@@ -1,0 +1,65 @@
+// **********************************************************************
+//
+// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+//
+// This copy of Ice is licensed to you under the terms described in the
+// ICE_LICENSE file included in this distribution.
+//
+// **********************************************************************
+
+task testSliceTask {
+    slice {
+        java {
+            set1 {
+                files = fileTree(dir: testDir, includes:['Freeze/complex/*.ice'])
+            }
+            set2 {
+                args = "--tie"
+                files = fileTree(dir: testDir, includes:['Freeze/evictor/*.ice'])
+            }
+        }
+        freezej {
+            files = [file("${testDir}/Freeze/complex/Complex.ice"),
+                     file("${sliceDir}/Ice/Identity.ice")]
+            args = "--ice"
+            dict {
+                ComplexDict {
+                    javaType = "test.Freeze.complex.Complex.ComplexDict"
+                    key = "Complex::Key"
+                    value = "Complex::Node"
+                }
+            }
+            dict {
+                ByteIntMap {
+                    javaType = "test.Freeze.dbmap.ByteIntMap"
+                    key = "byte"
+                    value = "int"
+                    index = [[:]]
+                }
+            }
+            dict {
+                IntIdentityMap {
+                    javaType = "test.Freeze.dbmap.IntIdentityMap"
+                    key = "int"
+                    value = "Ice::Identity"
+                }
+            }
+            dict {
+                IntIdentityMapWithIndex {
+                    javaType = "test.Freeze.dbmap.IntIdentityMapWithIndex"
+                    key = "int"
+                    value = "Ice::Identity"
+                    index = [[ member: 'category']]
+                }
+            }
+            dict {
+                SortedMap {
+                    javaType = "test.Freeze.dbmap.SortedMap"
+                    key = "int"
+                    value = "Ice::Identity"
+                    index = [[ member: 'category']]
+                }
+            }
+        }
+    }
+}

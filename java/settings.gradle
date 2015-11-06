@@ -1,0 +1,37 @@
+// **********************************************************************
+//
+// Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
+//
+// This copy of Ice is licensed to you under the terms described in the
+// ICE_LICENSE file included in this distribution.
+//
+// **********************************************************************
+
+// Main source
+include ':freeze'
+project(':freeze').projectDir = new File('src/Freeze')
+
+// Tests
+include ':test'
+
+// Map of dir->subdir for each of the demos.
+def demos = [
+        'Freeze' : ['bench', 'casino', 'library', 'phonebook', 'transform'],
+]
+
+demos.each {
+        def dir = it.key
+        def subdirs = it.value
+
+        subdirs.each {
+                // abc_def -> AbcDef
+                def name = it.split('_').collect { it.capitalize() }.join()
+
+                // A project in directory xyz is demoXyzAbcDef
+                def projectName = ":demo${dir.capitalize()}${name}"
+                include projectName
+
+                // The directory is <dir>/<name>.
+                project("${projectName}").projectDir = new File("demo/${dir}/${it}")
+        }
+}

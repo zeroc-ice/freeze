@@ -1,0 +1,70 @@
+# Ignore objects and archives.
+*.[oa]
+*.obj
+*.dll
+*.ilk
+*.so
+*.so.*
+*.sl
+*.dylib
+*.pyc
+*.class
+*.exe
+*.mdb
+*.pdb
+*.tds
+*.bak
+*.ncb
+# .sdf is the Visual Studio 2010 equivalent to .ncb
+*.sdf
+*.opt
+*.user
+*.res
+*.exp
+.gdb_history
+.DS_Store
+core
+/*/dist
+generated
+generated.test
+cgenerated
+sgenerated
+/java/depcache
+/java/lib
+/cpp/bin
+/cpp/lib
+*#
+.#*
+*~
+*.lib
+*.idb
+*.suo
+*.xap
+core.*
+tmp_*.xml
+obj
+*.RES
+ClientBin
+vcproj
+.metadata
+# VIM swap file
+*.swp
+.keychain
+
+cpp/demo/ipch
+cpp/demo/Debug
+
+# Windows build files
+/cpp/test/*/*/build.txt
+/csharp/test/*/*/build.txt
+
+# OS X Keychain
+*.keychain
+.fl????????
+
+.depend
+
+*.bin
+
+# Nuget
+cpp/third-party-packages
