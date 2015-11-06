@@ -150,8 +150,8 @@ public:
 
     private:
 
-        StreamedObject(const StreamedObject&) {}
-        void operator=(const StreamedObject&) {}
+        StreamedObject(const StreamedObject&);
+        void operator=(const StreamedObject&);
     };
     typedef IceUtil::Handle<StreamedObject> StreamedObjectPtr;
 
