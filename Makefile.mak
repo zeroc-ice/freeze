@@ -7,9 +7,6 @@
 #
 # **********************************************************************
 
-top_srcdir = cpp
-!include cpp/config/Make.rules.mak
-
 SUBDIRS			= cpp java
 CLEAN_SUBDIRS		= java cpp
 DEPEND_SUBDIRS		= cpp java

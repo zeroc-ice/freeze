@@ -37,7 +37,7 @@ DUMP_OBJS	= .\DumpDescriptors.obj \
 
 OBJS		= $(COMMON_OBJS) $(TRANSFORM_OBJS) $(DUMP_OBJS)
 
-HDIR		= $(headerdir)\FreezeScript
+HDIR		= $(includedir)\FreezeScript
 
 !include $(top_srcdir)/make/Make.rules.mak
 

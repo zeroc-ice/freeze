@@ -234,21 +234,54 @@ if ((prefix.startsWith("/usr") || prefix.startsWith("/usr/local")) && !prefix.st
     ext.binDir = prefix + "/bin"
 }
 
+def localappdata
+def nuget
+def dbVersion
+def dbPackage
+
+if (isWindows) {
+
+localappdata = env['LOCALAPPDATA']
+nuget = "${localappdata}/ZeroC/nuget/nuget.exe"
+dbVersion = "5.3.28.1"
+dbPackage = "$rootProject.projectDir/../cpp/third-party-packages/berkeley.db.java7"
+
+task nugetDirectory() {
+    def nugetDir = new File("${localappdata}/ZeroC/nuget")
+    if(!nugetDir.exists()) {
+        nugetDir.mkdirs()
+    }
+}
+
+task nugetInstall(type:Exec, dependsOn:nugetDirectory) {
+  commandLine 'cmd', '/c', 'powershell', '-Command', "(New-Object Net.WebClient).DownloadFile('http://nuget.org/nuget.exe', '${nuget}')"
+}
+
+task nugetInstallBerkeleyDb(type:Exec) {
+  commandLine 'cmd', '/c', nuget, 'install', 'berkeley.db.java7', '-OutputDirectory', "$rootProject.projectDir/../cpp/third-party-packages/", '-ExcludeVersion'
+}
+
+}
+
+
 //
 // Find BerkeleyDB JAR
 //
 if(dbHome) {
     ext.dbJar = "${dbHome}/db.jar"
+} else if(env['DB_HOME']) {
+    def dbHomeDir = env['DB_HOME']
+    ext.dbJar = "${dbHomeDir}/lib/db.jar"
 } else {
     def subdirs
     if (isWindows) {
-        subdirs = [ "${iceDir}/lib/" ]
-
-        def thirdpartyhome = env['THIRDPARTY_HOME']
-        if (thirdpartyhome == null || thirdpartyhome.length() == 0) {
-            thirdpartyhome = "${programFiles}/ZeroC/Ice-${project.version}-ThirdParty"
+        if(!new File(nuget).exists()) {
+            nugetInstall.execute()
         }
-        subdirs.push("${thirdpartyhome}/lib/")
+        if(!new File("${dbPackage}/berkeley.db.java7.nupkg").exists()) {
+            nugetInstallBerkeleyDb.execute()
+        }
+        subdirs = [ "${dbPackage}/build/native/lib/" ]
     } else {
         subdirs = [
             "/usr/local/opt/ice/libexec/lib/",
@@ -274,5 +307,6 @@ if(dbHome) {
 }
 
 if(!ext.dbJar || !new File(ext.dbJar).exists()) {
-    throw new GradleException("Unable to find Berkeley DB JAR file, you may have to install it or set dbHome in gradle.properties.");
+    throw new GradleException("Unable to locate the required third party BerkeleyDB jar file `db.jar'.")
 }
+

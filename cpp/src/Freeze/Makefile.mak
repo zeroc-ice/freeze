@@ -46,7 +46,7 @@ OBJS		= .\BackgroundSaveEvictorI.obj \
 		  .\Util.obj \
 		  $(SLICE_OBJS)
 
-HDIR		= $(headerdir)\Freeze
+HDIR		= $(includedir)\Freeze
 SDIR		= $(slicedir)\Freeze
 
 !include $(top_srcdir)/make/Make.rules.mak
