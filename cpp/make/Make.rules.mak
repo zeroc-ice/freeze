@@ -81,8 +81,7 @@ UNIQUE_DLL_NAMES        = yes
 bindir			= $(top_srcdir)\bin
 libdir			= $(top_srcdir)\lib
 includedir		= $(top_srcdir)\include
-
-includedir		= $(ice_cpp_dir)\include
+slicedir		= $(top_srcdir)\..\slice
 
 install_libdir	  	= $(prefix)\lib$(x64suffix)
 install_includedir	= $(prefix)\include
@@ -155,7 +154,7 @@ $(DB_NUPKG): $(NUGET)
 
 CPPFLAGS		= $(CPPFLAGS) -I"$(ice_cpp_dir)\include" -I"$(includedir)"
 TESTCPPFLAGS		= -I$(top_srcdir)\..\ice\cpp\test\include
-ICECPPFLAGS		= -I"$(slicedir)"
+ICECPPFLAGS		= -I"$(ice_slicedir)" -I"$(slicedir)"
 SLICE2CPPFLAGS		= $(ICECPPFLAGS) $(SLICE2CPPFLAGS)
 BISONFLAGS		= -dvt
 

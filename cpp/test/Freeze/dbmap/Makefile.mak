@@ -43,17 +43,17 @@ ByteIntMap.h ByteIntMap.cpp: "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
 	del /q ByteIntMap.h ByteIntMap.cpp
 	"$(SLICE2FREEZE)" --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap
 
-IntIdentityMap.h IntIdentityMap.cpp: "$(slicedir)\Ice\Identity.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
+IntIdentityMap.h IntIdentityMap.cpp: "$(ice_slicedir)\Ice\Identity.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
 	del /q IntIdentityMap.h IntIdentityMap.cpp
-	"$(SLICE2FREEZE)" --ice $(SLICE2CPPFLAGS)  --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(slicedir)\Ice\Identity.ice"
+	"$(SLICE2FREEZE)" --ice $(SLICE2CPPFLAGS)  --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(ice_slicedir)\Ice\Identity.ice"
 
-IntIdentityMapWithIndex.h IntIdentityMapWithIndex.cpp: "$(slicedir)\Ice\Identity.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
+IntIdentityMapWithIndex.h IntIdentityMapWithIndex.cpp: "$(ice_slicedir)\Ice\Identity.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
 	del /q IntIdentityMapWithIndex.h IntIdentityMapWithIndex.cpp
-	"$(SLICE2FREEZE)" --ice $(SLICE2CPPFLAGS) --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(slicedir)\Ice\Identity.ice"
+	"$(SLICE2FREEZE)" --ice $(SLICE2CPPFLAGS) --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(ice_slicedir)\Ice\Identity.ice"
 
-SortedMap.h SortedMap.cpp: "$(slicedir)\Ice\Identity.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
+SortedMap.h SortedMap.cpp: "$(ice_slicedir)\Ice\Identity.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
 	del /q SortedMap.h SortedMap.cpp
-	"$(SLICE2FREEZE)"  --ice $(SLICE2CPPFLAGS) --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater<std::string>" "$(slicedir)\Ice\Identity.ice"
+	"$(SLICE2FREEZE)"  --ice $(SLICE2CPPFLAGS) --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater<std::string>" "$(ice_slicedir)\Ice\Identity.ice"
 
 WstringWstringMap.h WstringWstringMap.cpp: "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
 	del /q WstringWstringMap.h WstringWstringMap.cpp

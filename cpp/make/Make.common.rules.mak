@@ -100,9 +100,9 @@ ice_cpp_dir = $(ice_dir)
 PATH = $(PATH);$(ice_cpp_dir)\bin
 
 #
-# Set slicedir to the path of the directory containing the Slice files.
+# Set ice_slicedir to the path of the directory containing the Slice files.
 #
-slicedir		= $(ice_dir)\slice
+ice_slicedir		= $(ice_dir)\slice
 
 !if exist ($(top_srcdir)\..\slice)
 install_slicedir    	= $(prefix)\slice

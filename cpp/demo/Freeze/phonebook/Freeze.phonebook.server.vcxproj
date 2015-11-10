@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -27,22 +27,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(LOCALAPPDATA)\ZeroC\IceBuilder\IceBuilder.Cpp.props" />
@@ -86,7 +86,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories);..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -101,6 +101,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>..\..\..\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,7 +118,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories);..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -132,6 +133,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalLibraryDirectories>..\..\..\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,7 +146,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories);..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -158,6 +160,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>..\..\..\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -174,7 +177,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(AdditionalIncludeDirectories);..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -188,6 +191,7 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalLibraryDirectories>..\..\..\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -223,13 +227,13 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy.freeze">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(IceToolsBin)\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"..\..\..\bin\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">generated\server\NameIndex.cpp;generated\server\NameIndex.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(IceToolsBin)\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"..\..\..\bin\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">generated\server\NameIndex.cpp;generated\server\NameIndex.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(IceToolsBin)\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"..\..\..\bin\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">generated\server\NameIndex.cpp;generated\server\NameIndex.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(IceToolsBin)\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"..\..\..\bin\slice2freeze.exe" --output-dir="generated\server" -I. -I"$(IceHome)\slice" --index NameIndex,Demo::Contact,name,case-insensitive NameIndex PhoneBook.ice</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">generated\server\NameIndex.cpp;generated\server\NameIndex.h;%(Outputs)</Outputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Running slice2freeze</Message>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Running slice2freeze</Message>
