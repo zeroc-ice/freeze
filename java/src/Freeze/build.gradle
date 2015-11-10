@@ -13,12 +13,13 @@ targetCompatibility = iceTargetCompatibility
 slice {
     java {
         args = "--ice"
-        files = files(fileTree(dir: "$sliceDir/Freeze", includes:['*.ice'], excludes:["*F.ice"]),
+        files = files(fileTree(dir: "$rootProject.projectDir/../slice/Freeze", includes:['*.ice'], excludes:["*F.ice"]),
                       file("./src/main/java/Freeze/PingObject.ice"))
+	include = ["$rootProject.projectDir/../slice"]
     }
     freezej {
         files = [file("${sliceDir}/Ice/BuiltinSequences.ice"),
-                 file("${sliceDir}/Freeze/CatalogData.ice")]
+                 file("$rootProject.projectDir/../slice/Freeze/CatalogData.ice")]
         args = "--ice"
         dict {
             CatalogData {

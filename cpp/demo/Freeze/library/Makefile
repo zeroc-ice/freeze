@@ -65,7 +65,7 @@ $(COLLOCATED): $(COLOBJS)
 LibraryTypes.h: LibraryTypes.cpp
 LibraryTypes.cpp: Library.ice $(SLICE2FREEZE) $(SLICEPARSERLIB)
 	rm -f LibraryTypes.h LibraryTypes.cpp
-	$(SLICE2FREEZE) --ice -I. -I$(slicedir) --dict StringIsbnSeqDict,string,Ice::StringSeq LibraryTypes $(slicedir)/Ice/BuiltinSequences.ice Library.ice
+	$(SLICE2FREEZE) --ice -I. -I$(ice_slicedir) --dict StringIsbnSeqDict,string,Ice::StringSeq LibraryTypes $(ice_slicedir)/Ice/BuiltinSequences.ice Library.ice
 
 clean::
 	-rm -rf db/*

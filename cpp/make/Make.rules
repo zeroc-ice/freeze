@@ -59,6 +59,7 @@ MACHINE_TYPE	:= $(shell uname -m)
 bindir		= $(top_srcdir)/bin
 libdir		= $(top_srcdir)/$(libsubdir)
 headerdir	= $(top_srcdir)/include
+slicedir	= $(top_srcdir)/../slice
 
 #
 # Ensure ice_language has been set by the file that includes this one.
@@ -196,12 +197,12 @@ $(error Unable to find $(slice_translator) in $(ICE_HOME)/$(binsubdir), please v
 endif
 
 #
-# Set slicedir to the path of the directory containing the Slice files.
+# Set ice_slicedir to the path of the directory containing the Slice files.
 #
 ifeq ($(ice_dir), $(usr_dir))
-    slicedir = $(usr_dir)/share/slice
+    ice_slicedir = $(usr_dir)/share/slice
 else
-    slicedir = $(ice_dir)/slice
+    ice_slicedir = $(ice_dir)/slice
 endif
 
 ifdef ice_src_dist
@@ -324,7 +325,7 @@ endif
 #
 include	 $(top_srcdir)/make/Make.rules.$(UNAME)
 
-ICECPPFLAGS		= -I$(slicedir)
+ICECPPFLAGS		= -I$(ice_slicedir) -I$(slicedir)
 
 SLICE2CPPFLAGS		= $(ICECPPFLAGS)
 
