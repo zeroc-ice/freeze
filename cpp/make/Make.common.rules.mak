@@ -20,7 +20,6 @@ SOVERSION       = 37
 
 OBJEXT		= .obj
 
-
 #
 # MKDIR
 #
