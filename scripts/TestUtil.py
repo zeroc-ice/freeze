@@ -135,7 +135,7 @@ def getCppCompiler():
     elif isMINGW():
         compiler = "MINGW"
     else:
-        config = open(os.path.join(toplevel, "cpp", "config", "Make.rules.mak"), "r")
+        config = open(os.path.join(toplevel, "cpp", "make", "Make.rules.mak"), "r")
         compiler = re.search("CPP_COMPILER[\t\s]*= ([A-Z0-9]*)", config.read()).group(1)
         if compiler != "VC100" and compiler != "VC110" and compiler != "VC120" and compiler != "VC140":
             compiler = ""
