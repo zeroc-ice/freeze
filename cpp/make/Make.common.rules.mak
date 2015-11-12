@@ -29,9 +29,6 @@ MKDIR = md
 x64suffix		= \x64
 ARCH			= x64
 PLATFORM		= x64
-!elseif "$(PLATFORM)" == "ARM"
-ARCH			= arm
-PLATFORM		= arm
 !else
 ARCH			= x86
 PLATFORM		= Win32
@@ -78,15 +75,18 @@ ice_bin_dist_dir = $(PROGRAMFILES)\ZeroC\Ice-$(VERSION)
 #
 !if "$(ICE_HOME)" != ""
 
-!if exist ("$(ICE_HOME)\cpp\bin")
+!if exist ("$(ICE_HOME)\cpp\bin\$(slice_translator)")
 ice_src_dist = 1
 ice_dir = $(ICE_HOME)
 ice_cpp_dir = $(ice_dir)\cpp
+!elseif exist ("$(ICE_HOME)\bin\$(slice_translator)")
+ice_dir = $(ICE_HOME)
+ice_cpp_dir = $(ice_dir)
 !endif
 
 !else
 
-!if exist ("$(ice_bin_dist_dir)\bin$(x64suffix)\$(slice_translator)")
+!if exist ("$(ice_bin_dist_dir)\bin\$(slice_translator)")
 ice_dir = $(ice_bin_dist_dir)
 ice_cpp_dir = $(ice_dir)
 !endif
@@ -98,6 +98,9 @@ ice_cpp_dir = $(ice_dir)
 !endif
 
 PATH = $(PATH);$(ice_cpp_dir)\bin
+!if "$(x64suffix)" != ""
+PATH = $(PATH);$(ice_cpp_dir)\bin$(x64suffix)
+!endif
 
 #
 # Set ice_slicedir to the path of the directory containing the Slice files.

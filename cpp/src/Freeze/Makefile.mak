@@ -80,10 +80,10 @@ $(HDIR)/Catalog.h Catalog.cpp: $(SDIR)/CatalogData.ice "$(SLICE2FREEZE)" "$(SLIC
 	Catalog $(slicedir)/Freeze/CatalogData.ice
 	move Catalog.h $(HDIR)
 
-$(HDIR)/CatalogIndexList.h CatalogIndexList.cpp: $(ice_slicedir)/Ice/BuiltinSequences.ice "$(SLICE2FREEZE)" $(SLICEPARSERLIB)
+$(HDIR)/CatalogIndexList.h CatalogIndexList.cpp: "$(ice_slicedir)/Ice/BuiltinSequences.ice" "$(SLICE2FREEZE)" "$(SLICEPARSERLIB)"
 	del /q $(HDIR)\CatalogIndexList.h CatalogIndexList.cpp
 	"$(SLICE2FREEZE)" $(SLICE2CPPFLAGS) --dict Freeze::CatalogIndexList,string,Ice::StringSeq \
-	CatalogIndexList $(ice_slicedir)/Ice/BuiltinSequences.ice
+	CatalogIndexList "$(ice_slicedir)/Ice/BuiltinSequences.ice"
 	move CatalogIndexList.h $(HDIR)
 
 clean::
