@@ -365,7 +365,7 @@ try:
     if isWin32():
         config = open(os.path.join(toplevel, "cpp", "make", "Make.common.rules.mak"), "r")
     else:
-        config = open(os.path.join(toplevel, "cpp", "make", "Make.common.rules"), "r")
+        config = open(os.path.join(toplevel, "cpp", "make", "Make.rules"), "r")
     iceVersion = re.search("VERSION[\t\s]*= ([0-9]+\.[0-9]+(\.[0-9]+|b[0-9]*))", config.read()).group(1)
     config.close()
 except:
@@ -1879,7 +1879,7 @@ def getTestEnv(lang, testdir):
     #
     # Jar files from the source of binary distribution
     #
-    iceJARs = ["ice", "glacier2", "freeze", "icebox", "icestorm", "icegrid", "icepatch2", "icediscovery",
+    iceJARs = ["ice", "glacier2", "icebox", "icestorm", "icegrid", "icepatch2", "icediscovery",
                "icelocatordiscovery"]
     jarSuffix = "-" + iceVersion + ".jar"
 
@@ -1908,7 +1908,7 @@ def getTestEnv(lang, testdir):
     #
     if lang in ["cpp", "java", "csharp", "python", "ruby"]:
         if isWin32():
-            mode = getBuildMode(os.path.join(getIceDir("cpp"), "bin"))
+            mode = getBuildMode(os.path.join(toplevel, "cpp", "bin"))
             configuration = "Debug" if mode == "debug" else "Release"
             platform = "x64" if x64 else "Win32"
 
@@ -1972,13 +1972,6 @@ def getTestEnv(lang, testdir):
         addLdPath(getCppLibDir(lang), env)
     elif lang in ["python", "ruby", "php", "js", "objective-c"]:
         addLdPath(getCppLibDir(lang), env)
-
-    if lang == "java":
-        # The Ice.jar and Freeze.jar comes from the installation
-        # directory or the toplevel dir.
-        javaDir = os.path.join(getIceDir("java", testdir), "lib")
-        for jar in iceJARs:
-            addClasspath(os.path.join(javaDir, jar + jarSuffix), env)
 
     #
     # On Windows, C# assemblies are found thanks to the .exe.config files.
