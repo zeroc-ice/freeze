@@ -477,3 +477,8 @@ clean::
 	rm -f $(addsuffix .cpp, $(basename $(notdir $(SLICE_OBJS))))
 	rm -f $(addsuffix .h, $(basename $(notdir $(SLICE_OBJS))))
 endif
+
+ifneq ($(HDIR),)
+clean::
+	rm -f $(addprefix $(HDIR)/, $(addsuffix .h, $(basename $(SLICE_OBJS))))
+endif
