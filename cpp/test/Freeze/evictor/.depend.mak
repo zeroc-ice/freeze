@@ -9,7 +9,7 @@ Test.obj: \
 
 Client.obj: \
 	Client.cpp \
-    "C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\freeze\ice\cpp\test\include\TestCommon.h" \
+    "$(top_srcdir)\test\include\TestCommon.h" \
     "Test.h" \
 
 TestI.obj: \
@@ -27,7 +27,7 @@ TestI.obj: \
     "$(includedir)\Freeze\CatalogData.h" \
     "TestI.h" \
     "Test.h" \
-    "C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\freeze\ice\cpp\test\include\TestCommon.h" \
+    "$(top_srcdir)\test\include\TestCommon.h" \
 
 Server.obj: \
 	Server.cpp \

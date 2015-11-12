@@ -1,63 +1,63 @@
 
 BackgroundSaveEvictor.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\BackgroundSaveEvictor.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Freeze/Evictor.ice \
+    "$(slicedir)\Freeze\BackgroundSaveEvictor.ice" \
+    "$(slicedir)/Freeze/Evictor.ice" \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ObjectAdapterF.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ServantLocator.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Current.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ConnectionF.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Freeze/Exception.ice
+    "$(slicedir)/Freeze/Exception.ice"
 
 CatalogData.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\CatalogData.ice
+    "$(slicedir)\Freeze\CatalogData.ice"
 
 Connection.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\Connection.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Freeze/Transaction.ice \
+    "$(slicedir)\Freeze\Connection.ice" \
+    "$(slicedir)/Freeze/Transaction.ice" \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/CommunicatorF.ice
 
 ConnectionF.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\ConnectionF.ice
+    "$(slicedir)\Freeze\ConnectionF.ice"
 
 DB.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\DB.ice
+    "$(slicedir)\Freeze\DB.ice"
 
 Evictor.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\Evictor.ice \
+    "$(slicedir)\Freeze\Evictor.ice" \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ObjectAdapterF.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ServantLocator.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Current.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ConnectionF.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Freeze/Exception.ice
+    "$(slicedir)/Freeze/Exception.ice"
 
 EvictorF.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\EvictorF.ice
+    "$(slicedir)\Freeze\EvictorF.ice"
 
 EvictorStorage.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\EvictorStorage.ice \
+    "$(slicedir)\Freeze\EvictorStorage.ice" \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice
 
 Exception.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\Exception.ice
+    "$(slicedir)\Freeze\Exception.ice"
 
 Transaction.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\Transaction.ice
+    "$(slicedir)\Freeze\Transaction.ice"
 
 TransactionalEvictor.h: \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice\Freeze\TransactionalEvictor.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Freeze/Evictor.ice \
+    "$(slicedir)\Freeze\TransactionalEvictor.ice" \
+    "$(slicedir)/Freeze/Evictor.ice" \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ObjectAdapterF.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ServantLocator.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Current.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ConnectionF.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice \
     C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Freeze/Exception.ice
+    "$(slicedir)/Freeze/Exception.ice"
 
 PingObject.h: \
     PingObject.ice

@@ -223,16 +223,16 @@ depend:: $(OBJS:.obj=.cpp) $(RC_SRCS:.rc=.h) $(OBJS_DEPEND)
 .cpp{$(DEPEND_DIR)}.d:
 	@echo Generating dependencies for $<
 	@$(CXX) /E $(CPPFLAGS) $(CXXFLAGS) /showIncludes $< 1>$(*F).i 2>$(*F).d && \
-	cscript /NoLogo $(top_srcdir)\..\ice\config\makedepend.vbs $(*F).cpp $(top_srcdir)
+	cscript /NoLogo $(top_srcdir)\make\makedepend.vbs $(*F).cpp $(top_srcdir)
 	@del /q $(*F).d $(*F).i
 
 {$(SDIR)\}.ice{$(SLICE_DEPEND_DIR)\}.d:
 	@echo Generating dependencies for $<
-	@"$(SLICE2CPP)" $(SLICE2CPPFLAGS) --depend $< | cscript /NoLogo $(top_srcdir)\..\ice\config\makedepend-slice.vbs $(*F).ice
+	@"$(SLICE2CPP)" $(SLICE2CPPFLAGS) --depend $< | cscript /NoLogo $(top_srcdir)\make\makedepend-slice.vbs $(*F).ice
 
 .ice{$(SLICE_DEPEND_DIR)\}.d:
 	@echo Generating dependencies for $<
-	@"$(SLICE2CPP)" $(SLICE2CPPFLAGS) --depend $(*F).ice | cscript /NoLogo $(top_srcdir)\..\ice\config\makedepend-slice.vbs $(*F).ice
+	@"$(SLICE2CPP)" $(SLICE2CPPFLAGS) --depend $(*F).ice | cscript /NoLogo $(top_srcdir)\make\makedepend-slice.vbs $(*F).ice
 
 .cpp.obj::
 	$(CXX) /c $(CPPFLAGS) $(CXXFLAGS) $<

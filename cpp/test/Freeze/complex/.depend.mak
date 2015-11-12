@@ -39,7 +39,7 @@ Client.obj: \
     "$(includedir)\Freeze\CatalogData.h" \
     "ComplexDict.h" \
     "Complex.h" \
-    "C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\freeze\ice\cpp\test\include\TestCommon.h" \
+    "$(top_srcdir)\test\include\TestCommon.h" \
     "NodeI.h" \
     "Parser.h" \
 
