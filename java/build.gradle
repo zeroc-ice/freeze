@@ -29,6 +29,9 @@ subprojects {
         maven {
             url 'https://repo.zeroc.com/nexus/content/repositories/thirdparty'
         }
+        maven {
+            url 'https://repo.zeroc.com/nexus/content/repositories/releases'
+        }
     }
 
     jar {
