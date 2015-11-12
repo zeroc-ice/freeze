@@ -12,8 +12,8 @@ In C++, `Freeze` and `Berkeley DB` consist of a library that you link with your 
 
 # Languages
 
-- C++
-- Java
+- [C++](./cpp)
+- [Java](./java)
 
 # Documentation
 
