@@ -15,7 +15,7 @@ ifneq ($(MAKECMDGOALS),install)
 endif
 
 INSTALL_SUBDIRS	= $(install_bindir) $(install_libdir)$(cpp11libdirsuffix) $(install_includedir) \
-	$(install_configdir) $(install_mandir)
+	$(install_mandir)
 
 install:: install-common
 	@for subdir in $(INSTALL_SUBDIRS); \

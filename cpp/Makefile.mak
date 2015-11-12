@@ -8,7 +8,7 @@ top_srcdir	= .
 
 !include $(top_srcdir)/make/Make.rules.mak
 
-INSTALL_SUBDIRS	= "$(install_bindir)" "$(install_libdir)" "$(install_includedir)" "$(install_configdir)"
+INSTALL_SUBDIRS	= "$(install_bindir)" "$(install_libdir)" "$(install_includedir)"
 
 SUBDIRS		= src include test 
 
@@ -18,17 +18,15 @@ install:: install-common
 	        @echo "Creating %i..." && \
 	        $(MKDIR) %i
 
-	@for %i in ( config src include ) do \
+	@for %i in ( src include ) do \
 	    @echo "making $@ in %i" && \
 	    cmd /c "cd %i && $(MAKE) -nologo -f Makefile.mak $@" || exit 1
 
 install::
 	@if not exist "$(install_bindir)" $(MKDIR) "$(install_bindir)"
-	copy "$(BZIP2_HOME)\build\native\bin\$(PLATFORM)\$(CONFIGURARTION)\*" "$(install_bindir)"
-	copy "$(DB_HOME)\build\native\bin\$(PLATFORM)\$(CONFIGURARTION)\*" "$(install_bindir)"
-	copy "$(EXPAT_HOME)\build\native\bin\$(PLATFORM)\$(CONFIGURARTION)\*" "$(install_bindir)"
+	copy "$(DB_HOME)\build\native\bin\$(PLATFORM)\$(CONFIGURATION)\*" "$(install_bindir)"
 
-!if "$(CONFIGURARTION)" == "Debug"
+!if "$(CONFIGURATION)" == "Debug"
 #
 # If that is a Debug build install also the DB tools from the release bin directory
 install::
