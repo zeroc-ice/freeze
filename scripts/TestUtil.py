@@ -365,7 +365,7 @@ try:
     if isWin32():
         config = open(os.path.join(toplevel, "cpp", "make", "Make.common.rules.mak"), "r")
     else:
-        config = open(os.path.join(toplevel, "cpp", "make", "Make.rules"), "r")
+        config = open(os.path.join(toplevel, "cpp", "make", "Make.common.rules"), "r")
     iceVersion = re.search("VERSION[\t\s]*= ([0-9]+\.[0-9]+(\.[0-9]+|b[0-9]*))", config.read()).group(1)
     config.close()
 except:

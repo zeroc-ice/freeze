@@ -222,6 +222,15 @@ ext {
     localDependency = this.&localDependency
 }
 
+if (prefix == null || prefix.length() == 0) {
+    // If the prefix isn't set use these default locations.
+    if (isWindows) {
+        prefix = "C:\\Ice-${project.version}"
+    } else {
+        prefix = "/opt/Ice-${project.version}"
+    }
+}
+
 // Installation location for jar/pom & executables.
 //
 // Note that we exclude /usr/src/packages because it's the RPM build directory on SLES.
