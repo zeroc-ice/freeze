@@ -2,9 +2,6 @@
 #
 # Copyright (c) 2003-2015 ZeroC, Inc. All rights reserved.
 #
-# This copy of Ice is licensed to you under the terms described in the
-# ICE_LICENSE file included in this distribution.
-#
 # **********************************************************************
 
 # ----------------------------------------------------------------------
@@ -115,7 +112,7 @@ install_bindir		= $(prefix)\bin$(x64suffix)
 
 all::
 
-!if exist ($(top_srcdir)\..\ICE_LICENSE.txt)
+!if exist ($(top_srcdir)\..\LICENSE.txt)
 TEXT_EXT	= .txt
 !endif
 
@@ -136,7 +133,5 @@ install-common::
             @echo "Creating $(install_bindir)..." && \
             $(MKDIR) "$(prefix)\bin"
 
-	@if not exist "$(prefix)\ICE_LICENSE$(TEXT_EXT)" \
-	    @copy $(top_srcdir)\..\ICE_LICENSE$(TEXT_EXT) "$(prefix)"
 	@if not exist "$(prefix)\LICENSE$(TEXT_EXT)" \
 	    @copy $(top_srcdir)\..\LICENSE$(TEXT_EXT) "$(prefix)"
