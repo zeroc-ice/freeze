@@ -20,7 +20,7 @@ OBJS		= $(SLICE_OBJS) \
 
 !include $(top_srcdir)/make/Make.rules.mak
 
-CPPFLAGS	= -I. $(CPPFLAGS) $(TESTCPPFLAGS) -DWIN32_LEAN_AND_MEAN
+CPPFLAGS	= -I. $(CPPFLAGS) -DWIN32_LEAN_AND_MEAN
 
 !if "$(GENERATE_PDB)" == "yes"
 PDBFLAGS        = /pdb:$(CLIENT:.exe=.pdb)

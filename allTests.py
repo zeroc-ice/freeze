@@ -10,7 +10,7 @@
 
 import os, sys, imp
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "ice", "scripts"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "scripts"))
 import TestUtil
 
 testGroups = []

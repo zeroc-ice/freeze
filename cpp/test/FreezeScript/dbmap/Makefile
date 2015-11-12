@@ -23,7 +23,7 @@ all:: IntSMap.cpp
 
 include $(top_srcdir)/make/Make.rules
 
-CPPFLAGS	:= -I. $(CPPFLAGS) $(TESTCPPFLAGS)
+CPPFLAGS	:= -I. $(CPPFLAGS)
 
 $(CLIENT): $(OBJS)
 	rm -f $@

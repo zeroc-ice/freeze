@@ -22,7 +22,7 @@ OBJS		= $(COBJS) \
 
 !include $(top_srcdir)\make\Make.rules.mak
 
-CPPFLAGS	= -I. -I..\..\include $(CPPFLAGS) $(TESTCPPFLAGS) -DWIN32_LEAN_AND_MEAN
+CPPFLAGS	= -I. -I..\..\include $(CPPFLAGS) -DWIN32_LEAN_AND_MEAN
 
 !if "$(GENERATE_PDB)" == "yes"
 CPDBFLAGS        = /pdb:$(CLIENT:.exe=.pdb)

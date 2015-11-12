@@ -331,8 +331,6 @@ SLICE2CPPFLAGS		= $(ICECPPFLAGS)
 
 CPPFLAGS	+= -I$(headerdir)
 
-TESTCPPFLAGS	+= -I$(top_srcdir)/../ice/cpp/test/include
-
 ifeq ($(ice_dir), $(usr_dir))
     LDFLAGS	= $(LDPLATFORMFLAGS) $(CXXFLAGS)
     ifeq ($(CPP11),yes)

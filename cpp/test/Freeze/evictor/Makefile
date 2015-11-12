@@ -28,7 +28,7 @@ OBJS		= $(COBJS) \
 
 include $(top_srcdir)/make/Make.rules
 
-CPPFLAGS	:= -I. -I../../include $(CPPFLAGS) $(TESTCPPFLAGS)
+CPPFLAGS	:= -I. -I../../include $(CPPFLAGS)
 
 $(CLIENT): $(COBJS)
 	rm -f $@

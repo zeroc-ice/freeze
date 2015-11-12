@@ -26,7 +26,7 @@ all:: ComplexDict.cpp
 
 include $(top_srcdir)/make/Make.rules
 
-CPPFLAGS	:= -I. -I../../include $(CPPFLAGS) $(TESTCPPFLAGS)
+CPPFLAGS	:= -I. -I../../include $(CPPFLAGS)
 
 $(CLIENT): $(OBJS)
 	rm -f $@

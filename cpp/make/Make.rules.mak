@@ -153,7 +153,6 @@ $(DB_NUPKG): $(NUGET)
 	$(NUGET) install berkeley.db.$(PLATFORMTOOLSET) -OutputDirectory "$(PKG_DIR)" -Version $(DB_VERSION) -ExcludeVersion
 
 CPPFLAGS		= $(CPPFLAGS) -I"$(ice_cpp_dir)\include" -I"$(includedir)"
-TESTCPPFLAGS		= -I$(top_srcdir)\..\ice\cpp\test\include
 ICECPPFLAGS		= -I"$(ice_slicedir)" -I"$(slicedir)"
 SLICE2CPPFLAGS		= $(ICECPPFLAGS) $(SLICE2CPPFLAGS)
 BISONFLAGS		= -dvt
