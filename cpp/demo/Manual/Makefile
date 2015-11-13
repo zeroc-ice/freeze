@@ -4,12 +4,12 @@
 #
 # **********************************************************************
 
-top_srcdir	 = ..
+top_srcdir	= ../..
 
 include $(top_srcdir)/make/Make.rules
 
-SUBDIRS		= Freeze \
-		  Manual
+SUBDIRS		= evictorFilesystem \
+                  mapFilesystem
 
 .PHONY: $(EVERYTHING) $(SUBDIRS)
 
@@ -23,5 +23,5 @@ $(EVERYTHING_EXCEPT_ALL)::
 	@for subdir in $(SUBDIRS); \
 	do \
 	    echo "making $@ in $$subdir"; \
-            ( cd $$subdir && $(MAKE) $@ ) || exit 1; \
+	    ( cd $$subdir && $(MAKE) $@ ) || exit 1; \
 	done
