@@ -17,6 +17,6 @@ In C++, `Freeze` and `Berkeley DB` consist of a library that you link with your 
 
 # Documentation
 
-- [Freeze Manual](https://doc.zeroc.com/display/Freeze37/Home)
+- [Freeze Manual](https://doc.zeroc.com/display/Freeze37/Freeze+Manual)
 
 [1]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm

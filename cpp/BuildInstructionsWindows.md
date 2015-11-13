@@ -89,8 +89,8 @@ as described in the [release notes][4].
 
 Refer to the README file in each demo directory for usage instructions.
 
-[1]: https://doc.zeroc.com/display/Ice37/Supported+Platforms+for+Ice+3.7.0
+[1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
 [2]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm
 [3]: https://www.nuget.org
-[4]: https://doc.zeroc.com/display/Ice37/Ice+Release+Notes
+[4]: https://doc.zeroc.com/display/Freeze37/Release+Notes
 
