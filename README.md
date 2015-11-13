@@ -15,7 +15,7 @@ In C++, `Freeze` and `Berkeley DB` consist of a library that you link with your 
 - [C++](./cpp)
 - [Java](./java)
 
-## Copyright and License
+# Copyright and License
 
 Copyright &copy; ZeroC, Inc.
 
