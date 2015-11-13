@@ -13,7 +13,7 @@
 #include <Freeze/EvictorStorage.h>
 #include <Freeze/Index.h>
 #include <Freeze/TransactionI.h>
-#include <IceUtil/Cache.h>
+#include <Freeze/Cache.h>
 
 #include <vector>
 #include <list>
@@ -112,7 +112,7 @@ private:
 
 
 template<class T>
-class ObjectStore : public ObjectStoreBase, public IceUtil::Cache<Ice::Identity, T>
+class ObjectStore : public ObjectStoreBase, public Cache<Ice::Identity, T>
 {
  public:
 
@@ -126,7 +126,7 @@ class ObjectStore : public ObjectStoreBase, public IceUtil::Cache<Ice::Identity,
 
     using ObjectStoreBase::load;
 
-    typedef IceUtil::Cache<Ice::Identity, T> Cache;
+    typedef Cache<Ice::Identity, T> ObjectCache;
 
 protected:
 
@@ -145,7 +145,7 @@ protected:
     }
 
     virtual void 
-    pinned(const IceUtil::Handle<T>& element, typename Cache::Position p)
+    pinned(const IceUtil::Handle<T>& element, typename ObjectCache::Position p)
     {
         element->init(p);
     }

@@ -55,12 +55,15 @@ Util.obj: \
     "$(includedir)\Freeze\CatalogData.h" \
     "Exception.h" \
     "$(includedir)\Freeze\Catalog.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\Connection.h" \
     "$(includedir)\Freeze\Transaction.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
 
 Grammar.obj: \
 	Grammar.cpp \
@@ -107,10 +110,13 @@ Transformer.obj: \
     "Util.h" \
     "$(includedir)\Freeze\CatalogData.h" \
     "$(includedir)\Freeze\Catalog.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Exception.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
 
 transformdb.obj: \
 	transformdb.cpp \
@@ -123,10 +129,13 @@ transformdb.obj: \
     "Exception.h" \
     "Util.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Catalog.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Exception.h" \
 
 DumpDescriptors.obj: \
@@ -151,8 +160,10 @@ DumpDB.obj: \
     "Util.h" \
     "$(includedir)\Freeze\CatalogData.h" \
     "Exception.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "$(includedir)\Freeze\Connection.h" \

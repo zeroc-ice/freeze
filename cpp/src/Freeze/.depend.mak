@@ -2,12 +2,12 @@
 BackgroundSaveEvictor.h: \
     "$(slicedir)\Freeze\BackgroundSaveEvictor.ice" \
     "$(slicedir)/Freeze/Evictor.ice" \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ObjectAdapterF.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ServantLocator.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Current.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ConnectionF.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ObjectAdapterF.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ServantLocator.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Current.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ConnectionF.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Identity.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Version.ice \
     "$(slicedir)/Freeze/Exception.ice"
 
 CatalogData.h: \
@@ -16,8 +16,8 @@ CatalogData.h: \
 Connection.h: \
     "$(slicedir)\Freeze\Connection.ice" \
     "$(slicedir)/Freeze/Transaction.ice" \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/CommunicatorF.ice
+    c:\Users\bernard\builds\ice\slice/Ice/Version.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/CommunicatorF.ice
 
 ConnectionF.h: \
     "$(slicedir)\Freeze\ConnectionF.ice"
@@ -27,12 +27,12 @@ DB.h: \
 
 Evictor.h: \
     "$(slicedir)\Freeze\Evictor.ice" \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ObjectAdapterF.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ServantLocator.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Current.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ConnectionF.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ObjectAdapterF.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ServantLocator.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Current.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ConnectionF.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Identity.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Version.ice \
     "$(slicedir)/Freeze/Exception.ice"
 
 EvictorF.h: \
@@ -40,7 +40,7 @@ EvictorF.h: \
 
 EvictorStorage.h: \
     "$(slicedir)\Freeze\EvictorStorage.ice" \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice
+    c:\Users\bernard\builds\ice\slice/Ice/Identity.ice
 
 Exception.h: \
     "$(slicedir)\Freeze\Exception.ice"
@@ -51,12 +51,12 @@ Transaction.h: \
 TransactionalEvictor.h: \
     "$(slicedir)\Freeze\TransactionalEvictor.ice" \
     "$(slicedir)/Freeze/Evictor.ice" \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ObjectAdapterF.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ServantLocator.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Current.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/ConnectionF.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Identity.ice \
-    C:\Users\Dwayne\.babun\cygwin\home\Dwayne\src\ice\slice/Ice/Version.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ObjectAdapterF.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ServantLocator.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Current.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/ConnectionF.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Identity.ice \
+    c:\Users\bernard\builds\ice\slice/Ice/Version.ice \
     "$(slicedir)/Freeze/Exception.ice"
 
 PingObject.h: \
@@ -66,17 +66,24 @@ BackgroundSaveEvictorI.obj: \
 	BackgroundSaveEvictorI.cpp \
     "BackgroundSaveEvictorI.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "TransactionI.h" \
@@ -87,6 +94,7 @@ BackgroundSaveEvictorI.obj: \
 Catalog.obj: \
 	Catalog.cpp \
     "$(includedir)\Freeze\Catalog.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\Connection.h" \
@@ -96,6 +104,7 @@ Catalog.obj: \
 CatalogIndexList.obj: \
 	CatalogIndexList.cpp \
     "$(includedir)\Freeze\CatalogIndexList.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\Connection.h" \
@@ -106,28 +115,38 @@ ConnectionI.obj: \
     "ConnectionI.h" \
     "$(includedir)\Freeze\Connection.h" \
     "$(includedir)\Freeze\Transaction.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "TransactionI.h" \
     "SharedDbEnv.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Exception.h" \
     "MapI.h" \
 
 EvictorI.obj: \
 	EvictorI.cpp \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "TransactionI.h" \
@@ -139,17 +158,24 @@ EvictorI.obj: \
 EvictorIteratorI.obj: \
 	EvictorIteratorI.cpp \
     "EvictorIteratorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "TransactionI.h" \
@@ -159,9 +185,12 @@ EvictorIteratorI.obj: \
 
 Index.obj: \
 	Index.cpp \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "IndexI.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
     "$(includedir)\Freeze\Transaction.h" \
@@ -169,9 +198,13 @@ Index.obj: \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "TransactionI.h" \
@@ -181,8 +214,11 @@ Index.obj: \
 IndexI.obj: \
 	IndexI.cpp \
     "IndexI.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
     "$(includedir)\Freeze\Transaction.h" \
@@ -190,9 +226,13 @@ IndexI.obj: \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "TransactionI.h" \
@@ -206,11 +246,14 @@ MapDb.obj: \
     "ConnectionI.h" \
     "$(includedir)\Freeze\Connection.h" \
     "$(includedir)\Freeze\Transaction.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "TransactionI.h" \
     "SharedDbEnv.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Exception.h" \
     "Util.h" \
     "$(includedir)\Freeze\Catalog.h" \
@@ -220,17 +263,21 @@ MapDb.obj: \
 MapI.obj: \
 	MapI.cpp \
     "MapI.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\Connection.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "ConnectionI.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "TransactionI.h" \
     "SharedDbEnv.h" \
     "MapDb.h" \
     "Util.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
     "$(includedir)\Freeze\CatalogIndexList.h" \
@@ -240,18 +287,25 @@ ObjectStore.obj: \
     "ObjectStore.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
+    "$(includedir)\Freeze\Index.h" \
     "TransactionI.h" \
     "$(includedir)\Freeze\Transaction.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
     "EvictorIteratorI.h" \
     "SharedDbEnv.h" \
     "BackgroundSaveEvictorI.h" \
@@ -261,6 +315,7 @@ ObjectStore.obj: \
 SharedDbEnv.obj: \
 	SharedDbEnv.cpp \
     "SharedDbEnv.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\Connection.h" \
@@ -268,17 +323,23 @@ SharedDbEnv.obj: \
     "Util.h" \
     "MapDb.h" \
     "ConnectionI.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "TransactionI.h" \
     "TransactionalEvictorContext.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "EvictorIteratorI.h" \
     "$(includedir)\Freeze\CatalogIndexList.h" \
@@ -291,14 +352,21 @@ TransactionalEvictorContext.obj: \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "TransactionI.h" \
     "EvictorIteratorI.h" \
@@ -311,17 +379,24 @@ TransactionalEvictorI.obj: \
 	TransactionalEvictorI.cpp \
     "TransactionalEvictorI.h" \
     "EvictorI.h" \
+    "$(includedir)\Freeze\Freeze.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "$(includedir)\Freeze\Transaction.h" \
     "$(includedir)\Freeze\BackgroundSaveEvictor.h" \
     "$(includedir)\Freeze\Evictor.h" \
     "$(includedir)\Freeze\Exception.h" \
     "$(includedir)\Freeze\TransactionalEvictor.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Catalog.h" \
     "$(includedir)\Freeze\CatalogData.h" \
+    "$(includedir)\Freeze\AbstractMutex.h" \
+    "$(includedir)\Freeze\Cache.h" \
     "ObjectStore.h" \
     "$(includedir)\Freeze\EvictorStorage.h" \
     "TransactionI.h" \
@@ -332,6 +407,7 @@ TransactionalEvictorI.obj: \
 
 TransactionHolder.obj: \
 	TransactionHolder.cpp \
+    "$(includedir)\Freeze\TransactionHolder.h" \
     "$(includedir)\Freeze\Connection.h" \
     "$(includedir)\Freeze\Transaction.h" \
 
@@ -341,10 +417,13 @@ TransactionI.obj: \
     "$(includedir)\Freeze\Transaction.h" \
     "ConnectionI.h" \
     "$(includedir)\Freeze\Connection.h" \
+    "$(includedir)\Freeze\Initialize.h" \
     "$(includedir)\Freeze\EvictorF.h" \
     "$(includedir)\Freeze\ConnectionF.h" \
+    "$(includedir)\Freeze\Index.h" \
     "$(includedir)\Freeze\DB.h" \
     "SharedDbEnv.h" \
+    "$(includedir)\Freeze\Map.h" \
     "$(includedir)\Freeze\Exception.h" \
 
 Util.obj: \

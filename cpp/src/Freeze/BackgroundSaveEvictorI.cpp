@@ -6,7 +6,7 @@
 
 #include <Freeze/BackgroundSaveEvictorI.h>
 #include <Freeze/Initialize.h>
-#include <IceUtil/AbstractMutex.h>
+#include <Freeze/AbstractMutex.h>
 #include <IceUtil/StringUtil.h>
 #include <Freeze/Util.h>
 

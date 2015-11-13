@@ -9,6 +9,7 @@
 
 #include <IceUtil/IceUtil.h>
 #include <Ice/Ice.h>
+#include <Freeze/Freeze.h>
 #include <CurrentDatabase.h>
 #include <ItemI.h>
 #include <list>
@@ -19,7 +20,7 @@ typedef IceUtil::Handle<EvictorEntry> EvictorEntryPtr;
 //
 // A map that allows lookups while loading from storage.
 //
-class EvictorCache : public IceUtil::Cache<Ice::Identity, EvictorEntry>
+class EvictorCache : public Freeze::Cache<Ice::Identity, EvictorEntry>
 {
 public:
 

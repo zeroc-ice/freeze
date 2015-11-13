@@ -8,7 +8,7 @@
 #define LIBRARY_I_H
 
 #include <IceUtil/IceUtil.h>
-#include <Freeze/Evictor.h>
+#include <Freeze/Freeze.h>
 #include <Library.h>
 #include <LibraryTypes.h>
 

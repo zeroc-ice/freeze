@@ -5,7 +5,6 @@
 // **********************************************************************
 
 #include <Freeze/Freeze.h>
-#include <IceUtil/AbstractMutex.h>
 #include <TestOld.h>
 
 using namespace std;

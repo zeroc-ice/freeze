@@ -14,6 +14,8 @@
 #include <Freeze/Map.h>
 #include <Freeze/TransactionHolder.h>
 #include <Freeze/Catalog.h>
+#include <Freeze/AbstractMutex.h>
+#include <Freeze/Cache.h>
 #include <IceUtil/PopDisableWarnings.h>
 
 #endif
