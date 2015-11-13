@@ -17,7 +17,7 @@ In C++, `Freeze` and `Berkeley DB` consist of a library that you link with your 
 
 # Copyright and License
 
-Copyright &copy; ZeroC, Inc.
+Copyright &copy; ZeroC, Inc.All rights reserved.
 
 The default license for Freeze is [GPLv2](http://opensource.org/licenses/GPL-2.0), a popular open-source license with strong [copyleft](http://en.wikipedia.org/wiki/Copyleft) conditions.
 
