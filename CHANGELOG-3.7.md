@@ -19,17 +19,16 @@ These are the changes since Freeze 3.6.1:
 
 ## General Changes
 
-- Freeze is now a separate component. In prior releases, it was incorporated
-inside Ice.
+- Freeze is now a separate component. In prior releases, it was incorporated inside Ice.
 
 ## C++ Changes
 
-- The following classes are now provided by Freeze for C++: IceUtil::AbstractMutex, Freeze::Cache
-  Freeze::Cache was previously provided by IceUtil.
+- The following classes are now provided by Freeze for C++: `IceUtil::AbstractMutex`, `Freeze::Cache`.
+  `Freeze::Cache` was previously provided by the `IceUtil` library.
 
 ## Java Changes
 
-- The following classes are now provided by Freeze for Java: Freeze.Cache, Freeze.Store, Freeze.FileLockException
-  There classes were previously in package IceUtil and incorporated in ice.jar.
+- The following classes are now provided by Freeze for Java: `Freeze.Cache`, `Freeze.Store`, `Freeze.FileLockException`
+  There classes were previously in package `IceUtil` and incorporated in `ice.jar`.
 
 
