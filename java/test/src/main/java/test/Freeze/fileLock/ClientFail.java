@@ -36,7 +36,7 @@ public class ClientFail extends test.Util.Application
                 Freeze.Util.createConnection(communicator(), envName);
                 test(false);
             }
-            catch(IceUtil.FileLockException ex)
+            catch(Freeze.FileLockException ex)
             {
                 System.out.println("File lock not acquired.");
                 test(true);

@@ -311,7 +311,7 @@ public class SharedDbEnv implements com.sleepycat.db.ErrorHandler, Runnable
                     throw new DatabaseException("Failed to create directory `" + dbHome + "/__Freeze'");
                 }
             }
-            _fileLock = new IceUtilInternal.FileLock(dbHome + "/__Freeze/lock");
+            _fileLock = new FileLock(dbHome + "/__Freeze/lock");
         }
 
         try
@@ -572,5 +572,5 @@ public class SharedDbEnv implements com.sleepycat.db.ErrorHandler, Runnable
 
     private static java.util.Map<MapKey, SharedDbEnv> _map = new java.util.HashMap<MapKey, SharedDbEnv>();
 
-    private IceUtilInternal.FileLock _fileLock;
+    private FileLock _fileLock;
 }

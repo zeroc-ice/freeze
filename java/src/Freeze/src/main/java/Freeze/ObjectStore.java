@@ -6,12 +6,12 @@
 
 package Freeze;
 
-class ObjectStore implements IceUtil.Store
+class ObjectStore implements Store
 {
     ObjectStore(String facet, String facetType, boolean createDb, EvictorI evictor, java.util.List<Index> indices,
                 boolean populateEmptyIndices)
     {
-        _cache = new IceUtil.Cache(this);
+        _cache = new Cache(this);
 
         _facet = facet;
 
@@ -367,7 +367,7 @@ class ObjectStore implements IceUtil.Store
         return rec;
     }
 
-    final IceUtil.Cache
+    final Cache
     cache()
     {
         return _cache;
@@ -681,7 +681,7 @@ class ObjectStore implements IceUtil.Store
         }
     }
 
-    private final IceUtil.Cache _cache;
+    private final Cache _cache;
     private final String _facet;
     private final String _dbName;
     private final EvictorI _evictor;

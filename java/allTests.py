@@ -25,6 +25,7 @@ tests = [
     ("Freeze/dbmap", ["once"]),
     ("Freeze/complex", ["once"]),
     ("Freeze/evictor", ["once"]),
+    ("Freeze/simpleFileLock", ["once"]),
     ("Freeze/fileLock", ["once"]),
     ]
 
