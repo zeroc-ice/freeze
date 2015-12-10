@@ -43,7 +43,7 @@ Freeze::ObjectStoreBase::ObjectStoreBase(const string& facet, const string& face
         //
         // Create a sample servant with this type
         //
-        ObjectFactoryPtr factory = _communicator->findObjectFactory(facetType);
+        ValueFactoryPtr factory = _communicator->findValueFactory(facetType);
         if(factory == 0)
         {
             throw DatabaseException(__FILE__, __LINE__, "No object factory registered for type-id '" + facetType + "'");
@@ -129,13 +129,13 @@ Freeze::ObjectStoreBase::ObjectStoreBase(const string& facet, const string& face
         }
 
         //
-        // Berkeley DB expects file paths to be UTF8 encoded. We keep 
+        // Berkeley DB expects file paths to be UTF8 encoded. We keep
         // _dbName as a native string here, while it might have
         // been better to convert it to UTF-8, changing this isn't
         // possible without potentially breaking backward compatibility
         // with deployed databases.
         //
-        _db->open(txn, 
+        _db->open(txn,
                   IceUtil::nativeToUTF8(evictor->filename(), IceUtil::getProcessStringConverter()).c_str(),
                   _dbName.c_str(), DB_BTREE, flags, FREEZE_DB_MODE);
 

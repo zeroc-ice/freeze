@@ -566,12 +566,11 @@ private:
 };
 typedef IceUtil::Handle<ObjectRef> ObjectRefPtr;
 
-class ObjectFactory : public Ice::ObjectFactory
+class ValueFactory : public Ice::ValueFactory
 {
 public:
 
     virtual Ice::ObjectPtr create(const std::string&);
-    virtual void destroy();
 
     void activate(const DataFactoryPtr&, const Slice::UnitPtr&);
     void deactivate();
@@ -581,7 +580,7 @@ private:
     DataFactoryPtr _factory;
     Slice::UnitPtr _unit;
 };
-typedef IceUtil::Handle<ObjectFactory> ObjectFactoryPtr;
+typedef IceUtil::Handle<ValueFactory> ValueFactoryPtr;
 
 class ClassNotFoundException
 {

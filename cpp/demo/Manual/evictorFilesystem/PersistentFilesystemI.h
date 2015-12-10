@@ -57,12 +57,11 @@ public:
     IceUtil::Mutex _mutex;
 };
 
-class NodeFactory : public Ice::ObjectFactory
+class NodeFactory : public Ice::ValueFactory
 {
 public:
 
     virtual Ice::ObjectPtr create(const std::string&);
-    virtual void destroy();
 };
 
 }

@@ -2475,10 +2475,10 @@ FreezeScript::ObjectRef::setValue(const ObjectDataPtr& value)
 }
 
 //
-// ObjectFactory
+// ValueFactory
 //
 Ice::ObjectPtr
-FreezeScript::ObjectFactory::create(const string& id)
+FreezeScript::ValueFactory::create(const string& id)
 {
     Ice::ObjectPtr result;
 
@@ -2512,19 +2512,14 @@ FreezeScript::ObjectFactory::create(const string& id)
 }
 
 void
-FreezeScript::ObjectFactory::destroy()
-{
-}
-
-void
-FreezeScript::ObjectFactory::activate(const DataFactoryPtr& factory, const Slice::UnitPtr& unit)
+FreezeScript::ValueFactory::activate(const DataFactoryPtr& factory, const Slice::UnitPtr& unit)
 {
     assert(!_factory && !_unit);
     _factory = factory;
     _unit = unit;
 }
 void
-FreezeScript::ObjectFactory::deactivate()
+FreezeScript::ValueFactory::deactivate()
 {
     _factory = 0;
     _unit = 0;

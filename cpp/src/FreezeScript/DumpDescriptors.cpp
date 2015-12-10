@@ -1237,11 +1237,11 @@ FreezeScript::RecordDescriptor::RecordDescriptor(const DescriptorPtr& parent, in
                                                  const ErrorReporterPtr& errorReporter,
                                                  const IceXML::Attributes& attributes,
                                                  const Slice::UnitPtr& unit,
-                                                 const FreezeScript::ObjectFactoryPtr& objectFactory) :
+                                                 const FreezeScript::ValueFactoryPtr& valueFactory) :
     Descriptor(parent, line, factory, errorReporter),
     ExecutableContainerDescriptor(parent, line, factory, errorReporter, attributes, "record"),
     _unit(unit),
-    _objectFactory(objectFactory)
+    _valueFactory(valueFactory)
 {
 }
 
@@ -1251,7 +1251,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/, ExecuteIn
     //
     // Temporarily add an object factory.
     //
-    _objectFactory->activate(_factory, _unit);
+    _valueFactory->activate(_factory, _unit);
 
     //
     // Iterate over the database.
@@ -1320,7 +1320,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/, ExecuteIn
         {
             dbc->close();
         }
-        _objectFactory->deactivate();
+        _valueFactory->deactivate();
         throw;
     }
 
@@ -1328,7 +1328,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/, ExecuteIn
     {
         dbc->close();
     }
-    _objectFactory->deactivate();
+    _valueFactory->deactivate();
 }
 
 //

@@ -20,7 +20,7 @@ namespace FreezeScript
 
 void
 transformDatabase(const Ice::CommunicatorPtr&,
-                  const FreezeScript::ObjectFactoryPtr& objectFactory,
+                  const FreezeScript::ValueFactoryPtr& valueFactory,
                   const Slice::UnitPtr&, const Slice::UnitPtr&,
                   Db*, Db*, DbTxn*, const Freeze::ConnectionPtr&, const std::string&, const std::string&, bool,
                   std::ostream&, bool, std::istream&);

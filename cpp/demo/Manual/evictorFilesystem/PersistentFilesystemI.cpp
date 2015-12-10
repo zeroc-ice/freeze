@@ -258,8 +258,3 @@ Filesystem::NodeFactory::create(const string& type)
         return 0;
     }
 }
-
-void
-Filesystem::NodeFactory::destroy()
-{
-}

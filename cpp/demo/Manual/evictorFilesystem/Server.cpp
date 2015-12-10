@@ -23,9 +23,9 @@ public:
         //
         // Install object factories.
         //
-        Ice::ObjectFactoryPtr factory = new NodeFactory;
-        communicator()->addObjectFactory(factory, PersistentFile::ice_staticId());
-        communicator()->addObjectFactory(factory, PersistentDirectory::ice_staticId());
+        Ice::ValueFactoryPtr factory = new NodeFactory;
+        communicator()->addValueFactory(factory, PersistentFile::ice_staticId());
+        communicator()->addValueFactory(factory, PersistentDirectory::ice_staticId());
 
         //
         // Create an object adapter.

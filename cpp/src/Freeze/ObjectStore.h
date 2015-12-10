@@ -30,7 +30,7 @@ class ObjectStoreBase
 {
 public:
 
-    ObjectStoreBase(const std::string&, const std::string&, bool, EvictorIBase*, 
+    ObjectStoreBase(const std::string&, const std::string&, bool, EvictorIBase*,
                     const std::vector<IndexPtr>&, bool);
 
     virtual ~ObjectStoreBase();
@@ -79,7 +79,7 @@ public:
 
     bool insert(const Ice::Identity&, const ObjectRecord&, const TransactionIPtr&);
     bool remove(const Ice::Identity&, const TransactionIPtr&);
-    
+
     EvictorIBase* evictor() const;
 
     //
@@ -92,13 +92,13 @@ public:
     const Ice::EncodingVersion& encoding() const;
     const std::string& facet() const;
     bool keepStats() const;
-    
+
 protected:
 
     bool loadImpl(const Ice::Identity&, ObjectRecord&);
 
 private:
-    
+
     IceUtil::UniquePtr<Db> _db;
     std::string _facet;
     std::string _dbName;
@@ -117,7 +117,7 @@ class ObjectStore : public ObjectStoreBase, public Cache<Ice::Identity, T>
  public:
 
     ObjectStore(const std::string& facet, const std::string facetType,
-                bool createDb, EvictorIBase* evictor, 
+                bool createDb, EvictorIBase* evictor,
                 const std::vector<IndexPtr>& indices = std::vector<IndexPtr>(),
                 bool populateEmptyIndices = false) :
         ObjectStoreBase(facet, facetType, createDb, evictor, indices, populateEmptyIndices)
@@ -130,7 +130,7 @@ class ObjectStore : public ObjectStoreBase, public Cache<Ice::Identity, T>
 
 protected:
 
-    virtual IceUtil::Handle<T> 
+    virtual IceUtil::Handle<T>
     load(const Ice::Identity& ident)
     {
         ObjectRecord rec;
@@ -144,7 +144,7 @@ protected:
         }
     }
 
-    virtual void 
+    virtual void
     pinned(const IceUtil::Handle<T>& element, typename ObjectCache::Position p)
     {
         element->init(p);
@@ -155,19 +155,19 @@ protected:
 // Inline member function definitions
 //
 
-inline Db* 
+inline Db*
 ObjectStoreBase::db() const
 {
     return _db.get();
 }
 
-inline const Ice::CommunicatorPtr& 
+inline const Ice::CommunicatorPtr&
 ObjectStoreBase::communicator() const
 {
     return _communicator;
 }
 
-inline const Ice::EncodingVersion& 
+inline const Ice::EncodingVersion&
 ObjectStoreBase::encoding() const
 {
     return _encoding;

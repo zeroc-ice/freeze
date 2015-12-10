@@ -114,7 +114,7 @@ findType(const Slice::UnitPtr& u, const string& type)
 
 static void
 transformDb(bool evictor,  const Ice::CommunicatorPtr& communicator,
-            const FreezeScript::ObjectFactoryPtr& objectFactory,
+            const FreezeScript::ValueFactoryPtr& valueFactory,
             DbEnv& dbEnv, DbEnv& dbEnvNew, const string& dbName,
             const Freeze::ConnectionPtr& connectionNew, vector<Db*>& dbs,
             const Slice::UnitPtr& oldUnit, const Slice::UnitPtr& newUnit,
@@ -174,7 +174,7 @@ transformDb(bool evictor,  const Ice::CommunicatorPtr& communicator,
             //
             istringstream istr(descriptors);
             string facet = (name == "$default" ? string("") : name);
-            FreezeScript::transformDatabase(communicator, objectFactory, oldUnit, newUnit, &db, dbNew, txnNew, 0,
+            FreezeScript::transformDatabase(communicator, valueFactory, oldUnit, newUnit, &db, dbNew, txnNew, 0,
                                             dbName, facet, purgeObjects, cerr, suppress, istr);
 
             db.close(0);
@@ -200,7 +200,7 @@ transformDb(bool evictor,  const Ice::CommunicatorPtr& communicator,
         // Execute the transformation descriptors.
         //
         istringstream istr(descriptors);
-        FreezeScript::transformDatabase(communicator, objectFactory, oldUnit, newUnit, &db, dbNew, txnNew,
+        FreezeScript::transformDatabase(communicator, valueFactory, oldUnit, newUnit, &db, dbNew, txnNew,
                                         connectionNew, dbName, "", purgeObjects, cerr, suppress, istr);
 
         db.close(0);
@@ -757,8 +757,8 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
         return EXIT_FAILURE;
     }
 
-    FreezeScript::ObjectFactoryPtr objectFactory = new FreezeScript::ObjectFactory;
-    communicator->addObjectFactory(objectFactory, "");
+    FreezeScript::ValueFactoryPtr valueFactory = new FreezeScript::ValueFactory;
+    communicator->addValueFactory(valueFactory, "");
 
     //
     // Transform the database.
@@ -830,13 +830,13 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
             //
             for(FreezeScript::CatalogDataMap::iterator p = catalog.begin(); p != catalog.end(); ++p)
             {
-                transformDb(p->second.evictor, communicator, objectFactory, dbEnv, dbEnvNew, p->first, connectionNew,
+                transformDb(p->second.evictor, communicator, valueFactory, dbEnv, dbEnvNew, p->first, connectionNew,
                             dbs, oldUnit, newUnit, txnNew, purgeObjects, suppress, descriptors);
             }
         }
         else
         {
-            transformDb(evictor, communicator, objectFactory, dbEnv, dbEnvNew, dbName, connectionNew, dbs,
+            transformDb(evictor, communicator, valueFactory, dbEnv, dbEnvNew, dbName, connectionNew, dbs,
                         oldUnit, newUnit, txnNew, purgeObjects, suppress, descriptors);
         }
     }

@@ -57,7 +57,7 @@ struct TransformInfoI : public TransformInfo
     virtual ObjectDataMap& getObjectDataMap();
 
     Ice::CommunicatorPtr communicator;
-    FreezeScript::ObjectFactoryPtr objectFactory;
+    FreezeScript::ValueFactoryPtr valueFactory;
     Slice::UnitPtr oldUnit;
     Slice::UnitPtr newUnit;
     Db* oldDb;
@@ -1885,7 +1885,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/)
     //
     // Temporarily add an object factory.
     //
-    _info->objectFactory->activate(_info->factory, _info->oldUnit);
+    _info->valueFactory->activate(_info->factory, _info->oldUnit);
 
     //
     // Iterate over the database.
@@ -1940,7 +1940,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/)
         {
             dbc->close();
         }
-        _info->objectFactory->deactivate();
+        _info->valueFactory->deactivate();
         throw;
     }
 
@@ -1948,7 +1948,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/)
     {
         dbc->close();
     }
-    _info->objectFactory->deactivate();
+    _info->valueFactory->deactivate();
 }
 
 void
@@ -3004,7 +3004,7 @@ FreezeScript::assignOrTransform(const DataPtr& dest, const DataPtr& src, bool co
 
 void
 FreezeScript::transformDatabase(const Ice::CommunicatorPtr& communicator,
-                                const FreezeScript::ObjectFactoryPtr& objectFactory,
+                                const FreezeScript::ValueFactoryPtr& valueFactory,
                                 const Slice::UnitPtr& oldUnit, const Slice::UnitPtr& newUnit,
                                 Db* oldDb, Db* newDb, DbTxn* newDbTxn, const Freeze::ConnectionPtr& connection,
                                 const string& newDbName, const string& facetName, bool purgeObjects, ostream& errors,
@@ -3013,7 +3013,7 @@ FreezeScript::transformDatabase(const Ice::CommunicatorPtr& communicator,
 
     TransformInfoIPtr info = new TransformInfoI;
     info->communicator = communicator;
-    info->objectFactory = objectFactory;
+    info->valueFactory = valueFactory;
     info->oldUnit = oldUnit;
     info->newUnit = newUnit;
     info->oldDb = oldDb;
