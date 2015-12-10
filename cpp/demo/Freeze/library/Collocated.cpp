@@ -14,7 +14,7 @@ using namespace std;
 class LibraryCollocated : public Ice::Application
 {
 public:
-    
+
     LibraryCollocated(const string&);
 
     virtual int run(int argc, char* argv[]);
@@ -45,7 +45,7 @@ int
 LibraryCollocated::run(int argc, char* argv[])
 {
     Ice::PropertiesPtr properties = communicator()->getProperties();
-    
+
     //
     // Create an object adapter
     //
@@ -60,23 +60,23 @@ LibraryCollocated::run(int argc, char* argv[])
     {
         evictor->setSize(evictorSize);
     }
-    
+
     //
     // Use the evictor as servant Locator.
     //
     adapter->addServantLocator(evictor, "book");
-    
+
     //
     // Create the library, and add it to the Object Adapter.
     //
     LibraryIPtr library = new LibraryI(communicator(), _envName, "authors", evictor);
     adapter->add(library, communicator()->stringToIdentity("library"));
-    
+
     //
     // Create and install a factory for books.
     //
-    Ice::ObjectFactoryPtr bookFactory = new BookFactory(library);
-    communicator()->addObjectFactory(bookFactory, Demo::Book::ice_staticId());
+    Ice::ValueFactoryPtr bookFactory = new BookFactory(library);
+    communicator()->addValueFactory(bookFactory, Demo::Book::ice_staticId());
 
     //
     // Everything ok, let's go.

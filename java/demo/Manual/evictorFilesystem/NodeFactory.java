@@ -6,7 +6,7 @@
 
 import Filesystem.*;
 
-public class NodeFactory implements Ice.ObjectFactory
+public class NodeFactory implements Ice.ValueFactory
 {
     @Override
     public Ice.Object
@@ -25,11 +25,5 @@ public class NodeFactory implements Ice.ObjectFactory
             assert(false);
             return null;
         }
-    }
-
-    @Override
-    public void
-    destroy()
-    {
     }
 }

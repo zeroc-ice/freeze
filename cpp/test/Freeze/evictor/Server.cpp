@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class AccountFactory : public Ice::ObjectFactory
+class AccountFactory : public Ice::ValueFactory
 {
 public:
 
@@ -24,15 +24,10 @@ public:
         assert(type == "::Test::Account");
         return new Test::AccountI;
     }
-
-    virtual void
-    destroy()
-    {
-    }
 };
 
 
-class ServantFactory : public Ice::ObjectFactory
+class ServantFactory : public Ice::ValueFactory
 {
 public:
 
@@ -46,15 +41,10 @@ public:
         assert(type == "::Test::Servant");
         return new Test::ServantI;
     }
-
-    virtual void
-    destroy()
-    {
-    }
 };
 
 
-class FacetFactory : public Ice::ObjectFactory
+class FacetFactory : public Ice::ValueFactory
 {
 public:
 
@@ -68,11 +58,6 @@ public:
         assert(type == "::Test::Facet");
         return new Test::FacetI;
     }
-
-    virtual void
-    destroy()
-    {
-    }
 };
 int
 run(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName)
@@ -80,9 +65,9 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName
     communicator->getProperties()->setProperty("Factory.Endpoints", "default -p 12010");
     Ice::ObjectAdapterPtr adapter = communicator->createObjectAdapter("Factory");
 
-    communicator->addObjectFactory(new ServantFactory, "::Test::Servant");
-    communicator->addObjectFactory(new FacetFactory, "::Test::Facet");
-    communicator->addObjectFactory(new AccountFactory, "::Test::Account");
+    communicator->addValueFactory(new ServantFactory, "::Test::Servant");
+    communicator->addValueFactory(new FacetFactory, "::Test::Facet");
+    communicator->addValueFactory(new AccountFactory, "::Test::Account");
 
     Test::RemoteEvictorFactoryPtr factory = new Test::RemoteEvictorFactoryI(envName);
     adapter->add(factory, communicator->stringToIdentity("factory"));

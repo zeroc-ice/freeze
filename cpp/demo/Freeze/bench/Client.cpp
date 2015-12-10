@@ -673,7 +673,7 @@ TestApp::IntIntMapReadTest(const string& mapName, T*)
     */
 }
 
-class MyFactory : public Ice::ObjectFactory
+class MyFactory : public Ice::ValueFactory
 {
 public:
 
@@ -689,11 +689,6 @@ public:
             return new Class2();
         }
         return 0;
-    }
-
-    void
-    destroy()
-    {
     }
 };
 typedef IceUtil::Handle<MyFactory> MyFactoryPtr;

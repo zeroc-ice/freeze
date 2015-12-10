@@ -26,20 +26,11 @@ ContactFactory::create(const string&)
 }
 
 void
-ContactFactory::destroy()
-{
-    //
-    // Break cyclic object dependencies
-    //
-    _evictor = 0;
-}
-
-void
 ContactFactory::setEvictor(const Freeze::EvictorPtr& evictor)
 {
     _evictor = evictor;
 }
-    
+
 Freeze::EvictorPtr
 ContactFactory::getEvictor() const
 {

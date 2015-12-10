@@ -8,7 +8,7 @@
 #define NODE_I_H
 
 #include <Complex.h>
-#include <Ice/ObjectFactory.h>
+#include <Ice/ValueFactory.h>
 
 namespace Complex
 {
@@ -72,7 +72,7 @@ public:
     }
 };
 
-class ObjectFactoryI : public Ice::ObjectFactory
+class ValueFactoryI : public Ice::ValueFactory
 {
 public:
 
@@ -93,11 +93,6 @@ public:
         std::cout << "create: " << type << std::endl;
         assert(false);
         return 0;
-    }
-
-    virtual void destroy()
-    {
-        // Nothing to do
     }
 };
 

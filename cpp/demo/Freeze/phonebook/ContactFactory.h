@@ -9,21 +9,20 @@
 
 #include <Freeze/Freeze.h>
 
-class ContactFactory : public Ice::ObjectFactory
+class ContactFactory : public Ice::ValueFactory
 {
 public:
 
     ContactFactory();
 
     //
-    // Operations from ObjectFactory
+    // Operations from ValueFactory
     //
     virtual Ice::ObjectPtr create(const std::string&);
-    virtual void destroy();
 
     void
     setEvictor(const Freeze::EvictorPtr&);
-    
+
     Freeze::EvictorPtr
     getEvictor() const;
 

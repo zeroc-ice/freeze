@@ -51,7 +51,7 @@ validate(const Complex::ComplexDict& m)
     return EXIT_SUCCESS;
 }
 
-static const char* expressions[] = 
+static const char* expressions[] =
 {
     "2",
     "10",
@@ -84,7 +84,7 @@ static void
 usage(const char* name)
 {
     cerr << "Usage: " << name << " [options] validate|populate\n";
-    cerr <<     
+    cerr <<
         "Options:\n"
         "--dbdir           Location of the database directory.\n";
 }
@@ -95,10 +95,10 @@ run(int argc, char* argv[], const Ice::CommunicatorPtr& communicator, Complex::C
     //
     // Register a factory for the node types.
     //
-    Ice::ObjectFactoryPtr factory = new Complex::ObjectFactoryI;
-    communicator->addObjectFactory(factory, "::Complex::NumberNode");
-    communicator->addObjectFactory(factory, "::Complex::AddNode");
-    communicator->addObjectFactory(factory, "::Complex::MultiplyNode");
+    Ice::ValueFactoryPtr factory = new Complex::ValueFactoryI;
+    communicator->addValueFactory(factory, "::Complex::NumberNode");
+    communicator->addValueFactory(factory, "::Complex::AddNode");
+    communicator->addValueFactory(factory, "::Complex::MultiplyNode");
 
     if(argc > 1 && strcmp(argv[1], "populate") == 0)
     {
@@ -118,7 +118,7 @@ main(int argc, char* argv[])
 {
     int status;
     Ice::CommunicatorPtr communicator;
-   
+
     string envName = "db";
 
     try

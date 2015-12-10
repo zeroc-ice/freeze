@@ -35,10 +35,10 @@ class ObjectStore implements Store
             //
             // Create a sample servant with this type
             //
-            Ice.ObjectFactory factory = _communicator.findObjectFactory(facetType);
+            Ice.ValueFactory factory = _communicator.findValueFactory(facetType);
             if(factory == null)
             {
-                throw new DatabaseException(_evictor.errorPrefix() + "No object factory registered for type-id '" +
+                throw new DatabaseException(_evictor.errorPrefix() + "No value factory registered for type-id '" +
                                             facetType + "'");
             }
 
@@ -292,7 +292,7 @@ class ObjectStore implements Store
     static com.sleepycat.db.DatabaseEntry
     marshalKey(Ice.Identity v, Ice.Communicator communicator, Ice.EncodingVersion encoding)
     {
-        IceInternal.BasicStream os = 
+        IceInternal.BasicStream os =
             new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, false);
         v.__write(os);
         return new com.sleepycat.db.DatabaseEntry(os.prepareWrite().b);

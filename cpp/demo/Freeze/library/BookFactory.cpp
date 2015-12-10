@@ -24,12 +24,3 @@ BookFactory::create(const string&)
     assert(type == "::Demo::Book");
     return new BookI(_library);
 }
-
-void
-BookFactory::destroy()
-{
-    //
-    // Break cyclic object dependencies
-    //
-    _library = 0;
-}

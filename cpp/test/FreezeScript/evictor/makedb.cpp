@@ -30,7 +30,7 @@ class DerivedFacetObjectI : public DerivedFacetObject, public IceUtil::AbstractM
 {
 };
 
-class Factory : public Ice::ObjectFactory
+class Factory : public Ice::ValueFactory
 {
 public:
 
@@ -56,18 +56,13 @@ public:
         assert(false);
         return 0;
     }
-
-    virtual void
-    destroy()
-    {
-    }
 };
 
 int
 run(const Ice::CommunicatorPtr& communicator, const string& envName, const string& dbName)
 {
-    Ice::ObjectFactoryPtr factory = new Factory;
-    communicator->addObjectFactory(factory, "");
+    Ice::ValueFactoryPtr factory = new Factory;
+    communicator->addValueFactory(factory, "");
 
     Ice::ObjectAdapterPtr adapter = communicator->createObjectAdapter("");
     Freeze::EvictorPtr evictor = Freeze::createBackgroundSaveEvictor(adapter, envName, dbName);
@@ -129,7 +124,7 @@ main(int argc, char* argv[])
 {
     int status;
     Ice::CommunicatorPtr communicator;
- 
+
     string envName = "db";
 
     try
@@ -141,7 +136,7 @@ main(int argc, char* argv[])
             envName += "/";
             envName += "db";
         }
-       
+
         status = run(communicator, envName, "evictor.db");
     }
     catch(const Ice::Exception& ex)

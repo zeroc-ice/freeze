@@ -52,19 +52,19 @@ class Collocated extends Ice.Application
         }
 
         adapter.addServantLocator(evictor, "book");
-    
+
         //
         // Create the library, and add it to the Object Adapter.
         //
         LibraryI library = new LibraryI(communicator(), _envName, "authors", evictor);
         adapter.add(library, communicator().stringToIdentity("library"));
-    
+
         //
         // Create and install a factory and initializer for books.
         //
-        Ice.ObjectFactory bookFactory = new BookFactory(library);
-        communicator().addObjectFactory(bookFactory, Demo.Book.ice_staticId());
-    
+        Ice.ValueFactory bookFactory = new BookFactory(library);
+        communicator().addValueFactory(bookFactory, Demo.Book.ice_staticId());
+
         //
         // Everything ok, let's go.
         //

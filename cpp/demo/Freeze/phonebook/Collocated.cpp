@@ -14,7 +14,7 @@ using namespace std;
 class PhoneBookCollocated : public Ice::Application
 {
 public:
-    
+
     PhoneBookCollocated(const string&);
     virtual int run(int argc, char* argv[]);
 
@@ -49,7 +49,7 @@ PhoneBookCollocated::run(int argc, char* argv[])
     // Create and install a factory for contacts.
     //
     ContactFactoryPtr contactFactory = new ContactFactory();
-    communicator()->addObjectFactory(contactFactory, Demo::Contact::ice_staticId());
+    communicator()->addValueFactory(contactFactory, Demo::Contact::ice_staticId());
 
     //
     // Create the name index.
@@ -87,13 +87,13 @@ PhoneBookCollocated::run(int argc, char* argv[])
     // which cannot happen during createXXXEvictor().
     //
     contactFactory->setEvictor(evictor);
-    
+
     //
     // Create the phonebook, and add it to the Object Adapter.
     //
     PhoneBookIPtr phoneBook = new PhoneBookI(evictor, contactFactory, index);
     adapter->add(phoneBook, communicator()->stringToIdentity("phonebook"));
-    
+
     //
     // Everything ok, let's go.
     //

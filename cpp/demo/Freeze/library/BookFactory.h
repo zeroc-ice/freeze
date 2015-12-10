@@ -9,17 +9,16 @@
 
 #include <LibraryI.h>
 
-class BookFactory : public Ice::ObjectFactory
+class BookFactory : public Ice::ValueFactory
 {
 public:
 
     BookFactory(const LibraryIPtr&);
 
     //
-    // Operations from ObjectFactory
+    // Operations from ValueFactory
     //
     virtual Ice::ObjectPtr create(const std::string&);
-    virtual void destroy();
 
 private:
 

@@ -43,7 +43,7 @@ main(int argc, char* argv[])
 }
 
 template<class T>
-class ObjectFactory : public Ice::ObjectFactory
+class ValueFactory : public Ice::ValueFactory
 {
 public:
 
@@ -51,11 +51,6 @@ public:
     create(const string& /*type*/)
     {
         return new T;
-    }
-
-    virtual void
-    destroy()
-    {
     }
 };
 
@@ -90,9 +85,9 @@ CasinoServer::run(int argc, char*[])
     //
     // Register factories
     //
-    communicator()->addObjectFactory(new ObjectFactory<BankI>, CasinoStore::PersistentBank::ice_staticId());
-    communicator()->addObjectFactory(new ObjectFactory<PlayerI>, CasinoStore::PersistentPlayer::ice_staticId());
-    communicator()->addObjectFactory(new ObjectFactory<BetI>, CasinoStore::PersistentBet::ice_staticId());
+    communicator()->addValueFactory(new ValueFactory<BankI>, CasinoStore::PersistentBank::ice_staticId());
+    communicator()->addValueFactory(new ValueFactory<PlayerI>, CasinoStore::PersistentPlayer::ice_staticId());
+    communicator()->addValueFactory(new ValueFactory<BetI>, CasinoStore::PersistentBet::ice_staticId());
 
     //
     // Create evictors; each type gets its own type-specific evictor

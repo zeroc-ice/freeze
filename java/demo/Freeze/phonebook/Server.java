@@ -22,7 +22,7 @@ class Server extends Ice.Application
         // Create and install a factory for contacts.
         //
         ContactFactory contactFactory = new ContactFactory();
-        communicator().addObjectFactory(contactFactory, Demo.Contact.ice_staticId());
+        communicator().addValueFactory(contactFactory, Demo.Contact.ice_staticId());
 
         //
         // Create an object adapter
@@ -50,7 +50,7 @@ class Server extends Ice.Application
         {
             evictor.setSize(evictorSize);
         }
-    
+
         //
         // Completes the initialization of the contact factory. Note that ContactI/
         // ContactFactoryI uses this evictor only when a Contact is destroyed,
@@ -62,13 +62,13 @@ class Server extends Ice.Application
         // Register the evictor with the adapter
         //
         adapter.addServantLocator(evictor, "contact");
-    
+
         //
         // Create the phonebook, and add it to the object adapter.
         //
         PhoneBookI phoneBook = new PhoneBookI(evictor, contactFactory, index);
         adapter.add(phoneBook, communicator().stringToIdentity("phonebook"));
-        
+
         //
         // Everything ok, let's go.
         //

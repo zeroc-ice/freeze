@@ -13,7 +13,7 @@ using namespace std;
 class LibraryServer : public Ice::Application
 {
 public:
-    
+
     LibraryServer(const string& envName) :
         _envName(envName)
     {
@@ -58,25 +58,25 @@ LibraryServer::run(int argc, char*[])
     {
         evictor->setSize(evictorSize);
     }
-    
+
     //
     // Use the evictor as servant Locator.
     //
     adapter->addServantLocator(evictor, "book");
 
-    
+
     //
     // Create the library, and add it to the object adapter.
     //
     LibraryIPtr library = new LibraryI(communicator(), _envName, "authors", evictor);
     adapter->add(library, communicator()->stringToIdentity("library"));
-    
+
     //
     // Create and install a factory for books.
     //
-    Ice::ObjectFactoryPtr bookFactory = new BookFactory(library);
-    communicator()->addObjectFactory(bookFactory, Demo::Book::ice_staticId());
-    
+    Ice::ValueFactoryPtr bookFactory = new BookFactory(library);
+    communicator()->addValueFactory(bookFactory, Demo::Book::ice_staticId());
+
     //
     // Everything ok, let's go.
     //

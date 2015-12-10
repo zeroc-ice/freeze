@@ -35,12 +35,12 @@ class Collocated extends Ice.Application
         setInterruptHook(new ShutdownHook());
 
         Ice.Properties properties = communicator().getProperties();
-    
+
         //
         // Create and install a factory for contacts.
         //
         ContactFactory contactFactory = new ContactFactory();
-        communicator().addObjectFactory(contactFactory, Demo.Contact.ice_staticId());
+        communicator().addValueFactory(contactFactory, Demo.Contact.ice_staticId());
 
         //
         // Create an object adapter
@@ -80,13 +80,13 @@ class Collocated extends Ice.Application
         // Register the evictor with the adapter
         //
         adapter.addServantLocator(evictor, "contact");
-    
+
         //
         // Create the phonebook, and add it to the Object Adapter.
         //
         PhoneBookI phoneBook = new PhoneBookI(evictor, contactFactory, index);
         adapter.add(phoneBook, communicator().stringToIdentity("phonebook"));
-    
+
         //
         // Everything ok, let's go.
         //

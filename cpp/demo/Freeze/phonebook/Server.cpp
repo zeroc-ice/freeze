@@ -15,7 +15,7 @@ using namespace Freeze;
 class PhoneBookServer : public Ice::Application
 {
 public:
-    
+
     PhoneBookServer(const string& envName) :
         _envName(envName)
     {
@@ -44,13 +44,13 @@ PhoneBookServer::run(int argc, char*[])
     }
 
     Ice::PropertiesPtr properties = communicator()->getProperties();
-    
+
     //
     // Create and install a factory for contacts.
     //
     ContactFactoryPtr contactFactory = new ContactFactory();
-    communicator()->addObjectFactory(contactFactory, Demo::Contact::ice_staticId());
-    
+    communicator()->addValueFactory(contactFactory, Demo::Contact::ice_staticId());
+
     //
     // Create the name index.
     //
@@ -86,13 +86,13 @@ PhoneBookServer::run(int argc, char*[])
     // which cannot happen during createXXXEvictor().
     //
     contactFactory->setEvictor(evictor);
-        
+
     //
     // Create the phonebook, and add it to the object adapter.
     //
     PhoneBookIPtr phoneBook = new PhoneBookI(evictor, contactFactory, index);
     adapter->add(phoneBook, communicator()->stringToIdentity("phonebook"));
-    
+
     //
     // Everything ok, let's go.
     //

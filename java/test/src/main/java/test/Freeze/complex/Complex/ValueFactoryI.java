@@ -6,7 +6,7 @@
 
 package test.Freeze.complex.Complex;
 
-public class ObjectFactoryI implements Ice.ObjectFactory
+public class ValueFactoryI implements Ice.ValueFactory
 {
     public Ice.Object
     create(String type)
@@ -27,11 +27,5 @@ public class ObjectFactoryI implements Ice.ObjectFactory
         System.err.println( "create: " + type);
         assert(false);
         return null;
-    }
-
-    public void
-    destroy()
-    {
-        // Nothing to do
     }
 }

@@ -120,10 +120,10 @@ public class Client extends test.Util.Application
         //
         // Register a factory for the node types.
         //
-        Ice.ObjectFactory factory = new ObjectFactoryI();
-        communicator().addObjectFactory(factory, "::Complex::NumberNode");
-        communicator().addObjectFactory(factory, "::Complex::AddNode");
-        communicator().addObjectFactory(factory, "::Complex::MultiplyNode");
+        Ice.ValueFactory factory = new ValueFactoryI();
+        communicator().addValueFactory(factory, "::Complex::NumberNode");
+        communicator().addValueFactory(factory, "::Complex::AddNode");
+        communicator().addValueFactory(factory, "::Complex::MultiplyNode");
 
         if(args.length != 0 && args[0].equals("populate"))
         {
@@ -197,7 +197,7 @@ public class Client extends test.Util.Application
         }
         return status;
     }
-    
+
     public static void main(String[] args)
     {
         Client c = new Client();

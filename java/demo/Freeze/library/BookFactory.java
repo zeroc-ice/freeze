@@ -4,7 +4,7 @@
 //
 // **********************************************************************
 
-class BookFactory implements Ice.ObjectFactory
+class BookFactory implements Ice.ValueFactory
 {
     @Override
     public Ice.Object
@@ -12,12 +12,6 @@ class BookFactory implements Ice.ObjectFactory
     {
         assert(type.equals("::Demo::Book"));
         return new BookI(_library);
-    }
-
-    @Override
-    public void
-    destroy()
-    {
     }
 
     BookFactory(LibraryI library)

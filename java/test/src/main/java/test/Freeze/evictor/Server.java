@@ -9,7 +9,7 @@ import test.Freeze.evictor.Test.*;
 
 public class Server extends test.Util.Application
 {
-    static class AccountFactory implements Ice.ObjectFactory
+    static class AccountFactory implements Ice.ValueFactory
     {
         public Ice.Object
         create(String type)
@@ -17,14 +17,9 @@ public class Server extends test.Util.Application
             assert(type.equals("::Test::Account"));
             return new AccountI();
         }
-
-        public void
-        destroy()
-        {
-        }
     }
 
-    static class ServantFactory implements Ice.ObjectFactory
+    static class ServantFactory implements Ice.ValueFactory
     {
         public Ice.Object
         create(String type)
@@ -34,14 +29,9 @@ public class Server extends test.Util.Application
             tie.ice_delegate(new ServantI(tie));
             return tie;
         }
-
-        public void
-        destroy()
-        {
-        }
     }
 
-    static class FacetFactory implements Ice.ObjectFactory
+    static class FacetFactory implements Ice.ValueFactory
     {
         public Ice.Object
         create(String type)
@@ -50,11 +40,6 @@ public class Server extends test.Util.Application
             _FacetTie tie = new _FacetTie();
             tie.ice_delegate(new FacetI(tie));
             return tie;
-        }
-
-        public void
-        destroy()
-        {
         }
     }
 
@@ -65,9 +50,9 @@ public class Server extends test.Util.Application
 
         Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Evictor");
 
-        communicator.addObjectFactory(new AccountFactory(), "::Test::Account");
-        communicator.addObjectFactory(new ServantFactory(), "::Test::Servant");
-        communicator.addObjectFactory(new FacetFactory(), "::Test::Facet");
+        communicator.addValueFactory(new AccountFactory(), "::Test::Account");
+        communicator.addValueFactory(new ServantFactory(), "::Test::Servant");
+        communicator.addValueFactory(new FacetFactory(), "::Test::Facet");
 
         RemoteEvictorFactoryI factory = new RemoteEvictorFactoryI("db");
         adapter.add(factory, communicator.stringToIdentity("factory"));

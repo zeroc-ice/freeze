@@ -21,9 +21,9 @@ public class Server extends Ice.Application
         //
         // Install object factories.
         //
-        Ice.ObjectFactory factory = new NodeFactory();
-        communicator().addObjectFactory(factory, PersistentFile.ice_staticId());
-        communicator().addObjectFactory(factory, PersistentDirectory.ice_staticId());
+        Ice.ValueFactory factory = new NodeFactory();
+        communicator().addValueFactory(factory, PersistentFile.ice_staticId());
+        communicator().addValueFactory(factory, PersistentDirectory.ice_staticId());
 
         //
         // Create an object adapter.
