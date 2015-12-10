@@ -9,7 +9,7 @@
 
 #include <Freeze/Map.h>
 #include <Freeze/ConnectionI.h>
-#ifdef ICE_CPP11
+#ifdef ICE_CPP11_COMPILER
 #  include <memory>
 #endif
 
@@ -68,7 +68,7 @@ public:
     close();
 
     class Tx
-#ifndef ICE_CPP11
+#ifndef ICE_CPP11_COMPILER
         : public IceUtil::SimpleShared
 #endif
     {
@@ -90,7 +90,7 @@ public:
         bool _dead;
     };
 
-#ifdef ICE_CPP11
+#ifdef ICE_CPP11_COMPILER
     typedef std::shared_ptr<Tx> TxPtr;
 #else
     typedef IceUtil::Handle<Tx> TxPtr;

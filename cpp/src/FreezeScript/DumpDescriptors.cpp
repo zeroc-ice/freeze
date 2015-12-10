@@ -966,7 +966,7 @@ FreezeScript::IfDescriptor::IfDescriptor(const DescriptorPtr& parent, int line, 
                                          const IceXML::Attributes& attributes) :
     Descriptor(parent, line, factory, errorReporter),
     ExecutableContainerDescriptor(parent, line, factory, errorReporter, attributes, "if")
-   
+
 {
     DescriptorErrorContext ctx(_errorReporter, "if", _line);
 
@@ -1013,7 +1013,7 @@ FreezeScript::IterateDescriptor::IterateDescriptor(const DescriptorPtr& parent, 
                                                    const IceXML::Attributes& attributes) :
     Descriptor(parent, line, factory, errorReporter),
     ExecutableContainerDescriptor(parent, line, factory, errorReporter, attributes, "iterate")
-  
+
 {
     DescriptorErrorContext ctx(_errorReporter, "iterate", _line);
 
@@ -1156,7 +1156,7 @@ FreezeScript::DumpDescriptor::DumpDescriptor(const DescriptorPtr& parent, int li
                                              const Slice::UnitPtr& unit) :
     Descriptor(parent, line, factory, errorReporter),
     ExecutableContainerDescriptor(parent, line, factory, errorReporter, attributes, "dump"),
-    _base(true), 
+    _base(true),
     _contents(true)
 {
     DescriptorErrorContext ctx(_errorReporter, "dump", _line);
@@ -1238,7 +1238,7 @@ FreezeScript::RecordDescriptor::RecordDescriptor(const DescriptorPtr& parent, in
                                                  const IceXML::Attributes& attributes,
                                                  const Slice::UnitPtr& unit,
                                                  const FreezeScript::ObjectFactoryPtr& objectFactory) :
-    Descriptor(parent, line, factory, errorReporter), 
+    Descriptor(parent, line, factory, errorReporter),
     ExecutableContainerDescriptor(parent, line, factory, errorReporter, attributes, "record"),
     _unit(unit),
     _objectFactory(objectFactory)
@@ -1339,7 +1339,7 @@ FreezeScript::DatabaseDescriptor::DatabaseDescriptor(const DescriptorPtr& parent
                                                      const ErrorReporterPtr& errorReporter,
                                                      const IceXML::Attributes& attributes,
                                                      const Slice::UnitPtr& unit) :
-    Descriptor(parent, line, factory, errorReporter), 
+    Descriptor(parent, line, factory, errorReporter),
     ExecutableContainerDescriptor(parent, line, factory, errorReporter, attributes, "database"),
     _unit(unit)
 {
@@ -1604,6 +1604,7 @@ FreezeScript::SymbolTableI::getConstantValue(const string& name) const
             case Slice::Builtin::KindObject:
             case Slice::Builtin::KindObjectProxy:
             case Slice::Builtin::KindLocalObject:
+            case Slice::Builtin::KindValue:
                 assert(false);
             }
         }

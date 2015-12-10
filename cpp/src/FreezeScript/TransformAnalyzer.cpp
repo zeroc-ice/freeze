@@ -526,6 +526,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     break;
                 }
@@ -563,6 +564,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     break;
                 }
@@ -591,6 +593,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     break;
                 }
@@ -619,6 +622,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     break;
                 }
@@ -647,6 +651,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     break;
                 }
@@ -675,6 +680,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     break;
                 }
@@ -698,6 +704,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
                 case Builtin::KindDouble:
                 case Builtin::KindString:
                 case Builtin::KindObjectProxy:
+                case Builtin::KindValue:
                 {
                     return;
                 }
@@ -724,6 +731,7 @@ FreezeScript::AnalyzeTransformVisitor::compareTypes(const string& desc, const Ty
             break;
         }
         case Builtin::KindObject:
+        case Builtin::KindValue:
         {
             //
             // Allow change from Object to class. Validation has to

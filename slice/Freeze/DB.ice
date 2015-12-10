@@ -28,7 +28,7 @@ sequence<byte> Key;
  * A database value, represented as a sequence of bytes.
  *
  **/
-sequence<byte> Value;
+sequence<byte> \Value;
 
 };
 

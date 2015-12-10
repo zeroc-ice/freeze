@@ -657,6 +657,7 @@ FreezeScript::TransformVisitor::isCompatible(const Slice::TypePtr& dest, const S
                 case Slice::Builtin::KindObject:
                 case Slice::Builtin::KindObjectProxy:
                 case Slice::Builtin::KindLocalObject:
+                case Slice::Builtin::KindValue:
                 {
                     return false;
                 }
@@ -695,6 +696,7 @@ FreezeScript::TransformVisitor::isCompatible(const Slice::TypePtr& dest, const S
                 case Slice::Builtin::KindObject:
                 case Slice::Builtin::KindObjectProxy:
                 case Slice::Builtin::KindLocalObject:
+                case Slice::Builtin::KindValue:
                 {
                     return false;
                 }
@@ -723,6 +725,7 @@ FreezeScript::TransformVisitor::isCompatible(const Slice::TypePtr& dest, const S
                 }
                 case Slice::Builtin::KindObject:
                 case Slice::Builtin::KindLocalObject:
+                case Slice::Builtin::KindValue:
                 {
                     return false;
                 }
@@ -742,6 +745,7 @@ FreezeScript::TransformVisitor::isCompatible(const Slice::TypePtr& dest, const S
             return false;
         }
         case Slice::Builtin::KindObject:
+        case Slice::Builtin::KindValue:
         {
             //
             // Allow transformation from Object to class. Validation has to

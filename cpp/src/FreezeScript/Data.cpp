@@ -262,7 +262,7 @@ FreezeScript::DataFactory::createObject(const Slice::TypePtr& type, bool readOnl
     else
     {
         Slice::BuiltinPtr b = Slice::BuiltinPtr::dynamicCast(type);
-        if(b && b->kind() == Slice::Builtin::KindObject)
+        if(b && (b->kind() == Slice::Builtin::KindObject || b->kind() == Slice::Builtin::KindValue))
         {
             obj = new ObjectRef(this, b, readOnly);
         }
@@ -326,6 +326,7 @@ FreezeScript::DataFactory::createImpl(const Slice::TypePtr& type, bool readOnly)
             return new StringData(this, builtin, _errorReporter, readOnly);
 
         case Slice::Builtin::KindObject:
+        case Slice::Builtin::KindValue:
             return new ObjectRef(this, builtin, readOnly);
 
         case Slice::Builtin::KindObjectProxy:
@@ -652,6 +653,7 @@ FreezeScript::IntegerData::marshal(const Ice::OutputStreamPtr& out) const
     case Slice::Builtin::KindObject:
     case Slice::Builtin::KindObjectProxy:
     case Slice::Builtin::KindLocalObject:
+    case Slice::Builtin::KindValue:
         assert(false);
     }
 }
@@ -697,6 +699,7 @@ FreezeScript::IntegerData::unmarshal(const Ice::InputStreamPtr& in)
     case Slice::Builtin::KindObject:
     case Slice::Builtin::KindObjectProxy:
     case Slice::Builtin::KindLocalObject:
+    case Slice::Builtin::KindValue:
         assert(false);
     }
 }
@@ -825,6 +828,7 @@ FreezeScript::IntegerData::rangeCheck(Ice::Long value, bool fatal) const
     case Slice::Builtin::KindObject:
     case Slice::Builtin::KindObjectProxy:
     case Slice::Builtin::KindLocalObject:
+    case Slice::Builtin::KindValue:
         assert(false);
     }
 
@@ -929,6 +933,7 @@ FreezeScript::DoubleData::marshal(const Ice::OutputStreamPtr& out) const
     case Slice::Builtin::KindObject:
     case Slice::Builtin::KindObjectProxy:
     case Slice::Builtin::KindLocalObject:
+    case Slice::Builtin::KindValue:
         assert(false);
     }
 }
@@ -960,6 +965,7 @@ FreezeScript::DoubleData::unmarshal(const Ice::InputStreamPtr& in)
     case Slice::Builtin::KindObject:
     case Slice::Builtin::KindObjectProxy:
     case Slice::Builtin::KindLocalObject:
+    case Slice::Builtin::KindValue:
         assert(false);
     }
 }

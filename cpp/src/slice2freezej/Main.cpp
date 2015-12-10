@@ -199,6 +199,7 @@ FreezeGenerator::varToObject(const TypePtr& type, const string& param)
             case Builtin::KindObject:
             case Builtin::KindObjectProxy:
             case Builtin::KindLocalObject:
+            case Builtin::KindValue:
                 break;
         }
     }
@@ -254,6 +255,7 @@ FreezeGenerator::objectToVar(const TypePtr& type, const string& param)
             case Builtin::KindObject:
             case Builtin::KindObjectProxy:
             case Builtin::KindLocalObject:
+            case Builtin::KindValue:
                 break;
         }
     }
@@ -987,6 +989,7 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
             case Builtin::KindObject:
             case Builtin::KindObjectProxy:
             case Builtin::KindLocalObject:
+            case Builtin::KindValue:
             {
                 writeMarshalUnmarshalCode(out, "", type, OptionalNone, false, 0, "__r", false, iter, false, metaData,
                                           patchParams);
@@ -1136,6 +1139,7 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
                 case Builtin::KindObject:
                 case Builtin::KindObjectProxy:
                 case Builtin::KindLocalObject:
+                case Builtin::KindValue:
                 {
                     writeMarshalUnmarshalCode(out, "", indexTypes[i], OptionalNone, false, 0, "r", false, iter, false,
                                               metaData, patchParams);

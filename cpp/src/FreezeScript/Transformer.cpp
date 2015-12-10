@@ -2138,7 +2138,7 @@ FreezeScript::DatabaseDescriptor::execute(const SymbolTablePtr& st)
         Freeze::Catalog catalog(_info->connection, Freeze::catalogName());
         Freeze::CatalogData catalogData;
         catalogData.evictor = false;
-        catalogData.key = _info->newKeyType->typeId(); 
+        catalogData.key = _info->newKeyType->typeId();
         catalogData.value = _info->newValueType->typeId();
         catalog.put(Freeze::Catalog::value_type(_info->newDbName, catalogData));
     }
@@ -2413,6 +2413,7 @@ FreezeScript::SymbolTableI::getConstantValue(const string& name) const
             case Slice::Builtin::KindObject:
             case Slice::Builtin::KindObjectProxy:
             case Slice::Builtin::KindLocalObject:
+            case Slice::Builtin::KindValue:
                 assert(false);
             }
         }

@@ -383,7 +383,7 @@ Freeze::IteratorHelperI::IteratorHelperI(const MapHelperI& m, bool readOnly,
         //
         // Need to start a transaction
         //
-#ifdef ICE_CPP11
+#ifdef ICE_CPP11_COMPILER
         _tx.reset(new Tx(_map));
 #else
         _tx = new Tx(_map);
@@ -939,7 +939,7 @@ Freeze::IteratorHelperI::cleanup()
 
     // this can raise an exception when committing the transaction
     // (only for read/write iterators)
-#ifdef ICE_CPP11
+#ifdef ICE_CPP11_COMPILER
     _tx.reset();
 #else
     _tx = 0;
@@ -1474,7 +1474,7 @@ Freeze::MapHelperI::clear()
                 IteratorHelperI::TxPtr tx;
                 if(txn == 0)
                 {
-#ifdef ICE_CPP11
+#ifdef ICE_CPP11_COMPILER
                     tx.reset(new IteratorHelperI::Tx(*this));
 #else
                     tx = new IteratorHelperI::Tx(*this);
