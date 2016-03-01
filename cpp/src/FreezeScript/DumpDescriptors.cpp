@@ -1266,13 +1266,15 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/, ExecuteIn
             Ice::ByteSeq keyBytes;
             keyBytes.resize(dbKey.get_size());
             memcpy(&keyBytes[0], dbKey.get_data(), dbKey.get_size());
-            Ice::InputStreamPtr inKey = Ice::wrapInputStream(info->communicator, keyBytes);
+            Ice::InputStream inKey(info->communicator, keyBytes);
 
             Ice::ByteSeq valueBytes;
             valueBytes.resize(dbValue.get_size());
             memcpy(&valueBytes[0], dbValue.get_data(), dbValue.get_size());
-            Ice::InputStreamPtr inValue = Ice::wrapInputStream(info->communicator, valueBytes);
-            inValue->startEncapsulation();
+            Ice::InputStream inValue(info->communicator, valueBytes);
+            StreamUtil util;
+            inValue.setClosure(&util);
+            inValue.startEncapsulation();
 
             //
             // Create data representations of the key and value types.
@@ -1287,11 +1289,11 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/, ExecuteIn
             //
             // Unmarshal the key and value.
             //
-            keyData->unmarshal(inKey);
-            valueData->unmarshal(inValue);
+            keyData->unmarshal(&inKey);
+            valueData->unmarshal(&inValue);
             if(info->valueType->usesClasses())
             {
-                inValue->readPendingObjects();
+                inValue.readPendingObjects();
             }
 
             //

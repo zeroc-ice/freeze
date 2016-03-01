@@ -65,9 +65,9 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName
     communicator->getProperties()->setProperty("Factory.Endpoints", "default -p 12010");
     Ice::ObjectAdapterPtr adapter = communicator->createObjectAdapter("Factory");
 
-    communicator->addValueFactory(new ServantFactory, "::Test::Servant");
-    communicator->addValueFactory(new FacetFactory, "::Test::Facet");
-    communicator->addValueFactory(new AccountFactory, "::Test::Account");
+    communicator->getValueFactoryManager()->add(new ServantFactory, "::Test::Servant");
+    communicator->getValueFactoryManager()->add(new FacetFactory, "::Test::Facet");
+    communicator->getValueFactoryManager()->add(new AccountFactory, "::Test::Account");
 
     Test::RemoteEvictorFactoryPtr factory = new Test::RemoteEvictorFactoryI(envName);
     adapter->add(factory, communicator->stringToIdentity("factory"));

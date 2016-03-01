@@ -62,7 +62,7 @@ int
 run(const Ice::CommunicatorPtr& communicator, const string& envName, const string& dbName)
 {
     Ice::ValueFactoryPtr factory = new Factory;
-    communicator->addValueFactory(factory, "");
+    communicator->getValueFactoryManager()->add(factory, "");
 
     Ice::ObjectAdapterPtr adapter = communicator->createObjectAdapter("");
     Freeze::EvictorPtr evictor = Freeze::createBackgroundSaveEvictor(adapter, envName, dbName);

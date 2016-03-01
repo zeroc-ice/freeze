@@ -35,7 +35,7 @@ class ObjectStore implements Store
             //
             // Create a sample servant with this type
             //
-            Ice.ValueFactory factory = _communicator.findValueFactory(facetType);
+            Ice.ValueFactory factory = _communicator.getValueFactoryManager().find(facetType);
             if(factory == null)
             {
                 throw new DatabaseException(_evictor.errorPrefix() + "No value factory registered for type-id '" +
@@ -292,46 +292,44 @@ class ObjectStore implements Store
     static com.sleepycat.db.DatabaseEntry
     marshalKey(Ice.Identity v, Ice.Communicator communicator, Ice.EncodingVersion encoding)
     {
-        IceInternal.BasicStream os =
-            new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, false);
-        v.__write(os);
+        Ice.OutputStream os = new Ice.OutputStream(communicator, encoding, false);
+        v.ice_write(os);
         return new com.sleepycat.db.DatabaseEntry(os.prepareWrite().b);
     }
 
     static Ice.Identity
     unmarshalKey(com.sleepycat.db.DatabaseEntry e, Ice.Communicator communicator, Ice.EncodingVersion encoding)
     {
-        IceInternal.BasicStream is;
+        Ice.InputStream is;
         if(e.getDataNIO() != null)
         {
-            is = new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, e.getDataNIO());
+            is = new Ice.InputStream(communicator, encoding, e.getDataNIO());
         }
         else
         {
-            is = new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, e.getData());
+            is = new Ice.InputStream(communicator, encoding, e.getData());
         }
         Ice.Identity key = new Ice.Identity();
-        key.__read(is);
+        key.ice_read(is);
         return key;
     }
 
     static com.sleepycat.db.DatabaseEntry
     marshalValue(ObjectRecord v, Ice.Communicator communicator, Ice.EncodingVersion encoding, boolean keepStats)
     {
-        IceInternal.BasicStream os =
-            new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, false);
-        os.startWriteEncaps();
+        Ice.OutputStream os = new Ice.OutputStream(communicator, encoding, false);
+        os.startEncapsulation();
 
         if(keepStats)
         {
-            v.__write(os);
+            v.ice_write(os);
         }
         else
         {
             os.writeObject(v.servant);
         }
         os.writePendingObjects();
-        os.endWriteEncaps();
+        os.endEncapsulation();
         return new com.sleepycat.db.DatabaseEntry(os.prepareWrite().b);
     }
 
@@ -339,21 +337,21 @@ class ObjectStore implements Store
     unmarshalValue(com.sleepycat.db.DatabaseEntry e, Ice.Communicator communicator, Ice.EncodingVersion encoding,
                    boolean keepStats)
     {
-        IceInternal.BasicStream is;
+        Ice.InputStream is;
         if(e.getDataNIO() != null)
         {
-            is = new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, e.getDataNIO());
+            is = new Ice.InputStream(communicator, encoding, e.getDataNIO());
         }
         else
         {
-            is = new IceInternal.BasicStream(IceInternal.Util.getInstance(communicator), encoding, e.getData());
+            is = new Ice.InputStream(communicator, encoding, e.getData());
         }
-        is.sliceObjects(false);
+        is.setSliceObjects(false);
         ObjectRecord rec = new ObjectRecord();
-        is.startReadEncaps();
+        is.startEncapsulation();
         if(keepStats)
         {
-            rec.__read(is);
+            rec.ice_read(is);
             is.readPendingObjects();
         }
         else
@@ -363,7 +361,7 @@ class ObjectStore implements Store
             is.readPendingObjects();
             rec.servant = holder.value;
         }
-        is.endReadEncaps();
+        is.endEncapsulation();
         return rec;
     }
 

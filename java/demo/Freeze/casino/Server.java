@@ -69,9 +69,12 @@ class Server extends Ice.Application
         //
         // Register factories
         //
-        communicator().addValueFactory(new ValueFactory(BankI.class), CasinoStore.PersistentBank.ice_staticId());
-        communicator().addValueFactory(new ValueFactory(PlayerI.class), CasinoStore.PersistentPlayer.ice_staticId());
-        communicator().addValueFactory(new ValueFactory(BetI.class), CasinoStore.PersistentBet.ice_staticId());
+        communicator().getValueFactoryManager().add(new ValueFactory(BankI.class),
+                                                    CasinoStore.PersistentBank.ice_staticId());
+        communicator().getValueFactoryManager().add(new ValueFactory(PlayerI.class),
+                                                    CasinoStore.PersistentPlayer.ice_staticId());
+        communicator().getValueFactoryManager().add(new ValueFactory(BetI.class),
+                                                    CasinoStore.PersistentBet.ice_staticId());
 
         //
         // Create evictors; each type gets its own type-specific evictor

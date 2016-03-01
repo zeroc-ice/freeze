@@ -476,7 +476,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
         in.close();
     }
     FreezeScript::ValueFactoryPtr valueFactory = new FreezeScript::ValueFactory;
-    communicator->addValueFactory(valueFactory, "");
+    communicator->getValueFactoryManager()->add(valueFactory, "");
 
     DbEnv dbEnv(0);
     DbTxn* txn = 0;

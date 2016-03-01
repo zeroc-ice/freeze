@@ -25,8 +25,8 @@ import java.nio.ByteBuffer;
 public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
     implements Map<K, V>, KeyCodec<K>, IteratorModel<K, V>
 {
-    public abstract void encodeValue(V v, IceInternal.BasicStream str);
-    public abstract V decodeValue(IceInternal.BasicStream str);
+    public abstract void encodeValue(V v, Ice.OutputStream str);
+    public abstract V decodeValue(Ice.InputStream str);
 
     protected
     MapI(Connection connection, String dbName, String key, String value, boolean createDb,
@@ -1115,7 +1115,7 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
 
     ByteBuffer encodeKey(K k)
     {
-        IceInternal.BasicStream str = createWriteStream();
+        Ice.OutputStream str = createWriteStream();
         encodeKey(k, str);
         return str.prepareWrite().b;
     }
@@ -1142,7 +1142,7 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
 
     ByteBuffer encodeValue(V v)
     {
-        IceInternal.BasicStream str = createWriteStream();
+        Ice.OutputStream str = createWriteStream();
         encodeValue(v, str);
         return str.prepareWrite().b;
     }
@@ -1167,20 +1167,20 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
         }
     }
 
-    IceInternal.BasicStream createWriteStream()
+    Ice.OutputStream createWriteStream()
     {
-        return new IceInternal.BasicStream(IceInternal.Util.getInstance(_communicator), _encoding, false);
+        return new Ice.OutputStream(_communicator, _encoding, false);
     }
 
-    IceInternal.BasicStream createReadStream(byte[] arr)
+    Ice.InputStream createReadStream(byte[] arr)
     {
-        return new IceInternal.BasicStream(IceInternal.Util.getInstance(_communicator), _encoding, arr);
+        return new Ice.InputStream(_communicator, _encoding, arr);
     }
 
-    IceInternal.BasicStream createReadStream(ByteBuffer buf)
+    Ice.InputStream createReadStream(ByteBuffer buf)
     {
         buf.rewind();
-        return new IceInternal.BasicStream(IceInternal.Util.getInstance(_communicator), _encoding, buf);
+        return new Ice.InputStream(_communicator, _encoding, buf);
     }
 
     com.sleepycat.db.Database
@@ -1650,7 +1650,7 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
         private final java.util.Comparator<K> _comparator;
     }
 
-    public static class Patcher implements IceInternal.Patcher
+    public static class Patcher implements Ice.ReadObjectCallback
     {
         public
         Patcher(String type)
@@ -1660,16 +1660,9 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
 
         @Override
         public void
-        patch(Ice.Object v)
+        objectReady(Ice.Object v)
         {
             value = v;
-        }
-
-        @Override
-        public String
-        type()
-        {
-            return this.type;
         }
 
         public Ice.Object

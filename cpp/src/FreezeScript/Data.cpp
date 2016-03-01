@@ -20,13 +20,14 @@ namespace FreezeScript
 //
 // ObjectWriter
 //
-class ObjectWriter : public Ice::ObjectWriter
+class ObjectWriter : public Ice::Object
 {
 public:
 
     ObjectWriter(const ObjectDataPtr&);
 
-    virtual void write(const Ice::OutputStreamPtr&) const;
+    virtual void __write(Ice::OutputStream*) const;
+    virtual void __read(Ice::InputStream*);
 
 private:
 
@@ -34,31 +35,16 @@ private:
 };
 
 //
-// ReadObjectCallback
-//
-class ReadObjectCallback : public Ice::ReadObjectCallback
-{
-public:
-
-    ReadObjectCallback(const ObjectRefPtr&);
-
-    virtual void invoke(const Ice::ObjectPtr&);
-
-private:
-
-    ObjectRefPtr _ref;
-};
-
-//
 // ObjectReader
 //
-class ObjectReader : public Ice::ObjectReader
+class ObjectReader : public Ice::Object
 {
 public:
 
     ObjectReader(const DataFactoryPtr&, const Slice::TypePtr&);
 
-    virtual void read(const Ice::InputStreamPtr&);
+    virtual void __write(Ice::OutputStream*) const;
+    virtual void __read(Ice::InputStream*);
 
     ObjectDataPtr getValue() const;
 
@@ -81,7 +67,7 @@ FreezeScript::ObjectWriter::ObjectWriter(const ObjectDataPtr& value) :
 }
 
 void
-FreezeScript::ObjectWriter::write(const Ice::OutputStreamPtr& out) const
+FreezeScript::ObjectWriter::__write(Ice::OutputStream* out) const
 {
     out->startObject(0);
 
@@ -116,6 +102,12 @@ FreezeScript::ObjectWriter::write(const Ice::OutputStreamPtr& out) const
     out->endObject();
 }
 
+void
+FreezeScript::ObjectWriter::__read(Ice::InputStream*)
+{
+    assert(false);
+}
+
 //
 // ObjectReader
 //
@@ -125,7 +117,13 @@ FreezeScript::ObjectReader::ObjectReader(const DataFactoryPtr& factory, const Sl
 }
 
 void
-FreezeScript::ObjectReader::read(const Ice::InputStreamPtr& in)
+FreezeScript::ObjectReader::__write(Ice::OutputStream*) const
+{
+    assert(false);
+}
+
+void
+FreezeScript::ObjectReader::__read(Ice::InputStream* in)
 {
     const_cast<ObjectDataPtr&>(_value) = new ObjectData(_factory, _type, true);
     Slice::ClassDeclPtr decl = Slice::ClassDeclPtr::dynamicCast(_type);
@@ -491,13 +489,13 @@ FreezeScript::BooleanData::getType() const
 }
 
 void
-FreezeScript::BooleanData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::BooleanData::marshal(Ice::OutputStream* out) const
 {
     out->write(_value);
 }
 
 void
-FreezeScript::BooleanData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::BooleanData::unmarshal(Ice::InputStream* in)
 {
     in->read(_value);
 }
@@ -619,7 +617,7 @@ FreezeScript::IntegerData::getType() const
 }
 
 void
-FreezeScript::IntegerData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::IntegerData::marshal(Ice::OutputStream* out) const
 {
     rangeCheck(_value, true);
 
@@ -659,7 +657,7 @@ FreezeScript::IntegerData::marshal(const Ice::OutputStreamPtr& out) const
 }
 
 void
-FreezeScript::IntegerData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::IntegerData::unmarshal(Ice::InputStream* in)
 {
     switch(_type->kind())
     {
@@ -909,7 +907,7 @@ FreezeScript::DoubleData::getType() const
 }
 
 void
-FreezeScript::DoubleData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::DoubleData::marshal(Ice::OutputStream* out) const
 {
     switch(_type->kind())
     {
@@ -939,7 +937,7 @@ FreezeScript::DoubleData::marshal(const Ice::OutputStreamPtr& out) const
 }
 
 void
-FreezeScript::DoubleData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::DoubleData::unmarshal(Ice::InputStream* in)
 {
     switch(_type->kind())
     {
@@ -1111,13 +1109,13 @@ FreezeScript::StringData::getType() const
 }
 
 void
-FreezeScript::StringData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::StringData::marshal(Ice::OutputStream* out) const
 {
     out->write(_value);
 }
 
 void
-FreezeScript::StringData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::StringData::unmarshal(Ice::InputStream* in)
 {
     string val;
     in->read(val);
@@ -1256,13 +1254,13 @@ FreezeScript::ProxyData::destroy()
 }
 
 void
-FreezeScript::ProxyData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::ProxyData::marshal(Ice::OutputStream* out) const
 {
     out->write(_value);
 }
 
 void
-FreezeScript::ProxyData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::ProxyData::unmarshal(Ice::InputStream* in)
 {
     in->read(_value);
 }
@@ -1468,7 +1466,7 @@ FreezeScript::StructData::destroy()
 }
 
 void
-FreezeScript::StructData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::StructData::marshal(Ice::OutputStream* out) const
 {
     Slice::DataMemberList members = _type->dataMembers();
     for(Slice::DataMemberList::iterator p = members.begin(); p != members.end(); ++p)
@@ -1480,7 +1478,7 @@ FreezeScript::StructData::marshal(const Ice::OutputStreamPtr& out) const
 }
 
 void
-FreezeScript::StructData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::StructData::unmarshal(Ice::InputStream* in)
 {
     Slice::DataMemberList members = _type->dataMembers();
     for(Slice::DataMemberList::iterator p = members.begin(); p != members.end(); ++p)
@@ -1643,7 +1641,7 @@ FreezeScript::SequenceData::destroy()
 }
 
 void
-FreezeScript::SequenceData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::SequenceData::marshal(Ice::OutputStream* out) const
 {
     out->writeSize(static_cast<int>(_elements.size()));
     for(DataList::const_iterator p = _elements.begin(); p != _elements.end(); ++p)
@@ -1653,7 +1651,7 @@ FreezeScript::SequenceData::marshal(const Ice::OutputStreamPtr& out) const
 }
 
 void
-FreezeScript::SequenceData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::SequenceData::unmarshal(Ice::InputStream* in)
 {
     Slice::TypePtr type = _type->type();
     Ice::Int sz = in->readSize();
@@ -1792,7 +1790,7 @@ FreezeScript::EnumData::destroy()
 }
 
 void
-FreezeScript::EnumData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::EnumData::marshal(Ice::OutputStream* out) const
 {
     if(_count <= 127)
     {
@@ -1809,7 +1807,7 @@ FreezeScript::EnumData::marshal(const Ice::OutputStreamPtr& out) const
 }
 
 void
-FreezeScript::EnumData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::EnumData::unmarshal(Ice::InputStream* in)
 {
     if(_count <= 127)
     {
@@ -2025,7 +2023,7 @@ FreezeScript::DictionaryData::destroy()
 }
 
 void
-FreezeScript::DictionaryData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::DictionaryData::marshal(Ice::OutputStream* out) const
 {
     out->writeSize(static_cast<int>(_map.size()));
     for(DataMap::const_iterator p = _map.begin(); p != _map.end(); ++p)
@@ -2036,7 +2034,7 @@ FreezeScript::DictionaryData::marshal(const Ice::OutputStreamPtr& out) const
 }
 
 void
-FreezeScript::DictionaryData::unmarshal(const Ice::InputStreamPtr& in)
+FreezeScript::DictionaryData::unmarshal(Ice::InputStream* in)
 {
     Slice::TypePtr keyType = _type->keyType();
     Slice::TypePtr valueType = _type->valueType();
@@ -2191,17 +2189,17 @@ FreezeScript::ObjectData::destroy()
 }
 
 void
-FreezeScript::ObjectData::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::ObjectData::marshal(Ice::OutputStream* out) const
 {
     if(!_marshaler)
     {
         const_cast<Ice::ObjectPtr&>(_marshaler) = new ObjectWriter(const_cast<ObjectData*>(this));
     }
-    out->writeObject(_marshaler);
+    out->write(_marshaler);
 }
 
 void
-FreezeScript::ObjectData::unmarshal(const Ice::InputStreamPtr& /*in*/)
+FreezeScript::ObjectData::unmarshal(Ice::InputStream* /*in*/)
 {
     //
     // Unmarshaling is done by ObjectReader.
@@ -2371,11 +2369,12 @@ FreezeScript::ObjectRef::destroy()
 }
 
 void
-FreezeScript::ObjectRef::marshal(const Ice::OutputStreamPtr& out) const
+FreezeScript::ObjectRef::marshal(Ice::OutputStream* out) const
 {
     if(!_value)
     {
-        out->writeObject(0);
+        Ice::ObjectPtr nil;
+        out->write(nil);
         return;
     }
 
@@ -2399,10 +2398,32 @@ FreezeScript::ReadObjectCallback::invoke(const Ice::ObjectPtr& p)
     }
 }
 
-void
-FreezeScript::ObjectRef::unmarshal(const Ice::InputStreamPtr& in)
+namespace
 {
-    in->readObject(new ReadObjectCallback(this));
+
+void
+patchObject(void* addr, const Ice::ObjectPtr& v)
+{
+    FreezeScript::ReadObjectCallback* cb = static_cast<FreezeScript::ReadObjectCallback*>(addr);
+    assert(cb);
+    cb->invoke(v);
+}
+
+}
+
+void
+FreezeScript::ObjectRef::unmarshal(Ice::InputStream* in)
+{
+    //
+    // This callback is notified when the Slice value is actually read. The StreamUtil object
+    // attached to the stream keeps a reference to the callback object to ensure it lives
+    // long enough.
+    //
+    ReadObjectCallbackPtr rocb = new ReadObjectCallback(this);
+    StreamUtil* util = reinterpret_cast<StreamUtil*>(in->getClosure());
+    assert(util);
+    util->add(rocb);
+    in->read(patchObject, rocb.get());
 }
 
 bool

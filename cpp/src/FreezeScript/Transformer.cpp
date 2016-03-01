@@ -1957,13 +1957,15 @@ FreezeScript::RecordDescriptor::transformRecord(const Ice::ByteSeq& inKeyBytes,
                                                 Ice::ByteSeq& outKeyBytes,
                                                 Ice::ByteSeq& outValueBytes)
 {
-    Ice::InputStreamPtr inKey = Ice::wrapInputStream(_info->communicator, inKeyBytes);
-    Ice::InputStreamPtr inValue = Ice::wrapInputStream(_info->communicator, inValueBytes);
-    inValue->startEncapsulation();
+    Ice::InputStream inKey(_info->communicator, inKeyBytes);
+    Ice::InputStream inValue(_info->communicator, inValueBytes);
+    StreamUtil util;
+    inValue.setClosure(&util);
+    inValue.startEncapsulation();
 
-    Ice::OutputStreamPtr outKey = Ice::createOutputStream(_info->communicator);
-    Ice::OutputStreamPtr outValue = Ice::createOutputStream(_info->communicator);
-    outValue->startEncapsulation();
+    Ice::OutputStream outKey(_info->communicator);
+    Ice::OutputStream outValue(_info->communicator);
+    outValue.startEncapsulation();
 
     //
     // Create data representations of the old key and value types.
@@ -1977,12 +1979,12 @@ FreezeScript::RecordDescriptor::transformRecord(const Ice::ByteSeq& inKeyBytes,
     //
     // Unmarshal the old key and value.
     //
-    oldKeyData->unmarshal(inKey);
-    oldValueData->unmarshal(inValue);
+    oldKeyData->unmarshal(&inKey);
+    oldValueData->unmarshal(&inValue);
     _info->objectDataMap.clear();
     if(_info->oldValueType->usesClasses())
     {
-        inValue->readPendingObjects();
+        inValue.readPendingObjects();
         ObjectVisitor visitor(_info->objectDataMap);
         oldValueData->visit(visitor);
     }
@@ -2022,17 +2024,17 @@ FreezeScript::RecordDescriptor::transformRecord(const Ice::ByteSeq& inKeyBytes,
         ExecutableContainerDescriptor::execute(st);
     }
 
-    newKeyData->marshal(outKey);
-    newValueData->marshal(outValue);
+    newKeyData->marshal(&outKey);
+    newValueData->marshal(&outValue);
 
-    outKey->finished(outKeyBytes);
+    outKey.finished(outKeyBytes);
 
     if(_info->newValueType->usesClasses())
     {
-        outValue->writePendingObjects();
+        outValue.writePendingObjects();
     }
-    outValue->endEncapsulation();
-    outValue->finished(outValueBytes);
+    outValue.endEncapsulation();
+    outValue.finished(outValueBytes);
 }
 
 //

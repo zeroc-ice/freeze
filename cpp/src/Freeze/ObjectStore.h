@@ -41,7 +41,7 @@ public:
     void save(Dbt&, Dbt&, Ice::Byte, DbTxn*);
 
     //
-    // This base class encapsulates a BasicStream, which allows us to avoid
+    // This base class encapsulates a stream, which allows us to avoid
     // making any extra copies of marshaled data when updating the database.
     //
     class Marshaler
@@ -54,7 +54,7 @@ public:
 
     protected:
 
-        IceInternal::BasicStream _os;
+        Ice::OutputStream _os;
     };
 
     class KeyMarshaler : public Marshaler

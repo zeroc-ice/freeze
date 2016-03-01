@@ -758,7 +758,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
     }
 
     FreezeScript::ValueFactoryPtr valueFactory = new FreezeScript::ValueFactory;
-    communicator->addValueFactory(valueFactory, "");
+    communicator->getValueFactoryManager()->add(valueFactory, "");
 
     //
     // Transform the database.

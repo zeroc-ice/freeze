@@ -20,7 +20,8 @@ using namespace Ice;
 // TransactionalEvictorDeadlockException
 //
 
-Freeze::TransactionalEvictorDeadlockException::TransactionalEvictorDeadlockException(const char* file, int line, const TransactionPtr& transaction) :
+Freeze::TransactionalEvictorDeadlockException::TransactionalEvictorDeadlockException(
+    const char* file, int line, const TransactionPtr& transaction) :
     Ice::SystemException(file, line),
     tx(transaction)
 {
@@ -31,9 +32,9 @@ Freeze::TransactionalEvictorDeadlockException::~TransactionalEvictorDeadlockExce
 }
 
 string
-Freeze::TransactionalEvictorDeadlockException::ice_name() const
+Freeze::TransactionalEvictorDeadlockException::ice_id() const
 {
-    return "Freeze::TransactionalEvictorDeadlockException";
+    return "::Freeze::TransactionalEvictorDeadlockException";
 }
 
 Freeze::TransactionalEvictorDeadlockException*

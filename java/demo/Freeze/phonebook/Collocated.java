@@ -40,7 +40,7 @@ class Collocated extends Ice.Application
         // Create and install a factory for contacts.
         //
         ContactFactory contactFactory = new ContactFactory();
-        communicator().addValueFactory(contactFactory, Demo.Contact.ice_staticId());
+        communicator().getValueFactoryManager().add(contactFactory, Demo.Contact.ice_staticId());
 
         //
         // Create an object adapter

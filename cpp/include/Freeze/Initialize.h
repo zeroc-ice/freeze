@@ -90,7 +90,7 @@ public:
 
     virtual ~TransactionalEvictorDeadlockException() throw();
 
-    virtual std::string ice_name() const;
+    virtual std::string ice_id() const;
     virtual TransactionalEvictorDeadlockException* ice_clone() const;
     virtual void ice_throw() const;
 

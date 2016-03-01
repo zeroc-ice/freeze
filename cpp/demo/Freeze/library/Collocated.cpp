@@ -76,7 +76,7 @@ LibraryCollocated::run(int argc, char* argv[])
     // Create and install a factory for books.
     //
     Ice::ValueFactoryPtr bookFactory = new BookFactory(library);
-    communicator()->addValueFactory(bookFactory, Demo::Book::ice_staticId());
+    communicator()->getValueFactoryManager()->add(bookFactory, Demo::Book::ice_staticId());
 
     //
     // Everything ok, let's go.

@@ -85,9 +85,12 @@ CasinoServer::run(int argc, char*[])
     //
     // Register factories
     //
-    communicator()->addValueFactory(new ValueFactory<BankI>, CasinoStore::PersistentBank::ice_staticId());
-    communicator()->addValueFactory(new ValueFactory<PlayerI>, CasinoStore::PersistentPlayer::ice_staticId());
-    communicator()->addValueFactory(new ValueFactory<BetI>, CasinoStore::PersistentBet::ice_staticId());
+    communicator()->getValueFactoryManager()->add(new ValueFactory<BankI>,
+                                                  CasinoStore::PersistentBank::ice_staticId());
+    communicator()->getValueFactoryManager()->add(new ValueFactory<PlayerI>,
+                                                  CasinoStore::PersistentPlayer::ice_staticId());
+    communicator()->getValueFactoryManager()->add(new ValueFactory<BetI>,
+                                                  CasinoStore::PersistentBet::ice_staticId());
 
     //
     // Create evictors; each type gets its own type-specific evictor

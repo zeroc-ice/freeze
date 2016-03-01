@@ -776,7 +776,7 @@ protected:
 
     void init();
 
-    IceInternal::BasicStream _stream;
+    Ice::OutputStream _stream;
     Dbt* _dbt;
 };
 
@@ -804,7 +804,7 @@ public:
                                            const Ice::CommunicatorPtr& communicator,
                                            const Ice::EncodingVersion& encoding)
     {
-        IceInternal::BasicStream stream(IceInternal::getInstance(communicator).get(), encoding);
+        Ice::OutputStream stream(communicator, encoding);
         stream.write(v);
         std::vector<Ice::Byte>(stream.b.begin(), stream.b.end()).swap(bytes);
     }
@@ -813,8 +813,7 @@ public:
                                           const Ice::CommunicatorPtr& communicator,
                                           const Ice::EncodingVersion& encoding)
     {
-        IceInternal::BasicStream stream(IceInternal::getInstance(communicator).get(), encoding, &bytes[0],
-                                        &bytes[0] + bytes.size());
+        Ice::InputStream stream(communicator, encoding, bytes);
         stream.read(v);
     }
 };
@@ -835,9 +834,9 @@ public:
     MapValueCodec(const T& v, const Ice::CommunicatorPtr& communicator, const Ice::EncodingVersion& encoding) :
         MapCodecBase(communicator, encoding)
     {
-        _stream.startWriteEncaps();
+        _stream.startEncapsulation();
         _stream.write(v);
-        _stream.endWriteEncaps();
+        _stream.endEncapsulation();
         init();
     }
 
@@ -845,10 +844,10 @@ public:
                                            const Ice::CommunicatorPtr& communicator,
                                            const Ice::EncodingVersion& encoding)
     {
-        IceInternal::BasicStream stream(IceInternal::getInstance(communicator).get(), encoding);
-        stream.startWriteEncaps();
+        Ice::OutputStream stream(communicator, encoding);
+        stream.startEncapsulation();
         stream.write(v);
-        stream.endWriteEncaps();
+        stream.endEncapsulation();
         std::vector<Ice::Byte>(stream.b.begin(), stream.b.end()).swap(bytes);
     }
 
@@ -856,11 +855,10 @@ public:
                                           const Ice::CommunicatorPtr& communicator,
                                           const Ice::EncodingVersion& encoding)
     {
-        IceInternal::BasicStream stream(IceInternal::getInstance(communicator).get(), encoding, &bytes[0],
-                                        &bytes[0] + bytes.size());
-        stream.startReadEncaps();
+        Ice::InputStream stream(communicator, encoding, bytes);
+        stream.startEncapsulation();
         stream.read(v);
-        stream.endReadEncaps();
+        stream.endEncapsulation();
     }
 };
 
@@ -880,10 +878,10 @@ public:
     MapObjectValueCodec(const T& v, const Ice::CommunicatorPtr& communicator, const Ice::EncodingVersion& encoding) :
         MapCodecBase(communicator, encoding)
     {
-        _stream.startWriteEncaps();
+        _stream.startEncapsulation();
         _stream.write(v);
         _stream.writePendingObjects();
-        _stream.endWriteEncaps();
+        _stream.endEncapsulation();
         init();
     }
 
@@ -891,11 +889,11 @@ public:
                                            const Ice::CommunicatorPtr& communicator,
                                            const Ice::EncodingVersion& encoding)
     {
-        IceInternal::BasicStream stream(IceInternal::getInstance(communicator).get(), encoding);
-        stream.startWriteEncaps();
+        Ice::OutputStream stream(communicator, encoding);
+        stream.startEncapsulation();
         stream.write(v);
         stream.writePendingObjects();
-        stream.endWriteEncaps();
+        stream.endEncapsulation();
         std::vector<Ice::Byte>(stream.b.begin(), stream.b.end()).swap(bytes);
     }
 
@@ -903,13 +901,12 @@ public:
                                           const Ice::CommunicatorPtr& communicator,
                                           const Ice::EncodingVersion& encoding)
     {
-        IceInternal::BasicStream stream(IceInternal::getInstance(communicator).get(), encoding, &bytes[0],
-                                        &bytes[0] + bytes.size());
-        stream.sliceObjects(false);
-        stream.startReadEncaps();
+        Ice::InputStream stream(communicator, encoding, bytes);
+        stream.setSliceObjects(false);
+        stream.startEncapsulation();
         stream.read(v);
         stream.readPendingObjects();
-        stream.endReadEncaps();
+        stream.endEncapsulation();
     }
 };
 

@@ -50,9 +50,9 @@ public class Server extends test.Util.Application
 
         Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Evictor");
 
-        communicator.addValueFactory(new AccountFactory(), "::Test::Account");
-        communicator.addValueFactory(new ServantFactory(), "::Test::Servant");
-        communicator.addValueFactory(new FacetFactory(), "::Test::Facet");
+        communicator.getValueFactoryManager().add(new AccountFactory(), "::Test::Account");
+        communicator.getValueFactoryManager().add(new ServantFactory(), "::Test::Servant");
+        communicator.getValueFactoryManager().add(new FacetFactory(), "::Test::Facet");
 
         RemoteEvictorFactoryI factory = new RemoteEvictorFactoryI("db");
         adapter.add(factory, communicator.stringToIdentity("factory"));

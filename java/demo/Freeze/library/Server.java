@@ -45,7 +45,7 @@ class Server extends Ice.Application
         // Create and install a factory for books.
         //
         Ice.ValueFactory bookFactory = new BookFactory(library);
-        communicator().addValueFactory(bookFactory, Demo.Book.ice_staticId());
+        communicator().getValueFactoryManager().add(bookFactory, Demo.Book.ice_staticId());
 
         //
         // Everything ok, let's go.

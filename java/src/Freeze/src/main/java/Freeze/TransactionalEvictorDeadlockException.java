@@ -15,9 +15,9 @@ public class TransactionalEvictorDeadlockException extends Ice.SystemException
 
     @Override
     public String
-    ice_name()
+    ice_id()
     {
-        return "Freeze::TransactionalEvictorDeadlockException";
+        return "::Freeze::TransactionalEvictorDeadlockException";
     }
 
     public Transaction tx;

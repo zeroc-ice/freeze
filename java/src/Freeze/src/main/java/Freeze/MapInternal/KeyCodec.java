@@ -8,6 +8,6 @@ package Freeze.MapInternal;
 
 interface KeyCodec<K>
 {
-    public abstract void encodeKey(K k, IceInternal.BasicStream str);
-    public abstract K decodeKey(IceInternal.BasicStream str);
+    public abstract void encodeKey(K k, Ice.OutputStream str);
+    public abstract K decodeKey(Ice.InputStream str);
 }

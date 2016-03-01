@@ -96,9 +96,9 @@ run(int argc, char* argv[], const Ice::CommunicatorPtr& communicator, Complex::C
     // Register a factory for the node types.
     //
     Ice::ValueFactoryPtr factory = new Complex::ValueFactoryI;
-    communicator->addValueFactory(factory, "::Complex::NumberNode");
-    communicator->addValueFactory(factory, "::Complex::AddNode");
-    communicator->addValueFactory(factory, "::Complex::MultiplyNode");
+    communicator->getValueFactoryManager()->add(factory, "::Complex::NumberNode");
+    communicator->getValueFactoryManager()->add(factory, "::Complex::AddNode");
+    communicator->getValueFactoryManager()->add(factory, "::Complex::MultiplyNode");
 
     if(argc > 1 && strcmp(argv[1], "populate") == 0)
     {

@@ -639,8 +639,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
         {
             assert(!indexTypes[i].type->usesClasses());
 
-            C << nl << "IceInternal::InstancePtr __instance = IceInternal::getInstance(__communicator);";
-            C << nl << "IceInternal::BasicStream __stream(__instance.get(), __encoding);";
+            C << nl << "Ice::OutputStream __stream(__communicator, __encoding);";
 
             string valueS;
             if(dict.indices[i].caseSensitive)
@@ -673,10 +672,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
         }
         else
         {
-            C << nl << "IceInternal::InstancePtr __instance = IceInternal::getInstance(__communicator);";
-            C << nl << "IceInternal::BasicStream __stream(__instance.get(), __encoding, ";
-            C << "&__bytes[0], &__bytes[0] + __bytes.size());";
-
+            C << nl << "Ice::InputStream __stream(__communicator, __encoding, __bytes);";
             writeMarshalUnmarshalCode(C, indexTypes[i].type, false, 0, "__index", false, indexTypes[i].metaData, 0,
                                       "__stream", false);
         }
@@ -1168,8 +1164,7 @@ writeIndexC(const TypePtr& type, const TypePtr& memberType, const string& member
     C << sp << nl << "void";
     C << nl << fullName << "::" << "marshalKey(" << inputType << " __index, Freeze::Key& __bytes) const";
     C << sb;
-    C << nl << "IceInternal::InstancePtr __instance = IceInternal::getInstance(_communicator);";
-    C << nl << "IceInternal::BasicStream __stream(__instance.get(), _encoding);";
+    C << nl << "Ice::OutputStream __stream(_communicator, _encoding);";
 
     string valueS;
     if(caseSensitive)
@@ -1389,9 +1384,10 @@ gen(const string& name, const UnitPtr& u, const vector<string>& includePaths, co
 
 
     CPP << "\n#include <IceUtil/PushDisableWarnings.h>";
-    CPP << "\n#include <Ice/BasicStream.h>";
     CPP << "\n#include <IceUtil/StringUtil.h>";
     CPP << "\n#include <IceUtil/PopDisableWarnings.h>";
+    CPP << "\n#include <Ice/InputStream.h>";
+    CPP << "\n#include <Ice/OutputStream.h>";
     CPP << "\n#include <";
     if(include.size())
     {

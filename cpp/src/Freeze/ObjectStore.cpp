@@ -43,7 +43,7 @@ Freeze::ObjectStoreBase::ObjectStoreBase(const string& facet, const string& face
         //
         // Create a sample servant with this type
         //
-        ValueFactoryPtr factory = _communicator->findValueFactory(facetType);
+        ValueFactoryPtr factory = _communicator->getValueFactoryManager()->find(facetType);
         if(factory == 0)
         {
             throw DatabaseException(__FILE__, __LINE__, "No object factory registered for type-id '" + facetType + "'");
@@ -336,7 +336,7 @@ Freeze::ObjectStoreBase::Marshaler::Marshaler(const CommunicatorPtr& communicato
 void
 Freeze::ObjectStoreBase::Marshaler::getDbt(Dbt& dbt) const
 {
-    initializeInDbt(const_cast<IceInternal::BasicStream&>(_os), dbt);
+    initializeInDbt(const_cast<Ice::OutputStream&>(_os), dbt);
 }
 
 Freeze::ObjectStoreBase::KeyMarshaler::KeyMarshaler(const Identity& ident,
@@ -353,7 +353,7 @@ Freeze::ObjectStoreBase::ValueMarshaler::ValueMarshaler(const ObjectRecord& rec,
                                                         bool keepStats) :
     Marshaler(communicator, encoding)
 {
-    _os.startWriteEncaps();
+    _os.startEncapsulation();
     if(keepStats)
     {
         _os.write(rec);
@@ -364,7 +364,7 @@ Freeze::ObjectStoreBase::ValueMarshaler::ValueMarshaler(const ObjectRecord& rec,
     }
 
     _os.writePendingObjects();
-    _os.endWriteEncaps();
+    _os.endEncapsulation();
 }
 
 void
@@ -373,8 +373,7 @@ Freeze::ObjectStoreBase::unmarshal(Identity& ident,
                                    const CommunicatorPtr& communicator,
                                    const EncodingVersion& encoding)
 {
-    IceInternal::InstancePtr instance = IceInternal::getInstance(communicator);
-    IceInternal::BasicStream stream(instance.get(), encoding, &bytes[0], &bytes[0] + bytes.size());
+    Ice::InputStream stream(communicator, encoding, bytes);
     stream.read(ident);
 }
 
@@ -385,10 +384,9 @@ Freeze::ObjectStoreBase::unmarshal(ObjectRecord& v,
                                    const EncodingVersion& encoding,
                                    bool keepStats)
 {
-    IceInternal::InstancePtr instance = IceInternal::getInstance(communicator);
-    IceInternal::BasicStream stream(instance.get(), encoding, &bytes[0], &bytes[0] + bytes.size());
-    stream.sliceObjects(false);
-    stream.startReadEncaps();
+    Ice::InputStream stream(communicator, encoding, bytes);
+    stream.setSliceObjects(false);
+    stream.startEncapsulation();
 
     if(keepStats)
     {
@@ -400,7 +398,7 @@ Freeze::ObjectStoreBase::unmarshal(ObjectRecord& v,
     }
 
     stream.readPendingObjects();
-    stream.endReadEncaps();
+    stream.endEncapsulation();
 }
 
 bool

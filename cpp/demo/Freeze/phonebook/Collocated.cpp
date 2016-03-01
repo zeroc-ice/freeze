@@ -49,7 +49,7 @@ PhoneBookCollocated::run(int argc, char* argv[])
     // Create and install a factory for contacts.
     //
     ContactFactoryPtr contactFactory = new ContactFactory();
-    communicator()->addValueFactory(contactFactory, Demo::Contact::ice_staticId());
+    communicator()->getValueFactoryManager()->add(contactFactory, Demo::Contact::ice_staticId());
 
     //
     // Create the name index.

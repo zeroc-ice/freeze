@@ -121,9 +121,9 @@ public class Client extends test.Util.Application
         // Register a factory for the node types.
         //
         Ice.ValueFactory factory = new ValueFactoryI();
-        communicator().addValueFactory(factory, "::Complex::NumberNode");
-        communicator().addValueFactory(factory, "::Complex::AddNode");
-        communicator().addValueFactory(factory, "::Complex::MultiplyNode");
+        communicator().getValueFactoryManager().add(factory, "::Complex::NumberNode");
+        communicator().getValueFactoryManager().add(factory, "::Complex::AddNode");
+        communicator().getValueFactoryManager().add(factory, "::Complex::MultiplyNode");
 
         if(args.length != 0 && args[0].equals("populate"))
         {

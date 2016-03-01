@@ -18,7 +18,6 @@
 #   define FREEZE_DB_MODE (S_IRUSR | S_IWUSR)
 #endif
 
-
 namespace Freeze
 {
 
@@ -34,7 +33,7 @@ initializeInDbt(const std::vector<Ice::Byte>& v, Dbt& dbt)
 }
 
 inline void
-initializeInDbt(IceInternal::BasicStream& s, Dbt& dbt)
+initializeInDbt(Ice::OutputStream& s, Dbt& dbt)
 {
     dbt.set_data(const_cast<Ice::Byte*>(s.b.begin()));
     dbt.set_size(static_cast<u_int32_t>(s.b.size()));
@@ -56,18 +55,6 @@ initializeOutDbt(std::vector<Ice::Byte>& v, Dbt& dbt)
     dbt.set_flags(DB_DBT_USERMEM);
 }
 
-inline void
-initializeOutDbt(IceInternal::BasicStream& s, Dbt& dbt)
-{
-    dbt.set_data(const_cast<Ice::Byte*>(s.b.begin()));
-    dbt.set_size(0);
-    dbt.set_ulen(static_cast<u_int32_t>(s.b.size()));
-    dbt.set_dlen(0);
-    dbt.set_doff(0);
-    dbt.set_flags(DB_DBT_USERMEM);
-}
-
-
 //
 // Handles a Berkeley DB DbException by resizing the
 // given key/value/dbt (when the exception's errno is
@@ -75,19 +62,12 @@ initializeOutDbt(IceInternal::BasicStream& s, Dbt& dbt)
 // Freeze::DatabaseException
 //
 
-void
-handleDbException(const DbException&, const char*, int);
+void handleDbException(const DbException&, const char*, int);
 
-void
-handleDbException(const DbException&, Key&, Dbt&,
-                  const char*, int);
+void handleDbException(const DbException&, Key&, Dbt&, const char*, int);
 
-void
-handleDbException(const DbException&, Key&, Dbt&, Value&, Dbt&,
-                  const char*, int);
+void handleDbException(const DbException&, Key&, Dbt&, Value&, Dbt&, const char*, int);
 
 }
 
-
 #endif
-
