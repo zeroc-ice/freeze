@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildThisFileDirectory)\freeze.cpp.props"/>
+
+    <PropertyGroup>
+        <IceBuilderOutputDir>$(Platform)\$(Configuration)\</IceBuilderOutputDir>
+        <OutDir>$(Platform)\$(Configuration)\</OutDir>
+    </PropertyGroup>
+
+    <ItemDefinitionGroup>
+        <ClCompile>
+            <AdditionalIncludeDirectories>$(Platform)\$(Configuration);$(Ice_SrcRootDir)\test\include;$(FreezeIncludePath);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+        </ClCompile>
+        <Link>
+            <AdditionalLibraryDirectories>$(FreezeLibraryPath)</AdditionalLibraryDirectories>
+        </Link>
+    </ItemDefinitionGroup>
+
+</Project>

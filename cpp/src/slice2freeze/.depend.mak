@@ -1,3 +1,0 @@
-
-Main.obj: \
-	Main.cpp \

@@ -7,7 +7,11 @@
 
 import os, sys
 
-path = [ ".", "..", "../..", "../../..", "../../../.." ]
+path = [ ".", "..", "../..", "../../..", "../../../.."]
+
+if os.environ.get('ICE_HOME'):
+    path.append(os.environ.get('ICE_HOME'))
+
 head = os.path.dirname(sys.argv[0])
 if len(head) > 0:
     path = [os.path.join(head, p) for p in path]
@@ -15,6 +19,9 @@ path = [os.path.abspath(p) for p in path if os.path.exists(os.path.join(p, "scri
 if len(path) == 0:
     raise RuntimeError("can't find toplevel directory!")
 sys.path.append(os.path.join(path[0], "scripts"))
+
+print("PATH: ")
+print(path)
 import TestUtil
 
 testdir = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +32,7 @@ testdir = os.path.dirname(os.path.abspath(__file__))
 dbdir = os.path.join(os.getcwd(), "db")
 TestUtil.cleanDbDir(dbdir)
 
-client = os.path.join(os.getcwd(), "client")
+client = os.path.join(os.getcwd(), TestUtil.getTestExecutable("client"))
 
 if TestUtil.appverifier:
     TestUtil.setAppVerifierSettings([client])

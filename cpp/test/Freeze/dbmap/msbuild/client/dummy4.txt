@@ -1,0 +1,1 @@
+// dummy file to compile WstringWstringMap.h/WstringWstringMap.cpp slice2freeze generated files

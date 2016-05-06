@@ -7,8 +7,11 @@ to test the resulting build.
 
 ### Operating Systems and Compilers
 
-Freeze was extensively tested using the operating systems and compiler versions
+Ice was extensively tested using the operating systems and compiler versions
 listed for our [supported platforms][1].
+
+The build requires the [Ice Builder for Visual Studio][5], you must install
+version 4.2.0 or greater to build Ice.
 
 ### Third-Party Libraries
 
@@ -18,41 +21,30 @@ Berkeley DB version 5.3 (the recommended version is 5.3.28).
 You do not need to build Berkeley DB yourself, as ZeroC supplies
 [Nuget][3] packages.
 
-The Freeze build system for Windows downloads and installs Nuget and the
+The Freeze build system for Windows downloads and installs Nuget and these
 Nuget packages when you build Freeze for C++. The third-party packages
-are installed in the ``freeze/cpp/third-party-packages`` folder.
+are installed in the ``freeze/cpp/msbuild/packages`` folder.
 
 ## Building Freeze
 
-Open a command prompt that is configured for your target architecture. For
-example, when using Visual Studio 2013, you have several alternatives:
+Open a command prompt for example, when using Visual Studio 2015, you have
+several alternatives:
 
-- Developer Command Prompt
-- VS2013 x86 Native Tools Command Prompt
-- VS2013 x64 Native Tools Command Prompt
-- VS2013 x64 Cross Tools Command Prompt
+- VS2015 x86 Native Tools Command Prompt
+- VS2015 x64 Native Tools Command Prompt
 
-Using the first two configurations produces 32-bit binaries, while the third and
-fourth configurations produce 64-bit binaries.
+Using the first configurations produces 32-bit binaries, while the second
+configurations produce 64-bit binaries.
 
 In the command window, change to the `cpp` subdirectory:
 
-    $ cd cpp
+    cd cpp
 
-Edit `config\Make.rules.mak` to establish your build configuration. The comments
-in the file provide more information.
+Now you're ready to build Ice:
 
-If you've installed Ice in a non-standard location, you'll need to set the
-`ICE_HOME` environment variable with the path name of the installation directory:
-```
-set ICE_HOME=C:\test\Ice-3.7.0
-```
+    Msbuild msbuild\freeze.proj
 
-Now you're ready to build Freeze:
-
-    > nmake /f Makefile.mak
-
-This will build the FreezeScript utilities, Freeze library, and tests.
+This will build the Freeze for C++ developer kit and the Freeze for C++ test suite.
 
 ### Building the Demos
 
@@ -63,21 +55,13 @@ using a newer version of Visual Studio.
 Select your target configuration: Debug or Release, Win32 or x64. Right click on
 the desired demo in the Solution Explorer window and select "Build".
 
-## Installing a C++ Source Build
-
-Simply run `nmake /f Makefile.mak install`. This will install Freeze in the
-directory specified by the `prefix` variable in `config\Make.rules.mak`.
-
-If you built a 64-bit version of Freeze, the binaries are installed in the
-`bin\x64` directory and the libraries are installed in the `lib\x64` directory.
-
 ## Running the Test Suite
 
 Python is required to run the test suite.
 
 After a successful source build, you can run the tests as follows:
 
-    > python allTests.py
+    python allTests.py --mode=debug --x86
 
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
@@ -93,4 +77,4 @@ Refer to the README file in each demo directory for usage instructions.
 [2]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm
 [3]: https://www.nuget.org
 [4]: https://doc.zeroc.com/display/Freeze37/Release+Notes
-
+[5]: https://github.com/zeroc-ice/ice-builder-visualstudio
