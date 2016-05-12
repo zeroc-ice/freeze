@@ -32,7 +32,7 @@ before_install:
 - git clone https://github.com/zeroc-ice/mcpp.git mcpp
 - wget https://github.com/LMDB/lmdb/archive/LMDB_${LMDB_REVISION}.tar.gz
 - tar xvf LMDB_${LMDB_REVISION}.tar.gz
-- git clone https://github.com/zeroc-ice/ice.git ice --depth=1
+- git submodule update --init
 install:
 - make -C ${MCPP_HOME} -j3
 - mkdir -p ${LMDB_HOME}/bin
@@ -42,7 +42,7 @@ install:
 - CPPFLAGS=-fPIC make -C ${LMDB_BUILD_DIR}/libraries/liblmdb install prefix=${LMDB_HOME}
 - rm -f ${LMDB_HOME}/lib/liblmdb.so
 - pip install passlib
-- make BUILD_ICE_BT=no -C ${ICE_HOME}/cpp/src -j3
+- make BUILD_ICE_BT=no -C ${ICE_HOME}/cpp -j3
 - make -C ${ICE_HOME}/java -j3
 - make -j3
 script:
