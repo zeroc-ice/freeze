@@ -10,19 +10,19 @@ subprojects {
 
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply from: "$rootProject.projectDir/gradle/ice.gradle"
+    apply from: "$rootProject.projectDir/gradle/freeze.gradle"
 
     repositories {
-        if (distJarDir != null) {
-            flatDir {
-                name "local"
-                dirs distJarDir
-            }
-        }
         flatDir {
             name "local"
-            dirs "$rootProject.projectDir/lib"
-	}
+            dirs "$rootProject.projectDir/lib", localIceLibPath
+        }
+        if (slice.jarDir) {
+            flatDir {
+                name "local"
+                dirs slice.jarDir
+            }
+        }
         maven {
             url 'https://repo.zeroc.com/nexus/content/repositories/thirdparty'
         }
@@ -52,5 +52,5 @@ subprojects {
 // the version of gradle needed to build Ice.
 //
 task wrapper(type: Wrapper) {
-    gradleVersion = "2.8"
+    gradleVersion = "2.13"
 }

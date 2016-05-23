@@ -7,12 +7,15 @@
 sourceCompatibility = iceSourceCompatibility
 targetCompatibility = iceTargetCompatibility
 
+ext.displayName = "Freeze"
+ext.description = "Persistent storage for Ice objects"
+
 slice {
     java {
         args = "--ice"
         files = files(fileTree(dir: "$rootProject.projectDir/../slice/Freeze", includes:['*.ice'], excludes:["*F.ice"]),
                       file("./src/main/java/Freeze/PingObject.ice"))
-	include = ["$rootProject.projectDir/../slice"]
+        include = ["$rootProject.projectDir/../slice"]
     }
     freezej {
         files = [file("${sliceDir}/Ice/BuiltinSequences.ice"),
@@ -38,4 +41,4 @@ dependencies {
     compile files(dbJar)
 }
 
-apply from: "$rootProject.projectDir/gradle/library.gradle"
+apply from: "$rootProject.projectDir/../ice/java/gradle/library.gradle"
