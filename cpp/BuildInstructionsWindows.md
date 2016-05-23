@@ -1,21 +1,17 @@
 # Building Freeze for C++ on Windows
 
-This file describes how to build Ice for C++ from sources on Windows, and how
-to test the resulting build.
+This file describes how to build Freeze for C++ from sources on Windows, and
+how to test the resulting build.
 
 ## Build Requirements
 
 ### Operating Systems and Compilers
 
-Ice was extensively tested using the operating systems and compiler versions
-listed for our [supported platforms][1].
-
-The build requires the [Ice Builder for Visual Studio][5], you must install
-version 4.2.0 or greater to build Ice.
+TBD
 
 ### Third-Party Libraries
 
-Freeze uses [Berkeley DB][2] as its underlying database and currently requires
+Freeze uses [Berkeley DB][2] as its underlying database and requires
 Berkeley DB version 5.3 (the recommended version is 5.3.28).
 
 You do not need to build Berkeley DB yourself, as ZeroC supplies
@@ -25,35 +21,41 @@ The Freeze build system for Windows downloads and installs Nuget and these
 Nuget packages when you build Freeze for C++. The third-party packages
 are installed in the ``freeze/cpp/msbuild/packages`` folder.
 
-## Building Freeze
+## Building Freeze for C++
 
-Open a command prompt for example, when using Visual Studio 2015, you have
-several alternatives:
-
+Open a command prompt with the Visual Studio environment, such as:
+- VS2013 x86 Native Tools Command Prompt
+- VS2013 x64 Native Tools Command Prompt
 - VS2015 x86 Native Tools Command Prompt
 - VS2015 x64 Native Tools Command Prompt
 
-Using the first configurations produces 32-bit binaries, while the second
-configurations produce 64-bit binaries.
+For example, if you select `VS2015 x64 Native Tools Command Prompt`,
+the build instructions below will create 64-bit binaries with VS 2015.
 
-In the command window, change to the `cpp` subdirectory:
+### Step 1: build IceXML for C++ in the ice submodule
 
-    cd cpp
+Debug build with VS 2015:
+    cd freeze\ice\cpp
+    msbuild\ice.v140.sln /t:C++98\icexml:Rebuild /m
+    msbuild\ice.test.sln /t:Common\testcommon:Rebuild /m
 
-Now you're ready to build Ice:
+Release build with VS 2015:
+    cd freeze\ice\cpp
+    msbuild\ice.v140.sln /t:C++98\icexml:Rebuild /p:Configuration=Release /m
+    msbuild\ice.test.sln /t:Common\testcommon:Rebuild /p:Configuration=Release /m
 
-    Msbuild msbuild\freeze.proj
+### Step 2: build Freeze for C++
 
-This will build the Freeze for C++ developer kit and the Freeze for C++ test suite.
+Debug build:
+    cd freeze\cpp
+    msbuild msbuild\ice.proj
 
-### Building the Demos
+Release build:
+    cd freeze\cpp
+    msbuild msbuild\ice.proj /p:Configuration=Release
 
-Open the solution file `demo\Freeze C++ demos.sln` to build the sample programs.
-This file was created with Visual Studio 2013 and will be converted if you are
-using a newer version of Visual Studio.
-
-Select your target configuration: Debug or Release, Win32 or x64. Right click on
-the desired demo in the Solution Explorer window and select "Build".
+This will build the Freeze for C++ developer kit and the Freeze for C++ test 
+suite.
 
 ## Running the Test Suite
 
@@ -65,6 +67,13 @@ After a successful source build, you can run the tests as follows:
 
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
+
+## Building the Demos
+
+Open the solution file `demo\Freeze C++ demos.sln` to build the sample programs.
+
+Select your target configuration: Debug or Release, Win32 or x64. Right click on
+the desired demo in the Solution Explorer window and select "Build".
 
 ## Running the Demos
 
