@@ -35,11 +35,13 @@ the build instructions below will create 64-bit binaries with VS 2015.
 ### Step 1: build IceXML for C++ in the ice submodule
 
 Debug build with VS 2015:
+
     cd freeze\ice\cpp
     msbuild\ice.v140.sln /t:C++98\icexml:Rebuild /m
     msbuild\ice.test.sln /t:Common\testcommon:Rebuild /m
 
 Release build with VS 2015:
+
     cd freeze\ice\cpp
     msbuild\ice.v140.sln /t:C++98\icexml:Rebuild /p:Configuration=Release /m
     msbuild\ice.test.sln /t:Common\testcommon:Rebuild /p:Configuration=Release /m
@@ -47,10 +49,12 @@ Release build with VS 2015:
 ### Step 2: build Freeze for C++
 
 Debug build:
+
     cd freeze\cpp
     msbuild msbuild\ice.proj
 
 Release build:
+
     cd freeze\cpp
     msbuild msbuild\ice.proj /p:Configuration=Release
 
