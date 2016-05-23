@@ -48,10 +48,6 @@ Python is required to run the test suite.
 
 After a successful source build, you can run the tests as follows:
 
-    make test
-
-This command is equivalent to:
-
     python allTests.py
 
 If everything worked out, you should see lots of `ok` messages. In case of a
