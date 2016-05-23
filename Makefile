@@ -2,52 +2,38 @@
 #
 # Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
 #
+# This copy of Ice is licensed to you under the terms described in the
+# ICE_LICENSE file included in this distribution.
+#
 # **********************************************************************
 
-SUBDIRS		= cpp java
-CLEAN_SUBDIRS	= java cpp
-DEPEND_SUBDIRS	= cpp
-INSTALL_SUBDIRS	= cpp java
+top_srcdir := .
 
-all::
-	@for subdir in $(SUBDIRS); \
+include $(top_srcdir)/config/Make.rules
+
+define make-global-rule
+$1::
+	@for subdir in $2; \
 	do \
-	    echo "making all in $$subdir"; \
-	    ( cd $$subdir && $(MAKE) all ) || exit 1; \
+	    echo "making all in $$$$subdir"; \
+	    ( cd $$$$subdir && $(MAKE) $1 ) || exit 1; \
 	done
+endef
 
-clean::
-	@for subdir in $(CLEAN_SUBDIRS); \
-	do \
-	    echo "making clean in $$subdir"; \
-	    ( cd $$subdir && $(MAKE) clean ) || exit 1; \
-	done
+$(eval $(call make-global-rule,srcs,$(languages)))
+$(eval $(call make-global-rule,tests,$(languages)))
+$(eval $(call make-global-rule,all,$(languages)))
+$(eval $(call make-global-rule,clean,$(languages)))
+$(eval $(call make-global-rule,distclean,$(languages)))
+$(eval $(call make-global-rule,install,$(languages)))
 
-depend::
-	@for subdir in $(DEPEND_SUBDIRS); \
-	do \
-	    echo "making depend in $$subdir"; \
-	    ( cd $$subdir && $(MAKE) depend ) || exit 1; \
-	done
+#
+# Install documentation and slice files
+#
+install:: install-doc install-slice
 
-install::
-	@for subdir in $(INSTALL_SUBDIRS); \
-	do \
-	    echo "making install in $$subdir"; \
-	    ( cd $$subdir && $(MAKE) install ) || exit 1; \
-	done
+$(eval $(call install-data-files,$(wildcard $(slicedir)/*/*.ice),$(slicedir),$(install_slicedir),\
+	install-slice,"Installing slice files"))
 
-test::
-	@for subdir in $(SUBDIRS); \
-	do \
-	    echo "making test in $$subdir"; \
-	    ( cd $$subdir && $(MAKE) test ) || exit 1; \
-	done
-
-cpp::
-	echo "making all in cpp";
-	( cd cpp && $(MAKE) all ) || exit 1;
-
-java::
-	echo "making all in java";
-	( cd java && $(MAKE) all ) || exit 1;
+$(eval $(call install-data-files,$(wildcard $(top_srcdir)/*LICENSE),$(top_srcdir),$(install_docdir),\
+	install-doc,"Installing documentation files"))

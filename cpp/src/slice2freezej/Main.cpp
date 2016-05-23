@@ -908,7 +908,7 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
         writeMarshalUnmarshalCode(out, "", type, OptionalNone, false, 0, valS, true, iter, false);
         if(type->usesClasses())
         {
-            out << nl << "__os.writePendingObjects();";
+            out << nl << "__os.writePendingValues();";
         }
         if(encaps)
         {
@@ -923,7 +923,7 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
         out << sb;
         if(type->usesClasses())
         {
-            out << nl << "__is.setSliceObjects(false);";
+            out << nl << "__is.setSliceValues(false);";
         }
         if(encaps)
         {
@@ -1004,7 +1004,7 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
         }
         if(type->usesClasses())
         {
-            out << nl << "__is.readPendingObjects();";
+            out << nl << "__is.readPendingValues();";
         }
         if(encaps)
         {
@@ -1214,9 +1214,9 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
     if((b && b->kind() == Builtin::KindObject) || ClassDeclPtr::dynamicCast(valueType))
     {
         string typeS = typeToString(valueType, TypeModeIn);
-        out << sp << nl << "private static class Patcher implements Ice.ReadObjectCallback";
+        out << sp << nl << "private static class Patcher implements Ice.ReadValueCallback";
         out << sb;
-        out << sp << nl << "public void" << nl << "objectReady(Ice.Object v)";
+        out << sp << nl << "public void" << nl << "valueReady(Ice.Object v)";
         out << sb;
         if(b)
         {
@@ -1401,7 +1401,7 @@ FreezeGenerator::generate(UnitPtr& u, const Index& index)
     writeMarshalUnmarshalCode(out, "", dataMember->type(), OptionalNone, false, 0, valueS, true, iter, false);
     if(dataMember->type()->usesClasses())
     {
-        out << nl << "__os.writePendingObjects();";
+        out << nl << "__os.writePendingValues();";
     }
     out << nl << "return __os.prepareWrite().b;";
     out << eb;

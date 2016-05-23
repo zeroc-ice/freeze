@@ -880,7 +880,7 @@ public:
     {
         _stream.startEncapsulation();
         _stream.write(v);
-        _stream.writePendingObjects();
+        _stream.writePendingValues();
         _stream.endEncapsulation();
         init();
     }
@@ -892,7 +892,7 @@ public:
         Ice::OutputStream stream(communicator, encoding);
         stream.startEncapsulation();
         stream.write(v);
-        stream.writePendingObjects();
+        stream.writePendingValues();
         stream.endEncapsulation();
         std::vector<Ice::Byte>(stream.b.begin(), stream.b.end()).swap(bytes);
     }
@@ -902,10 +902,10 @@ public:
                                           const Ice::EncodingVersion& encoding)
     {
         Ice::InputStream stream(communicator, encoding, bytes);
-        stream.setSliceObjects(false);
+        stream.setSliceValues(false);
         stream.startEncapsulation();
         stream.read(v);
-        stream.readPendingObjects();
+        stream.readPendingValues();
         stream.endEncapsulation();
     }
 };

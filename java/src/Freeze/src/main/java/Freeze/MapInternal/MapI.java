@@ -1650,7 +1650,7 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
         private final java.util.Comparator<K> _comparator;
     }
 
-    public static class Patcher implements Ice.ReadObjectCallback
+    public static class Patcher implements Ice.ReadValueCallback
     {
         public
         Patcher(String type)
@@ -1660,7 +1660,7 @@ public abstract class MapI<K, V> extends java.util.AbstractMap<K, V>
 
         @Override
         public void
-        objectReady(Ice.Object v)
+        valueReady(Ice.Object v)
         {
             value = v;
         }

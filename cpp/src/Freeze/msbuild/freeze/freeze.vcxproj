@@ -72,10 +72,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <PropertyGroup Label="IceBuilder">
-    <IceBuilderHeaderOutputDir>$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</IceBuilderHeaderOutputDir>
+    <IceBuilderHeaderOutputDir>$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</IceBuilderHeaderOutputDir>
     <IceBuilderBaseDirectoryForGeneratedInclude>Freeze</IceBuilderBaseDirectoryForGeneratedInclude>
     <IceBuilderDLLExport>FREEZE_API</IceBuilderDLLExport>
-    <IceBuilderIncludeDirectories>$(Ice_SrcRootDir)\..\slice;$(IceBuilderIncludeDirectories)</IceBuilderIncludeDirectories>
+    <IceBuilderIncludeDirectories>$(Freeze_SrcRootDir)\..\slice;$(IceBuilderIncludeDirectories)</IceBuilderIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -713,50 +713,64 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice
-move $(Platform)\$(Configuration)\Catalog.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice
-move $(Platform)\$(Configuration)\Catalog.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice
-move $(Platform)\$(Configuration)\Catalog.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice
-move $(Platform)\$(Configuration)\Catalog.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\Catalog.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\Catalog.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\Catalog.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\Catalog.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Ice_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Ice_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Ice_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Ice_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Ice_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Freeze_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\Catalog.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Freeze_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\Catalog.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Freeze_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\Catalog.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Freeze_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::Catalog,string,Freeze::CatalogData Catalog $(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\Catalog.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\Catalog.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\Catalog.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\Catalog.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\Catalog.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Catalog.h</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe;$(Freeze_SrcRootDir)\..\slice\Freeze\CatalogData.ice;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating Catalog.h and Catalog.cpp with slice2freeze </Message>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating Catalog.h and Catalog.cpp with slice2freeze </Message>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating Catalog.h and Catalog.cpp with slice2freeze </Message>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating Catalog.h and Catalog.cpp with slice2freeze </Message>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy1.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ -I"$(IceHome)\slice" --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(IceHome)\slice\Ice\BuiltinSequences.ice"
-move $(Platform)\$(Configuration)\CatalogIndexList.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ -I"$(IceHome)\slice" --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(IceHome)\slice\Ice\BuiltinSequences.ice"
-move $(Platform)\$(Configuration)\CatalogIndexList.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ -I"$(IceHome)\slice" --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(IceHome)\slice\Ice\BuiltinSequences.ice"
-move $(Platform)\$(Configuration)\CatalogIndexList.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">set PATH=$(IceHome)\cpp\bin\$(Platform)\$(Ice_Configuration);%PATH%
-..\..\..\..\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice\ -I"$(IceHome)\slice" --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(IceHome)\slice\Ice\BuiltinSequences.ice"
-move $(Platform)\$(Configuration)\CatalogIndexList.h $(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(Ice_SrcRootDir)\..\slice\Ice\BuiltinSequences.ice"
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\CatalogIndexList.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(Ice_SrcRootDir)\..\slice\Ice\BuiltinSequences.ice"
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\CatalogIndexList.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(Ice_SrcRootDir)\..\slice\Ice\BuiltinSequences.ice"
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\CatalogIndexList.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --ice --include-dir Freeze -I$(Ice_SrcRootDir)\..\slice --dll-export FREEZE_API --dict Freeze::CatalogIndexList,string,Ice::StringSeq CatalogIndexList "$(Ice_SrcRootDir)\..\slice\Ice\BuiltinSequences.ice"
+mkdir $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\
+move $(Platform)\$(Configuration)\CatalogIndexList.h $(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\Freeze\</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\CatalogIndexList.cpp;$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Configuration)\CatalogIndexList.h</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating CatalogIndexList.h and CatalogIndexList.cpp with slice2freeze </Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating CatalogIndexList.h and CatalogIndexList.cpp with slice2freeze </Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating CatalogIndexList.h and CatalogIndexList.cpp with slice2freeze </Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating CatalogIndexList.h and CatalogIndexList.cpp with slice2freeze </Message>
     </CustomBuild>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

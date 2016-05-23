@@ -363,7 +363,7 @@ Freeze::ObjectStoreBase::ValueMarshaler::ValueMarshaler(const ObjectRecord& rec,
         _os.write(rec.servant);
     }
 
-    _os.writePendingObjects();
+    _os.writePendingValues();
     _os.endEncapsulation();
 }
 
@@ -385,7 +385,7 @@ Freeze::ObjectStoreBase::unmarshal(ObjectRecord& v,
                                    bool keepStats)
 {
     Ice::InputStream stream(communicator, encoding, bytes);
-    stream.setSliceObjects(false);
+    stream.setSliceValues(false);
     stream.startEncapsulation();
 
     if(keepStats)
@@ -397,7 +397,7 @@ Freeze::ObjectStoreBase::unmarshal(ObjectRecord& v,
         stream.read(v.servant);
     }
 
-    stream.readPendingObjects();
+    stream.readPendingValues();
     stream.endEncapsulation();
 }
 

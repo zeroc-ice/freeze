@@ -16,12 +16,6 @@
     <ClCompile Include="..\..\Functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Grammar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Parser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Print.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -43,6 +37,23 @@
     <ClCompile Include="..\..\TransformVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\CPlusPlusUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\Grammar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\Preprocessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\SliceUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\FSGrammar.cpp" />
+    <ClCompile Include="..\..\FSParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AssignVisitor.h">

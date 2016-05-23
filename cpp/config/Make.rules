@@ -1,0 +1,156 @@
+# **********************************************************************
+#
+# Copyright (c) 2003-2016 ZeroC, Inc. All rights reserved.
+#
+# **********************************************************************
+
+# ----------------------------------------------------------------------
+# Don't change anything below this line!
+# ----------------------------------------------------------------------
+
+-include	$(lang_srcdir)/config/Make.rules.$(os)
+
+#
+# Supported configurations
+#
+supported-configs	= shared static
+
+slice2cpp_targetext     = cpp
+slice2cpp_path          = $(ice_bindir)/slice2cpp
+
+#
+# Create top-level include/config dir
+#
+$(DESTDIR)$(install_includedir):
+	$(Q)$(MKDIR) $@
+
+#
+# $(call make-freeze-components,$1=project,$2=component,$3=target)
+#
+# This is called by the component extension mechanism to allow adding generated sources
+# and headers to the build of the component.
+#
+define make-freeze-components
+
+ifneq ($$($2_slice2freeze),)
+
+$2_sources += $$(addprefix $$($1_generated_srcdir)/,$$(addsuffix .cpp,$$($2_slice2freeze)))
+
+$2_generated_includedir := $$(or $$($2_generated_includedir),$$($1_generated_includedir))
+
+$$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$(eval $$(call make-slice2freeze,$$d,$$($2_$$d),\
+	$$($2_$$d_slice),$$($2_generated_includedir),$$($1_generated_srcdir),$$($2_$$d_flags) $$($2_sliceflags)))))
+
+$2_generated_headers += $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
+$1_generated += $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
+
+ifeq ($(wildcard $$(1_generated_srcdir)/*),)
+# Make sure the slice2freeze generated files are built first
+$(wildcard $1/*.cpp): $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
+endif
+endif
+
+endef
+
+define make-freeze-project
+
+ifneq ($$($1_slice2freeze),)
+
+$$(foreach d,$$($1_slice2freeze),$$(eval $$(call make-slice2freeze,$$d,$$($1_$$d),\
+	$$($1_$$d_slice),$$($1_generated_includedir),$$($1_generated_srcdir),$$($1_$$d_flags) $$($1_sliceflags))))
+
+$1_generated += $$(foreach d,$$($1_slice2freeze),$$($1_generated_includedir)/$$d.h)
+
+ifeq ($(wildcard $$(1_generated_srcdir)/*),)
+# Make sure the slice2freeze generated files are built first
+$(wildcard $1/*.cpp): $$(foreach d,$$($1_slice2freeze),$$($1_generated_includedir)/$$d.h)
+endif
+endif
+
+endef
+
+#
+# $(call make-cpp-src-project,$1=project)
+#
+define make-cpp-src-project
+ifeq ($(USE_BIN_DIST),yes)
+    $(create-project-targets)
+else
+ifneq ($(filter ../ice/%,$1),)
+# Building ice submodule project
+$1_cppflags 		+= -I../ice/cpp/include -I../ice/cpp/include/generated -I../ice/cpp/src
+else
+# Building freeze project
+$1_slicecompiler 	:= slice2cpp
+$1_sliceflags		+= --ice -I$(ice_slicedir) -I$(slicedir)
+$1_cppflags 		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -I../ice/cpp/src -Isrc
+$1_cppflags		+= -I$(ice_includedir)/generated -I$(includedir)/generated
+$1_extensions		:= make-freeze-project
+$1_component_extensions	:= make-freeze-components
+endif
+$(make-project)
+srcs:: $1
+endif
+endef
+
+#
+# $(call make-cpp-test-project,$1=project)
+#
+define make-cpp-test-project
+$1_slicecompiler 	:= slice2cpp
+$1_sliceflags		+= -I$(ice_slicedir) -I$(slicedir) -I$1
+$1_cppflags		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -Itest/include -I$1
+ifneq ($(USE_BIN_DIST),yes)
+$1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
+endif
+$1_extensions		:= make-freeze-project
+$1_component_extensions	:= make-freeze-components
+$(make-project)
+tests:: $1
+endef
+
+#
+# $(create-cpp-test-project $1=test)
+#
+define create-cpp-test-project
+$1_srcext		:= cpp
+$1_dependencies 	:= $$(or $$($1_dependencies),Freeze Ice)
+$(create-test-project)
+endef
+
+#
+# $(call make-cpp-demo-project,$1=project)
+#
+define make-cpp-demo-project
+$1_slicecompiler 	:= slice2cpp
+$1_sliceflags		+= -I$(ice_slicedir) -I$(slicedir) -I$1
+$1_cppflags		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -I$1
+ifneq ($(USE_BIN_DIST),yes)
+$1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
+endif
+$1_extensions		:= make-freeze-project
+$1_component_extensions	:= make-freeze-components
+$(make-project)
+demos:: $1
+endef
+
+#
+# $(create-cpp-demo-project $1=demo)
+#
+define create-cpp-demo-project
+$1_srcext		:= cpp
+$1_dependencies 	:= $$(or $$($1_dependencies),Freeze Ice)
+$(create-test-project)
+endef
+
+#
+# $(call make-slice2freeze,$1=name,$2=command,$3=slice,$4=hdir,$5=sdir,$6=sliceflags)
+#
+define make-slice2freeze
+$4/$1.h: $5/$1.cpp
+$5/$1.cpp: $3 $$(slice2freeze_path) | $5 $4
+	$(E) "Generating $$@ with slice2freeze"
+	$(Q)$(RM) $4/$1.h $5/$1.cpp
+	$(Q)$$(slice2freeze_path) $(strip $6) $2 --output-dir $5 $1 $3
+	$(if $(filter-out $4,$5),$(Q)$(MV) $5/$1.h $4/$1.h)
+endef

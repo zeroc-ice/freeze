@@ -69,7 +69,7 @@ FreezeScript::ObjectWriter::ObjectWriter(const ObjectDataPtr& value) :
 void
 FreezeScript::ObjectWriter::__write(Ice::OutputStream* out) const
 {
-    out->startObject(0);
+    out->startValue(0);
 
     Slice::ClassDeclPtr decl = Slice::ClassDeclPtr::dynamicCast(_value->_type);
     Slice::ClassDefPtr type;
@@ -99,7 +99,7 @@ FreezeScript::ObjectWriter::__write(Ice::OutputStream* out) const
         type = base;
     }
 
-    out->endObject();
+    out->endValue();
 }
 
 void
@@ -133,7 +133,7 @@ FreezeScript::ObjectReader::__read(Ice::InputStream* in)
         type = decl->definition();
     }
 
-    in->startObject();
+    in->startValue();
 
     while(type)
     {
@@ -159,7 +159,7 @@ FreezeScript::ObjectReader::__read(Ice::InputStream* in)
         type = base;
     }
 
-    in->endObject(false);
+    in->endValue(false);
 }
 
 FreezeScript::ObjectDataPtr

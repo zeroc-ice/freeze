@@ -1984,7 +1984,7 @@ FreezeScript::RecordDescriptor::transformRecord(const Ice::ByteSeq& inKeyBytes,
     _info->objectDataMap.clear();
     if(_info->oldValueType->usesClasses())
     {
-        inValue.readPendingObjects();
+        inValue.readPendingValues();
         ObjectVisitor visitor(_info->objectDataMap);
         oldValueData->visit(visitor);
     }
@@ -2031,7 +2031,7 @@ FreezeScript::RecordDescriptor::transformRecord(const Ice::ByteSeq& inKeyBytes,
 
     if(_info->newValueType->usesClasses())
     {
-        outValue.writePendingObjects();
+        outValue.writePendingValues();
     }
     outValue.endEncapsulation();
     outValue.finished(outValueBytes);

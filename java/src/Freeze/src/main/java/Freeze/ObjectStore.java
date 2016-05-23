@@ -293,7 +293,7 @@ class ObjectStore implements Store
     marshalKey(Ice.Identity v, Ice.Communicator communicator, Ice.EncodingVersion encoding)
     {
         Ice.OutputStream os = new Ice.OutputStream(communicator, encoding, false);
-        v.ice_write(os);
+        v.__write(os);
         return new com.sleepycat.db.DatabaseEntry(os.prepareWrite().b);
     }
 
@@ -310,7 +310,7 @@ class ObjectStore implements Store
             is = new Ice.InputStream(communicator, encoding, e.getData());
         }
         Ice.Identity key = new Ice.Identity();
-        key.ice_read(is);
+        key.__read(is);
         return key;
     }
 
@@ -322,13 +322,13 @@ class ObjectStore implements Store
 
         if(keepStats)
         {
-            v.ice_write(os);
+            v.__write(os);
         }
         else
         {
-            os.writeObject(v.servant);
+            os.writeValue(v.servant);
         }
-        os.writePendingObjects();
+        os.writePendingValues();
         os.endEncapsulation();
         return new com.sleepycat.db.DatabaseEntry(os.prepareWrite().b);
     }
@@ -346,19 +346,19 @@ class ObjectStore implements Store
         {
             is = new Ice.InputStream(communicator, encoding, e.getData());
         }
-        is.setSliceObjects(false);
+        is.setSliceValues(false);
         ObjectRecord rec = new ObjectRecord();
         is.startEncapsulation();
         if(keepStats)
         {
-            rec.ice_read(is);
-            is.readPendingObjects();
+            rec.__read(is);
+            is.readPendingValues();
         }
         else
         {
             Ice.ObjectHolder holder = new Ice.ObjectHolder();
-            is.readObject(holder);
-            is.readPendingObjects();
+            is.readValue(holder);
+            is.readPendingValues();
             rec.servant = holder.value;
         }
         is.endEncapsulation();

@@ -1,149 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+
+    <!-- TODO: add support for building tests and demos against a
+    Ice+Freeze binary distribution -->
+
+    <PropertyGroup>
+        <Ice_BuildingSrc>yes</Ice_BuildingSrc>
+        <Ice_CppMapping>cpp98</Ice_CppMapping>
+    </PropertyGroup>
+
+    <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\cpp\msbuild\ice.cpp.props" />
+
+    <!-- If we are building the Freeze source distribution or if UseBinDist was not set to
+         yes, set FreezeHome to point to this Freeze source distribution -->
+
+    <PropertyGroup Condition="'$(UseBinDist)' != 'yes' or '$(Ice_BuildingSrc)' == yes">
+        <FreezeHome>$(MSBuildThisFileDirectory)..\..</FreezeHome>
+        <FreezeToolsPath>$(FreezeHome)\cpp\bin\$(Platform)\$(Configuration)</FreezeToolsPath>
+    </PropertyGroup>
+
     <!-- Define some common properties -->
     <PropertyGroup>
-        <Ice_SrcRootDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</Ice_SrcRootDir>
-        <IntDir>$(Platform)\$(Configuration)\</IntDir>
-        <IceBuilderOutputDir>$(Platform)\$(Configuration)</IceBuilderOutputDir>
-        <IceBuilderAllowIcePrefix>true</IceBuilderAllowIcePrefix>
-        <LinkIncremental>false</LinkIncremental>
-        <IceSoVersion>37a0</IceSoVersion>
+        <Freeze_SrcRootDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</Freeze_SrcRootDir>
+        <OutDir>$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\</OutDir>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(USE_BIN_DIST)' != 'yes'">
-        <FreezeHome>$(MSBuildThisFileDirectory)..\..</FreezeHome>
-        <IceHome Condition="'$(IceHome)' == ''">$(FreezeHome)\ice</IceHome>
-        <FreezeToolsPath>$(FreezeHome)\cpp\bin\$(Platform)\$(Configuration)</FreezeToolsPath>
-        <FreezeIncludePath>$(FreezeHome)\cpp\include\generated\$(Platform)\$(Configuration);$(FreezeHome)\cpp\include</FreezeIncludePath>
-        <FreezeLibraryPath>$(FreezeHome)\cpp\lib\$(Platform)\$(Configuration)</FreezeLibraryPath>
-        <Path>$(FreezeHome)\cpp\bin\$(Platform)\$(Configuration);$(Path)</Path>
-    </PropertyGroup>
-
-    <Choose>
-        <When Condition="'$(ConfigurationType)' == 'StaticLibrary'">
-            <PropertyGroup>
-                <OutDir>$(Ice_SrcRootDir)\lib\$(Platform)\$(Configuration)\</OutDir>
-            </PropertyGroup>
-        </When>
-        <Otherwise>
-            <PropertyGroup>
-                <OutDir>$(Ice_SrcRootDir)\bin\$(Platform)\$(Configuration)\</OutDir>
-            </PropertyGroup>
-        </Otherwise>
-    </Choose>
-
-    <!-- Ice_Configuration to use for C++ builds, this maps all configurations that use
-         debug libraries to Debug configuration, these allow us to define common settings
-         for the different debug configurations "Debug" and "Cpp11-Debug" -->
-    <Choose>
-        <When Condition="'$(UseDebugLibraries)' == 'true'">
-            <PropertyGroup>
-                <Ice_Configuration>Debug</Ice_Configuration>
-            </PropertyGroup>
-        </When>
-        <Otherwise>
-            <PropertyGroup>
-                <Ice_Configuration>Release</Ice_Configuration>
-            </PropertyGroup>
-        </Otherwise>
-    </Choose>
-
-    <!-- Common properties set for all builds, configurations and platforms -->
-    <ItemDefinitionGroup>
-        <ClCompile>
-            <WarningLevel>Level3</WarningLevel>
-            <PreprocessorDefinitions>_CONSOLE;_WIN32_WINNT=0x601;WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
-            <DisableSpecificWarnings>4250;4251;4275</DisableSpecificWarnings>
-            <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
-            <TreatWarningAsError>true</TreatWarningAsError>
-            <MultiProcessorCompilation>true</MultiProcessorCompilation>
-            <RuntimeTypeInfo>true</RuntimeTypeInfo>
-            <MinimalRebuild>false</MinimalRebuild>
-            <PrecompiledHeaderOutputFile />
-            <OmitFramePointers>false</OmitFramePointers>
-            <PrecompiledHeader>NotUsing</PrecompiledHeader>
-            <AdditionalIncludeDirectories>$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Configuration);$(Ice_SrcRootDir)\include;$(Ice_SrcRootDir)\src;$(IceHome)\cpp\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-        </ClCompile>
-        <Link>
-            <AdditionalDependencies />
-            <LinkTimeCodeGeneration />
-            <AdditionalLibraryDirectories>$(Ice_SrcRootDir)\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
-        </Link>
-    </ItemDefinitionGroup>
-
-    <!-- Common properties set for all debug builds and platforms -->
-    <ItemDefinitionGroup Condition="'$(Ice_Configuration)'=='Debug'">
-        <ClCompile>
-            <Optimization>Disabled</Optimization>
-            <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-            <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-            <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
-        </ClCompile>
-        <ResourceCompile>
-            <PreprocessorDefinitions>_DEBUG</PreprocessorDefinitions>
-        </ResourceCompile>
-    </ItemDefinitionGroup>
-
-    <!-- GenerateDebugInformation supported values change from v120 to v140, we set it conditionally
-         to the platform tool set -->
-    <ItemDefinitionGroup Condition="'$(Ice_Configuration)|$(DefaultPlatformToolset)'=='Debug|v140'">
-        <Link>
-            <GenerateDebugInformation>Debug</GenerateDebugInformation>
-        </Link>
-    </ItemDefinitionGroup>
-
-    <ItemDefinitionGroup Condition="'$(Ice_Configuration)|$(DefaultPlatformToolset)'=='Debug|v120'">
-        <Link>
-            <GenerateDebugInformation>Yes</GenerateDebugInformation>
-        </Link>
-    </ItemDefinitionGroup>
-
-    <!-- Common properties set for all release builds and platforms -->
-    <ItemDefinitionGroup Condition="'$(Ice_Configuration)'=='Release'">
-        <ClCompile>
-            <Optimization>MaxSpeed</Optimization>
-            <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-            <WholeProgramOptimization>false</WholeProgramOptimization>
-            <DebugInformationFormat>None</DebugInformationFormat>
-            <ProgramDataBaseFileName></ProgramDataBaseFileName>
-        </ClCompile>
-        <Link>
-            <GenerateDebugInformation>No</GenerateDebugInformation>
-        </Link>
-    </ItemDefinitionGroup>
-
-    <!-- Definitions that are only required when build Ice C++ source distribution as opposed to test suite -->
     <ItemDefinitionGroup Condition="'$(Ice_BuildingSrc)' == 'yes'">
         <ClCompile>
-            <AdditionalIncludeDirectories>$(Ice_SrcRootDir)\include\generated\$(Platform)\$(Ice_Configuration);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-            <PreprocessorDefinitions>ICE_BUILDING_SRC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+            <AdditionalIncludeDirectories>$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Ice_Configuration);
+                                          $(Freeze_SrcRootDir)\include;$(Freeze_SrcRootDir)\src;
+                                          %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
-            <AdditionalLibraryDirectories>$(Ice_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories>$(Freeze_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
 
     <ItemDefinitionGroup Condition="'$(ConfigurationType)|$(Ice_BuildingSrc)' == 'DynamicLibrary|yes'">
         <Link>
-            <ImportLibrary>$(Ice_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)\$(TargetName).lib</ImportLibrary>
+            <ImportLibrary>$(Freeze_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)\$(TargetName).lib</ImportLibrary>
         </Link>
     </ItemDefinitionGroup>
 
-    <ItemDefinitionGroup Condition="'$(ConfigurationType)|$(Ice_BuildingSrc)' == 'Application|yes'">
-        <Link>
-            <AdditionalDependencies>wsetargv.obj</AdditionalDependencies>
-        </Link>
-    </ItemDefinitionGroup>
-
-    <!-- Base target names -->
-    <PropertyGroup Condition="'$(Ice_Configuration)|$(ConfigurationType)' == 'Debug|DynamicLibrary'">
-        <TargetName>$(ProjectName)$(IceSoVersion)d</TargetName>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Ice_Configuration)|$(ConfigurationType)' == 'Release|DynamicLibrary'">
-        <TargetName>$(ProjectName)$(IceSoVersion)</TargetName>
-    </PropertyGroup>
-
-    <!-- Workaround to avoid annoying warnings from Nuget restore -->
-    <Target Name="BeforeGenerateProjectPriFile"></Target>
 </Project>

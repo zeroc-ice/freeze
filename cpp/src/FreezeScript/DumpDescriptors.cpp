@@ -1293,7 +1293,7 @@ FreezeScript::RecordDescriptor::execute(const SymbolTablePtr& /*sym*/, ExecuteIn
             valueData->unmarshal(&inValue);
             if(info->valueType->usesClasses())
             {
-                inValue.readPendingObjects();
+                inValue.readPendingValues();
             }
 
             //
