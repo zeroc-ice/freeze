@@ -11,22 +11,20 @@ path = [ ".", "..", "../..", "../../..", "../../../.." ]
 head = os.path.dirname(sys.argv[0])
 if len(head) > 0:
     path = [os.path.join(head, p) for p in path]
-path = [os.path.abspath(p) for p in path if os.path.exists(os.path.join(p, "scripts", "TestUtil.py")) ]
+path = [os.path.abspath(p) for p in path if os.path.exists(os.path.join(p, "ice", "scripts", "TestUtil.py")) ]
 if len(path) == 0:
     raise RuntimeError("can't find toplevel directory!")
-sys.path.append(os.path.join(path[0], "scripts"))
+sys.path.append(os.path.join(path[0], "ice", "scripts"))
 import TestUtil
 
 dbdir = os.path.join(os.getcwd(), "db")
 TestUtil.cleanDbDir(dbdir)
 
-client = os.path.join(os.getcwd(), "client")
-
 if TestUtil.appverifier:
     TestUtil.setAppVerifierSettings([client])
 
-clientProc = TestUtil.startClient(client, ' --Freeze.Warn.Rollback=0 "%s"' % os.getcwd())
-clientProc.waitTestSuccess()
+client = os.path.join(os.getcwd(), TestUtil.getTestExecutable("client"))
+TestUtil.simpleTest(client, ' --Freeze.Warn.Rollback=0 "%s"' % os.getcwd())
 
 if TestUtil.appverifier:
     TestUtil.appVerifierAfterTestEnd([client])

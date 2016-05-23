@@ -11,10 +11,10 @@ path = [ ".", "..", "../..", "../../..", "../../../.." ]
 head = os.path.dirname(sys.argv[0])
 if len(head) > 0:
     path = [os.path.join(head, p) for p in path]
-path = [os.path.abspath(p) for p in path if os.path.exists(os.path.join(p, "scripts", "TestUtil.py")) ]
+path = [os.path.abspath(p) for p in path if os.path.exists(os.path.join(p, "ice", "scripts", "TestUtil.py")) ]
 if len(path) == 0:
     raise RuntimeError("can't find toplevel directory!")
-sys.path.append(os.path.join(path[0], "scripts"))
+sys.path.append(os.path.join(path[0], "ice", "scripts"))
 import TestUtil
 
 transformdb = '%s' % os.path.join("..", "..", "..", "bin", "transformdb") 
@@ -98,7 +98,7 @@ print("ok")
 sys.stdout.write("creating test database... ")
 sys.stdout.flush()
 
-makedb = '"%s" "%s"'% (os.path.join(os.getcwd(), "makedb"), os.getcwd())
+makedb = os.path.join(os.getcwd(), TestUtil.getTestExecutable("makedb"))
 proc = TestUtil.spawn(makedb)
 proc.waitTestSuccess()
 print("ok")

@@ -8,6 +8,7 @@ $(project)_programs = transformdb dumpdb
 
 $(project)_dependencies	= Freeze IceXML Ice
 $(project)_libs		= db mcpp
+$(project)_targetdir    := $(bindir)
 
 common_sources		= AssignVisitor.cpp \
 			  Data.cpp \
