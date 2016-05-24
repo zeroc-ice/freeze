@@ -15,10 +15,10 @@ freezeToplevel = os.path.abspath(os.path.join(toplevel, ".."))
 def getJavaLibraryPath():
     if isWin32():
         if iceHome:
-            return "\"%s\" " % os.path.join(iceHome, "bin\\x64" if x64 else "bin")
+            return os.path.join(iceHome, "bin\\x64" if x64 else "bin")
         else:
-            return ("\"%s\" " % os.path.join(freezeToplevel, "cpp", "third-party-packages",
-                    "berkeley.db.java7", "build", "native", "bin", "x64" if x64 else "Win32"))
+            return os.path.join(freezeToplevel, "cpp", "third-party-packages",
+                                "berkeley.db.java7", "build", "native", "bin", "x64" if x64 else "Win32")
     elif isDarwin():
         if os.path.exists('/usr/local/opt/ice/libexec/lib'):
             return "/usr/local/opt/ice/libexec/lib"
@@ -35,6 +35,11 @@ def getJavaLibraryPath():
             libpath = os.environ["LD_LIBRARY_PATH"] + ":" + libpath
         return libpath
     return ''
+
+
+def getFreezeExe(name):
+    return getIceExe(name).replace(toplevel, freezeToplevel)
+
 
 setTestToplevel(freezeToplevel)
 setJavaLibraryPath(getJavaLibraryPath())

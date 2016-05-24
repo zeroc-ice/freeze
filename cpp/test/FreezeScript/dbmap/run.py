@@ -17,7 +17,7 @@ if len(path) == 0:
 sys.path.append(os.path.join(path[0], "scripts"))
 import FreezeTestUtil as TestUtil
 
-transformdb = '%s' % os.path.join("..", "..", "..", "bin", "transformdb")
+transformdb = TestUtil.getFreezeExe("transformdb")
 
 if TestUtil.appverifier:
     TestUtil.setAppVerifierSettings([transformdb])
