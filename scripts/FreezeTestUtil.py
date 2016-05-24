@@ -40,6 +40,7 @@ def getJavaLibraryPath():
 def getFreezeExe(name):
     return getIceExe(name).replace(toplevel, freezeToplevel)
 
+addLdPath(getCppBinDir().replace(toplevel, freezeToplevel))
 
 setTestToplevel(freezeToplevel)
 setJavaLibraryPath(getJavaLibraryPath())
