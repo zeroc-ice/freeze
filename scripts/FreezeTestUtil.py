@@ -10,12 +10,14 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "ice", "scripts"))
 from TestUtil import *
 
+freezeToplevel = os.path.abspath(os.path.join(toplevel, ".."))
+
 def getJavaLibraryPath():
     if isWin32():
         if iceHome:
             return "\"%s\" " % os.path.join(iceHome, "bin\\x64" if x64 else "bin")
         else:
-            return ("\"%s\" " % os.path.join(getIceDir("cpp"), "third-party-packages",
+            return ("\"%s\" " % os.path.join(freezeToplevel, "cpp", "third-party-packages",
                     "berkeley.db.java7", "build", "native", "bin", "x64" if x64 else "Win32"))
     elif isDarwin():
         if os.path.exists('/usr/local/opt/ice/libexec/lib'):
@@ -34,5 +36,5 @@ def getJavaLibraryPath():
         return libpath
     return ''
 
-setTestToplevel(os.path.abspath(os.path.join(toplevel, "..")))
+setTestToplevel(freezeToplevel)
 setJavaLibraryPath(getJavaLibraryPath())
