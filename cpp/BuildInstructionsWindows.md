@@ -53,12 +53,12 @@ To build with VS 2013, replace `v140` by `v120` in the instructions above.
 Debug build:
 
     cd freeze\cpp
-    msbuild msbuild\ice.proj
+    msbuild msbuild\freeze.proj
 
 Release build:
 
     cd freeze\cpp
-    msbuild msbuild\ice.proj /p:Configuration=Release
+    msbuild msbuild\freeze.proj /p:Configuration=Release
 
 This will build the Freeze for C++ developer kit and the Freeze for C++ test 
 suite.
