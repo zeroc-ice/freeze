@@ -11,15 +11,11 @@ TBD
 
 ### Third-Party Libraries
 
-Freeze uses [Berkeley DB][2] as its underlying database and requires
-Berkeley DB version 5.3 (the recommended version is 5.3.28).
+Freeze relies on [Oracle Berkeley DB][2] as its datastore.
 
-You do not need to build Berkeley DB yourself, as ZeroC supplies
-[Nuget][3] packages.
-
-The Freeze build system for Windows downloads and installs Nuget and these
-Nuget packages when you build Freeze for C++. The third-party packages
-are installed in the ``freeze/cpp/msbuild/packages`` folder.
+The Freeze build system for Windows automatically downloads and installs 
+[Nuget][3] and Nuget packages for Berkeley DB when you build Freeze for C++. 
+These packages are installed in `freeze\cpp\msbuild\packages`.
 
 ## Building Freeze for C++
 
@@ -32,36 +28,31 @@ Open a command prompt with the Visual Studio environment, such as:
 For example, if you select `VS2015 x64 Native Tools Command Prompt`,
 the build instructions below will create 64-bit binaries with VS 2015.
 
-### Step 1: build IceXML for C++ in the ice submodule
-
-Debug build with VS 2015:
-
-    cd freeze\ice\cpp
-    msbuild msbuild\ice.v140.sln /t:C++98\icexml:Rebuild /m
-    msbuild msbuild\ice.test.sln /t:Common\testcommon:Rebuild /m
-
-Release build with VS 2015:
-
-    cd freeze\ice\cpp
-    msbuild msbuild\ice.v140.sln /t:C++98\icexml:Rebuild /p:Configuration=Release /m
-    msbuild msbuild\ice.test.sln /t:Common\testcommon:Rebuild /p:Configuration=Release /m
-
-To build with VS 2013, replace `v140` by `v120` in the instructions above.
-
-### Step 2: build Freeze for C++
-
-Debug build:
+### Debug Build
 
     cd freeze\cpp
     msbuild msbuild\freeze.proj
 
-Release build:
+This builds several Ice C++ components in `freeze\ice\cpp`, the Freeze
+library, the FreezeScript utilities and all the Freeze tests in Debug mode.
+
+### Release Build
 
     cd freeze\cpp
     msbuild msbuild\freeze.proj /p:Configuration=Release
 
-This will build the Freeze for C++ developer kit and the Freeze for C++ test 
-suite.
+This builds several Ice C++ components in `freeze\ice\cpp`, the Freeze
+library, the FreezeScript utilities and all the Freeze tests in Release mode.
+mode.
+
+### Build All Platforms and Configurations
+
+    cd freeze\cpp
+    msbuild msbuild\freeze.proj /p:BuildAllConfigurations=yes
+
+This builds all platforms (x64, Win32) and configurations (Debug, Release)
+of several Ice C++ components in `freeze\ice\cpp`, the Freeze library, the 
+FreezeScript utilities and all the Freeze tests.
 
 ## Running the Test Suite
 
@@ -69,7 +60,8 @@ Python is required to run the test suite.
 
 After a successful source build, you can run the tests as follows:
 
-    python allTests.py --mode=debug --x86
+    cd freeze\cpp
+    python allTests.py --mode=debug|release --x86|--x64
 
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.

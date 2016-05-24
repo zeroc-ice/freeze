@@ -42,7 +42,8 @@
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.sln"/>
     </Target>
 
-    <!-- Ice for C++ builds -->
+
+    <!-- Freeze for C++ builds -->
     <Choose>
         <!--
             If BuildAllConfigurations is set to yes we build all configurations that are
@@ -65,18 +66,18 @@
               </DistSolution>
             </ItemGroup>
             <ItemGroup>
-              <TestSoution Include="freeze.test.sln">
+              <TestSolution Include="freeze.test.sln">
                 <Properties>Configuration=Debug;Platform=Win32</Properties>
-              </TestSoution>
-              <TestSoution Include="freeze.test.sln">
+              </TestSolution>
+              <TestSolution Include="freeze.test.sln">
                 <Properties>Configuration=Debug;Platform=x64</Properties>
-              </TestSoution>
-              <TestSoution Include="freeze.test.sln">
+              </TestSolution>
+              <TestSolution Include="freeze.test.sln">
                 <Properties>Configuration=Release;Platform=Win32</Properties>
-              </TestSoution>
-              <TestSoution Include="freeze.test.sln">
+              </TestSolution>
+              <TestSolution Include="freeze.test.sln">
                 <Properties>Configuration=Release;Platform=x64</Properties>
-              </TestSoution>
+              </TestSolution>
             </ItemGroup>
         </When>
         <Otherwise>
@@ -85,14 +86,29 @@
                     <Properties>Configuration=$(Configuration);Platform=$(Platform)</Properties>
                 </DistSolution>
 
-                <TestSoution Include="freeze.test.sln">
+                <TestSolution Include="freeze.test.sln">
                     <Properties>Configuration=$(Configuration);Platform=$(Platform)</Properties>
-                </TestSoution>
+                </TestSolution>
             </ItemGroup>
         </Otherwise>
     </Choose>
 
-    <Target Name="BuildDist" DependsOnTargets="NugetRestore"
+    <Target Name="BuildIce" Condition="'$(UseBinDist)' != 'yes'">
+        <MSBuild Projects="..\..\ice\cpp\msbuild\ice.proj"
+                 Targets="NugetRestore"
+                 BuildInParallel="true"/>
+        <MSBuild Projects="..\..\ice\cpp\msbuild\ice.$(DefaultPlatformToolset).sln"
+                 Targets="C++98\icexml;C++98\slice2java"
+                 BuildInParallel="true"
+                 Properties="%(DistSolution.Properties)"/>
+        <MSBuild Projects="..\..\ice\cpp\msbuild\ice.test.sln"
+                 Targets="Common\testcommon"
+                 BuildInParallel="true"
+                 Properties="%(TestSolution.Properties)"/>
+    </Target>
+
+
+    <Target Name="BuildDist" DependsOnTargets="BuildIce;NugetRestore"
             Condition="'$(UseBinDist)' != 'yes'">
         <MSBuild Projects="@(DistSolution)"
                  BuildInParallel="true"
@@ -109,13 +125,13 @@
 
     <!-- Build all the test solution configurations -->
     <Target Name="Build" DependsOnTargets="NugetRestore;BuildDist">
-        <MSBuild Projects="@(TestSoution)"
+        <MSBuild Projects="@(TestSolution)"
                  BuildInParallel="true"
                  Properties="%(Properties)" />
     </Target>
 
     <!-- Clean all the test solution configurations -->
     <Target Name="Clean" DependsOnTargets="CleanDist">
-        <MSBuild Projects="@(TestSoution)" BuildInParallel="true" Targets="Clean" Properties="%(Properties)" />
+        <MSBuild Projects="@(TestSolution)" BuildInParallel="true" Targets="Clean" Properties="%(Properties)" />
     </Target>
 </Project>
