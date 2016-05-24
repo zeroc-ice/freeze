@@ -106,8 +106,8 @@ install_mandir		?= $(prefix)$(if $(usr_dir_install),/share)/man
 #
 # Languages, platforms and configurations to build
 #
-supported-languages	?= cpp java
-supported-configs	?= shared static
+supported-languages	= cpp java
+supported-configs	= shared
 
 #
 # Support for 3rd party libraries

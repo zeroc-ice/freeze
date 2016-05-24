@@ -7,8 +7,8 @@
 
 import os, sys, imp
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "ice", "scripts"))
-import TestUtil
+sys.path.append(os.path.join(os.path.dirname(__file__), "scripts"))
+import FreezeTestUtil as TestUtil
 
 testGroups = []
 
