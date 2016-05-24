@@ -9,6 +9,9 @@ targetCompatibility = iceTargetCompatibility
 
 ext.displayName = "Freeze"
 ext.description = "Persistent storage for Ice objects"
+ext.connection = 'scm:git:git@github.com/zeroc-ice/freeze.git'
+ext.developerConnection = 'scm:git:git@github.com/zeroc-ice/freeze.git'
+ext.url = 'git://github.com/zeroc-ice/freeze.git'
 
 slice {
     java {
