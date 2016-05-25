@@ -7,10 +7,16 @@
 #
 # **********************************************************************
 import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "ice", "scripts"))
+freezeToplevel = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(os.path.join(freezeToplevel, "ice", "scripts"))
 from TestUtil import *
 
-freezeToplevel = os.path.abspath(os.path.join(toplevel, ".."))
+#
+# We import everything from TestUtil directly into FreezeTestUtil.
+#
+# Note: Since global variables are module scoped, TestUtil globals need to be
+#       modified though function calls to TestUtil functions.
+#
 
 def getJavaLibraryPath():
     if isWin32():
