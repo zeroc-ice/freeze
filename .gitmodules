@@ -1,3 +1,4 @@
 [submodule "ice"]
 	path = ice
 	url = https://github.com/zeroc-ice/ice.git
+	branch = master
