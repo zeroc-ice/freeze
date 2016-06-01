@@ -91,8 +91,17 @@ ice_slicedir 		?= $(top_srcdir)/ice/slice
 ice_includedir		?= $(top_srcdir)/ice/cpp/include
 endif
 
-version			= 3.7a0
-soversion		= 37a0
+version			= 3.7a2
+soversion		= 37a2
+
+#
+# The compatversion is the lowest patch release with the same API.
+# For example, if 3.7.2 introduces no new API compared to 3.7.1, we
+# would set version to 3.7.2 and compatversion to 3.7.1.
+# Used for OS X libraries.
+#
+compatversion           = $(version)
+
 ice_src_dist 		:= $(wildcard $(ice_home)/config/Make.rules)
 
 usr_dir_install		:= $(filter /usr%,$(prefix))
@@ -119,16 +128,7 @@ db_ldflags		:= -ldb_cxx
 expat_home 		:= $(EXPAT_HOME)
 mcpp_home		:= $(MCPP_HOME)
 
-define make-thirdparty
-ifneq ($($1_home),)
-# Check for 3rd party libraries either in home/lib<platform specific subdir> or home/lib
-$1_libdir	?= $$(strip $$(if $$(wildcard $$($1_home)/lib$$(call platform-var,installdir,$$1,$$2,$$3)),\
-			$$($1_home)/lib$$(call platform-var,installdir,$$1,$$2,$$3),$$($1_home)/lib))
-$1_includedir	?= $$($1_home)/include
-endif
-$1_ldflags	?= -l$1
-endef
-$(foreach l,$(thirdparties),$(eval $(call make-thirdparty,$l)))
+$(foreach l,$(thirdparties),$(eval $(call make-lib,$l)))
 
 #
 # Support for Ice libraries

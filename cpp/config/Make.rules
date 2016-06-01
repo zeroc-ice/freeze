@@ -31,7 +31,6 @@ $(DESTDIR)$(install_includedir):
 # and headers to the build of the component.
 #
 define make-freeze-components
-
 ifneq ($$($2_slice2freeze),)
 
 $2_sources += $$(addprefix $$($1_generated_srcdir)/,$$(addsuffix .cpp,$$($2_slice2freeze)))
