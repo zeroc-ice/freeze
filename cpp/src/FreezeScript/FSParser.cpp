@@ -155,7 +155,7 @@ FreezeScript::EvaluateException::~EvaluateException() throw()
 const char* FreezeScript::EvaluateException::_name = "FreezeScript::EvaluateException";
 
 string
-FreezeScript::EvaluateException::ice_name() const
+FreezeScript::EvaluateException::ice_id() const
 {
     return _name;
 }

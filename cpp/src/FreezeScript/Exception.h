@@ -15,10 +15,10 @@ namespace FreezeScript
 class FailureException : public IceUtil::Exception
 {
 public:
-    
+
     FailureException(const char*, int, const std::string&);
     virtual ~FailureException() throw();
-    virtual std::string ice_name() const;
+    virtual std::string ice_id() const;
     virtual void ice_print(std::ostream&) const;
     virtual FailureException* ice_clone() const;
     virtual void ice_throw() const;
