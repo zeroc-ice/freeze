@@ -15,19 +15,19 @@ def dbVersion
 def dbPackage
 
 if (isWindows) {
-    nuget = "${System.env.LOCALAPPDATA}/ZeroC/nuget/nuget.exe"
+    nuget = "${System.env.LOCALAPPDATA}\\ZeroC\\nuget\\nuget.exe"
     dbVersion = "5.3.28.1"
-    dbPackage = "${iceCppDir}/third-party-packages/berkeley.db.java7"
+    dbPackage = "${iceCppDir}\\third-party-packages\\berkeley.db.java7"
 
     task nugetDirectory() {
-        def nugetDir = new File("${localappdata}/ZeroC/nuget")
+        def nugetDir = new File("${localappdata}\\ZeroC\\nuget")
         if(!nugetDir.exists()) {
             nugetDir.mkdirs()
         }
     }
 
     task nugetInstall(type:Exec, dependsOn:nugetDirectory) {
-      commandLine 'cmd', '/c', 'powershell', '-Command', "(New-Object Net.WebClient).DownloadFile('http://nuget.org/nuget.exe', '${nuget}')"
+      commandLine 'cmd', '/c', 'powershell', '-Command', "(New-Object Net.WebClient).DownloadFile('https://nuget.org/nuget.exe', '${nuget}')"
     }
 
     task nugetInstallBerkeleyDb(type:Exec) {
