@@ -24,6 +24,14 @@
         <NugetExe>$(MSBuildThisFileDirectory)nuget.exe</NugetExe>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v120'">
+      <IceTargets>icexml;slice2java</IceTargets>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v140'">
+      <IceTargets>c++98\icexml;c++98\slice2java</IceTargets>
+    </PropertyGroup>
+
     <!-- Download nuget.exe if not present -->
     <Target Name="GetNuget" Condition="!Exists('$(NugetExe)')">
         <DownloadFile Address="https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" FileName="$(NugetExe)" />
@@ -98,7 +106,7 @@
                  Targets="NugetRestore"
                  BuildInParallel="true"/>
         <MSBuild Projects="..\..\ice\cpp\msbuild\ice.$(DefaultPlatformToolset).sln"
-                 Targets="C++98\icexml;C++98\slice2java"
+                 Targets="$(IceTargets)"
                  BuildInParallel="true"
                  Properties="%(DistSolution.Properties)"/>
         <MSBuild Projects="..\..\ice\cpp\msbuild\ice.test.sln"
