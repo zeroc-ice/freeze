@@ -52,7 +52,7 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
     <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets')" />
-    <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.3\build\native\berkeley.db.v120.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.3\build\native\berkeley.db.v120.targets')" />
+    <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets')" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -76,6 +76,7 @@
     <IceBuilderBaseDirectoryForGeneratedInclude>Freeze</IceBuilderBaseDirectoryForGeneratedInclude>
     <IceBuilderDLLExport>FREEZE_API</IceBuilderDLLExport>
     <IceBuilderIncludeDirectories>$(Freeze_SrcRootDir)\..\slice;$(IceBuilderIncludeDirectories)</IceBuilderIncludeDirectories>
+    <NuGetPackageImportStamp>045ee7e8</NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -780,6 +781,6 @@ move $(Platform)\$(Configuration)\CatalogIndexList.h $(Freeze_SrcRootDir)\includ
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.3\build\native\berkeley.db.v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.3\build\native\berkeley.db.v120.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets'))" />
   </Target>
 </Project>

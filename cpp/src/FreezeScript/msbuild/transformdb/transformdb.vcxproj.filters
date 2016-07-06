@@ -19,9 +19,6 @@
     <ClCompile Include="..\..\Print.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Scanner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,6 +51,8 @@
     </ClCompile>
     <ClCompile Include="..\..\FSGrammar.cpp" />
     <ClCompile Include="..\..\FSParser.cpp" />
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\Scanner.cpp" />
+    <ClCompile Include="..\..\FSScanner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AssignVisitor.h">
