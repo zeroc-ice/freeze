@@ -13,6 +13,7 @@
 #include <Freeze/Catalog.h>
 #include <IceUtil/Options.h>
 #include <IceUtil/FileUtil.h>
+#include <fstream>
 #include <db_cxx.h>
 #include <sys/stat.h>
 #include <algorithm>
@@ -721,7 +722,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
 
         if(!outputFile.empty())
         {
-            IceUtilInternal::ofstream of(outputFile);
+            ofstream of(IceUtilInternal::streamFilename(outputFile));
             if(!of.good())
             {
                 cerr << appName << ": unable to open file `" << outputFile << "'" << endl;
@@ -737,7 +738,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
         //
         // Read the input file.
         //
-        IceUtilInternal::ifstream in(inputFile);
+        ifstream in(IceUtilInternal::streamFilename(inputFile));
         char buff[1024];
         while(true)
         {
