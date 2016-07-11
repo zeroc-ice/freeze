@@ -450,7 +450,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
 
         if(!outputFile.empty())
         {
-            ofstream of(IceUtilInternal::streamFilename(outputFile));
+            ofstream of(IceUtilInternal::streamFilename(outputFile).c_str());
             if(!of.good())
             {
                 cerr << appName << ": unable to open file `" << outputFile << "'" << endl;
@@ -463,7 +463,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
     }
     else
     {
-        ifstream in(IceUtilInternal::streamFilename(inputFile));
+        ifstream in(IceUtilInternal::streamFilename(inputFile).c_str());
         char buff[1024];
         while(true)
         {
