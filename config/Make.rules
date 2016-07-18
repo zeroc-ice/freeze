@@ -123,7 +123,7 @@ supported-configs	= shared
 #
 thirdparties		:= bz2 db expat mcpp
 bz2_home 		:= $(BZ2_HOME)
-db_home 		:= $(DB_HOME)
+db_home 		:= $(or $(DB_HOME),$(if $(filter Darwin,$(os)),/usr/local/opt/berkeley-db53,))
 db_ldflags		:= -ldb_cxx
 expat_home 		:= $(EXPAT_HOME)
 mcpp_home		:= $(MCPP_HOME)
