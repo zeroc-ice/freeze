@@ -23,7 +23,7 @@ def getJavaLibraryPath():
         if iceHome:
             return os.path.join(iceHome, "bin\\x64" if x64 else "bin")
         else:
-            return os.path.join(freezeToplevel, "cpp", "third-party-packages",
+            return os.path.join(freezeToplevel, "ice", "cpp", "third-party-packages",
                                 "berkeley.db.java7", "build", "native", "bin", "x64" if x64 else "Win32")
     elif isDarwin():
         if os.path.exists('/usr/local/opt/ice/libexec/lib'):
