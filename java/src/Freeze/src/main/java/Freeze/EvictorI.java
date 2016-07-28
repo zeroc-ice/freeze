@@ -172,7 +172,7 @@ abstract class EvictorI implements Evictor
                 if(_trace >= 3)
                 {
                     _communicator.getLogger().trace(
-                        "Freeze.Evictor", "ice_ping found \"" + _communicator.identityToString(current.id) +
+                        "Freeze.Evictor", "ice_ping found \"" + Ice.Util.identityToString(current.id) +
                         "\" with facet \"" + current.facet + "\"");
                 }
 
@@ -185,7 +185,7 @@ abstract class EvictorI implements Evictor
                 {
                     _communicator.getLogger().trace(
                         "Freeze.Evictor", "ice_ping raises FacetNotExistException for \"" +
-                        _communicator.identityToString(current.id)  + "\" with facet \"" + current.facet + "\"");
+                        Ice.Util.identityToString(current.id)  + "\" with facet \"" + current.facet + "\"");
                 }
 
                 throw new Ice.FacetNotExistException();
@@ -196,7 +196,7 @@ abstract class EvictorI implements Evictor
                 {
                     _communicator.getLogger().trace(
                         "Freeze.Evictor", "ice_ping will raise ObjectNotExistException for \"" +
-                        _communicator.identityToString(current.id)  + "\" with facet \"" + current.facet + "\"");
+                        Ice.Util.identityToString(current.id)  + "\" with facet \"" + current.facet + "\"");
                 }
 
                 return null;

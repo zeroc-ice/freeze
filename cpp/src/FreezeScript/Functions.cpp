@@ -56,7 +56,7 @@ FreezeScript::invokeGlobalFunction(const Ice::CommunicatorPtr& communicator, con
         Ice::Identity id;
         try
         {
-            id = communicator->stringToIdentity(idstr);
+            id = Ice::stringToIdentity(idstr);
         }
         catch(const Ice::IdentityParseException& ex)
         {
@@ -113,7 +113,7 @@ FreezeScript::invokeGlobalFunction(const Ice::CommunicatorPtr& communicator, con
         assert(member);
         id.category = member->stringValue();
 
-        result = factory->createString(communicator->identityToString(id), false);
+        result = factory->createString(Ice::identityToString(id), false);
         return true;
     }
     else if(name == "stringToProxy")

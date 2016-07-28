@@ -598,7 +598,7 @@ void
 Test::RemoteEvictorI::deactivate(const Current& current)
 {
     _evictorAdapter->destroy();
-    current.adapter->remove(current.adapter->getCommunicator()->stringToIdentity(_category));
+    current.adapter->remove(Ice::stringToIdentity(_category));
 }
 
 
@@ -628,7 +628,7 @@ Test::RemoteEvictorFactoryI::createEvictor(const string& name, bool transactiona
     RemoteEvictorIPtr remoteEvictor = 
         new RemoteEvictorI(current.adapter->getCommunicator(), _envName, name, transactional);  
     return RemoteEvictorPrx::uncheckedCast(
-        current.adapter->add(remoteEvictor, current.adapter->getCommunicator()->stringToIdentity(name)));
+        current.adapter->add(remoteEvictor, Ice::stringToIdentity(name)));
 }
 
 void

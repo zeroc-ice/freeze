@@ -85,7 +85,7 @@ class Collocated extends Ice.Application
         // Create the phonebook, and add it to the Object Adapter.
         //
         PhoneBookI phoneBook = new PhoneBookI(evictor, contactFactory, index);
-        adapter.add(phoneBook, communicator().stringToIdentity("phonebook"));
+        adapter.add(phoneBook, Ice.Util.stringToIdentity("phonebook"));
 
         //
         // Everything ok, let's go.

@@ -92,7 +92,7 @@ PhoneBookCollocated::run(int argc, char* argv[])
     // Create the phonebook, and add it to the Object Adapter.
     //
     PhoneBookIPtr phoneBook = new PhoneBookI(evictor, contactFactory, index);
-    adapter->add(phoneBook, communicator()->stringToIdentity("phonebook"));
+    adapter->add(phoneBook, Ice::stringToIdentity("phonebook"));
 
     //
     // Everything ok, let's go.

@@ -234,7 +234,7 @@ CasinoServer::run(int argc, char*[])
         // Retrieve / create the bank
         //
 
-        Ice::Identity bankId = communicator()->stringToIdentity("bank/Montecito");
+        Ice::Identity bankId = Ice::stringToIdentity("bank/Montecito");
         _bankPrx = CasinoStore::PersistentBankPrx::uncheckedCast(adapter->createProxy(bankId));
 
         if(!_bankEvictor->hasObject(bankId))

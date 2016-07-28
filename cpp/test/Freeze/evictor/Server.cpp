@@ -70,7 +70,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName
     communicator->getValueFactoryManager()->add(new AccountFactory, "::Test::Account");
 
     Test::RemoteEvictorFactoryPtr factory = new Test::RemoteEvictorFactoryI(envName);
-    adapter->add(factory, communicator->stringToIdentity("factory"));
+    adapter->add(factory, Ice::stringToIdentity("factory"));
 
     adapter->activate();
 

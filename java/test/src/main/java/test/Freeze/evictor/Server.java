@@ -55,7 +55,7 @@ public class Server extends test.Util.Application
         communicator.getValueFactoryManager().add(new FacetFactory(), "::Test::Facet");
 
         RemoteEvictorFactoryI factory = new RemoteEvictorFactoryI("db");
-        adapter.add(factory, communicator.stringToIdentity("factory"));
+        adapter.add(factory, Ice.Util.stringToIdentity("factory"));
 
         adapter.activate();
 

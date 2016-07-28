@@ -69,7 +69,7 @@ LibraryServer::run(int argc, char*[])
     // Create the library, and add it to the object adapter.
     //
     LibraryIPtr library = new LibraryI(communicator(), _envName, "authors", evictor);
-    adapter->add(library, communicator()->stringToIdentity("library"));
+    adapter->add(library, Ice::stringToIdentity("library"));
 
     //
     // Create and install a factory for books.

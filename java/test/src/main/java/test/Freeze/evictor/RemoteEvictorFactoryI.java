@@ -20,7 +20,7 @@ public final class RemoteEvictorFactoryI extends _RemoteEvictorFactoryDisp
         RemoteEvictorI remoteEvictor =
             new RemoteEvictorI(current.adapter.getCommunicator(), _envName, name, transactional);
         return RemoteEvictorPrxHelper.
-            uncheckedCast(current.adapter.add(remoteEvictor, current.adapter.getCommunicator().stringToIdentity(name)));
+            uncheckedCast(current.adapter.add(remoteEvictor, Ice.Util.stringToIdentity(name)));
     }
 
     public void

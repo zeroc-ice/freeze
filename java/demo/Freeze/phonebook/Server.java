@@ -67,7 +67,7 @@ class Server extends Ice.Application
         // Create the phonebook, and add it to the object adapter.
         //
         PhoneBookI phoneBook = new PhoneBookI(evictor, contactFactory, index);
-        adapter.add(phoneBook, communicator().stringToIdentity("phonebook"));
+        adapter.add(phoneBook, Ice.Util.stringToIdentity("phonebook"));
 
         //
         // Everything ok, let's go.

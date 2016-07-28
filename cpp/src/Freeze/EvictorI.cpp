@@ -230,7 +230,7 @@ Freeze::EvictorIBase::locate(const Current& current, LocalObjectPtr& cookie)
             if(_trace >= 3)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "ice_ping found \"" << _communicator->identityToString(current.id)
+                out << "ice_ping found \"" << Ice::identityToString(current.id)
                     << "\" with facet \"" << current.facet + "\"";
             }
 
@@ -242,7 +242,7 @@ Freeze::EvictorIBase::locate(const Current& current, LocalObjectPtr& cookie)
             if(_trace >= 3)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "ice_ping raises FacetNotExistException for \"" << _communicator->identityToString(current.id)
+                out << "ice_ping raises FacetNotExistException for \"" << Ice::identityToString(current.id)
                     << "\" with facet \"" << current.facet + "\"";
             }
             throw FacetNotExistException(__FILE__, __LINE__);
@@ -253,7 +253,7 @@ Freeze::EvictorIBase::locate(const Current& current, LocalObjectPtr& cookie)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
                 out << "ice_ping will raise ObjectNotExistException for \""
-                    << _communicator->identityToString(current.id)  << "\" with facet \"" << current.facet + "\"";
+                    << Ice::identityToString(current.id)  << "\" with facet \"" << current.facet + "\"";
             }
             return 0;
         }

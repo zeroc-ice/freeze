@@ -48,7 +48,7 @@ public:
 };
 Init init;
 
-void 
+void
 handleFatalError(const Freeze::BackgroundSaveEvictorPtr& evictor, const Ice::CommunicatorPtr& communicator)
 {
     IceUtilInternal::MutexPtrLock<IceUtil::Mutex> lock(fatalErrorCallbackMutex);
@@ -70,7 +70,7 @@ handleFatalError(const Freeze::BackgroundSaveEvictorPtr& evictor, const Ice::Com
 class WatchDogTask : public IceUtil::TimerTask
 {
 public:
-    
+
     WatchDogTask(BackgroundSaveEvictorI& evictor) : _evictor(evictor)
     {
     }
@@ -82,7 +82,7 @@ public:
         out.flush();
         handleFatalError(&_evictor, _evictor.communicator());
     }
-    
+
 private:
 
     BackgroundSaveEvictorI& _evictor;
@@ -92,11 +92,11 @@ private:
 
 //
 // createEvictor functions
-// 
+//
 
 Freeze::BackgroundSaveEvictorPtr
-Freeze::createBackgroundSaveEvictor(const ObjectAdapterPtr& adapter, 
-                                    const string& envName, 
+Freeze::createBackgroundSaveEvictor(const ObjectAdapterPtr& adapter,
+                                    const string& envName,
                                     const string& filename,
                                     const ServantInitializerPtr& initializer,
                                     const vector<IndexPtr>& indices,
@@ -106,9 +106,9 @@ Freeze::createBackgroundSaveEvictor(const ObjectAdapterPtr& adapter,
 }
 
 BackgroundSaveEvictorPtr
-Freeze::createBackgroundSaveEvictor(const ObjectAdapterPtr& adapter, 
-                                    const string& envName, 
-                                    DbEnv& dbEnv, 
+Freeze::createBackgroundSaveEvictor(const ObjectAdapterPtr& adapter,
+                                    const string& envName,
+                                    DbEnv& dbEnv,
                                     const string& filename,
                                     const ServantInitializerPtr& initializer,
                                     const vector<IndexPtr>& indices,
@@ -117,7 +117,7 @@ Freeze::createBackgroundSaveEvictor(const ObjectAdapterPtr& adapter,
     return new BackgroundSaveEvictorI(adapter, envName, &dbEnv, filename, initializer, indices, createDb);
 }
 
-FatalErrorCallback 
+FatalErrorCallback
 Freeze::registerFatalErrorCallback(FatalErrorCallback cb)
 {
     IceUtilInternal::MutexPtrLock<IceUtil::Mutex> lock(fatalErrorCallbackMutex);
@@ -130,10 +130,10 @@ Freeze::registerFatalErrorCallback(FatalErrorCallback cb)
 // BackgroundSaveEvictorI
 //
 
-Freeze::BackgroundSaveEvictorI::BackgroundSaveEvictorI(const ObjectAdapterPtr& adapter, 
-                                                       const string& envName, 
-                                                       DbEnv* dbEnv, 
-                                                       const string& filename, 
+Freeze::BackgroundSaveEvictorI::BackgroundSaveEvictorI(const ObjectAdapterPtr& adapter,
+                                                       const string& envName,
+                                                       DbEnv* dbEnv,
+                                                       const string& filename,
                                                        const ServantInitializerPtr& initializer,
                                                        const vector<IndexPtr>& indices,
                                                        bool createDb) :
@@ -142,8 +142,8 @@ Freeze::BackgroundSaveEvictorI::BackgroundSaveEvictorI(const ObjectAdapterPtr& a
     _currentEvictorSize(0),
     _savingThreadDone(false)
 {
-    string propertyPrefix = string("Freeze.Evictor.") + envName + '.' + _filename; 
-    
+    string propertyPrefix = string("Freeze.Evictor.") + envName + '.' + _filename;
+
     //
     // By default, we save every minute or when the size of the modified queue
     // reaches 10.
@@ -156,24 +156,24 @@ Freeze::BackgroundSaveEvictorI::BackgroundSaveEvictorI(const ObjectAdapterPtr& a
         getPropertyAsIntWithDefault(propertyPrefix + ".SavePeriod", 60 * 1000);
 
     _savePeriod = IceUtil::Time::milliSeconds(savePeriod);
-   
+
     //
     // By default, we save at most 10 * SaveSizeTrigger objects per transaction
     //
     _maxTxSize = _communicator->getProperties()->
         getPropertyAsIntWithDefault(propertyPrefix + ".MaxTxSize", 10 * _saveSizeTrigger);
-    
+
     if(_maxTxSize <= 0)
     {
         _maxTxSize = 100;
-    }   
+    }
 
     //
     // By default, no stream timeout
     //
     _streamTimeout = _communicator->getProperties()->
         getPropertyAsIntWithDefault(propertyPrefix+ ".StreamTimeout", 0) * 1000;
-    
+
     if(_streamTimeout > 0)
     {
         _timer = IceInternal::getInstanceTimer(_communicator);
@@ -194,9 +194,9 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
     checkIdentity(ident);
     checkServant(servant);
     DeactivateController::Guard deactivateGuard(_deactivateController);
-   
+
     ObjectStore<BackgroundSaveEvictorElement>* store = findStore(facet, _createDb);
-    
+
     if(store == 0)
     {
         throw NotFoundException(__FILE__, __LINE__, "addFacet: could not open database for facet '"
@@ -210,11 +210,11 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
         //
         // Create a new entry
         //
-        
+
         BackgroundSaveEvictorElementPtr element = new BackgroundSaveEvictorElement(*store);
         element->status = dead;
         BackgroundSaveEvictorElementPtr oldElt = store->putIfAbsent(ident, element);
-      
+
         if(oldElt != 0)
         {
             element = oldElt;
@@ -227,13 +227,13 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
             {
                 //
                 // Try again
-                // 
+                //
                 continue;
             }
             fixEvictPosition(element);
 
             IceUtil::Mutex::Lock lock(element->mutex);
-        
+
             switch(element->status)
             {
                 case clean:
@@ -242,12 +242,12 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
                 {
                     alreadyThere = true;
                     break;
-                }  
+                }
                 case destroyed:
                 {
                     element->status = modified;
                     element->rec.servant = servant;
-                    
+
                     //
                     // No need to push it on the modified queue, as a destroyed object
                     // is either already on the queue or about to be saved. When saved,
@@ -279,12 +279,12 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
         }
         break; // for(;;)
     }
-    
+
     if(alreadyThere)
     {
         AlreadyRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = _communicator->identityToString(ident);
+        ex.id = Ice::identityToString(ident);
         if(!facet.empty())
         {
             ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
@@ -295,7 +295,7 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
     if(_trace >= 1)
     {
         Trace out(_communicator->getLogger(), "Freeze.Evictor");
-        out << "added object \"" << _communicator->identityToString(ident) << "\"";
+        out << "added object \"" << Ice::identityToString(ident) << "\"";
         if(!facet.empty())
         {
             out << " with facet \"" << facet << "\"";
@@ -316,7 +316,7 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
 {
     checkIdentity(ident);
     DeactivateController::Guard deactivateGuard(_deactivateController);
-   
+
     ObjectStore<BackgroundSaveEvictorElement>* store = findStore(facet, false);
     ObjectPtr servant = 0;
 
@@ -327,7 +327,7 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
             //
             // Retrieve object
             //
-            
+
             BackgroundSaveEvictorElementPtr element = store->pin(ident);
             if(element != 0)
             {
@@ -336,14 +336,14 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
                 {
                     //
                     // Try again
-                    // 
+                    //
                     continue;
                 }
-            
+
                 fixEvictPosition(element);
                 {
                     IceUtil::Mutex::Lock lock(element->mutex);
-                    
+
                     switch(element->status)
                     {
                         case clean:
@@ -372,7 +372,7 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
                             // (at which point it becomes clean)
                             //
                             break;
-                        }  
+                        }
                         case destroyed:
                         case dead:
                         {
@@ -400,15 +400,15 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
                     element->evictPosition = _evictorList.begin();
                 }
             }
-            break; // for(;;)  
+            break; // for(;;)
         }
     }
-    
+
     if(servant == 0)
     {
         NotRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = _communicator->identityToString(ident);
+        ex.id = Ice::identityToString(ident);
         if(!facet.empty())
         {
             ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
@@ -419,7 +419,7 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
     if(_trace >= 1)
     {
         Trace out(_communicator->getLogger(), "Freeze.Evictor");
-        out << "removed object \"" << _communicator->identityToString(ident) << "\"";
+        out << "removed object \"" << Ice::identityToString(ident) << "\"";
         if(!facet.empty())
         {
             out << " with facet \"" << facet << "\"";
@@ -458,9 +458,9 @@ Freeze::BackgroundSaveEvictorI::keepFacet(const Identity& ident, const string& f
                 notThere = true;
                 break;
             }
-            
+
             Lock sync(*this);
-            
+
             if(element->stale)
             {
                 //
@@ -468,8 +468,8 @@ Freeze::BackgroundSaveEvictorI::keepFacet(const Identity& ident, const string& f
                 //
                 continue;
             }
-            
-            
+
+
             {
                 IceUtil::Mutex::Lock lockElement(element->mutex);
                 if(element->status == destroyed || element->status == dead)
@@ -478,7 +478,7 @@ Freeze::BackgroundSaveEvictorI::keepFacet(const Identity& ident, const string& f
                     break;
                 }
             }
-            
+
             //
             // Found!
             //
@@ -511,7 +511,7 @@ Freeze::BackgroundSaveEvictorI::keepFacet(const Identity& ident, const string& f
     {
         NotRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = _communicator->identityToString(ident);
+        ex.id = Ice::identityToString(ident);
         if(!facet.empty())
         {
             ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
@@ -537,12 +537,12 @@ Freeze::BackgroundSaveEvictorI::releaseFacet(const Identity& ident, const string
     if(store != 0)
     {
         Lock sync(*this);
-        
+
         BackgroundSaveEvictorElementPtr element = store->getIfPinned(ident);
         if(element != 0)
         {
             assert(!element->stale);
-            if(element->keepCount > 0) 
+            if(element->keepCount > 0)
             {
                 if(--element->keepCount == 0)
                 {
@@ -563,10 +563,10 @@ Freeze::BackgroundSaveEvictorI::releaseFacet(const Identity& ident, const string
             }
         }
     }
-    
+
     NotRegisteredException ex(__FILE__, __LINE__);
     ex.kindOfObject = "servant";
-    ex.id = _communicator->identityToString(ident);
+    ex.id = Ice::identityToString(ident);
     if(!facet.empty())
     {
         ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
@@ -588,12 +588,12 @@ Freeze::BackgroundSaveEvictorI::hasFacet(const Identity& ident, const string& fa
     }
 
     {
-        Lock sync(*this);  
+        Lock sync(*this);
         BackgroundSaveEvictorElementPtr element = store->getIfPinned(ident);
         if(element != 0)
         {
-            assert(!element->stale);    
-            
+            assert(!element->stale);
+
             IceUtil::Mutex::Lock lock(element->mutex);
             return element->status != dead && element->status != destroyed;
         }
@@ -607,34 +607,34 @@ Freeze::BackgroundSaveEvictorI::hasAnotherFacet(const Identity& ident, const str
     DeactivateController::Guard deactivateGuard(_deactivateController);
 
     //
-    // If the object exists in another store, throw FacetNotExistException 
+    // If the object exists in another store, throw FacetNotExistException
     // instead of returning 0 (== ObjectNotExistException)
-    // 
+    //
     StoreMap storeMapCopy;
     {
         Lock sync(*this);
         storeMapCopy = _storeMap;
-    }       
-        
+    }
+
     for(StoreMap::iterator p = storeMapCopy.begin(); p != storeMapCopy.end(); ++p)
     {
         //
         // Do not check again the given facet
         //
         if((*p).first != facet)
-        { 
+        {
             ObjectStore<BackgroundSaveEvictorElement>* store = (*p).second;
-            
+
             bool inCache = false;
             {
                 Lock sync(*this);
-                
+
                 BackgroundSaveEvictorElementPtr element = store->getIfPinned(ident);
                 if(element != 0)
                 {
                     inCache = true;
-                    assert(!element->stale);    
-                    
+                    assert(!element->stale);
+
                     IceUtil::Mutex::Lock lock(element->mutex);
                     if(element->status != dead && element->status != destroyed)
                     {
@@ -672,7 +672,7 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
         }
         return 0;
     }
-    
+
     for(;;)
     {
         BackgroundSaveEvictorElementPtr element = store->pin(current.id);
@@ -681,12 +681,12 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
             if(_trace >= 2)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "locate could not find \"" << _communicator->identityToString(current.id) << "\" in Db \""
+                out << "locate could not find \"" << Ice::identityToString(current.id) << "\" in Db \""
                     << _filename << "\"";
             }
             return 0;
         }
-        
+
         Lock sync(*this);
 
         if(element->stale)
@@ -704,7 +704,7 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
             if(_trace >= 2)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "locate found \"" << _communicator->identityToString(current.id) 
+                out << "locate found \"" << Ice::identityToString(current.id)
                     << "\" in the cache for database \"" << current.facet << "\" but it was dead or destroyed";
             }
             return 0;
@@ -716,7 +716,7 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
         if(_trace >= 2)
         {
             Trace out(_communicator->getLogger(), "Freeze.Evictor");
-            out << "locate found \"" << _communicator->identityToString(current.id) << "\" in Db \"" 
+            out << "locate found \"" << Ice::identityToString(current.id) << "\" in Db \""
                 << _filename << "\"";
         }
 
@@ -738,37 +738,37 @@ Freeze::BackgroundSaveEvictorI::finished(const Current& current, const ObjectPtr
     {
         BackgroundSaveEvictorElementPtr element = BackgroundSaveEvictorElementPtr::dynamicCast(cookie);
         assert(element);
-    
+
         bool enqueue = false;
-        
+
         if((servant->ice_operationAttributes(current.operation) & 0x1) != 0)
         {
             IceUtil::Mutex::Lock lock(element->mutex);
-            
+
             if(element->status == clean)
             {
                 //
                 // Assume this operation updated the object
-                // 
+                //
                 element->status = modified;
                 enqueue = true;
             }
         }
-        
+
         Lock sync(*this);
 
         //
-        // Only elements with a usageCount == 0 can become stale and we own 
+        // Only elements with a usageCount == 0 can become stale and we own
         // one count!
-        // 
+        //
         assert(!element->stale);
         assert(element->usageCount >= 1);
-        
+
         //
         // Decrease the usage count of the evictor queue element.
         //
         element->usageCount--;
-        
+
         if(enqueue)
         {
             addToModifiedQueue(element);
@@ -793,19 +793,19 @@ Freeze::BackgroundSaveEvictorI::deactivate(const string&)
             saveNow();
 
             Lock sync(*this);
-     
+
             //
             // Set the evictor size to zero, meaning that we will evict
             // everything possible.
             //
             _evictorSize = 0;
             evict();
-            
+
             _savingThreadDone = true;
             notifyAll();
             sync.release();
             getThreadControl().join();
-            
+
             closeDbEnv();
         }
         catch(...)
@@ -838,7 +838,7 @@ Freeze::BackgroundSaveEvictorI::run()
             deque<BackgroundSaveEvictorElementPtr> deadObjects;
 
             size_t saveNowThreadsSize = 0;
-            
+
             {
                 Lock sync(*this);
 
@@ -856,18 +856,18 @@ Freeze::BackgroundSaveEvictorI::run()
                         // Timeout, so let's save
                         //
                         break; // while
-                    }                           
+                    }
                 }
-                
+
                 saveNowThreadsSize = _saveNowThreads.size();
-                
+
                 if(_savingThreadDone)
                 {
                     assert(_modifiedQueue.size() == 0);
                     assert(saveNowThreadsSize == 0);
                     break; // for(;;)
                 }
-                
+
                 //
                 // Check first if there is something to do!
                 //
@@ -880,38 +880,38 @@ Freeze::BackgroundSaveEvictorI::run()
                     }
                     continue; // for(;;)
                 }
-                
+
                 _modifiedQueue.swap(allObjects);
             }
-            
+
             const size_t size = allObjects.size();
-            
+
             deque<StreamedObjectPtr> streamedObjectQueue;
-            
+
             Long streamStart = IceUtil::Time::now(IceUtil::Time::Monotonic).toMilliSeconds();
-            
+
             //
             // Stream each element
             //
             for(size_t i = 0; i < size; i++)
             {
                 BackgroundSaveEvictorElementPtr& element = allObjects[i];
-                
+
                 bool tryAgain;
                 do
                 {
                     tryAgain = false;
                     ObjectPtr servant = 0;
-                    
+
                     //
-                    // These elements can't be stale as only elements with 
+                    // These elements can't be stale as only elements with
                     // usageCount == 0 can become stale, and the modifiedQueue
                     // (us now) owns one count.
                     //
 
                     IceUtil::Mutex::Lock lockElement(element->mutex);
                     Byte status = element->status;
-                    
+
                     switch(status)
                     {
                         case created:
@@ -919,7 +919,7 @@ Freeze::BackgroundSaveEvictorI::run()
                         {
                             servant = element->rec.servant;
                             break;
-                        }   
+                        }
                         case destroyed:
                         {
                             size_t index = streamedObjectQueue.size();
@@ -931,7 +931,7 @@ Freeze::BackgroundSaveEvictorI::run()
                             deadObjects.push_back(element);
 
                             break;
-                        }   
+                        }
                         case dead:
                         {
                             deadObjects.push_back(element);
@@ -958,7 +958,7 @@ Freeze::BackgroundSaveEvictorI::run()
                             // Lock servant and then element so that user can safely lock
                             // servant and call various Evictor operations
                             //
-                            
+
                             IceUtil::AbstractMutex::TryLock lockServant(*mutex);
                             if(!lockServant.acquired())
                             {
@@ -980,7 +980,7 @@ Freeze::BackgroundSaveEvictorI::run()
                                 lockElement.acquire();
                                 status = element->status;
                             }
-  
+
                             switch(status)
                             {
                                 case created:
@@ -1004,7 +1004,7 @@ Freeze::BackgroundSaveEvictorI::run()
                                 case destroyed:
                                 {
                                     lockServant.release();
-                                    
+
                                     size_t index = streamedObjectQueue.size();
                                     streamedObjectQueue.resize(index + 1);
                                     streamedObjectQueue[index] = new StreamedObject;
@@ -1013,7 +1013,7 @@ Freeze::BackgroundSaveEvictorI::run()
                                     element->status = dead;
                                     deadObjects.push_back(element);
                                     break;
-                                }   
+                                }
                                 case dead:
                                 {
                                     deadObjects.push_back(element);
@@ -1031,26 +1031,26 @@ Freeze::BackgroundSaveEvictorI::run()
                         else
                         {
                             DatabaseException ex(__FILE__, __LINE__);
-			    Ice::Object& svnt = *element->rec.servant;
+                            Ice::Object& svnt = *element->rec.servant;
                             ex.message = string(typeid(svnt).name()) + " does not implement IceUtil::AbstractMutex";
                             throw ex;
                         }
                     }
                 } while(tryAgain);
             }
-            
+
             if(_trace >= 1)
             {
                 Long now = IceUtil::Time::now(IceUtil::Time::Monotonic).toMilliSeconds();
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "streamed " << streamedObjectQueue.size() << " objects in " 
+                out << "streamed " << streamedObjectQueue.size() << " objects in "
                     << static_cast<Int>(now - streamStart) << " ms";
             }
-            
+
             //
             // Now let's save all these streamed objects to disk using a transaction
             //
-            
+
             //
             // Each time we get a deadlock, we reduce the number of objects to save
             // per transaction
@@ -1061,20 +1061,20 @@ Freeze::BackgroundSaveEvictorI::run()
                 txSize = static_cast<size_t>(_maxTxSize);
             }
             bool tryAgain;
-            
+
             do
             {
                 tryAgain = false;
-                
+
                 while(streamedObjectQueue.size() > 0)
                 {
                     if(txSize > streamedObjectQueue.size())
                     {
                         txSize = streamedObjectQueue.size();
                     }
-                    
+
                     Long saveStart = IceUtil::Time::now(IceUtil::Time::Monotonic).toMilliSeconds();
-                   
+
                     try
                     {
                         DbTxn* tx = 0;
@@ -1089,7 +1089,7 @@ Freeze::BackgroundSaveEvictorI::run()
                         }
 
                         try
-                        {       
+                        {
                             for(size_t i = 0; i < txSize; i++)
                             {
                                 StreamedObjectPtr obj = streamedObjectQueue[i];
@@ -1121,12 +1121,12 @@ Freeze::BackgroundSaveEvictorI::run()
                         }
 
                         streamedObjectQueue.erase(streamedObjectQueue.begin(), streamedObjectQueue.begin() + txSize);
-                        
+
                         if(_trace >= 1)
                         {
                             Long now = IceUtil::Time::now(IceUtil::Time::Monotonic).toMilliSeconds();
                             Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                            out << "saved " << txSize << " objects in " 
+                            out << "saved " << txSize << " objects in "
                                 << static_cast<Int>(now - saveStart) << " ms";
                         }
                     }
@@ -1138,7 +1138,7 @@ Freeze::BackgroundSaveEvictorI::run()
                             out << "Deadlock in Freeze::BackgroundSaveEvictorI::run while writing into Db \"" + _filename
                                 + "\"; retrying ...";
                         }
-                        
+
                         tryAgain = true;
                         txSize = (txSize + 1)/2;
                     }
@@ -1148,13 +1148,13 @@ Freeze::BackgroundSaveEvictorI::run()
                         ex.message = dx.what();
                         throw ex;
                     }
-                } 
+                }
             }
             while(tryAgain);
-            
+
             {
                 Lock sync(*this);
-               
+
                 //
                 // Release usage count
                 //
@@ -1192,7 +1192,7 @@ Freeze::BackgroundSaveEvictorI::run()
                 }
                 deadObjects.clear();
                 evict();
-                
+
                 if(saveNowThreadsSize > 0)
                 {
                     _saveNowThreads.erase(_saveNowThreads.begin(), _saveNowThreads.begin() + saveNowThreadsSize);
@@ -1228,7 +1228,7 @@ void
 Freeze::BackgroundSaveEvictorI::saveNow()
 {
     Lock sync(*this);
-    
+
     IceUtil::ThreadControl myself;
 
     _saveNowThreads.push_back(myself);
@@ -1250,7 +1250,7 @@ Freeze::BackgroundSaveEvictorI::evict()
     assert(_currentEvictorSize == _evictorList.size());
 
     list<BackgroundSaveEvictorElementPtr>::reverse_iterator p = _evictorList.rbegin();
-    
+
     while(_currentEvictorSize > _evictorSize)
     {
         //
@@ -1281,15 +1281,15 @@ Freeze::BackgroundSaveEvictorI::evict()
             string facet = element->store.facet();
 
             Trace out(_communicator->getLogger(), "Freeze.Evictor");
-            out << "evicting \"" << _communicator->identityToString(element->cachePosition->first) << "\" ";
+            out << "evicting \"" << Ice::identityToString(element->cachePosition->first) << "\" ";
             if(facet != "")
             {
                 out << "-f \"" << facet << "\" ";
             }
-            out << "from the queue\n" 
+            out << "from the queue\n"
                 << "number of elements in the queue: " << _currentEvictorSize;
         }
-        
+
         //
         // Remove last unused element from the evictor queue.
         //
@@ -1300,11 +1300,11 @@ Freeze::BackgroundSaveEvictorI::evict()
     }
 }
 
-void 
+void
 Freeze::BackgroundSaveEvictorI::fixEvictPosition(const BackgroundSaveEvictorElementPtr& element)
 {
     assert(!element->stale);
-    
+
     if(element->keepCount == 0)
     {
         if(element->usageCount < 0)
@@ -1324,7 +1324,7 @@ Freeze::BackgroundSaveEvictorI::fixEvictPosition(const BackgroundSaveEvictorElem
     }
 }
 
-void 
+void
 Freeze::BackgroundSaveEvictorI::evict(const BackgroundSaveEvictorElementPtr& element)
 {
     assert(!element->stale);
@@ -1342,7 +1342,7 @@ Freeze::BackgroundSaveEvictorI::addToModifiedQueue(const BackgroundSaveEvictorEl
 {
     element->usageCount++;
     _modifiedQueue.push_back(element);
-    
+
     if(_saveSizeTrigger >= 0 && static_cast<Int>(_modifiedQueue.size()) >= _saveSizeTrigger)
     {
         notifyAll();
@@ -1355,7 +1355,7 @@ Freeze::BackgroundSaveEvictorI::stream(const BackgroundSaveEvictorElementPtr& el
                                        const StreamedObjectPtr& obj)
 {
     assert(element->status != dead);
-    
+
     obj->status = element->status;
     obj->store = &element->store;
 
@@ -1399,7 +1399,7 @@ Freeze::BackgroundSaveEvictorElement::~BackgroundSaveEvictorElement()
 {
 }
 
-void 
+void
 Freeze::BackgroundSaveEvictorElement::init(ObjectStore<BackgroundSaveEvictorElement>::Position p)
 {
     stale = false;

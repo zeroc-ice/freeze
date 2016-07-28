@@ -91,7 +91,7 @@ PhoneBookServer::run(int argc, char*[])
     // Create the phonebook, and add it to the object adapter.
     //
     PhoneBookIPtr phoneBook = new PhoneBookI(evictor, contactFactory, index);
-    adapter->add(phoneBook, communicator()->stringToIdentity("phonebook"));
+    adapter->add(phoneBook, Ice::stringToIdentity("phonebook"));
 
     //
     // Everything ok, let's go.
