@@ -4,6 +4,7 @@
 //
 // **********************************************************************
 
+#include <Ice/Ice.h>
 #include <IceUtil/IceUtil.h>
 #include <PhoneBookI.h>
 
@@ -109,7 +110,7 @@ PhoneBookI::createContact(const Ice::Current& c)
     // Get a new unique identity.
     //
     Ice::Identity ident;
-    ident.name = IceUtil::generateUUID();
+    ident.name = Ice::generateUUID();
     ident.category = "contact";
 
     //

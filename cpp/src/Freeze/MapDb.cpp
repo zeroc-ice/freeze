@@ -11,7 +11,7 @@
 #include <Freeze/CatalogIndexList.h>
 #include <algorithm>
 
-#include <IceUtil/StringConverter.h>
+#include <Ice/StringConverter.h>
 
 using namespace std;
 using namespace Ice;

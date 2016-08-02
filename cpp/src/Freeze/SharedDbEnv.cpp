@@ -17,7 +17,7 @@
 #include <IceUtil/StringUtil.h>
 #include <IceUtil/IceUtil.h>
 
-#include <IceUtil/StringConverter.h>
+#include <Ice/StringConverter.h>
 
 #include <cstdlib>
 

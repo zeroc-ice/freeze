@@ -9,7 +9,7 @@
 #include <Freeze/ObjectStore.h>
 #include <Freeze/EvictorI.h>
 
-#include <IceUtil/StringConverter.h>
+#include <Ice/StringConverter.h>
 
 using namespace Freeze;
 using namespace Ice;
@@ -384,7 +384,7 @@ Freeze::IndexI::associate(ObjectStoreBase* store, DbTxn* txn,
     // with deployed databases.
     //
     _db->open(txn, 
-              IceUtil::nativeToUTF8(store->evictor()->filename(), IceUtil::getProcessStringConverter()).c_str(),
+              nativeToUTF8(store->evictor()->filename(), getProcessStringConverter()).c_str(),
               _dbName.c_str(), DB_BTREE, flags, FREEZE_DB_MODE);
 
     flags = 0;

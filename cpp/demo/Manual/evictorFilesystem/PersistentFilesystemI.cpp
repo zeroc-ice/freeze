@@ -5,6 +5,7 @@
 // **********************************************************************
 
 #include <PersistentFilesystemI.h>
+#include <Ice/Ice.h>
 
 using namespace std;
 
@@ -182,7 +183,7 @@ Filesystem::DirectoryI::createDirectory(const string& nm, const Ice::Current& c)
     }
 
     Ice::Identity id;
-    id.name = IceUtil::generateUUID();
+    id.name = Ice::generateUUID();
     PersistentDirectoryPtr dir = new DirectoryI;
     dir->nodeName = nm;
     dir->parent = PersistentDirectoryPrx::uncheckedCast(c.adapter->createProxy(c.id));
@@ -213,7 +214,7 @@ Filesystem::DirectoryI::createFile(const string& nm, const Ice::Current& c)
     }
 
     Ice::Identity id;
-    id.name = IceUtil::generateUUID();
+    id.name = Ice::generateUUID();
     PersistentFilePtr file = new FileI;
     file->nodeName = nm;
     file->parent = PersistentDirectoryPrx::uncheckedCast(c.adapter->createProxy(c.id));

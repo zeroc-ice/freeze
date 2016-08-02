@@ -6,7 +6,7 @@
 
 #include <BankI.h>
 #include <BetI.h>
-#include <IceUtil/IceUtil.h>
+#include <Ice/Ice.h>
 
 using namespace std;
 
@@ -98,7 +98,7 @@ BankI::checkAllChips(const Ice::Current& current) const
 Casino::BetPrx
 BankI::createBet(int amount, int lifetime, const Ice::Current&)
 {
-    Ice::Identity ident = { IceUtil::generateUUID(), "bet" };
+    Ice::Identity ident = { Ice::generateUUID(), "bet" };
     Ice::Long closeTime = IceUtil::Time::now().toMilliSeconds() + lifetime;
 
     outstandingChips += amount;

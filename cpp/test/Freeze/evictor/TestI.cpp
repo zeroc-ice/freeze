@@ -4,6 +4,7 @@
 //
 // **********************************************************************
 
+#include <Ice/Ice.h>
 #include <Freeze/Freeze.h>
 #include <TestI.h>
 #include <TestCommon.h>
@@ -519,7 +520,7 @@ Test::RemoteEvictorI::RemoteEvictorI(const CommunicatorPtr& communicator, const 
     _envName(envName),
     _category(category)
 {
-    _evictorAdapter = communicator->createObjectAdapterWithEndpoints(IceUtil::generateUUID(), "default");
+    _evictorAdapter = communicator->createObjectAdapterWithEndpoints(Ice::generateUUID(), "default");
  
     Initializer* initializer = new Initializer;
     

@@ -7,7 +7,7 @@
 #include <FilesystemI.h>
 #include <IdentityFileEntryMap.h>
 #include <IdentityDirectoryEntryMap.h>
-#include <IceUtil/IceUtil.h> // For generateUUID.
+#include <Ice/Ice.h>
 
 using namespace std;
 using namespace Filesystem;
@@ -336,7 +336,7 @@ DirectoryI::createDirectory(const string& nm, const Ice::Current& c)
             d.parent = c.id;
 
             Ice::Identity id;
-            id.name = IceUtil::generateUUID();
+            id.name = Ice::generateUUID();
             DirectoryPrx proxy = DirectoryPrx::uncheckedCast(c.adapter->createProxy(id));
 
             NodeDesc nd;
@@ -401,7 +401,7 @@ DirectoryI::createFile(const string& nm, const Ice::Current& c)
             d.parent = c.id;
 
             Ice::Identity id;
-            id.name = IceUtil::generateUUID();
+            id.name = Ice::generateUUID();
             id.category = "file";
             FilePrx proxy = FilePrx::uncheckedCast(c.adapter->createProxy(id));
 

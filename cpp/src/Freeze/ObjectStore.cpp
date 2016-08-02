@@ -12,7 +12,7 @@
 #include <Freeze/TransactionI.h>
 #include <Freeze/IndexI.h>
 
-#include <IceUtil/StringConverter.h>
+#include <Ice/StringConverter.h>
 
 using namespace std;
 using namespace Ice;
@@ -136,7 +136,7 @@ Freeze::ObjectStoreBase::ObjectStoreBase(const string& facet, const string& face
         // with deployed databases.
         //
         _db->open(txn,
-                  IceUtil::nativeToUTF8(evictor->filename(), IceUtil::getProcessStringConverter()).c_str(),
+                  nativeToUTF8(evictor->filename(), getProcessStringConverter()).c_str(),
                   _dbName.c_str(), DB_BTREE, flags, FREEZE_DB_MODE);
 
         for(size_t i = 0; i < _indices.size(); ++i)

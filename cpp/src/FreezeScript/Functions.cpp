@@ -6,7 +6,7 @@
 
 #include <FreezeScript/Functions.h>
 #include <FreezeScript/Util.h>
-#include <IceUtil/UUID.h>
+#include <Ice/UUID.h>
 #include <IceUtil/StringUtil.h>
 
 using namespace std;
@@ -34,7 +34,7 @@ FreezeScript::invokeGlobalFunction(const Ice::CommunicatorPtr& communicator, con
         {
             errorReporter->error("generateUUID() accepts no arguments");
         }
-        result = factory->createString(IceUtil::generateUUID(), false);
+        result = factory->createString(Ice::generateUUID(), false);
         return true;
     }
     else if(name == "stringToIdentity")
