@@ -34,7 +34,7 @@ before_install:
 install:
 - make -C ${MCPP_HOME} -j3
 - make -C ice/cpp IceXML slice2java TestCommon -j3
-- ice/java/gradlew -p ice/java Ice:assemble
+- ice/java-compat/gradlew -p ice/java-compat Ice-compat:assemble
 - make -j3
 
 script:
