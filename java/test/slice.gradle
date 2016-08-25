@@ -6,6 +6,7 @@
 
 task testSliceTask {
     slice {
+        compat = true
         java {
             set1 {
                 files = fileTree(dir: testDir, includes:['Freeze/complex/*.ice'])

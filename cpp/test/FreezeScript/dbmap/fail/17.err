@@ -1,4 +1,1 @@
-transformdb: class ::Test::C declared but not defined
-
-The following types had no matching definitions in the new Slice:
-  ::Test::C
+transformdb: unsupported type change in ::Test::C from class ::Test::C to interface ::Test::C

@@ -87,7 +87,7 @@ struct Index
     bool caseSensitive;
 };
 
-class FreezeGenerator : public JavaGenerator
+class FreezeGenerator : public JavaCompatGenerator
 {
 public:
     FreezeGenerator(const string&, const string&);
@@ -99,7 +99,7 @@ public:
 
 #ifdef __SUNPRO_CC
 protected:
-    using JavaGenerator::typeToObjectString;
+    using JavaCompatGenerator::typeToObjectString;
 #endif
 
 private:
@@ -112,7 +112,7 @@ private:
 };
 
 FreezeGenerator::FreezeGenerator(const string& prog, const string& dir)
-    : JavaGenerator(dir),
+    : JavaCompatGenerator(dir),
       _prog(prog)
 {
 }
@@ -1824,12 +1824,16 @@ compile(int argc, char* argv[])
         out.os() << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<dependencies>" << endl;
     }
 
+    vector<string> cppOpts;
+    cppOpts.push_back("-D__SLICE2FREEZEJ__");
+    cppOpts.push_back("-D__SLICE2JAVA_COMPAT__");
+
     for(vector<string>::size_type idx = 0; idx < args.size(); ++idx)
     {
         if(depend || dependxml)
         {
             PreprocessorPtr icecpp = Preprocessor::create(argv[0], args[idx], cppArgs);
-            FILE* cppHandle = icecpp->preprocess(false, "-D__SLICE2FREEZEJ__");
+            FILE* cppHandle = icecpp->preprocess(false, cppOpts);
 
             if(cppHandle == 0)
             {
@@ -1848,7 +1852,7 @@ compile(int argc, char* argv[])
             }
 
             if(!icecpp->printMakefileDependencies(out.os(), depend ? Preprocessor::Java : Preprocessor::SliceXML, includePaths,
-                                                  "-D__SLICE2FREEZEJ__"))
+                                                  cppOpts))
             {
                 out.cleanup();
                 u->destroy();
@@ -1865,7 +1869,7 @@ compile(int argc, char* argv[])
         else
         {
             PreprocessorPtr icecpp = Preprocessor::create(argv[0], args[idx], cppArgs);
-            FILE* cppHandle = icecpp->preprocess(false, "-DICE_COMPILER=ICE_SLICE2FREEZEJ");
+            FILE* cppHandle = icecpp->preprocess(false, cppOpts);
 
             if(cppHandle == 0)
             {
@@ -1926,7 +1930,7 @@ compile(int argc, char* argv[])
 
         FreezeGenerator gen(argv[0], output);
 
-        JavaGenerator::validateMetaData(u);
+        JavaCompatGenerator::validateMetaData(u);
 
         for(vector<Dict>::const_iterator p = dicts.begin(); p != dicts.end(); ++p)
         {

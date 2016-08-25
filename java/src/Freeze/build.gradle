@@ -14,6 +14,7 @@ ext.developerConnection = 'scm:git:git@github.com/zeroc-ice/freeze.git'
 ext.url = 'git://github.com/zeroc-ice/freeze.git'
 
 slice {
+    compat = true
     java {
         args = "--ice"
         files = files(fileTree(dir: "$rootProject.projectDir/../slice/Freeze", includes:['*.ice'], excludes:["*F.ice"]),
@@ -40,7 +41,7 @@ slice {
 }
 
 dependencies {
-    compile localDependency("ice")
+    compile localDependency("ice-compat")
     compile files(dbJar)
 }
 

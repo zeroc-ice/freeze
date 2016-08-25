@@ -5,6 +5,7 @@
 // **********************************************************************
 
 slice {
+    compat = true
     java {
         include = ["${projectDir}"]
         srcDir = '.'
@@ -32,7 +33,7 @@ sourceSets {
 }
 
 dependencies {
-    compile localDependency("ice")
+    compile localDependency("ice-compat")
     compile localDependency("freeze")
     compile files(dbJar)
     if (!useLocalOnly) {

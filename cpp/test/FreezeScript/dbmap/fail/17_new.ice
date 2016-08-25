@@ -1,7 +1,7 @@
 module Test
 {
 
-class C;
+interface C {};
 
 struct S
 {
