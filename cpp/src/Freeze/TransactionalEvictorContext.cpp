@@ -57,14 +57,14 @@ Freeze::TransactionalEvictorContext::TransactionalEvictorContext(const SharedDbE
     _tx((new ConnectionI(dbEnv))->beginTransactionI()),
     _deadlockExceptionDetected(false),
     _userExceptionDetected(false)
-{ 
+{
     _tx->setPostCompletionCallback(this);
 }
 
 Freeze::TransactionalEvictorContext::TransactionalEvictorContext(const TransactionIPtr& tx) :
     _tx(tx),
     _deadlockExceptionDetected(false)
-{ 
+{
     _tx->setPostCompletionCallback(this);
 }
 
@@ -91,7 +91,7 @@ Freeze::TransactionalEvictorContext::rollback()
     }
 }
 
-void 
+void
 Freeze::TransactionalEvictorContext::postCompletion(bool committed, bool deadlock, const SharedDbEnvPtr& dbEnv)
 {
     dbEnv->setCurrentTransaction(0);
@@ -166,15 +166,11 @@ Freeze::TransactionalEvictorContext::clearUserException()
     return result;
 }
 
-bool 
-Freeze::TransactionalEvictorContext::response(bool ok)
+bool
+Freeze::TransactionalEvictorContext::response()
 {
     if(_owner == IceUtil::ThreadControl())
     {
-        if(!ok)
-        {
-            _userExceptionDetected = true;
-        }
         return true;
     }
     else
@@ -188,7 +184,7 @@ Freeze::TransactionalEvictorContext::response(bool ok)
     }
 }
 
-bool 
+bool
 Freeze::TransactionalEvictorContext::exception(const std::exception& ex)
 {
     const DeadlockException* dx = dynamic_cast<const DeadlockException*>(&ex);
@@ -199,7 +195,7 @@ Freeze::TransactionalEvictorContext::exception(const std::exception& ex)
         return false;
     }
 
-    const TransactionalEvictorDeadlockException* edx = 
+    const TransactionalEvictorDeadlockException* edx =
         dynamic_cast<const TransactionalEvictorDeadlockException*>(&ex);
     if(edx != 0 && _owner == IceUtil::ThreadControl())
     {
@@ -207,17 +203,23 @@ Freeze::TransactionalEvictorContext::exception(const std::exception& ex)
         return false;
     }
 
+    const Ice::UserException* ue = dynamic_cast<const Ice::UserException*>(&ex);
+    if(ue != 0 && _owner == IceUtil::ThreadControl())
+    {
+        _userExceptionDetected = true;
+    }
+
     return true;
 }
 
-bool 
+bool
 Freeze::TransactionalEvictorContext::exception()
 {
     return true;
 }
 
 Ice::ObjectPtr
-Freeze::TransactionalEvictorContext::servantRemoved(const Identity& ident, 
+Freeze::TransactionalEvictorContext::servantRemoved(const Identity& ident,
                                                      ObjectStore<TransactionalEvictorElement>* store)
 {
     if(_tx != 0)
@@ -241,7 +243,7 @@ Freeze::TransactionalEvictorContext::servantRemoved(const Identity& ident,
 
 }
 
-void 
+void
 Freeze::TransactionalEvictorContext::deadlockException()
 {
     {
@@ -275,12 +277,12 @@ Freeze::TransactionalEvictorContext::ServantHolder::~ServantHolder() ICE_NOEXCEP
             {
                 if(_body.store->keepStats())
                 {
-                    EvictorIBase::updateStats(_body.rec.stats, 
+                    EvictorIBase::updateStats(_body.rec.stats,
                                               IceUtil::Time::now(IceUtil::Time::Monotonic).toMilliSeconds());
                 }
                 _body.store->update(_body.current->id, _body.rec, ctx->_tx);
             }
-        
+
             if(!_body.readOnly || _body.removed)
             {
                 ctx->_invalidateList.push_back(new ToInvalidate(_body.current->id, _body.store));
@@ -292,16 +294,16 @@ Freeze::TransactionalEvictorContext::ServantHolder::~ServantHolder() ICE_NOEXCEP
 
 
 void
-Freeze::TransactionalEvictorContext::ServantHolder::init(const TransactionalEvictorContextPtr& ctx, 
-                                                         const Current& current, 
+Freeze::TransactionalEvictorContext::ServantHolder::init(const TransactionalEvictorContextPtr& ctx,
+                                                         const Current& current,
                                                          ObjectStore<TransactionalEvictorElement>* store)
 {
     assert(_ownBody && _body.ctx == 0);
-  
+
     _body.ctx = &ctx;
     _body.current = &current;
     _body.store = store;
-    
+
     ServantHolder::Body* body = ctx->findServantHolderBody(current.id, store);
 
     if(body != 0)
@@ -367,10 +369,10 @@ Freeze::TransactionalEvictorContext::ServantHolder::Body::Body() :
 //
 
 //
-// When constructed in the servant holder destructor, it's protected by the dispatch() 
+// When constructed in the servant holder destructor, it's protected by the dispatch()
 // deactivate controller guard
 //
-Freeze::TransactionalEvictorContext::ToInvalidate::ToInvalidate(const Identity& ident, 
+Freeze::TransactionalEvictorContext::ToInvalidate::ToInvalidate(const Identity& ident,
                                                                 ObjectStore<TransactionalEvictorElement>* store) :
     _ident(ident),
     _store(store),

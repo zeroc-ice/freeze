@@ -100,7 +100,7 @@ public:
 
     virtual void postCompletion(bool, bool, const SharedDbEnvPtr&);
 
-    virtual bool response(bool);
+    virtual bool response();
     virtual bool exception(const std::exception&);
     virtual bool exception();
 

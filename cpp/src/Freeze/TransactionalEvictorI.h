@@ -85,7 +85,7 @@ public:
 
     virtual TransactionIPtr beforeQuery();
 
-    Ice::DispatchStatus dispatch(Ice::Request&);
+    bool dispatch(Ice::Request&);
 
     Ice::ObjectPtr evict(const Ice::Identity&, ObjectStore<TransactionalEvictorElement>*);
 

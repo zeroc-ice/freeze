@@ -87,7 +87,7 @@ Freeze::TransactionalEvictorI::TransactionalEvictorI(const ObjectAdapterPtr& ada
         {
         }
 
-        virtual DispatchStatus dispatch(Request& request)
+        virtual bool dispatch(Request& request)
         {
             return _evictor->dispatch(request);
         }
@@ -335,7 +335,7 @@ Freeze::TransactionalEvictorI::finished(const Current&, const ObjectPtr&, const 
     //
 }
 
-DispatchStatus
+bool
 Freeze::TransactionalEvictorI::dispatch(Request& request)
 {
     class CtxHolder
@@ -557,12 +557,9 @@ Freeze::TransactionalEvictorI::dispatch(Request& request)
 
                     try
                     {
-                        DispatchStatus dispatchStatus = sh.servant()->ice_dispatch(request, ctx);
-                        if(dispatchStatus == DispatchUserException && _rollbackOnUserException)
-                        {
-                            ctx->rollback();
-                        }
-                        if(dispatchStatus == DispatchAsync)
+                        bool dispatchAsync = sh.servant()->ice_dispatch(request, ctx);
+
+                        if(dispatchAsync)
                         {
                             //
                             // May throw DeadlockException or TransactionalEvictorDeadlockException
@@ -575,7 +572,15 @@ Freeze::TransactionalEvictorI::dispatch(Request& request)
                             }
                         }
 
-                        return dispatchStatus;
+                        return dispatchAsync;
+                    }
+                    catch(const Ice::UserException&)
+                    {
+                        if(_rollbackOnUserException)
+                        {
+                            ctx->rollback();
+                        }
+                        throw;
                     }
                     catch(...)
                     {
@@ -856,6 +861,3 @@ Freeze::TransactionalEvictorElement::init(ObjectStore<TransactionalEvictorElemen
     _stale = false;
     _cachePosition = p;
 }
-
-
-
