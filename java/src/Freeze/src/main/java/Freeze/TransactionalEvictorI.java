@@ -309,8 +309,8 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
     //
     // The interceptor dispatch call
     //
-    Ice.DispatchStatus
-    dispatch(Ice.Request request)
+    boolean
+    dispatch(Ice.Request request) throws Ice.UserException
     {
         _deactivateController.lock();
         try
@@ -482,16 +482,12 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
 
                                 try
                                 {
-                                    Ice.DispatchStatus dispatchStatus = sh.servant().ice_dispatch(request, ctx);
-                                    if(dispatchStatus == Ice.DispatchStatus.DispatchUserException &&
-                                       _rollbackOnUserException)
-                                    {
-                                        ctx.rollback();
-                                    }
-                                    if(dispatchStatus == Ice.DispatchStatus.DispatchAsync)
+                                    boolean dispatchAsync = sh.servant().ice_dispatch(request, ctx);
+                                    
+                                    if(dispatchAsync)
                                     {
                                         //
-                                        // Can throw DeadlockException or TransactionalEvictorDeadlockException
+                                        // May throw DeadlockException or TransactionalEvictorDeadlockException
                                         //
                                         ctx.checkDeadlockException();
 
@@ -500,7 +496,15 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
                                             ctx.rollback();
                                         }
                                     }
-                                    return dispatchStatus;
+                                    return dispatchAsync;
+                                }
+                                catch(Ice.UserException ex)
+                                {
+                                    if(_rollbackOnUserException)
+                                    {
+                                        ctx.rollback();
+                                    }
+                                    throw ex;
                                 }
                                 catch(RuntimeException ex)
                                 {
@@ -840,8 +844,8 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
     private Ice.DispatchInterceptor _interceptor = new Ice.DispatchInterceptor()
     {
         @Override
-        public Ice.DispatchStatus
-        dispatch(Ice.Request request)
+        public boolean
+        dispatch(Ice.Request request) throws Ice.UserException
         {
             return TransactionalEvictorI.this.dispatch(request);
         }

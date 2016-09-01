@@ -55,15 +55,10 @@ class TransactionalEvictorContext implements Ice.DispatchInterceptorAsyncCallbac
 
     @Override
     public boolean
-    response(boolean ok)
+    response()
     {
         if(Thread.currentThread().equals(_owner))
         {
-            if(!ok)
-            {
-                _userExceptionDetected = true;
-            }
-
             return true;
         }
         else
@@ -104,6 +99,11 @@ class TransactionalEvictorContext implements Ice.DispatchInterceptorAsyncCallbac
         {
             _nestedCallDeadlockException = (TransactionalEvictorDeadlockException)ex;
             return false;
+        }
+
+        if(ex instanceof Ice.UserException && Thread.currentThread().equals(_owner))
+        {
+            _userExceptionDetected = true;
         }
 
         return true;
