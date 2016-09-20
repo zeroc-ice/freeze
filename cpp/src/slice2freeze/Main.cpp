@@ -1992,13 +1992,24 @@ compile(int argc, char* argv[])
         }
         else
         {
-            PreprocessorPtr icecpp = Preprocessor::create(argv[0], args[idx], cppArgs);
+            string sliceFile = args[idx];
+
+            PreprocessorPtr icecpp = Preprocessor::create(argv[0], sliceFile, cppArgs);
 
             //
             // Add an include file for each Slice file. Note that the .h extension
             // is replaced with headerExtension later.
             //
-            includes.push_back(icecpp->getBaseName() + ".h");
+
+            string headerFile = sliceFile;
+            string::size_type pos = headerFile.rfind('.');
+            if(pos != string::npos)
+            {
+                headerFile.erase(pos);
+            }
+            headerFile += ".h";
+
+            includes.push_back(headerFile);
 
             FILE* cppHandle = icecpp->preprocess(false, "-D__SLICE2FREEZE__");
 
