@@ -127,7 +127,7 @@ class TransactionalEvictorContext implements Ice.DispatchInterceptorAsyncCallbac
                     if(_trace >= 3)
                     {
                         _communicator.getLogger().trace("Freeze.Evictor", "found \"" +
-                                                        Ice.Util.identityToString(_current.id) +
+                                                        _communicator.identityToString(_current.id) +
                                                         "\" with facet \"" + _store.facet() + "\" in current context");
                     }
                 }
@@ -143,7 +143,7 @@ class TransactionalEvictorContext implements Ice.DispatchInterceptorAsyncCallbac
                     if(_trace >= 3)
                     {
                         _communicator.getLogger().trace("Freeze.Evictor", "loaded \"" +
-                                                        Ice.Util.identityToString(_current.id) +
+                                                        _communicator.identityToString(_current.id) +
                                                         "\" with facet \"" + _store.facet() +
                                                         "\" into current context");
                     }
@@ -188,7 +188,7 @@ class TransactionalEvictorContext implements Ice.DispatchInterceptorAsyncCallbac
                         if(_trace >= 3)
                         {
                             _communicator.getLogger().trace("Freeze.Evictor", "updated \"" +
-                                                            Ice.Util.identityToString(_current.id) +
+                                                            _communicator.identityToString(_current.id) +
                                                             "\" with facet \"" + _store.facet() +
                                                             "\" within transaction");
                         }

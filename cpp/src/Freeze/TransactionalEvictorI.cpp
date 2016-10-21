@@ -165,10 +165,10 @@ Freeze::TransactionalEvictorI::addFacet(const ObjectPtr& servant, const Identity
     {
         AlreadyRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = Ice::identityToString(ident);
+        ex.id = _communicator->identityToString(ident);
         if(!facet.empty())
         {
-            ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
+            ex.id += " -f " + IceUtilInternal::escapeString(facet, "", IceUtilInternal::Unicode);
         }
         throw ex;
     }
@@ -229,10 +229,10 @@ Freeze::TransactionalEvictorI::removeFacet(const Identity& ident, const string& 
     {
         NotRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = Ice::identityToString(ident);
+        ex.id = _communicator->identityToString(ident);
         if(!facet.empty())
         {
-            ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
+            ex.id += " -f " + IceUtilInternal::escapeString(facet, "", IceUtilInternal::Unicode);
         }
         throw ex;
     }
@@ -240,7 +240,7 @@ Freeze::TransactionalEvictorI::removeFacet(const Identity& ident, const string& 
     if(_trace >= 1)
     {
         Trace out(_communicator->getLogger(), "Freeze.Evictor");
-        out << "removed object \"" << Ice::identityToString(ident) << "\"";
+        out << "removed object \"" << _communicator->identityToString(ident) << "\"";
         if(!facet.empty())
         {
             out << " with facet \"" << facet << "\"";
@@ -825,7 +825,7 @@ Freeze::TransactionalEvictorI::servantNotFound(const char* file, int line, const
     if(_trace >= 2)
     {
         Trace out(_communicator->getLogger(), "Freeze.Evictor");
-        out << "could not find \"" << Ice::identityToString(current.id)
+        out << "could not find \"" << _communicator->identityToString(current.id)
             << "\" with facet \"" <<  current.facet + "\"";
     }
 

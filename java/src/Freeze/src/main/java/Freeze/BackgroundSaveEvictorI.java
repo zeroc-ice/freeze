@@ -218,17 +218,17 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
             {
                 Ice.AlreadyRegisteredException ex = new Ice.AlreadyRegisteredException();
                 ex.kindOfObject = "servant";
-                ex.id = Ice.Util.identityToString(ident);
+                ex.id = _communicator.identityToString(ident);
                 if(facet.length() > 0)
                 {
-                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "");
+                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "", Ice.ToStringMode.Unicode);
                 }
                 throw ex;
             }
 
             if(_trace >= 1)
             {
-                String objString = "object \"" + Ice.Util.identityToString(ident) + "\"";
+                String objString = "object \"" + _communicator.identityToString(ident) + "\"";
                 if(!facet.equals(""))
                 {
                     objString += " with facet \"" + facet + "\"";
@@ -361,17 +361,17 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
             {
                 Ice.NotRegisteredException ex = new Ice.NotRegisteredException();
                 ex.kindOfObject = "servant";
-                ex.id = Ice.Util.identityToString(ident);
+                ex.id = _communicator.identityToString(ident);
                 if(facet.length() > 0)
                 {
-                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "");
+                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "", Ice.ToStringMode.Unicode);
                 }
                 throw ex;
             }
 
             if(_trace >= 1)
             {
-                String objString = "object \"" + Ice.Util.identityToString(ident) + "\"";
+                String objString = "object \"" + _communicator.identityToString(ident) + "\"";
                 if(!facet.equals(""))
                 {
                     objString += " with facet \"" + facet + "\"";
@@ -480,10 +480,10 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
             {
                 Ice.NotRegisteredException ex = new Ice.NotRegisteredException();
                 ex.kindOfObject = "servant";
-                ex.id = Ice.Util.identityToString(ident);
+                ex.id = _communicator.identityToString(ident);
                 if(facet.length() > 0)
                 {
-                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "");
+                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "", Ice.ToStringMode.Unicode);
                 }
                 throw ex;
             }
@@ -555,10 +555,10 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
 
             Ice.NotRegisteredException ex = new Ice.NotRegisteredException();
             ex.kindOfObject = "servant";
-            ex.id = Ice.Util.identityToString(ident);
+            ex.id = _communicator.identityToString(ident);
             if(facet.length() > 0)
             {
-                ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "");
+                ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "", Ice.ToStringMode.Unicode);
             }
 
             throw ex;
@@ -709,7 +709,7 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
                     if(_trace >= 2)
                     {
                         _communicator.getLogger().trace("Freeze.Evictor", "locate could not find \"" +
-                                                        Ice.Util.identityToString(current.id) + "\" in Db \"" +
+                                                        _communicator.identityToString(current.id) + "\" in Db \"" +
                                                         _filename + "\"");
                     }
                     return null;
@@ -732,7 +732,7 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
                             if(_trace >= 2)
                             {
                                 _communicator.getLogger().trace("Freeze.Evictor", "locate found \"" +
-                                                                Ice.Util.identityToString(current.id) +
+                                                                _communicator.identityToString(current.id) +
                                                                 "\" in the cache for Db \"" + _filename +
                                                                 "\" but it was dead or destroyed");
                             }
@@ -746,7 +746,7 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
                         if(_trace >= 2)
                         {
                             _communicator.getLogger().trace("Freeze.Evictor", "locate found \"" +
-                                                            Ice.Util.identityToString(current.id) + "\" in Db \"" +
+                                                            _communicator.identityToString(current.id) + "\" in Db \"" +
                                                             _filename + "\"");
                         }
 
@@ -1269,7 +1269,7 @@ class BackgroundSaveEvictorI extends EvictorI implements BackgroundSaveEvictor, 
 
                 if(_trace >= 2 || (_trace >= 1 && _evictorList.size() % 50 == 0))
                 {
-                    String objString = "object \"" + Ice.Util.identityToString(element.identity) + "\"";
+                    String objString = "object \"" + _communicator.identityToString(element.identity) + "\"";
                     String facet = element.store.facet();
                     if(facet.length() > 0)
                     {

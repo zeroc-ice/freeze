@@ -94,17 +94,17 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
             {
                 Ice.AlreadyRegisteredException ex = new Ice.AlreadyRegisteredException();
                 ex.kindOfObject = "servant";
-                ex.id = Ice.Util.identityToString(ident);
+                ex.id = _communicator.identityToString(ident);
                 if(facet.length() > 0)
                 {
-                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "");
+                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "", Ice.ToStringMode.Unicode);
                 }
                 throw ex;
             }
 
             if(_trace >= 1)
             {
-                String objString = "object \"" + Ice.Util.identityToString(ident) + "\"";
+                String objString = "object \"" + _communicator.identityToString(ident) + "\"";
                 if(!facet.equals(""))
                 {
                     objString += " with facet \"" + facet + "\"";
@@ -182,17 +182,17 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
             {
                 Ice.NotRegisteredException ex = new Ice.NotRegisteredException();
                 ex.kindOfObject = "servant";
-                ex.id = Ice.Util.identityToString(ident);
+                ex.id = _communicator.identityToString(ident);
                 if(facet.length() > 0)
                 {
-                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "");
+                    ex.id += " -f " + IceUtilInternal.StringUtil.escapeString(facet, "", Ice.ToStringMode.Unicode);
                 }
                 throw ex;
             }
 
             if(_trace >= 1)
             {
-                String objString = "object \"" + Ice.Util.identityToString(ident) + "\"";
+                String objString = "object \"" + _communicator.identityToString(ident) + "\"";
                 if(!facet.equals(""))
                 {
                     objString += " with facet \"" + facet + "\"";
@@ -705,7 +705,7 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
         if(_trace >= 2)
         {
             _communicator.getLogger().trace("Freeze.Evictor", "could not find \"" +
-                                            Ice.Util.identityToString(current.id) + "\" with facet \"" +
+                                            _communicator.identityToString(current.id) + "\" with facet \"" +
                                             current.facet + "\"");
         }
 
@@ -751,7 +751,7 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
                 if(_trace >= 3)
                 {
                     _communicator.getLogger().trace("Freeze.Evictor", "loaded \""
-                                                    + Ice.Util.identityToString(ident) + "\" with facet \"" +
+                                                    + _communicator.identityToString(ident) + "\" with facet \"" +
                                                     store.facet() + "\" into the cache");
                 }
                 return element.servant;

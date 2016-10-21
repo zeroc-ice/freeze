@@ -284,10 +284,10 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
     {
         AlreadyRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = Ice::identityToString(ident);
+        ex.id = _communicator->identityToString(ident);
         if(!facet.empty())
         {
-            ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
+            ex.id += " -f " + IceUtilInternal::escapeString(facet, "", IceUtilInternal::Unicode);
         }
         throw ex;
     }
@@ -295,7 +295,7 @@ Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identit
     if(_trace >= 1)
     {
         Trace out(_communicator->getLogger(), "Freeze.Evictor");
-        out << "added object \"" << Ice::identityToString(ident) << "\"";
+        out << "added object \"" << _communicator->identityToString(ident) << "\"";
         if(!facet.empty())
         {
             out << " with facet \"" << facet << "\"";
@@ -408,10 +408,10 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
     {
         NotRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = Ice::identityToString(ident);
+        ex.id = _communicator->identityToString(ident);
         if(!facet.empty())
         {
-            ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
+            ex.id += " -f " + IceUtilInternal::escapeString(facet, "", IceUtilInternal::Unicode);
         }
         throw ex;
     }
@@ -419,7 +419,7 @@ Freeze::BackgroundSaveEvictorI::removeFacet(const Identity& ident, const string&
     if(_trace >= 1)
     {
         Trace out(_communicator->getLogger(), "Freeze.Evictor");
-        out << "removed object \"" << Ice::identityToString(ident) << "\"";
+        out << "removed object \"" << _communicator->identityToString(ident) << "\"";
         if(!facet.empty())
         {
             out << " with facet \"" << facet << "\"";
@@ -511,10 +511,10 @@ Freeze::BackgroundSaveEvictorI::keepFacet(const Identity& ident, const string& f
     {
         NotRegisteredException ex(__FILE__, __LINE__);
         ex.kindOfObject = "servant";
-        ex.id = Ice::identityToString(ident);
+        ex.id = _communicator->identityToString(ident);
         if(!facet.empty())
         {
-            ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
+            ex.id += " -f " + IceUtilInternal::escapeString(facet, "", IceUtilInternal::Unicode);
         }
         throw ex;
     }
@@ -566,10 +566,10 @@ Freeze::BackgroundSaveEvictorI::releaseFacet(const Identity& ident, const string
 
     NotRegisteredException ex(__FILE__, __LINE__);
     ex.kindOfObject = "servant";
-    ex.id = Ice::identityToString(ident);
+    ex.id = _communicator->identityToString(ident);
     if(!facet.empty())
     {
-        ex.id += " -f " + IceUtilInternal::escapeString(facet, "");
+        ex.id += " -f " + IceUtilInternal::escapeString(facet, "", IceUtilInternal::Unicode);
     }
     throw ex;
 }
@@ -681,7 +681,7 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
             if(_trace >= 2)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "locate could not find \"" << Ice::identityToString(current.id) << "\" in Db \""
+                out << "locate could not find \"" << _communicator->identityToString(current.id) << "\" in Db \""
                     << _filename << "\"";
             }
             return 0;
@@ -704,7 +704,7 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
             if(_trace >= 2)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Evictor");
-                out << "locate found \"" << Ice::identityToString(current.id)
+                out << "locate found \"" << _communicator->identityToString(current.id)
                     << "\" in the cache for database \"" << current.facet << "\" but it was dead or destroyed";
             }
             return 0;
@@ -716,7 +716,7 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
         if(_trace >= 2)
         {
             Trace out(_communicator->getLogger(), "Freeze.Evictor");
-            out << "locate found \"" << Ice::identityToString(current.id) << "\" in Db \""
+            out << "locate found \"" << _communicator->identityToString(current.id) << "\" in Db \""
                 << _filename << "\"";
         }
 
@@ -1281,7 +1281,7 @@ Freeze::BackgroundSaveEvictorI::evict()
             string facet = element->store.facet();
 
             Trace out(_communicator->getLogger(), "Freeze.Evictor");
-            out << "evicting \"" << Ice::identityToString(element->cachePosition->first) << "\" ";
+            out << "evicting \"" << _communicator->identityToString(element->cachePosition->first) << "\" ";
             if(facet != "")
             {
                 out << "-f \"" << facet << "\" ";
