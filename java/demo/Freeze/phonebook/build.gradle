@@ -12,7 +12,6 @@ slice {
     }
     freezej {
         files = [file("PhoneBook.ice")]
-        args = "--ice"
         index {
             NameIndex {
                 javaType = "NameIndex"

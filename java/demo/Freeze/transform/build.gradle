@@ -13,7 +13,6 @@ slice {
     freezej {
         files = [file("ContactData.ice"), file("NewContactData.ice")]
         include = ["${projectDir}"]
-        args = "--ice"
         dict {
             Contacts {
                 javaType = "Demo.Contacts"

@@ -14,7 +14,6 @@ slice {
         files = [file("FilesystemDB.ice"),
                  file("${sliceDir}/Ice/Identity.ice")]
         include = ["${projectDir}"]
-        args = "--ice"
         dict {
             IdentityFileEntryMap {
                 javaType = "FilesystemDB.IdentityFileEntryMap"

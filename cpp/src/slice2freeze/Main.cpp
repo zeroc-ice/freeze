@@ -242,8 +242,10 @@ usage(const char* n)
         "--depend-xml          Generate dependencies in XML format.\n"
         "--depend-file FILE    Write dependencies to FILE instead of standard output.\n"
         "-d, --debug           Print debug messages.\n"
-        "--ice                 Allow reserved Ice prefix in Slice identifiers.\n"
-        "--underscore          Allow underscores in Slice identifiers.\n"
+        "--ice                 Allow reserved Ice prefix in Slice identifiers\n"
+        "                      (always on).\n"
+        "--underscore          Allow underscores in Slice identifiers\n"
+        "                      (always on).\n"
         ;
 }
 
@@ -1898,9 +1900,11 @@ compile(int argc, char* argv[])
 
     bool debug = opts.isSet("debug");
 
-    bool ice = opts.isSet("ice");
-
-    bool underscore = opts.isSet("underscore");
+    //
+    // Always on as of Freeze 3.7
+    //
+    bool ice = true;
+    bool underscore = true;;
 
     if(dicts.empty() && indices.empty() && !(depend || dependxml))
     {

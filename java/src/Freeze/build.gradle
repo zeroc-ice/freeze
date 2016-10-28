@@ -16,7 +16,6 @@ ext.url = 'git://github.com/zeroc-ice/freeze.git'
 slice {
     compat = true
     java {
-        args = "--ice"
         files = files(fileTree(dir: "$rootProject.projectDir/../slice/Freeze", includes:['*.ice'], excludes:["*F.ice"]),
                       file("./src/main/java/Freeze/PingObject.ice"))
         include = ["$rootProject.projectDir/../slice"]
@@ -24,7 +23,6 @@ slice {
     freezej {
         files = [file("${sliceDir}/Ice/BuiltinSequences.ice"),
                  file("$rootProject.projectDir/../slice/Freeze/CatalogData.ice")]
-        args = "--ice"
         dict {
             CatalogData {
                 javaType = "Freeze.Catalog"

@@ -19,7 +19,6 @@ task testSliceTask {
         freezej {
             files = [file("${testDir}/Freeze/complex/Complex.ice"),
                      file("${sliceDir}/Ice/Identity.ice")]
-            args = "--ice"
             dict {
                 ComplexDict {
                     javaType = "test.Freeze.complex.Complex.ComplexDict"

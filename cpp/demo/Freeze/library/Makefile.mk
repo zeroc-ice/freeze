@@ -32,6 +32,5 @@ $(test)_collocated_slice2freeze	:= LibraryTypes
 $(test)_slice2freeze 		:= LibraryTypes
 $(test)_LibraryTypes	  	:= --dict StringIsbnSeqDict,string,Ice::StringSeq
 $(test)_LibraryTypes_slice 	:= $(ice_slicedir)/Ice/BuiltinSequences.ice $(test)/Library.ice
-$(test)_LibraryTypes_flags 	:= --ice
 
 demos += $(test)

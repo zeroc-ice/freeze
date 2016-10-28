@@ -13,7 +13,6 @@ slice {
     freezej {
         files = [file("${sliceDir}/Ice/BuiltinSequences.ice"),
                  file("Library.ice")]
-        args = "--ice"
         dict {
             StringIsbnSeqDict {
                 javaType = "StringIsbnSeqDict"

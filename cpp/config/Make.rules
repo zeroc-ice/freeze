@@ -81,7 +81,7 @@ $1_cppflags 		+= -I../ice/cpp/include -I../ice/cpp/include/generated -I../ice/cp
 else
 # Building freeze project
 $1_slicecompiler 	:= slice2cpp
-$1_sliceflags		+= --ice -I$(ice_slicedir) -I$(slicedir)
+$1_sliceflags		+= -I$(ice_slicedir) -I$(slicedir)
 $1_cppflags 		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -I../ice/cpp/src -Isrc
 $1_cppflags		+= -I$(ice_includedir)/generated -I$(includedir)/generated
 $1_extensions		:= make-freeze-project

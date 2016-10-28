@@ -12,7 +12,6 @@ slice {
     }
     freezej {
         files = [file("Test.ice")]
-        args = "--ice"
         dict {
             IntIntMap {
                 javaType = "Demo.IntIntMap"
