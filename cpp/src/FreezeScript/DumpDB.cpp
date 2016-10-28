@@ -93,8 +93,6 @@ usage(const string& n)
         "-UNAME                Remove any definition for NAME.\n"
         "-IDIR                 Put DIR in the include file search path.\n"
         "-d, --debug           Print debug messages.\n"
-        "--ice                 Permit `Ice' prefix (for building Ice source code only).\n"
-        "--underscore          Permit underscores in Slice identifiers.\n"
         "-o FILE               Output sample descriptors into the file FILE.\n"
         "-f FILE               Execute the descriptors in the file FILE.\n"
         "--load SLICE          Load Slice definitions from the file SLICE.\n"
@@ -104,6 +102,9 @@ usage(const string& n)
         "--select EXPR         Dump a record only if EXPR is true.\n"
         "-c, --catalog         Display information about the databases in an\n"
         "                      environment, or about a particular database.\n"
+        "--ice                 Permit `Ice' prefix (always on).\n"
+        "--underscore          Permit underscores in Slice identifiers.\n"
+        "                      (always on)\n"
         ;
 }
 
@@ -130,7 +131,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
     vector<string> cppArgs;
     bool debug;
     bool ice = true; // Needs to be true in order to create default definitions.
-    bool underscore;
+    bool underscore = true;
     string outputFile;
     string inputFile;
     vector<string> slice;
@@ -279,10 +280,6 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
         }
     }
     debug = opts.isSet("debug");
-
-    // No need to set --ice option here -- it is always true.
-
-    underscore = opts.isSet("underscore");
 
     if(opts.isSet("o"))
     {

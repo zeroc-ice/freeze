@@ -51,7 +51,7 @@ usage(const std::string& n)
         "-DNAME=DEF            Define NAME as DEF.\n"
         "-UNAME                Remove any definition for NAME.\n"
         "-d, --debug           Print debug messages.\n"
-        "--underscore          Permit underscores in Slice identifiers.\n"
+        "--underscore          Permit underscores in Slice identifiers (always on).\n"
         "--include-old DIR     Put DIR in the include file search path for old Slice\n"
         "                      definitions.\n"
         "--include-new DIR     Put DIR in the include file search path for new Slice\n"
@@ -216,7 +216,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
     vector<string> newCppArgs;
     bool debug;
     bool ice = true; // Needs to be true in order to create default definitions.
-    bool underscore;
+    bool underscore = true;
     string outputFile;
     bool ignoreTypeChanges;
     bool purgeObjects;
@@ -295,8 +295,6 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
         }
     }
     debug = opts.isSet("debug");
-
-    underscore = opts.isSet("underscore");
 
     if(opts.isSet("o"))
     {
