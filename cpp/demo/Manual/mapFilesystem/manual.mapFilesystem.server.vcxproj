@@ -56,8 +56,8 @@
     <ClInclude Include="generated\server\IdentityFileEntryMap.h" />
     <IceBuilder Include="FilesystemDB.ice" />
     <CustomBuild Include="dummy.freeze">
-      <Command>"$(FreezeToolsPath)\slice2freeze.exe" -I"$(IceHome)\slice" --output-dir="generated\server" -I. --ice --dict FilesystemDB::IdentityFileEntryMap,Ice::Identity,FilesystemDB::FileEntry IdentityFileEntryMap FilesystemDB.ice "$(IceHome)\slice\Ice\Identity.ice"
-"$(FreezeToolsPath)\slice2freeze.exe" -I"$(IceHome)\slice" --output-dir="generated\server" -I. --ice --dict FilesystemDB::IdentityDirectoryEntryMap,Ice::Identity,FilesystemDB::DirectoryEntry IdentityDirectoryEntryMap FilesystemDB.ice "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command>"$(FreezeToolsPath)\slice2freeze.exe" -I"$(IceHome)\slice" --output-dir="generated\server" -I. --dict FilesystemDB::IdentityFileEntryMap,Ice::Identity,FilesystemDB::FileEntry IdentityFileEntryMap FilesystemDB.ice "$(IceHome)\slice\Ice\Identity.ice"
+"$(FreezeToolsPath)\slice2freeze.exe" -I"$(IceHome)\slice" --output-dir="generated\server" -I. --dict FilesystemDB::IdentityDirectoryEntryMap,Ice::Identity,FilesystemDB::DirectoryEntry IdentityDirectoryEntryMap FilesystemDB.ice "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Outputs>generated\server\IdentityFileEntryMap.cpp;generated\server\IdentityFileEntryMap.h;generated\server\IdentityDirectoryEntryMap.cpp;generated\server\IdentityDirectoryEntryMap.h;%(Outputs)</Outputs>
       <AdditionalInputs>FilesystemDB.ice</AdditionalInputs>
     </CustomBuild>

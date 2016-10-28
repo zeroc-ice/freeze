@@ -37,13 +37,13 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I
   <ItemGroup>
     <CustomBuild Include="dummy1.txt">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\IntIdentityMap.h;$(Platform)\$(Configuration)\IntIdentityMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\IntIdentityMap.h;$(Platform)\$(Configuration)\IntIdentityMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\IntIdentityMap.h;$(Platform)\$(Configuration)\IntIdentityMap.cpp</Outputs>
@@ -53,13 +53,13 @@ $(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configurati
   <ItemGroup>
     <CustomBuild Include="dummy2.txt">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\IntIdentityMapWithIndex.h;$(Platform)\$(Configuration)\IntIdentityMapWithIndex.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\IntIdentityMapWithIndex.h;$(Platform)\$(Configuration)\IntIdentityMapWithIndex.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\IntIdentityMapWithIndex.h;$(Platform)\$(Configuration)\IntIdentityMapWithIndex.cpp</Outputs>
@@ -69,13 +69,13 @@ $(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configurati
   <ItemGroup>
     <CustomBuild Include="dummy3.txt">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\SortedMap.h;$(Platform)\$(Configuration)\SortedMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\SortedMap.h;$(Platform)\$(Configuration)\SortedMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\SortedMap.h;$(Platform)\$(Configuration)\SortedMap.cpp</Outputs>
@@ -85,13 +85,13 @@ $(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configurati
   <ItemGroup>
     <CustomBuild Include="dummy4.txt">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --ice --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\WstringWstringMap.h;$(Platform)\$(Configuration)\WstringWstringMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\WstringWstringMap.h;$(Platform)\$(Configuration)\WstringWstringMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\WstringWstringMap.h;$(Platform)\$(Configuration)\WstringWstringMap.cpp</Outputs>
