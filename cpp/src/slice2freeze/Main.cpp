@@ -207,7 +207,6 @@ usage(const char* n)
         "-E                    Print preprocessor output on stdout.\n"
         "--include-dir DIR     Use DIR as the header include directory in\n"
         "                      source files.\n"
-        "--dll-export SYMBOL   Use SYMBOL for DLL exports.\n"
         "--dict NAME,KEY,VALUE[,sort[,COMPARE]]\n"
         "                      Create a Freeze dictionary with the name NAME,\n"
         "                      using KEY as key, and VALUE as value. This\n"
@@ -242,10 +241,11 @@ usage(const char* n)
         "--depend-xml          Generate dependencies in XML format.\n"
         "--depend-file FILE    Write dependencies to FILE instead of standard output.\n"
         "-d, --debug           Print debug messages.\n"
+        "--dll-export SYMBOL   Use SYMBOL for DLL exports.\n"
         "--ice                 Allow reserved Ice prefix in Slice identifiers\n"
-        "                      (always on).\n"
+        "                      deprecated: use instead [[\"ice-prefix\"]] metadata.\n"
         "--underscore          Allow underscores in Slice identifiers\n"
-        "                      (always on).\n"
+        "                      deprecated: use instead [[\"underscore\"]] metadata.\n"
         ;
 }
 
@@ -1900,11 +1900,8 @@ compile(int argc, char* argv[])
 
     bool debug = opts.isSet("debug");
 
-    //
-    // Always on as of Freeze 3.7
-    //
-    bool ice = true;
-    bool underscore = true;;
+    bool ice = opts.isSet("ice");
+    bool underscore = opts.isSet("underscore");
 
     if(dicts.empty() && indices.empty() && !(depend || dependxml))
     {

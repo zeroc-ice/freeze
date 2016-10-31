@@ -1452,9 +1452,9 @@ usage(const char* n)
         "-d, --debug               Print debug messages.\n"
         "--meta META               Define global metadata directive META.\n"
         "--ice                     Allow reserved Ice prefix in Slice identifiers\n"
-        "                          (always on).\n"
-        "--underscore              Allow underscores in Slice identifiers \n"
-        "                          (always on).\n"
+        "                          deprecated: use instead [[\"ice-prefix\"]] metadata.\n"
+        "--underscore              Allow underscores in Slice identifiers\n"
+        "                          deprecated: use instead [[\"underscore\"]] metadata.\n"
         ;
 }
 
@@ -1779,12 +1779,9 @@ compile(int argc, char* argv[])
     string dependFile = opts.optArg("depend-file");
 
     bool debug = opts.isSet("debug");
-
-    //
-    // Always true as of Freeze 3.7
-    //
-    bool ice = true;
-    bool underscore = true;
+    
+    bool ice = opts.isSet("ice");
+    bool underscore = opts.isSet("underscore");
 
     StringList globalMetadata;
     vector<string> v = opts.argVec("meta");

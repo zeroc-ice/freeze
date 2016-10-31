@@ -10,7 +10,7 @@
 #include <Ice/Version.ice>
 #include <Ice/CommunicatorF.ice>
 
-[["cpp:header-ext:h", "objc:header-dir:objc"]]
+[["cpp:header-ext:h", "cpp:dll-export:FREEZE_API"]]
 
 module Freeze
 {

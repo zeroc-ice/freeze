@@ -102,9 +102,10 @@ usage(const string& n)
         "--select EXPR         Dump a record only if EXPR is true.\n"
         "-c, --catalog         Display information about the databases in an\n"
         "                      environment, or about a particular database.\n"
-        "--ice                 Permit `Ice' prefix (always on).\n"
-        "--underscore          Permit underscores in Slice identifiers.\n"
-        "                      (always on)\n"
+        "--ice                 Allow reserved Ice prefix in Slice identifiers\n"
+        "                      deprecated: use instead [[\"ice-prefix\"]] metadata.\n"
+        "--underscore          Allow underscores in Slice identifiers\n"
+        "                      deprecated: use instead [[\"underscore\"]] metadata.\n"
         ;
 }
 
@@ -131,7 +132,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
     vector<string> cppArgs;
     bool debug;
     bool ice = true; // Needs to be true in order to create default definitions.
-    bool underscore = true;
+    bool underscore;
     string outputFile;
     string inputFile;
     vector<string> slice;
@@ -280,6 +281,7 @@ run(const Ice::StringSeq& originalArgs, const Ice::CommunicatorPtr& communicator
         }
     }
     debug = opts.isSet("debug");
+    underscore = opts.isSet("underscore");
 
     if(opts.isSet("o"))
     {

@@ -6,7 +6,7 @@
 
 #pragma once
 
-[["cpp:header-ext:h", "objc:header-dir:objc"]]
+[["cpp:header-ext:h", "cpp:dll-export:FREEZE_API"]]
 
 /**
  *
