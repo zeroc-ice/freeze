@@ -50,9 +50,9 @@ public:
     //
     // Custom refcounting implementation
     //
-    virtual void __incRef();
-    virtual void __decRef();
-    virtual int __getRef() const;
+    virtual void iceIncRef();
+    virtual void iceDecRef();
+    virtual int iceGetRef() const;
  
     virtual ~ConnectionI();
 
@@ -87,7 +87,7 @@ private:
 
     friend class TransactionI;
 
-    int __getRefNoSync() const;
+    int iceGetRefNoSync() const;
 
     const Ice::CommunicatorPtr _communicator;
     const Ice::EncodingVersion _encoding;

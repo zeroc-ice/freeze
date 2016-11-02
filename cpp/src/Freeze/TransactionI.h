@@ -45,9 +45,9 @@ public:
     //
     // Custom refcounting implementation
     //
-    virtual void __incRef();
-    virtual void __decRef();
-    virtual int __getRef() const;
+    virtual void iceIncRef();
+    virtual void iceDecRef();
+    virtual int iceGetRef() const;
 
     void rollbackInternal(bool);
     void setPostCompletionCallback(const PostCompletionCallbackPtr&);
@@ -65,7 +65,7 @@ private:
 
     friend class ConnectionI;
     
-    int __getRefNoSync() const;
+    int iceGetRefNoSync() const;
   
     void postCompletion(bool, bool);
 

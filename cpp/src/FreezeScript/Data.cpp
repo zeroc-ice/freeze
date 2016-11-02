@@ -26,8 +26,8 @@ public:
 
     ObjectWriter(const ObjectDataPtr&);
 
-    virtual void __write(Ice::OutputStream*) const;
-    virtual void __read(Ice::InputStream*);
+    virtual void iceWrite(Ice::OutputStream*) const;
+    virtual void iceRead(Ice::InputStream*);
 
 private:
 
@@ -43,8 +43,8 @@ public:
 
     ObjectReader(const DataFactoryPtr&, const Slice::TypePtr&);
 
-    virtual void __write(Ice::OutputStream*) const;
-    virtual void __read(Ice::InputStream*);
+    virtual void iceWrite(Ice::OutputStream*) const;
+    virtual void iceRead(Ice::InputStream*);
 
     ObjectDataPtr getValue() const;
 
@@ -67,7 +67,7 @@ FreezeScript::ObjectWriter::ObjectWriter(const ObjectDataPtr& value) :
 }
 
 void
-FreezeScript::ObjectWriter::__write(Ice::OutputStream* out) const
+FreezeScript::ObjectWriter::iceWrite(Ice::OutputStream* out) const
 {
     out->startValue(0);
 
@@ -103,7 +103,7 @@ FreezeScript::ObjectWriter::__write(Ice::OutputStream* out) const
 }
 
 void
-FreezeScript::ObjectWriter::__read(Ice::InputStream*)
+FreezeScript::ObjectWriter::iceRead(Ice::InputStream*)
 {
     assert(false);
 }
@@ -117,13 +117,13 @@ FreezeScript::ObjectReader::ObjectReader(const DataFactoryPtr& factory, const Sl
 }
 
 void
-FreezeScript::ObjectReader::__write(Ice::OutputStream*) const
+FreezeScript::ObjectReader::iceWrite(Ice::OutputStream*) const
 {
     assert(false);
 }
 
 void
-FreezeScript::ObjectReader::__read(Ice::InputStream* in)
+FreezeScript::ObjectReader::iceRead(Ice::InputStream* in)
 {
     const_cast<ObjectDataPtr&>(_value) = new ObjectData(_factory, _type, true);
     Slice::ClassDeclPtr decl = Slice::ClassDeclPtr::dynamicCast(_type);

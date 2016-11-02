@@ -54,8 +54,8 @@ public:
     void removeSharedMapDb(const std::string&);
 
     
-    void __incRef();
-    void __decRef();
+    void iceIncRef();
+    void iceDecRef();
    
     //
     // EvictorContext factory/manager

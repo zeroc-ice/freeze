@@ -273,14 +273,14 @@ Freeze::SharedDbEnv::removeSharedMapDb(const string& dbName)
 
 
 void 
-Freeze::SharedDbEnv::__incRef()
+Freeze::SharedDbEnv::iceIncRef()
 {
     IceUtilInternal::MutexPtrLock<IceUtil::Mutex> lock(refCountMutex);
     _refCount++;
 }
 
 void
-Freeze::SharedDbEnv::__decRef()
+Freeze::SharedDbEnv::iceDecRef()
 {
     IceUtilInternal::MutexPtrLock<IceUtil::Mutex> lock(refCountMutex);
     if(--_refCount == 0)
@@ -371,7 +371,7 @@ Freeze::SharedDbEnv::createCurrent()
     //
     // Give one refcount to this thread!
     //
-    ctx->__incRef();
+    ctx->iceIncRef();
     return ctx;
 }
 
@@ -426,7 +426,7 @@ Freeze::SharedDbEnv::setCurrentTransaction(const Freeze::TransactionPtr& tx)
         //
         // Release thread's refcount
         //
-        ctx->__decRef();
+        ctx->iceDecRef();
     }
 
     if(tx != 0)
@@ -449,7 +449,7 @@ Freeze::SharedDbEnv::setCurrentTransaction(const Freeze::TransactionPtr& tx)
             //
             // Give one refcount to this thread
             //
-            ctx->__incRef();
+            ctx->iceIncRef();
         }
     }
     else if(ctx != 0)
@@ -698,9 +698,9 @@ Freeze::CheckpointThread::CheckpointThread(SharedDbEnv& dbEnv, const Time& check
     _kbyte(kbyte),
     _trace(trace)
 {
-    __setNoDelete(true);
+    iceSetNoDelete(true);
     start();
-    __setNoDelete(false);
+    iceSetNoDelete(false);
 }
 
 void
