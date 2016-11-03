@@ -105,7 +105,7 @@ Freeze::ConnectionI::getName() const
 }
 
 void
-Freeze::ConnectionI::iceIncRef()
+Freeze::ConnectionI::__incRef()
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     _refCount++;
@@ -113,7 +113,7 @@ Freeze::ConnectionI::iceIncRef()
 
 
 void
-Freeze::ConnectionI::iceDecRef()
+Freeze::ConnectionI::__decRef()
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     if(--_refCount == 0)
