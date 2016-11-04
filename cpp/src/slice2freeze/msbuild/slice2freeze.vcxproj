@@ -68,7 +68,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wsetargv.obj;sliceD.lib;iceutilD.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>sliceD.lib;iceutilD.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(Freeze_SrcRootDir)\..\ice\cpp\lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -78,7 +78,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wsetargv.obj;slice.lib;iceutil.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>slice.lib;iceutil.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(Freeze_SrcRootDir)\..\ice\cpp\lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -88,7 +88,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wsetargv.obj;sliceD.lib;iceutilD.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>sliceD.lib;iceutilD.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(Freeze_SrcRootDir)\..\ice\cpp\lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -98,7 +98,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>wsetargv.obj;slice.lib;iceutil.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
+      <AdditionalDependencies>slice.lib;iceutil.lib;rpcrt4.lib;advapi32.lib;DbgHelp.lib;Shlwapi.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(Freeze_SrcRootDir)\..\ice\cpp\lib\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
