@@ -105,7 +105,7 @@ Freeze::ConnectionI::getName() const
 }
 
 void
-Freeze::ConnectionI::iceIncRef()
+Freeze::ConnectionI::__incRef()
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     _refCount++;
@@ -113,7 +113,7 @@ Freeze::ConnectionI::iceIncRef()
 
 
 void
-Freeze::ConnectionI::iceDecRef()
+Freeze::ConnectionI::__decRef()
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     if(--_refCount == 0)
@@ -121,7 +121,7 @@ Freeze::ConnectionI::iceDecRef()
         sync.release();
         delete this;
     }
-    else if(_refCount == 1 && _transaction != 0 && _transaction->dbTxn() != 0 && _transaction->iceGetRefNoSync() == 1)
+    else if(_refCount == 1 && _transaction != 0 && _transaction->dbTxn() != 0 && _transaction->__getRefNoSync() == 1)
     {
         sync.release();
         if(_transaction)
@@ -135,14 +135,14 @@ Freeze::ConnectionI::iceDecRef()
 }
 
 int
-Freeze::ConnectionI::iceGetRef() const
+Freeze::ConnectionI::__getRef() const
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     return _refCount;
 }
 
 int
-Freeze::ConnectionI::iceGetRefNoSync() const
+Freeze::ConnectionI::__getRefNoSync() const
 {
     return _refCount;
 }

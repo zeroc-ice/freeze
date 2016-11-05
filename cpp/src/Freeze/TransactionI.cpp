@@ -161,7 +161,7 @@ Freeze::TransactionI::rollbackInternal(bool warning)
 }
 
 void
-Freeze::TransactionI::iceIncRef()
+Freeze::TransactionI::__incRef()
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     _refCount++;
@@ -169,7 +169,7 @@ Freeze::TransactionI::iceIncRef()
 
 
 void
-Freeze::TransactionI::iceDecRef()
+Freeze::TransactionI::__decRef()
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     if(--_refCount == 0)
@@ -177,7 +177,7 @@ Freeze::TransactionI::iceDecRef()
         sync.release();
         delete this;
     }
-    else if(_txn != 0 && _refCount == 1 && _connection->iceGetRefNoSync() == 1)
+    else if(_txn != 0 && _refCount == 1 && _connection->__getRefNoSync() == 1)
     {
         sync.release();
         rollbackInternal(true);
@@ -185,14 +185,14 @@ Freeze::TransactionI::iceDecRef()
 }
 
 int
-Freeze::TransactionI::iceGetRef() const
+Freeze::TransactionI::__getRef() const
 {
     IceUtil::Mutex::Lock sync(_refCountMutex->mutex);
     return _refCount;
 }
 
 int
-Freeze::TransactionI::iceGetRefNoSync() const
+Freeze::TransactionI::__getRefNoSync() const
 {
     return _refCount;
 }
@@ -205,7 +205,7 @@ Freeze::TransactionI::setPostCompletionCallback(const Freeze::PostCompletionCall
     
 //
 // The constructor takes a ConnectionI* instead of a ConnectionIPtr
-// because we have to ensure there is no call to iceDecRef while the
+// because we have to ensure there is no call to __decRef while the
 // transaction or the connection are not assigned to a Ptr in
 // user-code.
 //
