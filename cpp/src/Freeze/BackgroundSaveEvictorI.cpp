@@ -182,9 +182,9 @@ Freeze::BackgroundSaveEvictorI::BackgroundSaveEvictorI(const ObjectAdapterPtr& a
     //
     // Start saving thread
     //
-    __setNoDelete(true);
+    iceSetNoDelete(true);
     start();
-    __setNoDelete(false);
+    iceSetNoDelete(false);
 }
 
 

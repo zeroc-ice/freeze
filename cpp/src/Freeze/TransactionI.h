@@ -45,8 +45,8 @@ public:
     //
     // Custom refcounting implementation
     //
-    virtual void __incRef();
-    virtual void __decRef();
+    virtual void iceIncRef();
+    virtual void iceDecRef();
     virtual int iceGetRef() const;
 
     void rollbackInternal(bool);
