@@ -177,7 +177,7 @@ Freeze::TransactionI::__decRef()
         sync.release();
         delete this;
     }
-    else if(_txn != 0 && _refCount == 1 && _connection->__getRefNoSync() == 1)
+    else if(_txn != 0 && _refCount == 1 && _connection->getRefNoSync() == 1)
     {
         sync.release();
         rollbackInternal(true);
@@ -192,7 +192,7 @@ Freeze::TransactionI::__getRef() const
 }
 
 int
-Freeze::TransactionI::__getRefNoSync() const
+Freeze::TransactionI::getRefNoSync() const
 {
     return _refCount;
 }

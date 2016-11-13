@@ -65,7 +65,7 @@ private:
 
     friend class ConnectionI;
     
-    int __getRefNoSync() const;
+    int getRefNoSync() const;
   
     void postCompletion(bool, bool);
 

@@ -87,7 +87,7 @@ private:
 
     friend class TransactionI;
 
-    int __getRefNoSync() const;
+    int getRefNoSync() const;
 
     const Ice::CommunicatorPtr _communicator;
     const Ice::EncodingVersion _encoding;
