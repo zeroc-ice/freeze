@@ -111,11 +111,11 @@ public class ServantI implements _ServantOperations
     }
 
     public void
-    setValueAsync_async(AMD_Servant_setValueAsync __cb, int value, Ice.Current current)
+    setValueAsync_async(AMD_Servant_setValueAsync cb, int value, Ice.Current current)
     {
         synchronized(_tie)
         {
-            _setValueAsyncCB = __cb;
+            _setValueAsyncCB = cb;
             _setValueAsyncValue = value;
             _tie.notify();
         }

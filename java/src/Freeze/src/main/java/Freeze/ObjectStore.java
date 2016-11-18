@@ -293,7 +293,7 @@ class ObjectStore implements Store
     marshalKey(Ice.Identity v, Ice.Communicator communicator, Ice.EncodingVersion encoding)
     {
         Ice.OutputStream os = new Ice.OutputStream(communicator, encoding, false);
-        v.__write(os);
+        v.ice_writeMembers(os);
         return new com.sleepycat.db.DatabaseEntry(os.prepareWrite().b);
     }
 
@@ -310,7 +310,7 @@ class ObjectStore implements Store
             is = new Ice.InputStream(communicator, encoding, e.getData());
         }
         Ice.Identity key = new Ice.Identity();
-        key.__read(is);
+        key.ice_readMembers(is);
         return key;
     }
 
@@ -322,7 +322,7 @@ class ObjectStore implements Store
 
         if(keepStats)
         {
-            v.__write(os);
+            v.ice_writeMembers(os);
         }
         else
         {
@@ -351,7 +351,7 @@ class ObjectStore implements Store
         is.startEncapsulation();
         if(keepStats)
         {
-            rec.__read(is);
+            rec.ice_readMembers(is);
             is.readPendingValues();
         }
         else
