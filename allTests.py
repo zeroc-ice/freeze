@@ -5,26 +5,11 @@
 #
 # **********************************************************************
 
-import os, sys, imp
-
+import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), "scripts"))
-import FreezeTestUtil as TestUtil
+sys.path.append(os.path.join(os.path.dirname(__file__), "ice", "scripts"))
 
-testGroups = []
+from Util import runTests, Mapping
+import FreezeUtil
 
-languages = [ "cpp", "java" ]
-
-for d in languages:
-
-    filename = os.path.abspath(os.path.join(os.path.dirname(__file__), d, "allTests.py"))
-    f = open(filename, "r")
-    current_mod = imp.load_module("allTests", f, filename, (".py", "r", imp.PY_SOURCE))
-    f.close()
-
-    tests = []
-
-    tests = [ (os.path.join(d, "test", x), y) for x, y in current_mod.tests ]
-    if len(tests) > 0:
-        testGroups.extend(tests)
-
-TestUtil.run(testGroups, root=True)
+runTests(mappings=[Mapping.getByName("freeze/cpp"), Mapping.getByName("freeze/java")])

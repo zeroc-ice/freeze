@@ -5,32 +5,11 @@
 #
 # **********************************************************************
 
-import os, sys, re, getopt
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "scripts"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "ice", "scripts"))
 
-path = [ ".", "..", "../..", "../../..", "../../../.." ]
-head = os.path.dirname(sys.argv[0])
+from Util import *
+from FreezeUtil import *
 
-if len(head) > 0:
-    path = [os.path.join(head, p) for p in path]
-path = [os.path.abspath(p) for p in path
-        if os.path.exists(os.path.join(p, "scripts", "FreezeTestUtil.py")) ]
-if len(path) == 0:
-    raise RuntimeError("can't find toplevel directory!")
-
-sys.path.append(os.path.join(path[0], "scripts"))
-import FreezeTestUtil as TestUtil
-
-#
-# List of all basic tests.
-#
-tests = [
-    ("Freeze/dbmap", ["once"]),
-    ("Freeze/complex", ["once"]),
-    ("Freeze/evictor", ["once"]),
-    ("Freeze/fileLock", ["once"]),
-    ("FreezeScript/dbmap", ["once"]),
-    ("FreezeScript/evictor", ["once"]),
-    ]
-
-if __name__ == "__main__":
-    TestUtil.run(tests)
+runTestsWithPath(__file__)
