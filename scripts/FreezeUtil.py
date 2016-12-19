@@ -33,18 +33,26 @@ class FreezeJavaMapping(JavaCompatMapping):
     def getJavaArgs(self, process, current):
         if process.isFromBinDir():
             return []
+        return ["-Djava.library.path={0}".format(self.getBerkeleyDB(current))]
 
+    def getEnv(self, process, current):
+        env = JavaCompatMapping.getEnv(self, process, current)
+        if isinstance(platform, Windows):
+            env["PATH"] = self.getBerkeleyDB(current) + ((os.pathsep + env["PATH"]) if "PATH" in env else "")
+        return env
+
+    def getBerkeleyDB(self, current):
         if isinstance(platform, Darwin):
             if os.path.exists('/usr/local/opt/ice/libexec/lib'):
-                return ["-Djava.library.path=/usr/local/opt/ice/libexec/lib"]
+                return "/usr/local/opt/ice/libexec/lib"
             else:
-                return ["-Djava.library.path=/usr/local/opt/berkeley-db53/lib"]
+                return "/usr/local/opt/berkeley-db53/lib"
         elif isinstance(platform, Windows):
-            return ["-Djava.library.path={0}".format(os.path.join(toplevel, "cpp", "msbuild", "packages",
-                                                                  "berkeley.db.v140.5.3.28.3", "build", "native", "bin",
-                                                                  current.config.buildConfig))]
+            return os.path.join(toplevel, "cpp", "msbuild", "packages", "berkeley.db.java7", "build", "native", "bin",
+                                current.config.buildPlatform)
         else:
             return ["-Djava.library.path=/usr/{0}".format(platform.getLibSubDir(self, process, current))]
+
 
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))

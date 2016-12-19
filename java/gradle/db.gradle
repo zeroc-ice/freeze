@@ -17,7 +17,7 @@ def dbPackage
 if (isWindows) {
     nuget = "${System.env.LOCALAPPDATA}\\ZeroC\\nuget\\nuget.exe"
     dbVersion = "5.3.28.1"
-    dbPackage = "${iceCppDir}\\third-party-packages\\berkeley.db.java7"
+    dbPackage = "$rootProject.projectDir\\..\\cpp\\msbuild\\packages\\berkeley.db.java7"
 
     task nugetDirectory() {
         def nugetDir = new File("${System.env.LOCALAPPDATA}\\ZeroC\\nuget")
@@ -31,7 +31,7 @@ if (isWindows) {
     }
 
     task nugetInstallBerkeleyDb(type:Exec) {
-      commandLine 'cmd', '/c', nuget, 'install', 'berkeley.db.java7', '-OutputDirectory', "${iceCppDir}/third-party-packages/", '-ExcludeVersion'
+      commandLine 'cmd', '/c', nuget, 'install', 'berkeley.db.java7', '-OutputDirectory', "$rootProject.projectDir/../cpp/msbuild/packages/", '-ExcludeVersion'
     }
 
 }
