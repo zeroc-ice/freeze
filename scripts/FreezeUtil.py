@@ -33,15 +33,15 @@ class FreezeJavaMapping(JavaCompatMapping):
     def getJavaArgs(self, process, current):
         if process.isFromBinDir():
             return []
-        return ["-Djava.library.path={0}".format(self.getBerkeleyDB(current))]
+        return ["-Djava.library.path={0}".format(self.getBerkeleyDB(process, current))]
 
     def getEnv(self, process, current):
         env = JavaCompatMapping.getEnv(self, process, current)
         if isinstance(platform, Windows):
-            env["PATH"] = self.getBerkeleyDB(current) + ((os.pathsep + env["PATH"]) if "PATH" in env else "")
+            env["PATH"] = self.getBerkeleyDB(process, current) + ((os.pathsep + env["PATH"]) if "PATH" in env else "")
         return env
 
-    def getBerkeleyDB(self, current):
+    def getBerkeleyDB(self, process, current):
         if isinstance(platform, Darwin):
             if os.path.exists("/usr/local/opt/ice/libexec/lib"):
                 return "/usr/local/opt/ice/libexec/lib"
