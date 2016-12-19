@@ -59,12 +59,8 @@ class FreezeScriptDBMapTestCase(ClientTestCase):
 
             i = 0
             while i < len(lines1):
-                if sys.version_info[0] == 2:
-                    line1 = regex2.sub("", lines1[i]).strip()
-                    line2 = regex2.sub("", lines2[i]).strip()
-                else:
-                    line1 = regex2.sub("", lines1[i].decode("utf-8")).strip()
-                    line2 = regex2.sub("", lines2[i]).strip()
+                line1 = regex2.sub("", lines1[i]).strip()
+                line2 = regex2.sub("", lines2[i]).strip()
                 if line1 != line2:
                     print("line1 = " + line1)
                     print("line2 = " + line2)
