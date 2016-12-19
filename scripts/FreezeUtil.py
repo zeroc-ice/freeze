@@ -23,7 +23,22 @@ class FreezeCppMapping(CppMapping):
             return CppMapping.getCommandLine(self, current, process, exe)
 
 class FreezeJavaMapping(JavaCompatMapping):
-    pass
+
+    def getJavaArgs(self, process, current):
+        if process.isFromBinDir():
+            return []
+
+        if isinstance(platform, Darwin):
+            if os.path.exists('/usr/local/opt/ice/libexec/lib'):
+                return ["-Djava.library.path=/usr/local/opt/ice/libexec/lib"]
+            else:
+                return ["-Djava.library.path=/usr/local/opt/berkeley-db53/lib"]
+        elif isinstance(platform, Windows):
+            return ["-Djava.library.path={0}".format(os.path.join(toplevel, "cpp", "msbuild", "packages",
+                                                                  "berkeley.db.v140.5.3.28.3", "build", "native", "bin",
+                                                                  current.config.buildConfig))]
+        else:
+            return ["-Djava.library.path=/usr/{0}".format(platform.getLibSubDir(self, process, current))]
 
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))
