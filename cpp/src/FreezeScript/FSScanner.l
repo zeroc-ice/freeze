@@ -7,7 +7,7 @@
 // **********************************************************************
 
 #include <FreezeScript/GrammarUtil.h>        // Before Grammar.h, so that YYSTYPE is defined
-#include <FreezeScript/Grammar.h>
+#include <FreezeScript/FSGrammar.h>
 #include <IceUtil/InputUtil.h>
 
 #include <stdlib.h>
@@ -185,7 +185,7 @@ floating_literal	(({fractional_constant}{exponent_part}?)|((\+|-)?[[:digit:]]+{e
 
 [[:space:]] {
     // Igore white-space
-    
+
     if(yytext[0] == '\n')
     {
         parseLine++;
@@ -272,13 +272,13 @@ parseString(char start)
                     str->v += next;
                     break;
                 }
-            
+
                 case 'n':
                 {
                     str->v += '\n';
                     break;
                 }
-            
+
                 case 'r':
                 {
                     str->v += '\r';
@@ -290,13 +290,13 @@ parseString(char start)
                     str->v += '\t';
                     break;
                 }
-            
+
                 case 'v':
                 {
                     str->v += '\v';
                     break;
                 }
-            
+
                 case 'f':
                 {
                     str->v += '\f';
@@ -370,9 +370,9 @@ parseString(char start)
                     str->v += static_cast<char>(ull);
                     break;
                 }
-        
+
                 // TODO: add universal character names
-            
+
                 default:
                 {
                     str->v += c;

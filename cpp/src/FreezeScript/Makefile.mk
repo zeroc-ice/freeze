@@ -9,6 +9,7 @@ $(project)_programs = transformdb dumpdb
 $(project)_dependencies	= Freeze IceXML Ice
 $(project)_libs		= db mcpp
 $(project)_targetdir    := $(bindir)
+$(project)_bisonflags	:= --name-prefix "freeze_script_"
 
 common_sources		= AssignVisitor.cpp \
 			  Data.cpp \
@@ -18,8 +19,8 @@ common_sources		= AssignVisitor.cpp \
 			  Print.cpp \
 			  Util.cpp \
 			  FSParser.cpp \
-			  FSScanner.cpp \
-			  FSGrammar.cpp
+			  FSScanner.l \
+			  FSGrammar.y
 
 transformdb_sources 	= $(common_sources) \
 			  TransformAnalyzer.cpp \

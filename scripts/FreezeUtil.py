@@ -18,7 +18,7 @@ class FreezeCppMapping(CppMapping):
 
     def getCommandLine(self, current, process, exe):
         if isinstance(process, TransformDB):
-            return os.path.join(toplevel, "cpp", platform.getBinSubDir(self, current), exe)
+            return os.path.join(toplevel, "cpp", platform.getBinSubDir(self, process, current), exe)
         else:
             return CppMapping.getCommandLine(self, current, process, exe)
 
