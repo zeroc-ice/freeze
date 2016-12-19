@@ -43,7 +43,7 @@ class FreezeJavaMapping(JavaCompatMapping):
 
     def getBerkeleyDB(self, current):
         if isinstance(platform, Darwin):
-            if os.path.exists('/usr/local/opt/ice/libexec/lib'):
+            if os.path.exists("/usr/local/opt/ice/libexec/lib"):
                 return "/usr/local/opt/ice/libexec/lib"
             else:
                 return "/usr/local/opt/berkeley-db53/lib"
@@ -51,7 +51,7 @@ class FreezeJavaMapping(JavaCompatMapping):
             return os.path.join(toplevel, "cpp", "msbuild", "packages", "berkeley.db.java7", "build", "native", "bin",
                                 current.config.buildPlatform)
         else:
-            return ["-Djava.library.path=/usr/{0}".format(platform.getLibSubDir(self, process, current))]
+            return "/usr/{0}".format(platform.getLibSubDir(self, process, current))
 
 
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
