@@ -22,6 +22,12 @@ class FreezeCppMapping(CppMapping):
         else:
             return CppMapping.getCommandLine(self, current, process, exe)
 
+    def getEnv(self, process, current):
+        env = CppMapping.getEnv(self, process, current)
+        if isinstance(platform, Windows):
+            env["PATH"] += os.pathsep + Mapping.getByName("cpp").getLibDir(process, current)
+        return env
+
 class FreezeJavaMapping(JavaCompatMapping):
 
     def getJavaArgs(self, process, current):
