@@ -10,10 +10,10 @@ from FreezeUtil import *
 class FreezeScriptEvictorTestCase(ClientTestCase):
 
     def setupClientSide(self, current):
-        self.mkdirs("db")
-        self.mkdirs("db_init")
-        self.mkdirs("db_check")
-        self.mkdirs("db_tmp")
+        current.mkdirs("db")
+        current.mkdirs("db_init")
+        current.mkdirs("db_check")
+        current.mkdirs("db_tmp")
 
     def runClientSide(self, current):
 

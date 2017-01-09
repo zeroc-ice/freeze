@@ -10,10 +10,10 @@ from FreezeUtil import *
 class FreezeScriptDBMapTestCase(ClientTestCase):
 
     def setupClientSide(self, current):
-        self.mkdirs("db")
-        self.mkdirs("db_init")
-        self.mkdirs("db_check")
-        self.mkdirs("db_tmp")
+        current.mkdirs("db")
+        current.mkdirs("db_init")
+        current.mkdirs("db_check")
+        current.mkdirs("db_tmp")
 
     def runClientSide(self, current):
 
@@ -52,7 +52,7 @@ class FreezeScriptDBMapTestCase(ClientTestCase):
             transformdb.run(current, args=["--old", "{testdir}/fail/" + oldfile, "--new", "{testdir}/fail/" + newfile,
                            "-o", "tmp.xml", "--key", "string", "--value", value], exitstatus=1)
 
-            lines1 = transformdb.getOutput().strip().split("\n")
+            lines1 = transformdb.getOutput(current).strip().split("\n")
             lines2 = open(os.path.join(current.testcase.getPath(), "fail", oldfile.replace("_old.ice", ".err")), "r").readlines()
             if len(lines1) != len(lines2):
                 raise RuntimeError("failed! (1)")

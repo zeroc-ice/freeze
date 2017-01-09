@@ -7,7 +7,7 @@
 class FreezeComplexTestCase(ClientTestCase):
 
     def setupClientSide(self, current):
-        self.mkdirs("db")
+        current.mkdirs("db")
 
     def runClientSide(self, current):
         client = SimpleClient(args=["--dbdir", "{testdir}"])

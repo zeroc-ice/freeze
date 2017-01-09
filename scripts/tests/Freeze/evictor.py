@@ -7,8 +7,8 @@
 class FreezeEvictorTestCase(ClientServerTestCase):
 
     def setupClientSide(self, current):
-        self.mkdirs("db")
-        self.createFile("db/DB_CONFIG", lines=["set_flags DB_TXN_NOSYNC"])
+        current.mkdirs("db")
+        current.createFile("db/DB_CONFIG", lines=["set_flags DB_TXN_NOSYNC"])
 
 props = {
     'Freeze.DbEnv.db.DbHome' : '{testdir}/db',
