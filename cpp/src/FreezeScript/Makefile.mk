@@ -33,7 +33,7 @@ dumpdb_sources		= $(common_sources) \
 			  DumpDB.cpp
 
 slice_sources		:= $(filter-out %Util.cpp %Ruby.cpp %Python.cpp %MD5.cpp %MD5I.cpp\
-                                %FileTracker.cpp %Checksum.cpp,\
+                               %Checksum.cpp,\
 				$(wildcard $(top_srcdir)/ice/cpp/src/Slice/*.cpp)) \
 			   $(top_srcdir)/cpp/src/Slice/SliceUtil.cpp \
 			   $(top_srcdir)/cpp/src/Slice/CPlusPlusUtil.cpp

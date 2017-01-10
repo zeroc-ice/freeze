@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,8 +21,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{6B287579-8A55-4242-9AE8-A4BF2D75BF95}</ProjectGuid>
     <Ice_BuildingSrc>yes</Ice_BuildingSrc>
-    <IceBuilderCppProps Condition="!Exists('$(IceBuilderCppProps)')">$([System.IO.Directory]::GetFiles('$(LocalAppData)\Microsoft\VisualStudio\$(VisualStudioVersion)\Extensions', 'IceBuilder.Cpp.props', SearchOption.AllDirectories))</IceBuilderCppProps>
-    <IceBuilderCppTargets Condition="!Exists('$(IceBuilderCppTargets)')">$([System.IO.Directory]::GetFiles('$(LocalAppData)\Microsoft\VisualStudio\$(VisualStudioVersion)\Extensions', 'IceBuilder.Cpp.targets', SearchOption.AllDirectories))</IceBuilderCppTargets>
+    <IceBuilderInstallDir>$([MSBuild]::GetRegistryValue('HKEY_CURRENT_USER\SOFTWARE\ZeroC\IceBuilder', 'InstallDir.$(VisualStudioVersion)'))</IceBuilderInstallDir>
+    <IceBuilderCppProps>$(IceBuilderInstallDir)\Resources\IceBuilder.Cpp.props</IceBuilderCppProps>
+    <IceBuilderCppTargets>$(IceBuilderInstallDir)\Resources\IceBuilder.Cpp.targets</IceBuilderCppTargets>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -781,5 +782,11 @@ move $(Platform)\$(Configuration)\CatalogIndexList.h $(Freeze_SrcRootDir)\includ
     </PropertyGroup>
     <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets'))" />
     <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets'))" />
+  </Target>
+  <Target Name="EnsureIceBuilderImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project requires the Ice Builder for Visual Studio extension. Use "Tools &amp;gt; Extensions and Updates" to install it. For more information, see https://visualstudiogallery.msdn.microsoft.com/1a64e701-63f2-4740-8004-290e6c682ce0.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(IceBuilderCppProps)')" Text="$(ErrorText)" />
   </Target>
 </Project>

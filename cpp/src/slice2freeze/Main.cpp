@@ -14,6 +14,7 @@
 #include <Slice/FileTracker.h>
 #include <Slice/Util.h>
 #include <IceUtil/OutputUtil.h>
+#include <IceUtil/ConsoleUtil.h>
 #include <IceUtil/StringUtil.h>
 #include <cstring>
 
@@ -189,8 +190,8 @@ struct IndexType
 void
 usage(const char* n)
 {
-    getErrorStream() << "Usage: " << n << " [options] file-base [slice-files...]\n";
-    getErrorStream() <<
+    consoleErr << "Usage: " << n << " [options] file-base [slice-files...]\n";
+    consoleErr <<
         "Options:\n"
         "-h, --help            Show this message.\n"
         "-v, --version         Display the Ice version.\n"
@@ -962,7 +963,7 @@ writeDict(const string& n, const UnitPtr& u, const Dict& dict, Output& H, Output
             }
             if(containsSequence)
             {
-                getErrorStream() << n << ": warning: use of sequences in dictionary keys has been deprecated";
+                consoleErr << n << ": warning: use of sequences in dictionary keys has been deprecated";
             }
 
             if(index.caseSensitive == false)
@@ -1038,7 +1039,7 @@ writeDict(const string& n, const UnitPtr& u, const Dict& dict, Output& H, Output
             }
             if(containsSequence)
             {
-                getErrorStream() << n << ": warning: use of sequences in dictionary keys has been deprecated";
+                consoleErr << n << ": warning: use of sequences in dictionary keys has been deprecated";
             }
 
             if(index.caseSensitive == false)
@@ -1468,7 +1469,7 @@ compile(int argc, char* argv[])
     }
     catch(const IceUtilInternal::BadOptException& e)
     {
-        getErrorStream() << argv[0] << ": error: " << e.reason << endl;
+        consoleErr << argv[0] << ": error: " << e.reason << endl;
         if(!validate)
         {
             usage(argv[0]);
@@ -1484,7 +1485,7 @@ compile(int argc, char* argv[])
 
     if(opts.isSet("version"))
     {
-        getErrorStream() << ICE_STRING_VERSION << endl;
+        consoleErr << ICE_STRING_VERSION << endl;
         return EXIT_SUCCESS;
     }
 
@@ -1609,8 +1610,8 @@ compile(int argc, char* argv[])
             {
                 if(s != "sort")
                 {
-                    getErrorStream() << argv[0] << ": error: " << *i << ": nothing or ',sort' expected after value-type"
-                                     << endl;
+                    consoleErr << argv[0] << ": error: " << *i << ": nothing or ',sort' expected after value-type"
+                               << endl;
                     if(!validate)
                     {
                         usage(argv[0]);
@@ -1625,8 +1626,8 @@ compile(int argc, char* argv[])
                 s.erase(0, pos + 1);
                 if(sort != "sort")
                 {
-                    getErrorStream() << argv[0] << ": error: " << *i << ": nothing or ',sort' expected after value-type"
-                                     << endl;
+                    consoleErr << argv[0] << ": error: " << *i << ": nothing or ',sort' expected after value-type"
+                               << endl;
                     if(!validate)
                     {
                         usage(argv[0]);
@@ -1640,7 +1641,7 @@ compile(int argc, char* argv[])
 
         if(dict.name.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no name specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no name specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1650,7 +1651,7 @@ compile(int argc, char* argv[])
 
         if(dict.key.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no key specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no key specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1660,7 +1661,7 @@ compile(int argc, char* argv[])
 
         if(dict.value.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no value specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no value specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1708,7 +1709,7 @@ compile(int argc, char* argv[])
 
         if(index.name.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no name specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no name specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1718,7 +1719,7 @@ compile(int argc, char* argv[])
 
         if(index.type.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no type specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no type specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1728,7 +1729,7 @@ compile(int argc, char* argv[])
 
         if(index.member.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no member specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no member specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1738,8 +1739,8 @@ compile(int argc, char* argv[])
 
         if(caseString != "case-sensitive" && caseString != "case-insensitive")
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": the case can be `case-sensitive' or "
-                             << "`case-insensitive'" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": the case can be `case-sensitive' or "
+                       << "`case-insensitive'" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1802,7 +1803,7 @@ compile(int argc, char* argv[])
                     }
                     else
                     {
-                        getErrorStream() << argv[0] << ": error: " << *i << ": syntax error" << endl;
+                        consoleErr << argv[0] << ": error: " << *i << ": syntax error" << endl;
                         if(!validate)
                         {
                             usage(argv[0]);
@@ -1843,7 +1844,7 @@ compile(int argc, char* argv[])
                     }
                     else
                     {
-                        getErrorStream() << argv[0] << ": error: " << *i << ": syntax error" << endl;
+                        consoleErr << argv[0] << ": error: " << *i << ": syntax error" << endl;
                         if(!validate)
                         {
                             usage(argv[0]);
@@ -1856,7 +1857,7 @@ compile(int argc, char* argv[])
 
         if(dictName.empty())
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": no dictionary specified" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": no dictionary specified" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1871,8 +1872,8 @@ compile(int argc, char* argv[])
             {
                 if(find(p->indices.begin(), p->indices.end(), index) != p->indices.end())
                 {
-                    getErrorStream() << argv[0] << ": error: --dict-index " << *i
-                         << ": this dict-index is defined twice" << endl;
+                    consoleErr << argv[0] << ": error: --dict-index " << *i << ": this dict-index is defined twice"
+                               << endl;
                     return EXIT_FAILURE;
                 }
                 p->indices.push_back(index);
@@ -1882,7 +1883,7 @@ compile(int argc, char* argv[])
         }
         if(!found)
         {
-            getErrorStream() << argv[0] << ": error: " << *i << ": unknown dictionary" << endl;
+            consoleErr << argv[0] << ": error: " << *i << ": unknown dictionary" << endl;
             if(!validate)
             {
                 usage(argv[0]);
@@ -1905,7 +1906,7 @@ compile(int argc, char* argv[])
 
     if(dicts.empty() && indices.empty() && !(depend || dependxml))
     {
-        getErrorStream() << argv[0] << ": error: no Freeze types specified" << endl;
+        consoleErr << argv[0] << ": error: no Freeze types specified" << endl;
         if(!validate)
         {
             usage(argv[0]);
@@ -1915,7 +1916,7 @@ compile(int argc, char* argv[])
 
     if(args.empty())
     {
-        getErrorStream() << argv[0] << ": error: no file name base specified" << endl;
+        consoleErr << argv[0] << ": error: no file name base specified" << endl;
         if(!validate)
         {
             usage(argv[0]);
@@ -1925,7 +1926,7 @@ compile(int argc, char* argv[])
 
     if(depend && dependxml)
     {
-        getErrorStream() << argv[0] << ": error: cannot specify both --depend and --depend-xml" << endl;
+        consoleErr << argv[0] << ": error: cannot specify both --depend and --depend-xml" << endl;
         if(!validate)
         {
             usage(argv[0]);
@@ -1947,10 +1948,10 @@ compile(int argc, char* argv[])
     IceUtil::CtrlCHandler ctrlCHandler;
     ctrlCHandler.setCallback(interruptedCallback);
 
-    DependOutputUtil out(dependFile);
+    ostringstream os;
     if(dependxml)
     {
-        out.os() << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<dependencies>" << endl;
+        os << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<dependencies>" << endl;
     }
 
     for(vector<string>::size_type idx = 1; idx < args.size(); ++idx)
@@ -1962,7 +1963,6 @@ compile(int argc, char* argv[])
 
             if(cppHandle == 0)
             {
-                out.cleanup();
                 u->destroy();
                 return EXIT_FAILURE;
             }
@@ -1971,22 +1971,19 @@ compile(int argc, char* argv[])
 
             if(status == EXIT_FAILURE)
             {
-                out.cleanup();
                 u->destroy();
                 return EXIT_FAILURE;
             }
 
-            if(!icecpp->printMakefileDependencies(out.os(), depend ? Preprocessor::CPlusPlus : Preprocessor::SliceXML, includePaths,
+            if(!icecpp->printMakefileDependencies(os, depend ? Preprocessor::CPlusPlus : Preprocessor::SliceXML, includePaths,
                                                   "-D__SLICE2FREEZE__",  sourceExtension, headerExtension))
             {
-                out.cleanup();
                 u->destroy();
                 return EXIT_FAILURE;
             }
 
             if(!icecpp->close())
             {
-                out.cleanup();
                 u->destroy();
                 return EXIT_FAILURE;
             }
@@ -2059,7 +2056,8 @@ compile(int argc, char* argv[])
 
     if(dependxml)
     {
-        out.os() << "</dependencies>\n";
+        os << "</dependencies>\n";
+        writeDependencies(os.str(), dependFile);
     }
 
     if(depend || dependxml)
@@ -2081,7 +2079,7 @@ compile(int argc, char* argv[])
             // created files.
             FileTracker::instance()->cleanup();
             u->destroy();
-            getErrorStream() << argv[0] << ": error: " << ex << endl;
+            consoleErr << argv[0] << ": error: " << ex << endl;
             return EXIT_FAILURE;
         }
         catch(const Slice::FileException& ex)
@@ -2090,12 +2088,12 @@ compile(int argc, char* argv[])
             // created files.
             FileTracker::instance()->cleanup();
             u->destroy();
-            getErrorStream() << argv[0] << ": error: " << ex.reason() << endl;
+            consoleErr << argv[0] << ": error: " << ex.reason() << endl;
             return EXIT_FAILURE;
         }
         catch(...)
         {
-            getErrorStream() << argv[0] << ": error: unknown exception" << endl;
+            consoleErr << argv[0] << ": error: unknown exception" << endl;
             FileTracker::instance()->cleanup();
             u->destroy();
             return EXIT_FAILURE;
@@ -2126,22 +2124,22 @@ main(int argc, char* argv[])
     }
     catch(const std::exception& ex)
     {
-        getErrorStream() << argv[0] << ": error:" << ex.what() << endl;
+        consoleErr << argv[0] << ": error:" << ex.what() << endl;
         return EXIT_FAILURE;
     }
     catch(const std::string& msg)
     {
-        getErrorStream() << argv[0] << ": error:" << msg << endl;
+        consoleErr << argv[0] << ": error:" << msg << endl;
         return EXIT_FAILURE;
     }
     catch(const char* msg)
     {
-        getErrorStream() << argv[0] << ": error:" << msg << endl;
+        consoleErr << argv[0] << ": error:" << msg << endl;
         return EXIT_FAILURE;
     }
     catch(...)
     {
-        getErrorStream() << argv[0] << ": error:" << "unknown exception" << endl;
+        consoleErr << argv[0] << ": error:" << "unknown exception" << endl;
         return EXIT_FAILURE;
     }
 }
