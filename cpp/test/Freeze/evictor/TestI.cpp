@@ -132,7 +132,7 @@ private:
     Test::AMD_Account_transfer3Ptr _cb;
     bool _response;
     bool _cancelled;
-    IceUtil::UniquePtr<Ice::UserException> _exception;
+    IceInternal::UniquePtr<Ice::UserException> _exception;
 };
 typedef IceUtil::Handle<ResponseThread> ResponseThreadPtr;
 

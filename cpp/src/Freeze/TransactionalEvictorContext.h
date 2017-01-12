@@ -142,8 +142,8 @@ private:
     TransactionIPtr _tx;
     IceUtil::ThreadControl _owner;
 
-    IceUtil::UniquePtr<DeadlockException> _deadlockException;
-    IceUtil::UniquePtr<TransactionalEvictorDeadlockException> _nestedCallDeadlockException;
+    IceInternal::UniquePtr<DeadlockException> _deadlockException;
+    IceInternal::UniquePtr<TransactionalEvictorDeadlockException> _nestedCallDeadlockException;
   
     //
     // Protected by this

@@ -77,7 +77,7 @@ private:
     void cleanup();
 
     DbEnv* _env;
-    IceUtil::UniquePtr<DbEnv> _envHolder;
+    IceInternal::UniquePtr<DbEnv> _envHolder;
     const std::string _envName;
     const Ice::CommunicatorPtr _communicator;
     Ice::EncodingVersion _encoding;

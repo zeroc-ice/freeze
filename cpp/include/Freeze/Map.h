@@ -395,7 +395,7 @@ private:
     friend class ConstIterator<key_type, mapped_type, KeyCodec, ValueCodec, Compare>;
     friend class Map<key_type, mapped_type, KeyCodec, ValueCodec, Compare>;
 
-    IceUtil::UniquePtr<IteratorHelper> _helper;
+    IceInternal::UniquePtr<IteratorHelper> _helper;
     Ice::CommunicatorPtr _communicator;
     Ice::EncodingVersion _encoding;
 
@@ -616,7 +616,7 @@ private:
 
     friend class Map<key_type, mapped_type, KeyCodec, ValueCodec, Compare>;
 
-    IceUtil::UniquePtr<IteratorHelper> _helper;
+    IceInternal::UniquePtr<IteratorHelper> _helper;
     Ice::CommunicatorPtr _communicator;
     Ice::EncodingVersion _encoding;
 
@@ -1313,7 +1313,7 @@ protected:
     {
     }
 
-    IceUtil::UniquePtr<MapHelper> _helper;
+    IceInternal::UniquePtr<MapHelper> _helper;
     Ice::CommunicatorPtr _communicator;
     Ice::EncodingVersion _encoding;
 };

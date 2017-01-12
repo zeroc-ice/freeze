@@ -145,7 +145,7 @@ Freeze::SharedDbEnv::get(const CommunicatorPtr& communicator, const string& envN
     //
     // MapKey not found, let's create and open a new DbEnv
     //
-    IceUtil::UniquePtr<SharedDbEnv> result(new SharedDbEnv(envName, communicator, env));
+    IceInternal::UniquePtr<SharedDbEnv> result(new SharedDbEnv(envName, communicator, env));
 
     //
     // Insert it into the map
@@ -242,7 +242,7 @@ Freeze::SharedDbEnv::getSharedMapDb(const string& dbName,
 
     ConnectionIPtr insertConnection = new ConnectionI(this);
 
-    IceUtil::UniquePtr<MapDb> result(new MapDb(insertConnection, dbName, key, value,
+    IceInternal::UniquePtr<MapDb> result(new MapDb(insertConnection, dbName, key, value,
                                      keyCompare, indices, createDb));
 
     //

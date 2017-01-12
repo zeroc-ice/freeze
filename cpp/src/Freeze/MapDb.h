@@ -54,7 +54,7 @@ public:
 private:
 
     const MapIndexBasePtr _index;
-    IceUtil::UniquePtr<Db> _db;
+    IceInternal::UniquePtr<Db> _db;
     std::string _dbName;
 };
 

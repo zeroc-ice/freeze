@@ -41,7 +41,7 @@ private:
 
     Index& _index;
     std::string _dbName;
-    IceUtil::UniquePtr<Db> _db;
+    IceInternal::UniquePtr<Db> _db;
     ObjectStoreBase* _store;
 };
 
