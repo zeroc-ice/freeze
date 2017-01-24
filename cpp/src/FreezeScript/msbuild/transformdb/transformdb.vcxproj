@@ -114,8 +114,8 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets')" />
     <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets')" />
-    <Import Project="..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.11\build\native\mcpp.v120.targets" Condition="Exists('..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.11\build\native\mcpp.v120.targets')" />
-    <Import Project="..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.11\build\native\mcpp.v140.targets" Condition="Exists('..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.11\build\native\mcpp.v140.targets')" />
+    <Import Project="..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.12\build\native\mcpp.v120.targets" Condition="Exists('..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.12\build\native\mcpp.v120.targets')" />
+    <Import Project="..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.12\build\native\mcpp.v140.targets" Condition="Exists('..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.12\build\native\mcpp.v140.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -123,8 +123,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets'))" />
     <Error Condition="!Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.11\build\native\mcpp.v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.11\build\native\mcpp.v120.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.11\build\native\mcpp.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.11\build\native\mcpp.v140.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.12\build\native\mcpp.v120.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\mcpp.v120.2.7.2.12\build\native\mcpp.v120.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.12\build\native\mcpp.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\msbuild\packages\mcpp.v140.2.7.2.12\build\native\mcpp.v140.targets'))" />
   </Target>
   <Target Name="EnsureIceBuilderImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

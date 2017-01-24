@@ -52,6 +52,7 @@
     <ClCompile Include="..\..\FSGrammar.cpp" />
     <ClCompile Include="..\..\FSParser.cpp" />
     <ClCompile Include="..\..\FSScanner.cpp" />
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\FileTracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AssignVisitor.h">

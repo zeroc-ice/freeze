@@ -53,6 +53,7 @@
     <ClCompile Include="..\..\FSParser.cpp" />
     <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\Scanner.cpp" />
     <ClCompile Include="..\..\FSScanner.cpp" />
+    <ClCompile Include="..\..\..\..\..\ice\cpp\src\Slice\FileTracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\AssignVisitor.h">
