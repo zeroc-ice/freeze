@@ -4,6 +4,10 @@
 //
 // **********************************************************************
 
+#pragma once
+
+[["suppress-warning:deprecated"]] // for classes with operations
+
 #include <Filesystem.ice>
 
 module Filesystem

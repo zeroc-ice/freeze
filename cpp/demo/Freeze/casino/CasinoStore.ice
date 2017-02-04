@@ -6,6 +6,8 @@
 
 #pragma once
 
+[["suppress-warning:deprecated"]] // for classes with operations
+
 #include <Casino.ice>
 #include <Ice/Identity.ice>
 

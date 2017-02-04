@@ -6,6 +6,8 @@
 
 #pragma once
 
+[["suppress-warning:deprecated"]] // for classes with operations
+
 #include <Ice/Identity.ice>
 
 module Demo
