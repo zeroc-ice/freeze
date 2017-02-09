@@ -2357,7 +2357,47 @@ FreezeScript::SymbolTableI::getConstantValue(const string& name) const
     Slice::ContainedList l = unit->findContents(key);
     if(l.empty())
     {
-        _info->errorReporter->error("unknown constant `" + name + "'");
+        //
+        // Could be an enumerator without the enumeration's name
+        //
+        string::size_type lastSep = key.rfind("::");
+        if(lastSep != 0 && lastSep != string::npos)
+        {
+            Slice::ContainedList parent = unit->findContents(key.substr(0, lastSep));
+            if(!parent.empty())
+            {
+                Slice::ContainerPtr container = Slice::ContainerPtr::dynamicCast(parent.front());
+                if(container)
+                {
+                    string enumerator = key.substr(lastSep + 2);
+                    Slice::EnumList enums = container->enums();
+
+                    for(Slice::EnumList::iterator p = enums.begin(); p != enums.end(); ++p)
+                    {
+                        Slice::ContainedList enumeratorList = (*p)->lookupContained(enumerator, false);
+                        if(!enumeratorList.empty())
+                        {
+                            l.push_back(enumeratorList.front());
+                        }
+                    }
+                }
+            }
+        }
+
+        if(l.empty())
+        {
+            _info->errorReporter->error("unknown constant `" + name + "'");
+        }
+        else if(l.size() == 1)
+        {
+            _info->errorReporter->warning("referencing enumerator `" + name +
+                                          "' in its enumeration's scope is deprecated");
+        }
+        else
+        {
+            l.clear();
+            _info->errorReporter->error("enumerator `" + name + "' is ambiguous");
+        }
     }
 
     Slice::EnumeratorPtr e = Slice::EnumeratorPtr::dynamicCast(l.front());
@@ -2423,7 +2463,7 @@ FreezeScript::SymbolTableI::getConstantValue(const string& name) const
         {
             Slice::EnumPtr en = Slice::EnumPtr::dynamicCast(type);
             assert(en);
-            Slice::EnumeratorList el = en->getEnumerators();
+            Slice::EnumeratorList el = en->enumerators();
             for(Slice::EnumeratorList::iterator q = el.begin(); q != el.end(); ++q)
             {
                 if((*q)->name() == value)

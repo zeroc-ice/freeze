@@ -405,7 +405,7 @@ FreezeScript::AnalyzeTransformVisitor::visitEnum(const EnumPtr& v)
 
     map<string, int> m;
     {
-        Slice::EnumeratorList enumerators = newEnum->getEnumerators();
+        Slice::EnumeratorList enumerators = newEnum->enumerators();
         int i = 0;
         for(Slice::EnumeratorList::iterator p = enumerators.begin(); p != enumerators.end(); ++p, ++i)
         {
@@ -418,7 +418,7 @@ FreezeScript::AnalyzeTransformVisitor::visitEnum(const EnumPtr& v)
     _out << "<!-- enum " << scoped << " -->";
     _out << se("transform") << attr("type", scoped);
 
-    Slice::EnumeratorList enumerators = v->getEnumerators();
+    Slice::EnumeratorList enumerators = v->enumerators();
     int i = 0;
     for(Slice::EnumeratorList::iterator p = enumerators.begin(); p != enumerators.end(); ++p, ++i)
     {

@@ -58,7 +58,7 @@
         <fail test="new.stringToString.replace(new.stringToString.length, 0, '!') != 'hello world!'"/>
         <fail test="new.stringToString.replace(0, 6, '') != 'world'"/>
         <fail test="'hello' + 'world' != 'helloworld'"/>
-        <fail test="new.stringToEnum != ::New::Test::E1"/>
+        <fail test="new.stringToEnum != ::New::Test::E::E1"/>
 
         <!-- Sequences -->
 
@@ -222,7 +222,7 @@
 
         <fail test="new.stringSeqToEnumSeq.length != 2"/>
         <fail test="new.stringSeqToEnumSeq[0] != ::New::Test::E2"/>
-        <fail test="new.stringSeqToEnumSeq[1] != ::New::Test::E3"/>
+        <fail test="new.stringSeqToEnumSeq[1] != ::New::Test::E::E3"/>
 
         <!-- Dictionaries -->
 
@@ -274,7 +274,7 @@
 
         <fail test="new.stringToEnumDict.length != 2"/>
         <fail test="new.stringToEnumDict[0] != ::New::Test::E2"/>
-        <fail test="new.stringToEnumDict[1] != ::New::Test::E3"/>
+        <fail test="new.stringToEnumDict[1] != ::New::Test::E::E3"/>
 
         <!-- Struct <-> class transformations -->
 
@@ -329,8 +329,8 @@
 
         <fail test="new.baseObject.ice_id != '::Test::F'"/>
         <fail test="new.baseObject.stringToEnumSeq.length != 2"/>
-        <fail test="new.baseObject.stringToEnumSeq[0] != ::New::Test::E1"/>
-        <fail test="new.baseObject.stringToEnumSeq[1] != ::New::Test::E3"/>
+        <fail test="new.baseObject.stringToEnumSeq[0] != ::New::Test::E::E1"/>
+        <fail test="new.baseObject.stringToEnumSeq[1] != ::New::Test::E::E3"/>
 
         <fail test="new.cObject.ice_id != '::Test::C'"/>
         <fail test="new.cObject.boolToStringDict.length != 2"/>

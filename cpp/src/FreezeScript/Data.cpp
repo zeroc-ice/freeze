@@ -1717,14 +1717,14 @@ FreezeScript::SequenceData::getElements()
 FreezeScript::EnumData::EnumData(const Slice::EnumPtr& type, const ErrorReporterPtr& errorReporter, bool readOnly) :
     Data(errorReporter, readOnly), _type(type), _value(0)
 {
-    _count = static_cast<int>(type->getEnumerators().size());
+    _count = static_cast<int>(type->enumerators().size());
 }
 
 FreezeScript::EnumData::EnumData(const Slice::EnumPtr& type, const ErrorReporterPtr& errorReporter, bool readOnly,
                                  Ice::Int value) :
     Data(errorReporter, readOnly), _type(type), _value(value)
 {
-    _count = static_cast<int>(type->getEnumerators().size());
+    _count = static_cast<int>(type->enumerators().size());
 }
 
 FreezeScript::DataPtr
@@ -1867,7 +1867,7 @@ FreezeScript::EnumData::toString() const
 {
     if(_name.empty())
     {
-        Slice::EnumeratorList l = _type->getEnumerators();
+        Slice::EnumeratorList l = _type->enumerators();
         Slice::EnumeratorList::const_iterator p = l.begin();
         Ice::Int i = _value;
         while(i > 0)
@@ -1908,7 +1908,7 @@ FreezeScript::EnumData::setValue(Ice::Int v)
 bool
 FreezeScript::EnumData::setValueAsString(const string& v)
 {
-    Slice::EnumeratorList l = _type->getEnumerators();
+    Slice::EnumeratorList l = _type->enumerators();
     Slice::EnumeratorList::const_iterator p;
     Ice::Int i = 0;
     for(p = l.begin(); p != l.end(); ++p, ++i)
