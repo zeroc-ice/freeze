@@ -130,6 +130,9 @@ mcpp_home		:= $(MCPP_HOME)
 
 $(foreach l,$(thirdparties),$(eval $(call make-lib,$l)))
 
+db_includedir           ?= $(wildcard /usr/include/db53)
+db_libdir               ?= $(wildcard /usr/lib64/db53)
+
 #
 # Support for Ice libraries
 #
