@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.props') and '$(ICE_BIN_DIST)' != ''" />
   <Import Project="..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.props') and '$(ICE_BIN_DIST)' != ''" />
-  <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props and '$(ICE_BIN_DIST)' != ''" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props') and '$(ICE_BIN_DIST)' != ''" />
+  <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props') and '$(ICE_BIN_DIST)' != ''" />
   <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.props') and '$(ICE_BIN_DIST)' != ''" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">

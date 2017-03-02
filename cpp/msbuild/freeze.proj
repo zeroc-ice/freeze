@@ -20,8 +20,13 @@
     </PropertyGroup>
 
     <!-- Restore Nuget packages -->
-    <Target Name="NugetRestore" DependsOnTargets="GetNuget">
+    <Target Name="NugetRestore" DependsOnTargets="GetNuget"  Condition="'$(ICE_BIN_DIST)' == ''">
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.sln"/>
+    </Target>
+
+    <Target Name="TestNugetRestore" DependsOnTargets="GetNuget" Condition="'$(ICE_BIN_DIST)' != ''">
+        <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.test.sln"/>
+        <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)..\..\ice\cpp\msbuild\ice.test.sln"/>
     </Target>
 
 
@@ -75,7 +80,7 @@
         </Otherwise>
     </Choose>
 
-    <Target Name="BuildIce" Condition="'$(UseBinDist)' != 'yes'">
+    <Target Name="BuildIce" Condition="'$(ICE_BIN_DIST)' == ''">
         <MSBuild Projects="..\..\ice\cpp\msbuild\ice.proj"
                  Targets="NugetRestore"
                  BuildInParallel="true"/>
@@ -83,22 +88,22 @@
                  Targets="$(IceTargets)"
                  BuildInParallel="true"
                  Properties="%(DistSolution.Properties)"/>
-        <MSBuild Projects="..\..\ice\cpp\msbuild\ice.test.sln"
+    </Target>
+
+    <Target Name="BuildIceTest">
+      <MSBuild Projects="..\..\ice\cpp\msbuild\ice.test.sln"
                  Targets="Common\testcommon"
                  BuildInParallel="true"
                  Properties="%(TestSolution.Properties)"/>
     </Target>
 
-
-    <Target Name="BuildDist" DependsOnTargets="BuildIce;NugetRestore"
-            Condition="'$(UseBinDist)' != 'yes'">
+    <Target Name="BuildDist" DependsOnTargets="BuildIce;NugetRestore" Condition="'$(ICE_BIN_DIST)' == ''">
         <MSBuild Projects="@(DistSolution)"
                  BuildInParallel="true"
                  Properties="%(Properties)"/>
     </Target>
 
-    <Target Name="CleanDist"
-            Condition="'$(UseBinDist)' != 'yes'">
+    <Target Name="CleanDist" Condition="'$(ICE_BIN_DIST)' == ''">
         <MSBuild Projects="@(DistSolution)"
                  BuildInParallel="true"
                  Properties="%(Properties)"
@@ -106,7 +111,7 @@
     </Target>
 
     <!-- Build all the test solution configurations -->
-    <Target Name="Build" DependsOnTargets="NugetRestore;BuildDist">
+    <Target Name="Build" DependsOnTargets="TestNugetRestore;BuildDist;BuildIceTest">
         <MSBuild Projects="@(TestSolution)"
                  BuildInParallel="true"
                  Properties="%(Properties)" />

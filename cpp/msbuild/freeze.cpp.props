@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
+        <Ice_LanguageMapping>cpp</Ice_LanguageMapping>
         <Ice_CppMapping>cpp98</Ice_CppMapping>
-        <Ice_BuildingSrc Condition="'$(Ice_BuildingSrc)' == ''">yes</Ice_BuildingSrc>
+        <Ice_BuildingSrc Condition="'$(ICE_BIN_DIST)' == ''">yes</Ice_BuildingSrc>
+        <Ice_BuildingSrc Condition="'$(ICE_BIN_DIST)' != ''">no</Ice_BuildingSrc>
     </PropertyGroup>
     <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\cpp\msbuild\ice.cpp.props" />
 
-    <PropertyGroup Condition="'$(UseBinDist)' != 'yes'">
+    <PropertyGroup Condition="'$(ICE_BIN_DIST)' == ''">
         <FreezeHome>$(MSBuildThisFileDirectory)..\..</FreezeHome>
         <FreezeToolsPath>$(FreezeHome)\cpp\bin\$(Platform)\$(Configuration)</FreezeToolsPath>
     </PropertyGroup>
@@ -17,7 +19,7 @@
         <OutDir>$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\</OutDir>
     </PropertyGroup>
 
-    <ItemDefinitionGroup Condition="'$(UseBinDist)' != 'yes'">
+    <ItemDefinitionGroup Condition="'$(ICE_BIN_DIST)' == ''">
         <ClCompile>
             <AdditionalIncludeDirectories>$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Ice_Configuration);
                                           $(Freeze_SrcRootDir)\include;$(Freeze_SrcRootDir)\src;
@@ -28,7 +30,7 @@
         </Link>
     </ItemDefinitionGroup>
 
-    <ItemDefinitionGroup Condition="'$(ConfigurationType)' == 'DynamicLibrary' And '$(UseBinDist)' != 'yes'">
+    <ItemDefinitionGroup Condition="'$(ConfigurationType)' == 'DynamicLibrary'">
         <Link>
             <ImportLibrary>$(Freeze_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)\$(TargetName).lib</ImportLibrary>
         </Link>
