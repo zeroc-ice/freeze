@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6496a20b-8978-44da-b559-d2d76d7d75f6}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{a960df2f-c51e-421d-99a7-7cef0ea69063}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{b063d960-1220-4acb-9018-76fcf77ec573}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Slice Files">
+      <UniqueIdentifier>{a0cd38ae-736a-4efa-86f9-0b665b094c00}</UniqueIdentifier>
+      <Extensions>ice</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{23a4499a-7a16-4999-a2e0-dc06116cbb2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32\Debug">
+      <UniqueIdentifier>{28ca26bd-815e-4d03-bc1e-42dd4cffc206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32">
+      <UniqueIdentifier>{0646a988-9d0a-447c-a176-aff1a3b0ce90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32\Debug">
+      <UniqueIdentifier>{51433d7d-6433-47f3-8900-cc115a8507f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64">
+      <UniqueIdentifier>{bc812325-a3b1-432a-84d3-982136927881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64\Debug">
+      <UniqueIdentifier>{461ed4de-d877-4c9a-8b76-d23b0b0ebaa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64">
+      <UniqueIdentifier>{0865e70c-cb7c-4c5a-a496-47a93ea78412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64\Debug">
+      <UniqueIdentifier>{896355a6-9d7b-4009-995e-16493216fbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32\Release">
+      <UniqueIdentifier>{ed708884-5211-47df-952c-edca74cc2c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32\Release">
+      <UniqueIdentifier>{6614e9f0-c254-4fc5-8f00-c7f5b875d9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64\Release">
+      <UniqueIdentifier>{5d7d3f9c-9e85-49cc-94f7-6c5adac16999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64\Release">
+      <UniqueIdentifier>{23573e6a-7964-49da-9ed6-51df807384b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Debug\Casino.cpp">
+      <Filter>Source Files\Win32\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Debug\Casino.cpp">
+      <Filter>Source Files\x64\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Release\Casino.cpp">
+      <Filter>Source Files\Win32\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Release\Casino.cpp">
+      <Filter>Source Files\x64\Release</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\config.client" />
+    <None Include="..\..\README.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Win32\Debug\Casino.h">
+      <Filter>Header Files\Win32\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\Casino.h">
+      <Filter>Header Files\x64\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Release\Casino.h">
+      <Filter>Header Files\Win32\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Release\Casino.h">
+      <Filter>Header Files\x64\Release</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <IceBuilder Include="..\..\Casino.ice">
+      <Filter>Slice Files</Filter>
+    </IceBuilder>
+  </ItemGroup>
+</Project>

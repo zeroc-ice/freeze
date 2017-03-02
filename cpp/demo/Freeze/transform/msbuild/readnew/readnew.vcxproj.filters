@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{501658a0-b4ed-482c-9ac6-8499e767d452}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{52d1b37a-1f34-4081-b097-d26ec0f0740b}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{6b0b68d0-151f-4530-9c31-9f0cb7a99792}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Slice Files">
+      <UniqueIdentifier>{40059258-4051-4b2a-9485-13d45cf3d66c}</UniqueIdentifier>
+      <Extensions>ice</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{9d3528d2-88e0-4d20-a2aa-591804c295de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32\Debug">
+      <UniqueIdentifier>{f35154cf-5ed0-4305-808c-e41f17caa924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32">
+      <UniqueIdentifier>{2706b1ef-9bb9-468a-ab42-36cb488c3e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32\Debug">
+      <UniqueIdentifier>{ce24e46b-b1f2-49f6-9322-ccc005bd02fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64">
+      <UniqueIdentifier>{cc33ec35-4690-4b21-a7ca-d5ce122d9823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64\Debug">
+      <UniqueIdentifier>{a9304132-a766-4242-b506-0e5a5e167654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64">
+      <UniqueIdentifier>{f4463484-31c3-4b88-9682-6f6b963c4b06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64\Debug">
+      <UniqueIdentifier>{5fd78400-7c00-46fc-bfbf-f9100036cd76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32\Release">
+      <UniqueIdentifier>{f3dfdc61-f445-45f1-a4f4-b10ef3e2f0e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32\Release">
+      <UniqueIdentifier>{f3f8e9cb-043a-43c0-998e-1611eae07911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64\Release">
+      <UniqueIdentifier>{8d282807-2795-4ce9-8635-e2bea5118de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64\Release">
+      <UniqueIdentifier>{7f4948fa-8940-44bc-9a27-e9e2c7def997}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\readnew.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Debug\NewContactData.cpp">
+      <Filter>Source Files\Win32\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Debug\NewContactData.cpp">
+      <Filter>Source Files\x64\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Release\NewContactData.cpp">
+      <Filter>Source Files\Win32\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Release\NewContactData.cpp">
+      <Filter>Source Files\x64\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Release\NewContacts.cpp">
+      <Filter>Source Files\x64\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Debug\NewContacts.cpp">
+      <Filter>Source Files\Win32\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Release\NewContacts.cpp">
+      <Filter>Source Files\Win32\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Debug\NewContacts.cpp">
+      <Filter>Source Files\x64\Debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Win32\Debug\NewContactData.h">
+      <Filter>Header Files\Win32\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\NewContactData.h">
+      <Filter>Header Files\x64\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Release\NewContactData.h">
+      <Filter>Header Files\Win32\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Release\NewContactData.h">
+      <Filter>Header Files\x64\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Release\NewContacts.h">
+      <Filter>Header Files\x64\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Debug\NewContacts.h">
+      <Filter>Header Files\Win32\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Release\NewContacts.h">
+      <Filter>Header Files\Win32\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\NewContacts.h">
+      <Filter>Header Files\x64\Debug</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="dummy.freeze" />
+  </ItemGroup>
+  <ItemGroup>
+    <IceBuilder Include="..\..\NewContactData.ice">
+      <Filter>Slice Files</Filter>
+    </IceBuilder>
+  </ItemGroup>
+</Project>

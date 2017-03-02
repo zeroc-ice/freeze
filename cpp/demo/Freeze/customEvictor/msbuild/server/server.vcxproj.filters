@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d395fd0c-2568-4ace-9aa4-03bd1828daf1}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5d451226-2d72-4efc-9ebf-eb1fe11f6be6}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{3336fc33-a2f6-489e-86dd-51984cb7a657}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Slice Files">
+      <UniqueIdentifier>{dac75d8d-01cc-447e-a334-191c72261230}</UniqueIdentifier>
+      <Extensions>ice</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{5d566de1-00d9-41ee-b837-c23925c29a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32\Debug">
+      <UniqueIdentifier>{ecace6d5-0c9f-4c07-a116-14b8d5096e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32">
+      <UniqueIdentifier>{bfbde909-40fe-4a76-bec8-9dc760440291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32\Debug">
+      <UniqueIdentifier>{b2590953-93cc-4370-aeda-c7b15a0ae7c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64">
+      <UniqueIdentifier>{9076a925-4d89-4e76-9336-d6bba3417db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64\Debug">
+      <UniqueIdentifier>{62a12419-3193-4542-8a25-cb1e9d182740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64">
+      <UniqueIdentifier>{5ff74364-2615-45f8-b3e6-50406b64f693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64\Debug">
+      <UniqueIdentifier>{525538e8-54fa-4d2b-b2cd-e8a220c530c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32\Release">
+      <UniqueIdentifier>{ddfd9999-d81b-4f7d-8a15-715df1912cdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32\Release">
+      <UniqueIdentifier>{b1bd902b-c0a0-46e2-9bd1-6f891e9a3d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\x64\Release">
+      <UniqueIdentifier>{58cbd237-6d21-4568-8b1e-2f1c7d6b84f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\x64\Release">
+      <UniqueIdentifier>{e96eafd7-ce82-40b0-94e4-725c71e3133d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\CurrentDatabase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Evictor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\EvictorBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ItemI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Server.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SimpleEvictor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Debug\Item.cpp">
+      <Filter>Source Files\Win32\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Debug\ItemInfo.cpp">
+      <Filter>Source Files\Win32\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Debug\Item.cpp">
+      <Filter>Source Files\x64\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Debug\ItemInfo.cpp">
+      <Filter>Source Files\x64\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Release\Item.cpp">
+      <Filter>Source Files\Win32\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Release\ItemInfo.cpp">
+      <Filter>Source Files\Win32\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Release\Item.cpp">
+      <Filter>Source Files\x64\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Release\ItemInfo.cpp">
+      <Filter>Source Files\x64\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Release\Database.cpp">
+      <Filter>Source Files\Win32\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32\Debug\Database.cpp">
+      <Filter>Source Files\Win32\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Debug\Database.cpp">
+      <Filter>Source Files\x64\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="x64\Release\Database.cpp">
+      <Filter>Source Files\x64\Release</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\CurrentDatabase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Evictor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\EvictorBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ItemI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleEvictor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Debug\Item.h">
+      <Filter>Header Files\Win32\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Debug\ItemInfo.h">
+      <Filter>Header Files\Win32\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\Item.h">
+      <Filter>Header Files\x64\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\ItemInfo.h">
+      <Filter>Header Files\x64\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Release\Item.h">
+      <Filter>Header Files\Win32\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Release\ItemInfo.h">
+      <Filter>Header Files\Win32\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Release\Item.h">
+      <Filter>Header Files\x64\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Release\ItemInfo.h">
+      <Filter>Header Files\x64\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Release\Database.h">
+      <Filter>Header Files\Win32\Release</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32\Debug\Database.h">
+      <Filter>Header Files\Win32\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Debug\Database.h">
+      <Filter>Header Files\x64\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="x64\Release\Database.h">
+      <Filter>Header Files\x64\Release</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\config.server" />
+    <None Include="..\..\README.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="dummy.freeze" />
+  </ItemGroup>
+  <ItemGroup>
+    <IceBuilder Include="..\..\Item.ice">
+      <Filter>Slice Files</Filter>
+    </IceBuilder>
+    <IceBuilder Include="..\..\ItemInfo.ice">
+      <Filter>Slice Files</Filter>
+    </IceBuilder>
+  </ItemGroup>
+</Project>

@@ -129,6 +129,7 @@
   <ItemGroup>
     <None Include="..\..\Scanner.l" />
     <None Include="..\..\Grammar.y" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy.txt">

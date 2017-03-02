@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Freeze", "Freeze", "{EDB92982-CA2F-4083-86C7-AF7CEA04E94A}"
 EndProject
@@ -19,51 +19,51 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "phonebook", "phonebook", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "transform", "transform", "{744D159D-9739-401C-B4F3-96D6A9590472}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\backup\Freeze.backup.client.vcxproj", "{3178F16D-EA3B-42F5-A334-CE753A0A8E33}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\bench\Freeze.bench.client.vcxproj", "{8148DA60-E8D7-4117-A60E-9AFA0C15143C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\casino\Freeze.casino.client.vcxproj", "{C015D52B-6548-4BEC-882C-3845945EDE13}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\casino\Freeze.casino.server.vcxproj", "{87CECE87-62E9-4D10-B1A4-D36191ADFC8A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\customEvictor\Freeze.customEvictor.client.vcxproj", "{AB4AAFB0-0F6F-4A46-A21F-96496A12A5F1}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\customEvictor\Freeze.customEvictor.server.vcxproj", "{342BFF78-C044-44EB-8DE9-464114C17233}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\library\Freeze.library.client.vcxproj", "{CCF288AA-4C00-45BA-AD36-DA064A1AB8CF}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collocated", "Freeze\library\Freeze.library.collocated.vcxproj", "{80D04E2B-F180-4D44-AD65-9F04E875988C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\library\Freeze.library.server.vcxproj", "{7CC6B463-7F14-4270-ABF5-5E5A7632EDBD}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\phonebook\Freeze.phonebook.client.vcxproj", "{DC19C23E-B53C-4A11-9B62-677CDC87D08C}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collocated", "Freeze\phonebook\Freeze.phonebook.collocated.vcxproj", "{5EB31F0A-A3D4-4553-83AF-45E30549A7AD}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\phonebook\Freeze.phonebook.server.vcxproj", "{8FACCA7B-B717-424A-8BAA-DF26D389E5C0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "create", "Freeze\transform\Freeze.transform.create.vcxproj", "{4ED994E8-3AF7-4ABC-B029-5EFDBCF41E76}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "read", "Freeze\transform\Freeze.transform.read.vcxproj", "{2D02A8FB-6011-4E84-B2B7-2A26E310C536}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "readnew", "Freeze\transform\Freeze.transform.readnew.vcxproj", "{AD9A8840-D6B6-41F6-8AB5-6A18F6A5A50B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "recreate", "Freeze\transform\Freeze.transform.recreate.vcxproj", "{7BD80BEC-C16B-412F-808B-FDD042D217DB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manual", "Manual", "{5F480383-0956-4BE4-AA77-8DFDCF417AB5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "evictorFilesystem", "evictorFilesystem", "{1FF8AD3D-FD78-413B-AFC8-C21EB93BEFD7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mapFilesystem", "mapFilesystem", "{9FDCD2FF-ED39-467A-97BE-7F4717F89E57}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Manual\evictorFilesystem\manual.evictorFilesystem.client.vcxproj", "{66668B00-70BB-4CF0-8DB2-2717DC5F4DA3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\backup\msbuild\client\client.vcxproj", "{3178F16D-EA3B-42F5-A334-CE753A0A8E33}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Manual\evictorFilesystem\manual.evictorFilesystem.server.vcxproj", "{2E1BBDAB-F9C2-4C72-9587-29D7F428BC32}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\bench\msbuild\client\client.vcxproj", "{8148DA60-E8D7-4117-A60E-9AFA0C15143C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Manual\mapFilesystem\manual.mapFilesystem.client.vcxproj", "{0C6E1127-1105-49F0-99BB-CBDC1C2566F0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\casino\msbuild\client\client.vcxproj", "{C015D52B-6548-4BEC-882C-3845945EDE13}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Manual\mapFilesystem\manual.mapFilesystem.server.vcxproj", "{37369B6D-DFB9-4413-A4F5-AE261FDA74A2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\casino\msbuild\server\server.vcxproj", "{87CECE87-62E9-4D10-B1A4-D36191ADFC8A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\customEvictor\msbuild\client\client.vcxproj", "{AB4AAFB0-0F6F-4A46-A21F-96496A12A5F1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\customEvictor\msbuild\server\server.vcxproj", "{342BFF78-C044-44EB-8DE9-464114C17233}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\library\msbuild\client\client.vcxproj", "{CCF288AA-4C00-45BA-AD36-DA064A1AB8CF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collocated", "Freeze\library\msbuild\collocated\collocated.vcxproj", "{80D04E2B-F180-4D44-AD65-9F04E875988C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\library\msbuild\server\server.vcxproj", "{7CC6B463-7F14-4270-ABF5-5E5A7632EDBD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Freeze\phonebook\msbuild\client\client.vcxproj", "{DC19C23E-B53C-4A11-9B62-677CDC87D08C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "collocated", "Freeze\phonebook\msbuild\collocated\collocated.vcxproj", "{5EB31F0A-A3D4-4553-83AF-45E30549A7AD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Freeze\phonebook\msbuild\server\server.vcxproj", "{8FACCA7B-B717-424A-8BAA-DF26D389E5C0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "create", "Freeze\transform\msbuild\create\create.vcxproj", "{4ED994E8-3AF7-4ABC-B029-5EFDBCF41E76}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "read", "Freeze\transform\msbuild\read\read.vcxproj", "{2D02A8FB-6011-4E84-B2B7-2A26E310C536}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "readnew", "Freeze\transform\msbuild\readnew\readnew.vcxproj", "{AD9A8840-D6B6-41F6-8AB5-6A18F6A5A50B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "recreate", "Freeze\transform\msbuild\recreate\recreate.vcxproj", "{7BD80BEC-C16B-412F-808B-FDD042D217DB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Manual\evictorFilesystem\msbuild\client\client.vcxproj", "{66668B00-70BB-4CF0-8DB2-2717DC5F4DA3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Manual\evictorFilesystem\msbuild\server\server.vcxproj", "{2E1BBDAB-F9C2-4C72-9587-29D7F428BC32}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "Manual\mapFilesystem\msbuild\client\client.vcxproj", "{0C6E1127-1105-49F0-99BB-CBDC1C2566F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "Manual\mapFilesystem\msbuild\server\server.vcxproj", "{37369B6D-DFB9-4413-A4F5-AE261FDA74A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +245,8 @@ Global
 		{67AF994E-E884-4044-9FAE-CF05048DA0C0} = {EDB92982-CA2F-4083-86C7-AF7CEA04E94A}
 		{E5E9FD39-7A4D-4963-B20C-B18749EE09F7} = {EDB92982-CA2F-4083-86C7-AF7CEA04E94A}
 		{744D159D-9739-401C-B4F3-96D6A9590472} = {EDB92982-CA2F-4083-86C7-AF7CEA04E94A}
+		{1FF8AD3D-FD78-413B-AFC8-C21EB93BEFD7} = {5F480383-0956-4BE4-AA77-8DFDCF417AB5}
+		{9FDCD2FF-ED39-467A-97BE-7F4717F89E57} = {5F480383-0956-4BE4-AA77-8DFDCF417AB5}
 		{3178F16D-EA3B-42F5-A334-CE753A0A8E33} = {E15F3D45-342D-4038-8901-9ED2872E02F5}
 		{8148DA60-E8D7-4117-A60E-9AFA0C15143C} = {C9255378-9AB2-4A34-BD52-23F609C28CC5}
 		{C015D52B-6548-4BEC-882C-3845945EDE13} = {17EE3699-CA88-4452-BD63-6EE56D38FCD6}
@@ -261,8 +263,6 @@ Global
 		{2D02A8FB-6011-4E84-B2B7-2A26E310C536} = {744D159D-9739-401C-B4F3-96D6A9590472}
 		{AD9A8840-D6B6-41F6-8AB5-6A18F6A5A50B} = {744D159D-9739-401C-B4F3-96D6A9590472}
 		{7BD80BEC-C16B-412F-808B-FDD042D217DB} = {744D159D-9739-401C-B4F3-96D6A9590472}
-		{1FF8AD3D-FD78-413B-AFC8-C21EB93BEFD7} = {5F480383-0956-4BE4-AA77-8DFDCF417AB5}
-		{9FDCD2FF-ED39-467A-97BE-7F4717F89E57} = {5F480383-0956-4BE4-AA77-8DFDCF417AB5}
 		{66668B00-70BB-4CF0-8DB2-2717DC5F4DA3} = {1FF8AD3D-FD78-413B-AFC8-C21EB93BEFD7}
 		{2E1BBDAB-F9C2-4C72-9587-29D7F428BC32} = {1FF8AD3D-FD78-413B-AFC8-C21EB93BEFD7}
 		{0C6E1127-1105-49F0-99BB-CBDC1C2566F0} = {9FDCD2FF-ED39-467A-97BE-7F4717F89E57}

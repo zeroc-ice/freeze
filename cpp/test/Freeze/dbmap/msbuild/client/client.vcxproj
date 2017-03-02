@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.props') and '$(ICE_BIN_DIST)' != ''" />
+  <Import Project="..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.props') and '$(ICE_BIN_DIST)' != ''" />
+  <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props') and '$(ICE_BIN_DIST)' != ''" />
+  <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.props" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.props') and '$(ICE_BIN_DIST)' != ''" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -20,14 +24,10 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. --dict Test::ByteIntMap,byte,int --dict-index Test::ByteIntMap,sort ByteIntMap</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\ByteIntMap.h;$(Platform)\$(Configuration)\ByteIntMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\ByteIntMap.h;$(Platform)\$(Configuration)\ByteIntMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\ByteIntMap.h;$(Platform)\$(Configuration)\ByteIntMap.cpp</Outputs>
@@ -36,14 +36,10 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy1.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I..\.. -I$(IceHome)\slice --dict Test::IntIdentityMap,int,Ice::Identity IntIdentityMap "$(IceHome)\slice\Ice\Identity.ice</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\IntIdentityMap.h;$(Platform)\$(Configuration)\IntIdentityMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\IntIdentityMap.h;$(Platform)\$(Configuration)\IntIdentityMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\IntIdentityMap.h;$(Platform)\$(Configuration)\IntIdentityMap.cpp</Outputs>
@@ -52,14 +48,10 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy2.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::IntIdentityMapWithIndex,int,Ice::Identity --dict-index Test::IntIdentityMapWithIndex,category IntIdentityMapWithIndex "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\IntIdentityMapWithIndex.h;$(Platform)\$(Configuration)\IntIdentityMapWithIndex.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\IntIdentityMapWithIndex.h;$(Platform)\$(Configuration)\IntIdentityMapWithIndex.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\IntIdentityMapWithIndex.h;$(Platform)\$(Configuration)\IntIdentityMapWithIndex.cpp</Outputs>
@@ -68,14 +60,10 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy3.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I$(IceHome)\slice --dict Test::SortedMap,int,Ice::Identity,sort SortedMap --dict-index "Test::SortedMap,category,sort,std::greater&lt;std::string&gt;" "$(IceHome)\slice\Ice\Identity.ice"</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\SortedMap.h;$(Platform)\$(Configuration)\SortedMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\SortedMap.h;$(Platform)\$(Configuration)\SortedMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\SortedMap.h;$(Platform)\$(Configuration)\SortedMap.cpp</Outputs>
@@ -84,14 +72,10 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) -I
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="dummy4.txt">
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --dict Test::WstringWstringMap,[\"cpp:type:wstring\"]string,[\"cpp:type:wstring\"]string --dict-index Test::WstringWstringMap WstringWstringMap</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\WstringWstringMap.h;$(Platform)\$(Configuration)\WstringWstringMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\WstringWstringMap.h;$(Platform)\$(Configuration)\WstringWstringMap.cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\WstringWstringMap.h;$(Platform)\$(Configuration)\WstringWstringMap.cpp</Outputs>
@@ -303,6 +287,9 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD8FB4E0-F3BC-4E78-BF8F-F5EC14F9951A}</ProjectGuid>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -335,6 +322,10 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --
   <Import Project="$(MSBuildThisFileDirectory)\..\..\..\..\..\msbuild\freeze.test.props" />
   <Import Project="$(IceBuilderCppProps)" Condition="Exists('$(IceBuilderCppProps)')" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.targets" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.targets') and '$(ICE_BIN_DIST)' != ''" />
+    <Import Project="..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.targets" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.targets') and '$(ICE_BIN_DIST)' != ''" />
+    <Import Project="..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.targets" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.targets') and '$(ICE_BIN_DIST)' != ''" />
+    <Import Project="..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.targets" Condition="Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.targets') and '$(ICE_BIN_DIST)' != ''" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -381,5 +372,18 @@ $(FreezeToolsPath)\slice2freeze.exe --output-dir $(Platform)\$(Configuration) --
       <ErrorText>This project requires the Ice Builder for Visual Studio extension. Use "Tools &amp;gt; Extensions and Updates" to install it. For more information, see https://visualstudiogallery.msdn.microsoft.com/1a64e701-63f2-4740-8004-290e6c682ce0.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(IceBuilderCppProps)')" Text="$(ErrorText)" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.props') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.targets') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.ice.v120.3.7.0-alpha4\build\native\zeroc.ice.v120.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.targets') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.ice.v140.3.7.0-alpha4\build\native\zeroc.ice.v140.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.props') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.targets') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.freeze.v120.3.7.0-alpha4\build\native\zeroc.freeze.v120.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.props') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.targets') and '$(ICE_BIN_DIST)' != ''" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\msbuild\packages\zeroc.freeze.v140.3.7.0-alpha4\build\native\zeroc.freeze.v140.targets'))" />
   </Target>
 </Project>
