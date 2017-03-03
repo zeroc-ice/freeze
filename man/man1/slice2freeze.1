@@ -10,11 +10,12 @@ slice2freeze [options] [files]
 
 .SH DESCRIPTION
 
-slice2freeze generates Freeze map and index classes in C++.
+slice2freeze generates Freeze map and index classes in C++. The macro
+__SLICE2FREEZE__ is defined during this compilation.
 
 Full documentation for slice2freeze is available online at: 
 .br
-"https://doc.zeroc.com/display/Ice37/slice2freeze+Command-Line+Options".
+https://doc.zeroc.com/display/Freeze37/slice2freeze+Command-Line+Options
 
 .SH OPTIONS
 
@@ -63,15 +64,30 @@ Place the generated files into directory DIR.
 Print debug information showing the operation of the Slice parser.
 
 .TP
-.BR \-\-ice\fR
+.BR \-\-depend\fR
 .br
-Permit use of the normally reserved prefix Ice for identifiers. Use this
-option only when compiling the source code for the Ice run time.
+Print dependency information to standard output by default, or to the
+file specified by the --depend-file option. No code is generated when
+this option is specified.
 
 .TP
-.BR \-\-underscore\fR
+.BR \-\-depend\-xml\fR
 .br
-Permit use of underscores in Slice identifiers.
+Print dependency information in XML format to standard output by default,
+or to the file specified by the --depend-file option. No code is generated
+when this option is specified.
+
+.TP
+.BR \-\-depend\-file " " FILE\fR
+.br
+Directs dependency information to the specified file. The output
+format depends on whether --depend or --depend-xml is also specified.
+
+.TP
+.BR \-\-validate\fR
+.br
+Checks the provided command-line options for correctness, and does not
+generate any code.
 
 .TP
 .BR \-\-header-ext " " EXT\fR
@@ -98,12 +114,6 @@ specified guard.
 .br
 Modifies #include directives in source files to prepend the path name of each
 header file with the directory DIR.
-
-.TP
-.BR \-\-dll-export " " SYMBOL\fR
-.br
-Use SYMBOL to control DLL exports or imports. This option allows you to
-selectively export or import global symbols in the generated code.
 
 .TP
 .BR \-\-dict " " NAME,KEY,VALUE[,sort[,COMPARE]]\fR
@@ -133,13 +143,13 @@ data member in TYPE to index. When MEMBER has type string, it is possible to
 specify whether the index is case-sensitive or not. The default is 
 case-sensitive.
 
+.TP
+.BR \-\-dll-export " " SYMBOL\fR
+.br
+Use SYMBOL to control DLL exports or imports. This option allows you to
+selectively export or import global symbols in the generated code.
+
 .SH SEE ALSO
 
 .BR slice2cpp (1),
-.BR slice2cs (1),
-.BR slice2freezej (1),
-.BR slice2html (1),
-.BR slice2java (1), 
-.BR slice2php (1),
-.BR slice2py (1),
-.BR slice2rb (1)
+.BR slice2freezej (1)

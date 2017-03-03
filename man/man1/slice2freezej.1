@@ -10,11 +10,12 @@ slice2freezej [options] [files]
 
 .SH DESCRIPTION
 
-slice2java generates Freeze map and index classes in Java.
+slice2java generates Freeze map and index classes in Java. The macro
+__SLICE2FREEZEJ__ is defined during this compilation.
 
 Full documentation for slice2freezej is available online at:
 .br
-"https://doc.zeroc.com/display/Ice37/slice2freezej+Command-Line+Options".
+https://doc.zeroc.com/display/Freeze37/slice2freezej+Command-Line+Options
 
 .SH OPTIONS
 
@@ -34,7 +35,7 @@ Defines the preprocessor symbol NAME.
 
 .TP
 .BR \-DNAME=DEF\fR
-.br 
+.br
 Defines the preprocessor symbol NAME with the value DEF.
 
 .TP
@@ -63,15 +64,30 @@ Place the generated files into directory DIR.
 Print debug information showing the operation of the Slice parser.
 
 .TP
-.BR \-\-ice\fR
+.BR \-\-depend\fR
 .br
-Permit use of the normally reserved prefix Ice for identifiers. Use this
-option only when compiling the source code for the Ice run time.
+Print dependency information to standard output by default, or to the
+file specified by the --depend-file option. No code is generated when
+this option is specified.
 
 .TP
-.BR \-\-underscore\fR
+.BR \-\-depend\-xml\fR
 .br
-Permit use of underscores in Slice identifiers.
+Print dependency information in XML format to standard output by default,
+or to the file specified by the --depend-file option. No code is generated
+when this option is specified.
+
+.TP
+.BR \-\-depend\-file " " FILE\fR
+.br
+Directs dependency information to the specified file. The output
+format depends on whether --depend or --depend-xml is also specified.
+
+.TP
+.BR \-\-validate\fR
+.br
+Checks the provided command-line options for correctness, and does not
+generate any code.
 
 .TP
 .BR \-\-dict " " NAME,KEY,VALUE\fR
@@ -86,7 +102,7 @@ Ice::Identity.
 .BR \-\-dict\-index " " MAP[,MEMBER][,case\-sensitive|case\-insensitive]\fR
 .br
 Add an index to the Freeze map named MAP. If MEMBER is specified, the map
-value type must be a structure or a class, and MEMBER must be the name of a 
+value type must be a structure or a class, and MEMBER must be the name of a
 member of that type. If MEMBER is not specified, the entire value is indexed.
 When the indexed member (or entire value) is a string, the index can be
 case-sensitive (default) or case-insensitive.
@@ -112,11 +128,5 @@ compiled.
 
 .SH SEE ALSO
 
-.BR slice2cpp (1),
-.BR slice2cs (1),
 .BR slice2freeze (1),
-.BR slice2html (1),
-.BR slice2java (1), 
-.BR slice2php (1),
-.BR slice2py (1),
-.BR slice2rb (1)
+.BR slice2java (1)

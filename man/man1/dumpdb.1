@@ -10,14 +10,15 @@ dumpdb [options] dbenv db
 
 .SH DESCRIPTION
 
-The FreezeScript tool dumpdb is used to examine a Freeze database. Its 
+The FreezeScript tool dumpdb is used to examine a Freeze database. Its
 simplest invocation displays every record of the database, but the tool also
-supports more selective activities. In fact, dumpdb supports a scripted mode 
-that shares many of the same XML descriptors as transformdb, enabling 
-sophisticated filtering and reporting. Full documentation for dumpdb is 
-available online at: 
+supports more selective activities. In fact, dumpdb supports a scripted mode
+that shares many of the same XML descriptors as transformdb, enabling
+sophisticated filtering and reporting.
+The macro __DUMPDB__ is defined during the Slice file compilation.
+Full documentation for dumpdb is available online at:
 .br
-"https://doc.zeroc.com/display/Ice37/Using+dumpdb".
+https://doc.zeroc.com/display/Freeze37/Using+dumpdb
 
 .SH OPTIONS
 
@@ -28,7 +29,7 @@ Displays help message.
 
 .TP
 .BR \-v ", " \-\-version\fR
-Displays the Ice version.
+Displays the Freeze version.
 
 .TP
 .BR \-DNAME\fR
@@ -37,7 +38,7 @@ Defines the preprocessor symbol NAME.
 
 .TP
 .BR \-DNAME=DEF\fR
-.br 
+.br
 Defines the preprocessor symbol NAME with the value DEF.
 
 .TP
@@ -64,17 +65,6 @@ Place the generated files into directory DIR.
 .BR \-d ", " \-\-debug\fR
 .br
 Print debug information showing the operation of the Slice parser.
-
-.TP
-.BR \-\-ice\fR
-.br
-Permit use of the normally reserved prefix Ice for identifiers. Use this 
-option only when compiling the source code for the Ice run time.
-
-.TP
-.BR \-\-underscore\fR
-.br
-Permit use of underscores in Slice identifiers.
 
 .TP
 .BR \-\-load " " SLICE\fR
@@ -104,10 +94,10 @@ Indicates that a Freeze evictor database is being examined. As a convenience,
 this option automatically sets the database key and value types to those
 appropriate for the Freeze evictor, and therefore the --key and --value
 options are not necessary. Specifically, the key type of a Freeze evictor
-database is Ice::Identity, and the value type is Freeze::ObjectRecord. 
-The latter is defined in the Slice file Freeze/EvictorStorage.ice, however 
-this file does not need to be explicitly loaded. If this option is not 
-specified, and the --key and --value options are not used, dumpdb obtains 
+database is Ice::Identity, and the value type is Freeze::ObjectRecord.
+The latter is defined in the Slice file Freeze/EvictorStorage.ice, however
+this file does not need to be explicitly loaded. If this option is not
+specified, and the --key and --value options are not used, dumpdb obtains
 type information from the Freeze catalog.
 
 .TP
@@ -122,7 +112,7 @@ is used.
 .TP
 .BR \-f " " FILE\fR
 .br
-Execute the descriptors in the file named FILE. The file's <database> 
+Execute the descriptors in the file named FILE. The file's <database>
 descriptor specifies the key and value types, therefore it is not necessary to
 supply type information.
 

@@ -35,9 +35,11 @@ or evictor. It accomplishes this by comparing the "old" Slice definitions
 (i.e., the ones that describe the current contents of the database) with the 
 "new" Slice definitions, and making whatever modifications are necessary to 
 ensure that the transformed database is compatible with the new definitions.
+The macro __TRANSFORMDB__ is defined during the Slice file compilation.
+
 Full documentation for transformdb is available online at: 
 .br
-"https://doc.zeroc.com/display/Ice37/Using+transformdb".
+https://doc.zeroc.com/display/Freeze37/Using+transformdb
 
 .SH OPTIONS
 
@@ -48,7 +50,7 @@ Displays a help message.
 
 .TP
 .BR \-v ", " \-\-version\fR
-Displays the Ice version.
+Displays the Freeze version.
 
 .TP
 .BR \-DNAME\fR
@@ -84,17 +86,6 @@ Place the generated files into directory DIR.
 .BR \-d ", " \-\-debug\fR
 .br
 Print debug information showing the operation of the Slice parser.
-
-.TP
-.BR \-\-ice\fR
-.br
-Permit use of the normally reserved prefix Ice for identifiers. Use this
-option only when compiling the source code for the Ice run time.
-
-.TP
-.BR \-\-underscore\fR
-.br
-Permit use of underscores in Slice identifiers.
 
 .TP
 .BR \-\-old " " SLICE\fR
