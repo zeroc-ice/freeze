@@ -91,8 +91,8 @@ ice_slicedir 		?= $(top_srcdir)/ice/slice
 ice_includedir		?= $(top_srcdir)/ice/cpp/include
 endif
 
-version			= 3.7a4
-soversion		= 37a4
+version			= 3.7b0
+soversion		= 37b0
 
 #
 # The compatversion is the lowest patch release with the same API.
