@@ -482,9 +482,9 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
 
                                 try
                                 {
-                                    boolean dispatchAsync = sh.servant().ice_dispatch(request, ctx);
+                                    boolean dispatchSync = sh.servant().ice_dispatch(request, ctx);
                                     
-                                    if(dispatchAsync)
+                                    if(!dispatchSync)
                                     {
                                         //
                                         // May throw DeadlockException or TransactionalEvictorDeadlockException
@@ -496,7 +496,7 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
                                             ctx.rollback();
                                         }
                                     }
-                                    return dispatchAsync;
+                                    return dispatchSync;
                                 }
                                 catch(Ice.UserException ex)
                                 {

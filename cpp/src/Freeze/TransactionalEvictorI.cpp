@@ -557,9 +557,9 @@ Freeze::TransactionalEvictorI::dispatch(Request& request)
 
                     try
                     {
-                        bool dispatchAsync = sh.servant()->ice_dispatch(request, ctx);
+                        bool dispatchSync = sh.servant()->ice_dispatch(request, ctx);
 
-                        if(dispatchAsync)
+                        if(!dispatchSync)
                         {
                             //
                             // May throw DeadlockException or TransactionalEvictorDeadlockException
@@ -572,7 +572,7 @@ Freeze::TransactionalEvictorI::dispatch(Request& request)
                             }
                         }
 
-                        return dispatchAsync;
+                        return dispatchSync;
                     }
                     catch(const Ice::UserException&)
                     {
