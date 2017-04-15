@@ -6,6 +6,8 @@
 
 #pragma once
 
+[["suppress-warning:deprecated"]] // for classes with operations
+
 [["java:package:test.Freeze.complex"]]
 module Complex
 {
