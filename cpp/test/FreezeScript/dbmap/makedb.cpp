@@ -29,7 +29,7 @@ main(int argc, char* argv[])
 {
     int status;
     Ice::CommunicatorPtr communicator;
- 
+
     string envName = "db";
 
     try
@@ -41,7 +41,7 @@ main(int argc, char* argv[])
             envName += "/";
             envName += "db";
         }
-       
+
         status = run(communicator, envName, "default.db");
     }
     catch(const Ice::Exception& ex)

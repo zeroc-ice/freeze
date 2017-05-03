@@ -12,7 +12,7 @@ public abstract class Application
 {
     public final int WAIT = 2;
 
-    
+
 
     public interface ServerReadyListener
     {

@@ -16,7 +16,7 @@ module Freeze
 local interface Transaction;
 
 /**
- * 
+ *
  * A transactional evictor is an evictor that performs every single read-write
  * operation within its own transaction.
  *

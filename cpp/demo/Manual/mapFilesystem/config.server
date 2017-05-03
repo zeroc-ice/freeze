@@ -6,8 +6,8 @@ MapFilesystem.Endpoints=default -h localhost -p 10000
 #
 # Freeze Map Tracing.
 #
-# 0 = No map activity trace (default). 
-# 1 = Trace database open and close. 
+# 0 = No map activity trace (default).
+# 1 = Trace database open and close.
 # 2 = Also trace iterator and transaction operations, and reference
 # counting of the underlying database.
 #

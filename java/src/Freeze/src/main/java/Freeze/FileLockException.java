@@ -40,7 +40,7 @@ public class FileLockException extends RuntimeException implements Cloneable
 	{
 	    assert false;
 	}
-	return c; 
+	return c;
     }
 
     public String

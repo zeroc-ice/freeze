@@ -14,8 +14,8 @@ module Freeze
 {
 
 /**
- * 
- * A background-save evictor is an evictor that saves updates 
+ *
+ * A background-save evictor is an evictor that saves updates
  * asynchronously in a background thread.
  *
  **/
@@ -30,7 +30,7 @@ local interface BackgroundSaveEvictor extends Evictor
      *
      * @param id The identity of the Ice object.
      *
-     * @throws Ice.NotRegisteredException Raised if this identity was not 
+     * @throws Ice.NotRegisteredException Raised if this identity was not
      * registered with the evictor.
      *
      * @throws DatabaseException Raised if a database failure occurred.
@@ -44,7 +44,7 @@ local interface BackgroundSaveEvictor extends Evictor
 
     /**
      *
-     * Like {@link #keep}, but with a facet. Calling <tt>keep(id)</tt> 
+     * Like {@link #keep}, but with a facet. Calling <tt>keep(id)</tt>
      * is equivalent to calling {@link #keepFacet} with an empty facet.
      *
      * @param id The identity of the Ice object.
@@ -52,7 +52,7 @@ local interface BackgroundSaveEvictor extends Evictor
      * @param facet The facet. An empty facet means the default
      * facet.
      *
-     * @throws Ice.NotRegisteredException Raised if this identity was not 
+     * @throws Ice.NotRegisteredException Raised if this identity was not
      * registered with the evictor.
      *
      * @throws DatabaseException Raised if a database failure occurred.
@@ -68,7 +68,7 @@ local interface BackgroundSaveEvictor extends Evictor
     /**
      *
      * Release a lock acquired by {@link #keep}. Once all the locks on an
-     * object have been released, the object is again subject to the 
+     * object have been released, the object is again subject to the
      * normal eviction strategy.
      *
      * @param id The identity of the Ice object.
@@ -84,7 +84,7 @@ local interface BackgroundSaveEvictor extends Evictor
 
     /**
      *
-     * Like {@link #release}, but with a facet. Calling <tt>release(id)</tt> 
+     * Like {@link #release}, but with a facet. Calling <tt>release(id)</tt>
      * is equivalent to calling {@link #releaseFacet} with an empty facet.
      *
      * @param id The identity of the Ice object.

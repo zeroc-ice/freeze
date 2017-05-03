@@ -16,7 +16,7 @@ class ItemI : public Warehouse::Item
 {
 public:
 
-    ItemI(CurrentDatabase&, const Warehouse::ItemInfo&); 
+    ItemI(CurrentDatabase&, const Warehouse::ItemInfo&);
 
     virtual std::string getDescription(const Ice::Current&);
     virtual void setDescription(const std::string&,const Ice::Current&);
@@ -28,9 +28,9 @@ public:
     virtual void adjustStock(int, const Ice::Current&);
 
 private:
-    
+
     void save(const Ice::Current&);
-    
+
     CurrentDatabase& _currentDb;
     Warehouse::ItemInfo _cachedInfo;
     IceUtil::Mutex _mutex;

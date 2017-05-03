@@ -23,22 +23,22 @@ case $1 in
 
           echo "====== Checkpoint ======"
           ${db}_checkpoint -1 -h db
-    
+
           if [ $1 = "full" ]
           then
              if [ -d hotbackup ]
              then
-                 echo "====== Preserve (move) previous hotbackup directory ======"               
+                 echo "====== Preserve (move) previous hotbackup directory ======"
                  if [ -d hotbackup.1 ]
                  then
                     \rm -fr hotbackup.1
                  fi
                  \mv hotbackup hotbackup.1
              fi
-           
+
              echo "====== Retrieve list of old logs ======"
              oldLogs=`${db}_archive -h db`
-             
+
              echo "====== Run ${db}_hotbackup ======"
              ${db}_hotbackup -b hotbackup -v -D -h db
              status=$?
@@ -51,12 +51,12 @@ case $1 in
                 echo "db/logs/$i deleted"
              done
           fi
-          
+
           if [ $1 = "incremental" ]
           then
               if [ -d hotbackup ]
               then
-                 echo "====== Preserve (copy) previous hotbackup directory ======"               
+                 echo "====== Preserve (copy) previous hotbackup directory ======"
                  if [ -d hotbackup.1 ]
                  then
                     \rm -fr hotbackup.1
@@ -68,7 +68,7 @@ case $1 in
               ${db}_hotbackup -u -b hotbackup -v -D -h db
               status=$?
               if [ $status != 0 ]; then exit $status ; fi
-          fi          
+          fi
 
           ;;
   *) echo "Usage: $0 {full|incremental}"

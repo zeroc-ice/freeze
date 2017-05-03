@@ -27,7 +27,7 @@ public class ClientFail
     public static void
     main(String[] argvs)
     {
-        
+
         try
         {
             new Freeze.FileLock("file.lock");
@@ -37,7 +37,7 @@ public class ClientFail
         {
             System.out.println("File lock not acquired.");
             //
-            // Try to read the pid of the lock owner from the lock file, in Windows 
+            // Try to read the pid of the lock owner from the lock file, in Windows
             // we don't write pid to lock files.
             //
             if(!System.getProperty("os.name").startsWith("Windows"))

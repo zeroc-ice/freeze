@@ -295,7 +295,7 @@ public class Client extends test.Util.Application
             test(count == 1); // Opened by keys.remove()
 
             Transaction tx = connection.beginTransaction();
-            
+
             test(keys.size() == alphabet.length());
             test(keys.remove((byte)'a') == true);
 
@@ -1108,7 +1108,7 @@ public class Client extends test.Util.Application
                 // fastRemove
                 //
                 sub = sm.headMap(first, true);
-              
+
                 Ice.Identity id = sub.get(first);
                 test(sub.fastRemove(first) == true);
                 test(sub.fastRemove(first) == false);
@@ -1130,24 +1130,24 @@ public class Client extends test.Util.Application
                 NavigableMap<String, java.util.Set<java.util.Map.Entry<Integer, Ice.Identity>>> isub = null;
 
                 isub = sm.mapForCategory();
-            
+
                 {
                     Transaction tx = connection.beginTransaction();
-                    
+
                     Ice.Identity id = sm.get(sm.firstKey());
                     int sz = isub.get(id.category).size();
                     test(sz > 0);
-                    
 
-                    test(sm.fastRemove(sm.firstKey()) == true); 
-                    
-                    
+
+                    test(sm.fastRemove(sm.firstKey()) == true);
+
+
                     if(sz == 1)
                     {
                         test(isub.get(id.category) == null);
                     }
                     else
-                    { 
+                    {
                         // System.out.println("Check size within tx");
                         test(isub.get(id.category).size() == sz -1);
                     }
@@ -1424,10 +1424,10 @@ public class Client extends test.Util.Application
 
             {
                 NavigableMap<Integer, Ice.Identity> dmap = sm.descendingMap();
-               
+
                 testSortedMap(dmap, false);
                 testSortedMap(dmap.descendingMap(), true); // Ascending submap.
-              
+
             }
 
             int finc, tinc; // Inclusive flags
@@ -2154,7 +2154,7 @@ public class Client extends test.Util.Application
 
         return run(args, communicator(), envName, "binary");
     }
-    
+
     public static void main(String[] args)
     {
         Client c = new Client();

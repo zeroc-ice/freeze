@@ -13,7 +13,7 @@ slice2freeze [options] [files]
 slice2freeze generates Freeze map and index classes in C++. The macro
 __SLICE2FREEZE__ is defined during this compilation.
 
-Full documentation for slice2freeze is available online at: 
+Full documentation for slice2freeze is available online at:
 .br
 https://doc.zeroc.com/display/Freeze37/slice2freeze+Command-Line+Options
 
@@ -35,7 +35,7 @@ Defines the preprocessor symbol NAME.
 
 .TP
 .BR \-DNAME=DEF\fR
-.br 
+.br
 Defines the preprocessor symbol NAME with the value DEF.
 
 .TP
@@ -105,7 +105,7 @@ cpp to EXT.
 .BR \-\-add-header " " HDR[,GUARD]
 .br
 This option adds an include directive for the specified header at the
-beginning of the generated source file (preceding any other include 
+beginning of the generated source file (preceding any other include
 directives). If GUARD is specified, the include directive is protected by the
 specified guard.
 
@@ -118,10 +118,10 @@ header file with the directory DIR.
 .TP
 .BR \-\-dict " " NAME,KEY,VALUE[,sort[,COMPARE]]\fR
 .br
-Generate a Freeze map class named NAME using KEY as key and VALUE as value. 
-This option may be specified multiple times to generate several Freeze maps. 
-NAME may be a scoped C++ name, such as Demo::Struct1ObjectMap. KEY and VALUE 
-represent Slice types and therefore must use Slice syntax, such as bool or 
+Generate a Freeze map class named NAME using KEY as key and VALUE as value.
+This option may be specified multiple times to generate several Freeze maps.
+NAME may be a scoped C++ name, such as Demo::Struct1ObjectMap. KEY and VALUE
+represent Slice types and therefore must use Slice syntax, such as bool or
 Ice::Identity. By default, keys are sorted using their binary Ice-encoded
 representation. Include sort to sort with the COMPARE functor class. If
 COMPARE is not specified, the default value is std::less<KEY>.
@@ -129,7 +129,7 @@ COMPARE is not specified, the default value is std::less<KEY>.
 .TP
 .BR \-\-dict\-index " " MAP[,MEMBER] " " [,case\-sensitive|case\-insensitive][,sort[,COMPARE]]\fR
 .br
-Add an index to the Freeze map named MAP. If MEMBER is specified, the map 
+Add an index to the Freeze map named MAP. If MEMBER is specified, the map
 value type must be a structure or a class, and MEMBER must be a member of this
 structure or class.
 
@@ -140,7 +140,7 @@ Generate an index class for a Freeze evictor. CLASS is the name of the class
 to be generated. TYPE denotes the type of class to be indexed (objects of
 different classes are not included in this index). MEMBER is the name of the
 data member in TYPE to index. When MEMBER has type string, it is possible to
-specify whether the index is case-sensitive or not. The default is 
+specify whether the index is case-sensitive or not. The default is
 case-sensitive.
 
 .TP

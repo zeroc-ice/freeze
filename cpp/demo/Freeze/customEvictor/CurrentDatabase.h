@@ -17,12 +17,12 @@
 class CurrentDatabase
 {
 public:
-    
+
     CurrentDatabase(const Ice::CommunicatorPtr&, const std::string&, const std::string&);
     ~CurrentDatabase();
 
     Database& get();
-  
+
 private:
 
     const Ice::CommunicatorPtr _communicator;

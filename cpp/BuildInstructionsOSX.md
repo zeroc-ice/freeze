@@ -28,7 +28,7 @@ You can install Berkeley DB with [Homebrew][3] as follows:
 
 ### Step 1: build IceXML and testcommon in the ice submodule
 
-Edit `freeze/ice/config/Make.rules` to establish your build configuration. 
+Edit `freeze/ice/config/Make.rules` to establish your build configuration.
 The comments in the file provide more information.
 
     cd freeze/ice/cpp
@@ -39,7 +39,7 @@ The comments in the file provide more information.
     cd freeze/cpp
     make -j8
 
-This builds the Freeze library, the FreezeScript utilities, and all Freeze 
+This builds the Freeze library, the FreezeScript utilities, and all Freeze
 tests and demos.
 
 ## Running the Test Suite
@@ -69,7 +69,7 @@ After installation, make sure that the `<prefix>/bin` directory is in your
 `PATH`.
 
 If you choose to not embed a `runpath` into executables at build time (see your
-build settings in `freeze/ice/config/Make.rules`) or did not create a symbolic link 
+build settings in `freeze/ice/config/Make.rules`) or did not create a symbolic link
 from the `runpath` directory to the installation directory, you also need to add the
 library directory to your `DYLD_LIBRARY_PATH`.
 

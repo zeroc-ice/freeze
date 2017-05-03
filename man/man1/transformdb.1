@@ -32,12 +32,12 @@ environment NEWDBENV.
 
 The FreezeScript tool transformdb migrates a database created by a Freeze map
 or evictor. It accomplishes this by comparing the "old" Slice definitions
-(i.e., the ones that describe the current contents of the database) with the 
-"new" Slice definitions, and making whatever modifications are necessary to 
+(i.e., the ones that describe the current contents of the database) with the
+"new" Slice definitions, and making whatever modifications are necessary to
 ensure that the transformed database is compatible with the new definitions.
 The macro __TRANSFORMDB__ is defined during the Slice file compilation.
 
-Full documentation for transformdb is available online at: 
+Full documentation for transformdb is available online at:
 .br
 https://doc.zeroc.com/display/Freeze37/Using+transformdb
 
@@ -59,7 +59,7 @@ Defines the preprocessor symbol NAME.
 
 .TP
 .BR \-DNAME=DEF\fR
-.br 
+.br
 Defines the preprocessor symbol NAME with the value DEF.
 
 .TP
@@ -93,7 +93,7 @@ Print debug information showing the operation of the Slice parser.
 .BR \-\-new " " SLICE\fR
 .br
 Loads the old or new Slice definitions contained in the file SLICE. These
-options may be specified multiple times if several files must be loaded. 
+options may be specified multiple times if several files must be loaded.
 However, it is the user's responsibility to ensure that duplicate definitions
 do not occur (which is possible when two files are loaded that share a common
 include file). One strategy for avoiding duplicate definitions is to load a

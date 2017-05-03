@@ -483,7 +483,7 @@ class TransactionalEvictorI extends EvictorI implements TransactionalEvictor
                                 try
                                 {
                                     boolean dispatchSync = sh.servant().ice_dispatch(request, ctx);
-                                    
+
                                     if(!dispatchSync)
                                     {
                                         //

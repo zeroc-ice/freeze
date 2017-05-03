@@ -16,10 +16,10 @@
         </record>
     </database>
 
-    
+
     <!-- enum ::Test::E -->
     <transform type="::Test::E"/>
-    
+
     <!-- class ::Test::MainObject -->
     <transform type="::Test::MainObject">
         <fail test="new.boolToString != 'true'"/>
@@ -32,7 +32,7 @@
         <fail test="new.stringToEnum != ::New::Test::E::E1"/>
         <fail test="new.newname != ::New::Test::E2"/>
     </transform>
-    
+
     <!-- class ::Test::RenamedFacetObject -->
     <transform type="::Test::RenamedFacetObject">
         <fail test="new.doubleToString != '901235' and new.doubleToString != '901234'"/>

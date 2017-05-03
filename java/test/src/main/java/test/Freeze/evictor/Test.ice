@@ -93,7 +93,7 @@ interface RemoteEvictor
 {
     idempotent void setSize(int size);
 
-    Servant* createServant(string id, int value) 
+    Servant* createServant(string id, int value)
         throws AlreadyRegisteredException, EvictorDeactivatedException;
 
     idempotent Servant* getServant(string id);

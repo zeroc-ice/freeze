@@ -19,10 +19,10 @@ Test::AccountI::getBalance(const Current&)
 {
     return balance;
 }
-    
-void 
+
+void
 Test::AccountI::deposit(int amount, const Current&)
-{ 
+{
     //
     // No need to synchronize since everything occurs within its own transaction
     //
@@ -34,7 +34,7 @@ Test::AccountI::deposit(int amount, const Current&)
     balance = newBalance;
 }
 
-void 
+void
 Test::AccountI::transfer(int amount, const Test::AccountPrx& toAccount, const Current& current)
 {
     test(_evictor->getCurrentTransaction() != 0);
@@ -43,7 +43,7 @@ Test::AccountI::transfer(int amount, const Test::AccountPrx& toAccount, const Cu
     deposit(-amount, current); // direct call
 }
 
-void 
+void
 Test::AccountI::transfer2_async(const AMD_Account_transfer2Ptr& cb, int amount, const Test::AccountPrx& toAccount, const Current& current)
 {
     //
@@ -61,14 +61,14 @@ Test::AccountI::transfer2_async(const AMD_Account_transfer2Ptr& cb, int amount, 
         cb->ice_exception(ex);
         return;
     }
-    
+
     cb->ice_response();
 }
 
 class ResponseThread : public IceUtil::Thread, private IceUtil::Monitor<IceUtil::Mutex>
 {
 public:
-        
+
     ResponseThread(const Test::AMD_Account_transfer3Ptr& cb) :
         _cb(cb),
         _response(false),
@@ -127,7 +127,7 @@ public:
             _cb->ice_exception(Ice::TimeoutException(__FILE__, __LINE__));
         }
     }
-        
+
 private:
     Test::AMD_Account_transfer3Ptr _cb;
     bool _response;
@@ -140,7 +140,7 @@ typedef IceUtil::Handle<ResponseThread> ResponseThreadPtr;
 
 
 
-void 
+void
 Test::AccountI::transfer3_async(const AMD_Account_transfer3Ptr& cb, int amount, const Test::AccountPrx& toAccount, const Current& current)
 {
     //
@@ -149,7 +149,7 @@ Test::AccountI::transfer3_async(const AMD_Account_transfer3Ptr& cb, int amount, 
 
     ResponseThreadPtr thread = new ResponseThread(cb);
     IceUtil::ThreadControl tc = thread->start(33000);
-    
+
     test(_evictor->getCurrentTransaction() != 0);
 
     try
@@ -166,7 +166,7 @@ Test::AccountI::transfer3_async(const AMD_Account_transfer3Ptr& cb, int amount, 
         // when the dispatch commits before it gets any response!
         //
         _evictor->getCurrentTransaction()->rollback();
-        
+
         thread->exception(e);
 
         return;
@@ -195,7 +195,7 @@ Test::AccountI::AccountI() :
 {
 }
 
-void 
+void
 Test::AccountI::init(const Freeze::TransactionalEvictorPtr& evictor)
 {
     test(_evictor == 0);
@@ -212,7 +212,7 @@ public:
         _val(val)
     {
     }
-    
+
     virtual void
     run()
     {
@@ -491,7 +491,7 @@ public:
         _remoteEvictor = remoteEvictor;
         _evictor = evictor;
     }
-    
+
     virtual void
     initialize(const ObjectAdapterPtr&, const Identity&, const string&, const ObjectPtr& servant)
     {
@@ -521,9 +521,9 @@ Test::RemoteEvictorI::RemoteEvictorI(const CommunicatorPtr& communicator, const 
     _category(category)
 {
     _evictorAdapter = communicator->createObjectAdapterWithEndpoints(Ice::generateUUID(), "default");
- 
+
     Initializer* initializer = new Initializer;
-    
+
     if(transactional)
     {
         _evictor = Freeze::createTransactionalEvictor(_evictorAdapter, envName, category, Freeze::FacetTypeMap(), initializer);
@@ -626,8 +626,8 @@ Test::RemoteEvictorFactoryI::RemoteEvictorFactoryI(const std::string& envName) :
 ::Test::RemoteEvictorPrx
 Test::RemoteEvictorFactoryI::createEvictor(const string& name, bool transactional, const Current& current)
 {
-    RemoteEvictorIPtr remoteEvictor = 
-        new RemoteEvictorI(current.adapter->getCommunicator(), _envName, name, transactional);  
+    RemoteEvictorIPtr remoteEvictor =
+        new RemoteEvictorI(current.adapter->getCommunicator(), _envName, name, transactional);
     return RemoteEvictorPrx::uncheckedCast(
         current.adapter->add(remoteEvictor, Ice::stringToIdentity(name)));
 }

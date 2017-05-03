@@ -44,7 +44,7 @@ struct Statistics
 
 /**
  *
- * ObjectRecord is the value-type for the persistent maps maintained by evictors 
+ * ObjectRecord is the value-type for the persistent maps maintained by evictors
  * when using Ice encoding version is 1.0.
  *
  **/
@@ -59,7 +59,7 @@ struct ObjectRecord
 
     /**
      *
-     * The statistics for the object. 
+     * The statistics for the object.
      *
      **/
     Statistics stats;

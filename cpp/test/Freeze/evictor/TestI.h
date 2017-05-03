@@ -25,7 +25,7 @@ class AccountI : public Account
 public:
 
     virtual int getBalance(const Ice::Current&);
-    
+
     virtual void deposit(int, const Ice::Current&);
 
     virtual void transfer(int, const Test::AccountPrx&, const Ice::Current&);
@@ -58,10 +58,10 @@ public:
 
     //
     // Used only if you remove ["amd"] from Test.ice
-    // 
+    //
     virtual ::Ice::Int slowGetValue(const Ice::Current& = Ice::Current()) const;
 
-    
+
     virtual void slowGetValue_async(const AMD_Servant_slowGetValuePtr&,
                                     const Ice::Current& = Ice::Current()) const;
 
@@ -129,7 +129,7 @@ public:
 
     virtual void destroyAllServants(const std::string&, const Ice::Current&);
 
-    const std::string& 
+    const std::string&
     envName() const
     {
         return _envName;

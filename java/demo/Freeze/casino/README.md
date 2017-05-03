@@ -18,12 +18,12 @@ Highlights:
 - The public interface of the server is specified in Casino.ice;
   CasinoStore.ice is just an implementation detail of the server.
 
-- This demo uses a transactional evictor per servant type; this 
+- This demo uses a transactional evictor per servant type; this
   is more efficient than storing different types of servants in
   the same Freeze transactional evictor.
 
 - Transactions often span servants in several evictors; this works
-  because all the evictors use the same underlying Berkeley DB 
+  because all the evictors use the same underlying Berkeley DB
   environment.
 
 - The application code does not deal at all with database deadlocks;
@@ -39,7 +39,7 @@ Highlights:
   wins a bet and is destroyed at the same time? Will chips get lost?
   In fact, there is no issue thanks to Berkeley DB locking:
   when a bet picks a winner, it invokes an operation on this object
-  (through a proxy) within a transaction. At this point, if the 
+  (through a proxy) within a transaction. At this point, if the
   object is still alive, it's locked by the transaction, which
-  prevents another transaction from acquiring a write lock (for 
+  prevents another transaction from acquiring a write lock (for
   example, to destroy it).

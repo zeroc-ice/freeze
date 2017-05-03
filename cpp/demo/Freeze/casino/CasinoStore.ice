@@ -69,8 +69,8 @@ module CasinoStore
         // The time when the bet completes (ms since the epoch)
         //
         long closeTime;
-    }; 
-    
+    };
+
     class PersistentBank implements Casino::Bank, Winner
     {
         //

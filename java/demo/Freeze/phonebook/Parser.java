@@ -40,7 +40,7 @@ class Parser
             error("`add' requires at least one argument (type `help' for more info)");
             return;
         }
-        
+
         try
         {
             for(String name : args)
@@ -68,7 +68,7 @@ class Parser
             error("`find' requires exactly one argument (type `help' for more info)");
             return;
         }
-        
+
         try
         {
             String name = args.get(0);
@@ -96,7 +96,7 @@ class Parser
         }
         printCurrent();
     }
-    
+
     void
     printCurrent()
     {

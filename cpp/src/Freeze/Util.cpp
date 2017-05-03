@@ -12,15 +12,15 @@ using namespace Ice;
 using namespace std;
 
 void
-Freeze::handleDbException(const DbException& dx, 
+Freeze::handleDbException(const DbException& dx,
                           const char* file, int line)
 {
     throw DatabaseException(file, line, dx.what());
 }
 
 void
-Freeze::handleDbException(const DbException& dx, 
-                          Key& key, Dbt& dbKey, 
+Freeze::handleDbException(const DbException& dx,
+                          Key& key, Dbt& dbKey,
                           const char* file, int line)
 {
     bool bufferSmallException =
@@ -28,8 +28,8 @@ Freeze::handleDbException(const DbException& dx,
         (dx.get_errno() == ENOMEM);
 #else
         (dx.get_errno() == DB_BUFFER_SMALL || dx.get_errno() == ENOMEM);
-#endif  
-        
+#endif
+
     if(bufferSmallException && (dbKey.get_size() > dbKey.get_ulen()))
     {
         //
@@ -48,8 +48,8 @@ Freeze::handleDbException(const DbException& dx,
 }
 
 void
-Freeze::handleDbException(const DbException& dx, 
-                          Key& key, Dbt& dbKey, 
+Freeze::handleDbException(const DbException& dx,
+                          Key& key, Dbt& dbKey,
                           Value& value, Dbt& dbValue,
                           const char* file, int line)
 {
@@ -58,9 +58,9 @@ Freeze::handleDbException(const DbException& dx,
         (dx.get_errno() == ENOMEM);
 #else
         (dx.get_errno() == DB_BUFFER_SMALL || dx.get_errno() == ENOMEM);
-#endif  
+#endif
 
-    bool resized = false;       
+    bool resized = false;
     if(bufferSmallException)
     {
         if(dbKey.get_size() > dbKey.get_ulen())
@@ -71,7 +71,7 @@ Freeze::handleDbException(const DbException& dx,
             dbKey.set_size(static_cast<u_int32_t>(oldKeySize));
             resized = true;
         }
-        
+
         if(dbValue.get_size() > dbValue.get_ulen())
         {
             value.resize(dbValue.get_size());
@@ -79,7 +79,7 @@ Freeze::handleDbException(const DbException& dx,
             resized = true;
         }
     }
-    
+
     if(!resized)
     {
         handleDbException(dx, file, line);

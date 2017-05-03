@@ -29,33 +29,33 @@ $ transformdb --old ContactData.ice --new NewContactData.ice db dbnew
 
 With a sorted map, the situation is more complicated. transformdb
 is unaware of the sort order, and as a result transforms the map into
-an unsorted map -- or more precisely, a new map sorted using Berkeley 
-DB's default sort order (comparison of binary strings that correspond 
+an unsorted map -- or more precisely, a new map sorted using Berkeley
+DB's default sort order (comparison of binary strings that correspond
 to data encoded using the Ice encoding).
 
-The solution, illustrated in this demo, is to recreate the map 
+The solution, illustrated in this demo, is to recreate the map
 after the successful transformdb transformation.
 
 This demo provides four programs:
 
  - Create
 
-   Creates or updates the contacts map in the 'db' directory (uses 
+   Creates or updates the contacts map in the 'db' directory (uses
    the old version of ContactData)
 
  - Read
 
-   Reads and displays the contents of the contacts map in the 'db' 
+   Reads and displays the contents of the contacts map in the 'db'
    directory (uses the old version of ContactData)
 
  - ReadNew
 
    Reads and displays the contents of the contacts map in the 'dbnew'
    directory (uses the new version of ContactData)
-   
+
  - Recreate
 
-   Recreate the contacts map in the 'dbnew' directory (uses the new 
+   Recreate the contacts map in the 'dbnew' directory (uses the new
    version of ContactData)
 
 

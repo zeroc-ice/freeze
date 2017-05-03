@@ -64,7 +64,7 @@ class LibraryI extends _LibraryDisp
             newIsbnSeq[length] = description.isbn;
 
             _authors.fastPut(description.authors, newIsbnSeq);
-        
+
             return book;
         }
         catch(Freeze.DatabaseException ex)
@@ -161,7 +161,7 @@ class LibraryI extends _LibraryDisp
             String[] isbnSeq = _authors.get(description.authors);
 
             assert isbnSeq != null;
-            
+
             int i;
             for(i = 0; i < isbnSeq.length; ++i)
             {
@@ -193,7 +193,7 @@ class LibraryI extends _LibraryDisp
                 {
                     System.arraycopy(isbnSeq, i+1, newIsbnSeq, i, isbnSeq.length - i - 1);
                 }
-            
+
                 _authors.fastPut(description.authors, newIsbnSeq);
             }
 

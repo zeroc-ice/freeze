@@ -15,7 +15,7 @@ using namespace Freeze;
 class Recreate : public Ice::Application
 {
 public:
-    
+
     virtual int run(int, char*[]);
 };
 
@@ -30,7 +30,7 @@ Recreate::run(int, char*[])
 {
     ConnectionPtr connection = createConnection(communicator(), "dbnew");
     NewContacts::recreate(connection, "contacts");
-    
+
     cout << "Recreated contacts database successfully!" << endl;
     return 0;
 }

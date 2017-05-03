@@ -15,7 +15,7 @@ using namespace Freeze;
 class Read : public Ice::Application
 {
 public:
-    
+
     virtual int run(int, char*[]);
 };
 
@@ -30,7 +30,7 @@ Read::run(int, char*[])
 {
     ConnectionPtr connection = createConnection(communicator(), "db");
     const Contacts contacts(connection, "contacts", false);
-    
+
     Contacts::const_iterator p;
 
     cout << "All contacts (default order)" << endl;
@@ -44,6 +44,6 @@ Read::run(int, char*[])
     {
         cout << p->first << ":\t\t" << p->second.phoneNumber << endl;
     }
-    
+
     return 0;
 }

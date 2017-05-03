@@ -49,7 +49,7 @@ public class ClientFail extends test.Util.Application
         }
         return 0;
     }
-    
+
     public static void main(String[] args)
     {
         ClientFail c = new ClientFail();

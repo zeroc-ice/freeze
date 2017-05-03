@@ -43,7 +43,7 @@ WarehouseServer::run(int argc, char* argv[])
     }
     else
     {
-        cout << "Using Evictor implemented with IceUtil::Cache" << endl; 
+        cout << "Using Evictor implemented with IceUtil::Cache" << endl;
     }
 
     Ice::ObjectAdapterPtr adapter = communicator()->createObjectAdapter("Warehouse");

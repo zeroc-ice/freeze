@@ -20,16 +20,16 @@ class Token
     public static final int TOK_SHUTDOWN = 11;
     public static final int TOK_STRING = 12;
     public static final int TOK_SEMI = 13;
-    
+
     int type;
     String value;
-    
+
     Token(int t)
     {
         type = t;
         value = null;
     }
-    
+
     Token(int t, String v)
     {
         type = t;

@@ -30,7 +30,7 @@ public:
 private:
 
     void decrementBetCount();
-    
+
     int _betCount;
     IceUtil::Mutex _mutex;
     std::vector<IceUtil::TimerPtr> _timers;

@@ -62,13 +62,13 @@ public:
                 ItemPrx item = ItemPrx::uncheckedCast(_anItem->ice_identity(identity));
                 item->getDescription();
             }
-            _requestsPerSecond = 
+            _requestsPerSecond =
                 static_cast<int>(readCount / (IceUtil::Time::now(IceUtil::Time::Monotonic) - startTime).toSecondsDouble());
         }
         catch(const IceUtil::Exception& e)
         {
             cerr << "Unexpected exception in ReaderThread: " << e << endl;
-        }   
+        }
     }
 
     int getRequestsPerSecond() const
@@ -105,7 +105,7 @@ public:
             for(int i = 0; i < writeCount; ++i)
             {
                 int id = rand() % objectCount;
-                
+
                 ostringstream os;
                 os << "P/N " << id;
                 string nm = os.str();
@@ -116,13 +116,13 @@ public:
 
                 item->adjustStock(1);
             }
-            _requestsPerSecond = 
+            _requestsPerSecond =
                 static_cast<int>(writeCount / (IceUtil::Time::now(IceUtil::Time::Monotonic) - startTime).toSecondsDouble());
         }
         catch(const IceUtil::Exception& e)
         {
             cerr << "Unexpected exception in WriterThread: " << e << endl;
-        }   
+        }
     }
 
     int getRequestsPerSecond() const
@@ -176,7 +176,7 @@ WarehouseClient::run(int argc, char*[])
     wt->getThreadControl().join();
     for(i = 0; i < readerCount; ++i)
     {
-        rt[i]->getThreadControl().join(); 
+        rt[i]->getThreadControl().join();
     }
 
     //

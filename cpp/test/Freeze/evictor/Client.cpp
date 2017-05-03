@@ -21,7 +21,7 @@ public:
         _servants(servants)
     {
     }
-    
+
     virtual void
     run()
     {
@@ -41,7 +41,7 @@ public:
             {
                 test(false);
             }
-            
+
             for(int i = 1; i < static_cast<int>(_servants.size()); ++i)
             {
                 test(_servants[i]->getValue() == i);
@@ -64,7 +64,7 @@ public:
         _state(StateRunning)
     {
     }
-    
+
     virtual void
     run()
     {
@@ -148,7 +148,7 @@ public:
         ostr << prefix;
         _prefix = ostr.str();
     }
-    
+
     virtual void
     run()
     {
@@ -255,7 +255,7 @@ public:
         ostr << id;
         _id = ostr.str();
     }
-    
+
     virtual void
     run()
     {
@@ -274,12 +274,12 @@ public:
                         //
                         // Create when odd, destroy when even.
                         //
-                        
+
                         if(loops % 2 == 0)
                         {
                             Test::ServantPrx servant = _evictor->getServant(id);
                             servant->destroy();
-                            
+
                             //
                             // Twice
                             //
@@ -296,7 +296,7 @@ public:
                         else
                         {
                             Test::ServantPrx servant = _evictor->createServant(id, i);
-                            
+
                             //
                             // Twice
                             //
@@ -358,7 +358,7 @@ public:
         _accounts(accounts)
     {
     }
-    
+
     void
     run()
     {
@@ -372,22 +372,22 @@ public:
             //
             if(IceUtil::Time::now() - now > IceUtil::Time::seconds(60))
             {
-                cerr << "warning: exiting transfer thread after one minute and " << i << " iterations" << endl; 
+                cerr << "warning: exiting transfer thread after one minute and " << i << " iterations" << endl;
                 break;
             }
 
             //
-            // Transfer 100 at random between two distinct accounts 
+            // Transfer 100 at random between two distinct accounts
             //
             Test::AccountPrx from = _accounts[IceUtilInternal::random(static_cast<int>(_accounts.size()))];
-            
+
             Test::AccountPrx to;
             do
             {
                 to = _accounts[IceUtilInternal::random(static_cast<int>(_accounts.size()))];
             }
             while(from == to);
-                
+
 
             try
             {
@@ -438,7 +438,7 @@ public:
                 //
                 test(false);
             }
-            
+
             /*
               if(i % 100 == 0)
               {
@@ -452,7 +452,7 @@ private:
 
     Test::AccountPrxSeq _accounts;
 };
-    
+
 
 
 int
@@ -471,16 +471,16 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     {
         cout << "testing background-save Freeze Evictor... " << flush;
     }
-    
+
     const Ice::Int size = 5;
     Ice::Int i;
-    
+
     Test::RemoteEvictorPrx evictor = factory->createEvictor("Test", transactional);
-    
+
     evictor->setSize(size);
-    
+
     //
-    // Create some servants 
+    // Create some servants
     //
     vector<Test::ServantPrx> servants;
     for(i = 0; i < size; i++)
@@ -490,7 +490,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         string id = ostr.str();
         servants.push_back(evictor->createServant(id, i));
         servants[i]->ice_ping();
-        
+
         Test::FacetPrx facet1 = Test::FacetPrx::uncheckedCast(servants[i], "facet1");
         try
         {
@@ -512,7 +512,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         test(facet2);
         facet2->setValue(100 * i);
     }
-   
+
     //
     // Evict and verify values.
     //
@@ -529,7 +529,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         test(facet2);
         test(facet2->getData() == "moreData");
     }
-    
+
     //
     // Mutate servants.
     //
@@ -543,7 +543,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         test(facet2);
         facet2->setValue(100 * i + 100);
     }
-    
+
     //
     // Evict and verify values.
     //
@@ -562,7 +562,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
     if(!transactional)
     {
-        // 
+        //
         // Test saving while busy
         //
         for(i = 0; i < size; i++)
@@ -571,7 +571,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
             // Start a mutating operation so that the object is not idle.
             //
             servants[i]->begin_setValueAsync(i + 300);
-            
+
             test(servants[i]->getValue() == i + 100);
             //
             // This operation modifies the object state but is not saved
@@ -579,7 +579,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
             //
             servants[i]->setValue(i + 200);
             test(servants[i]->getValue() == i + 200);
-            
+
             //
             // Force the response to setValueAsync
             //
@@ -590,7 +590,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
     //
     // Add duplicate facet and catch corresponding exception
-    // 
+    //
     for(i = 0; i < size; i++)
     {
         try
@@ -602,10 +602,10 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         {
         }
     }
-    
+
     //
     // Remove a facet that does not exist
-    // 
+    //
     try
     {
         servants[0]->removeFacet("facet3");
@@ -617,7 +617,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
     //
     // Call an operation that does not exist on the servant
-    //    
+    //
     try
     {
         Test::AccountPrx::uncheckedCast(servants[0])->getBalance();
@@ -626,7 +626,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     catch(const Ice::OperationNotExistException&)
     {
     }
-  
+
     //
     // Remove all facets
     //
@@ -676,10 +676,10 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
             // Expected
         }
     }
-          
+
     //
     // Recreate servants, set transient value
-    //  
+    //
     servants.clear();
     for(i = 0; i < size; i++)
     {
@@ -689,14 +689,14 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         servants.push_back(evictor->createServant(id, i));
         servants[i]->setTransientValue(i);
     }
-    
+
     //
     // Evict all
     //
     evictor->saveNow();
     evictor->setSize(0);
     evictor->setSize(size);
-    
+
     //
     // Check the transient value
     //
@@ -707,7 +707,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
     if(!transactional)
     {
-    
+
         //
         // Now with keep
         //
@@ -720,8 +720,8 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         evictor->saveNow();
         evictor->setSize(0);
         evictor->setSize(size);
-   
-    
+
+
         //
         // Check the transient value
         //
@@ -782,7 +782,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     {
         int totalBalance = servants[0]->getTotalBalance();
         test(totalBalance == 0);
-        
+
         Test::AccountPrxSeq accounts = servants[0]->getAccounts();
         test(accounts.size() > 0);
 
@@ -790,7 +790,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         test(totalBalance > 0);
 
         const int threadCount = static_cast<int>(accounts.size());
-        
+
         vector<ThreadPtr> threads(threadCount);
         for(i = 0; i < threadCount; i++)
         {
@@ -802,19 +802,19 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         {
             threads[i]->getThreadControl().join();
         }
-       
+
         //
         // Check that the total balance did not change!
         //
         test(totalBalance == servants[0]->getTotalBalance());
     }
-        
+
     //
     // Deactivate and recreate evictor, to ensure that servants
     // are restored properly after database close and reopen.
     //
     evictor->deactivate();
-    
+
     evictor = factory->createEvictor("Test", transactional);
 
     evictor->setSize(size);
@@ -837,20 +837,20 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
     {
         const int threadCount = size * 2;
-        
+
         ThreadPtr threads[threadCount];
         for(i = 0; i < threadCount; i++)
         {
             threads[i] = new ReadThread(servants);
             threads[i]->start();
         }
-        
+
         for(i = 0; i < threadCount; i++)
         {
             threads[i]->getThreadControl().join();
         }
     }
-    
+
     //
     // Clean up.
     //
@@ -863,14 +863,14 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     //
     {
         const int threadCount = size;;
-        
+
         ThreadPtr threads[threadCount];
         for(i = 0; i < threadCount; i++)
         {
             threads[i] = new CreateDestroyThread(evictor, i, size);
             threads[i]->start();
         }
-        
+
         for(i = 0; i < threadCount; i++)
         {
             threads[i]->getThreadControl().join();
@@ -878,8 +878,8 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
         //
         // Verify all destroyed
-        // 
-        for(i = 0; i < size; i++)   
+        //
+        for(i = 0; i < size; i++)
         {
             try
             {
@@ -895,7 +895,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
 
     //
     // Recreate servants.
-    //  
+    //
     servants.clear();
     for(i = 0; i < size; i++)
     {
@@ -911,7 +911,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     //
     {
         const int threadCount = size;
-        
+
         ReadForeverThreadPtr threads[threadCount];
         for(i = 0; i < threadCount; i++)
         {
@@ -947,7 +947,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     //
     {
         const int threadCount = size;
-        
+
         AddForeverThreadPtr threads[threadCount];
         for(i = 0; i < threadCount; i++)
         {
@@ -965,14 +965,14 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         {
             threads[i]->setState(AddForeverThread::StateDeactivated);
         }
-        
+
         for(i = 0; i < threadCount; i++)
         {
             threads[i]->getThreadControl().join();
         }
     }
-    
-    
+
+
     //
     // Clean up.
     //
@@ -986,7 +986,7 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     {
         factory->shutdown();
     }
-    
+
     return EXIT_SUCCESS;
 }
 

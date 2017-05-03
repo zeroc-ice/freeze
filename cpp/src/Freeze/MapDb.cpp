@@ -26,7 +26,7 @@ const string _catalogIndexListName = "__catalogIndexList";
 
 }
 
-extern "C" 
+extern "C"
 {
 #if (DB_VERSION_MAJOR <= 5)
     static int customCompare(DB* db, const DBT* dbt1, const DBT* dbt2)
@@ -39,7 +39,7 @@ extern "C"
 	Key k1(first, first + dbt1->size);
 	first = static_cast<Ice::Byte*>(dbt2->data);
 	Key k2(first, first + dbt2->size);
-	
+
 	return me->getKeyCompare()->compare(k1, k2);
     }
 }
@@ -79,8 +79,8 @@ Freeze::MapDb::~MapDb()
         }
     }
 }
-  
-Freeze::MapDb::MapDb(const ConnectionIPtr& connection, 
+
+Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                      const string& dbName,
                      const string& key,
                      const string& value,
@@ -101,7 +101,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
     }
 
     Catalog catalog(connection, _catalogName);
-   
+
     TransactionPtr tx = connection->currentTransaction();
     bool ownTx = (tx == 0);
 
@@ -116,14 +116,14 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
             }
 
             Catalog::iterator ci = catalog.find(_dbName);
-        
+
             if(ci != catalog.end())
             {
                 if(ci->second.evictor)
                 {
                     throw DatabaseException(__FILE__, __LINE__, _dbName + " is an evictor database");
                 }
-                
+
                 _key = ci->second.key;
                 _value = ci->second.value;
                 checkTypes(key, value);
@@ -133,16 +133,16 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 _key = key;
                 _value = value;
             }
-    
+
             set_app_private(this);
             if(_keyCompare->compareEnabled())
             {
                 set_bt_compare(&customCompare);
             }
-            
+
             PropertiesPtr properties = _communicator->getProperties();
             string propPrefix = "Freeze.Map." + _dbName + ".";
-            
+
             int btreeMinKey = properties->getPropertyAsInt(propPrefix + "BtreeMinKey");
             if(btreeMinKey > 2)
             {
@@ -153,7 +153,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 }
                 set_bt_minkey(btreeMinKey);
             }
-            
+
             bool checksum = properties->getPropertyAsInt(propPrefix + "Checksum") > 0;
             if(checksum)
             {
@@ -162,10 +162,10 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                     Trace out(_communicator->getLogger(), "Freeze.Map");
                     out << "Turning checksum on for \"" << _dbName << "\"";
                 }
-                
+
                 set_flags(DB_CHKSUM);
             }
-            
+
             int pageSize = properties->getPropertyAsInt(propPrefix + "PageSize");
             if(pageSize > 0)
             {
@@ -176,10 +176,10 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 }
                 set_pagesize(pageSize);
             }
-            
+
 
             DbTxn* txn = getTxn(tx);
-            
+
             u_int32_t flags = DB_THREAD;
             if(createDb)
             {
@@ -191,12 +191,12 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
             //
             open(txn, nativeToUTF8(_dbName, getProcessStringConverter()).c_str(), 0, DB_BTREE,
                  flags, FREEZE_DB_MODE);
-            
+
             StringSeq oldIndices;
             StringSeq newIndices;
             size_t oldSize = 0;
             CatalogIndexList catalogIndexList(connection, _catalogIndexListName);
-            
+
             if(createDb)
             {
                 CatalogIndexList::iterator cil = catalogIndexList.find(_dbName);
@@ -205,17 +205,17 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                     oldIndices = cil->second;
                     oldSize = oldIndices.size();
                 }
-            } 
-            
+            }
+
             for(vector<MapIndexBasePtr>::const_iterator p = indices.begin();
                 p != indices.end(); ++p)
             {
-                const MapIndexBasePtr& indexBase = *p; 
+                const MapIndexBasePtr& indexBase = *p;
                 assert(indexBase->_impl == 0);
                 assert(indexBase->_communicator == 0);
                 indexBase->_communicator = connection->communicator();
                 indexBase->_encoding = connection->encoding();
-                
+
                 IceInternal::UniquePtr<MapIndexI> indexI;
 
                 try
@@ -233,24 +233,24 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
 
                     throw DatabaseException(__FILE__, __LINE__, message);
                 }
-                
+
 #ifdef NDEBUG
                 _indices.insert(IndexMap::value_type(indexBase->name(), indexI.get()));
 #else
-                bool inserted = 
+                bool inserted =
                     _indices.insert(IndexMap::value_type(indexBase->name(), indexI.get())).second;
                 assert(inserted);
 #endif
-                
+
                 indexBase->_impl = indexI.release();
-                
+
                 if(createDb)
                 {
                     newIndices.push_back(indexBase->name());
                     oldIndices.erase(std::remove(oldIndices.begin(), oldIndices.end(), indexBase->name()), oldIndices.end());
                 }
             }
-            
+
             if(ci == catalog.end())
             {
                 CatalogData catalogData;
@@ -259,7 +259,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 catalogData.value = value;
                 catalog.put(Catalog::value_type(_dbName, catalogData));
             }
-            
+
             if(createDb)
             {
                 //
@@ -270,13 +270,13 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 for(StringSeq::const_iterator q = oldIndices.begin(); q != oldIndices.end(); ++q)
                 {
                     const string& index = *q;
-                    
+
                     if(_trace >= 1)
                     {
                         Trace out(_communicator->getLogger(), "Freeze.Map");
                         out << "removing old index \"" << index << "\" on Db \"" << _dbName << "\"";
                     }
-                    
+
                     try
                     {
                         connection->removeMapIndex(_dbName, *q);
@@ -285,7 +285,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                     catch(const IndexNotFoundException&)
                     {
                         // Ignored
-                        
+
                         if(_trace >= 1)
                         {
                             Trace out(_communicator->getLogger(), "Freeze.Map");
@@ -293,7 +293,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                         }
                     }
                 }
-                
+
                 if(indexRemoved || oldSize != newIndices.size())
                 {
                     if(newIndices.size() == 0)
@@ -304,7 +304,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                             Trace out(_communicator->getLogger(), "Freeze.Map");
                             out << "Removed catalogIndexList entry for Db \"" << _dbName << "\"";
                         }
-                        
+
                     }
                     else
                     {
@@ -331,7 +331,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 if(connection->deadlockWarning())
                 {
                     Warning out(connection->communicator()->getLogger());
-                    out << "Deadlock in Freeze::MapDb::MapDb on Map \"" 
+                    out << "Deadlock in Freeze::MapDb::MapDb on Map \""
                         << _dbName << "\"; retrying ...";
                 }
 
@@ -356,7 +356,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 {
                 }
             }
-                
+
             string message = "Error while opening Db \"" + _dbName +
                 "\": " + dx.what();
 
@@ -365,7 +365,7 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
         catch(...)
         {
             if(ownTx && tx != 0)
-            {   
+            {
                 try
                 {
                     tx->rollback();
@@ -379,11 +379,11 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
     }
 }
 
-Freeze::MapDb::MapDb(const Ice::CommunicatorPtr& communicator, 
+Freeze::MapDb::MapDb(const Ice::CommunicatorPtr& communicator,
                      const Ice::EncodingVersion& encoding,
-                     const string& dbName, 
-                     const string& keyTypeId, 
-                     const string& valueTypeId, 
+                     const string& dbName,
+                     const string& keyTypeId,
+                     const string& valueTypeId,
                      DbEnv* env) :
     Db(env, 0),
     _communicator(communicator),
@@ -403,7 +403,7 @@ Freeze::MapDb::MapDb(const Ice::CommunicatorPtr& communicator,
     {
         PropertiesPtr properties = _communicator->getProperties();
         string propPrefix = "Freeze.Map." + _dbName + ".";
-        
+
         int btreeMinKey = properties->getPropertyAsInt(propPrefix + "BtreeMinKey");
         if(btreeMinKey > 2)
         {
@@ -414,7 +414,7 @@ Freeze::MapDb::MapDb(const Ice::CommunicatorPtr& communicator,
             }
             set_bt_minkey(btreeMinKey);
         }
-        
+
         bool checksum = properties->getPropertyAsInt(propPrefix + "Checksum") > 0;
         if(checksum)
         {
@@ -426,7 +426,7 @@ Freeze::MapDb::MapDb(const Ice::CommunicatorPtr& communicator,
 
             set_flags(DB_CHKSUM);
         }
-        
+
         int pageSize = properties->getPropertyAsInt(propPrefix + "PageSize");
         if(pageSize > 0)
         {
@@ -458,7 +458,7 @@ Freeze::MapDb::connectIndices(const vector<MapIndexBasePtr>& indices) const
     for(vector<MapIndexBasePtr>::const_iterator p = indices.begin();
         p != indices.end(); ++p)
     {
-        const MapIndexBasePtr& indexBase = *p; 
+        const MapIndexBasePtr& indexBase = *p;
         assert(indexBase->_impl == 0);
 
         IndexMap::const_iterator q = _indices.find(indexBase->name());

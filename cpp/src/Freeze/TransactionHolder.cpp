@@ -8,7 +8,7 @@
 
 using namespace Freeze;
 
-Freeze::TransactionHolder::TransactionHolder(const ConnectionPtr& connection) 
+Freeze::TransactionHolder::TransactionHolder(const ConnectionPtr& connection)
     : _transaction(0)
 {
     if(connection->currentTransaction() == 0)

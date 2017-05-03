@@ -29,7 +29,7 @@ public:
     class ServantHolder
     {
     public:
-        
+
         ServantHolder();
         ~ServantHolder() ICE_NOEXCEPT_FALSE;
 
@@ -80,7 +80,7 @@ public:
     public:
 
         ToInvalidate(const Ice::Identity&, ObjectStore<TransactionalEvictorElement>*);
-        
+
         static void invalidate(ToInvalidate*);
         static void destroy(ToInvalidate*);
 
@@ -119,9 +119,9 @@ public:
     {
         return _tx;
     }
-    
+
 private:
-    
+
     friend class ServantHolder;
 
     ServantHolder::Body* findServantHolderBody(const Ice::Identity&, ObjectStore<TransactionalEvictorElement>*) const;
@@ -133,7 +133,7 @@ private:
     //
     typedef std::deque<ServantHolder::Body*> Stack;
     Stack _stack;
-    
+
     //
     // List of objects to invalidate from the caches upon commit
     //
@@ -144,7 +144,7 @@ private:
 
     IceInternal::UniquePtr<DeadlockException> _deadlockException;
     IceInternal::UniquePtr<TransactionalEvictorDeadlockException> _nestedCallDeadlockException;
-  
+
     //
     // Protected by this
     //

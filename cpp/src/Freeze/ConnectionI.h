@@ -40,7 +40,7 @@ public:
     virtual void removeMapIndex(const std::string&, const std::string&);
 
     virtual void close();
-    
+
     virtual Ice::CommunicatorPtr getCommunicator() const;
 
     virtual Ice::EncodingVersion getEncoding() const;
@@ -53,7 +53,7 @@ public:
     virtual void __incRef();
     virtual void __decRef();
     virtual int __getRef() const;
- 
+
     virtual ~ConnectionI();
 
     ConnectionI(const SharedDbEnvPtr&);
@@ -71,12 +71,12 @@ public:
     DbTxn* dbTxn() const;
 
     const SharedDbEnvPtr& dbEnv() const;
-       
+
     const Ice::CommunicatorPtr& communicator() const;
     const Ice::EncodingVersion& encoding() const;
 
     const std::string&  envName() const;
-    
+
     Ice::Int trace() const;
 
     Ice::Int txTrace() const;
@@ -100,7 +100,7 @@ private:
     const bool _deadlockWarning;
     SharedMutexPtr _refCountMutex;
     int _refCount;
-};  
+};
 typedef IceUtil::Handle<ConnectionI> ConnectionIPtr;
 
 inline void
@@ -128,7 +128,7 @@ ConnectionI::dbEnv() const
     return _dbEnv;
 }
 
-inline const std::string& 
+inline const std::string&
 ConnectionI::envName() const
 {
     return _envName;

@@ -187,7 +187,7 @@ FreezeScript::parseSlice(const string& n, const Slice::UnitPtr& u, const vector<
 
         if(!icecpp->close())
         {
-            return false;            
+            return false;
         }
 
         if(status != EXIT_SUCCESS)

@@ -26,9 +26,9 @@ Freeze::TransactionI::commit()
     {
         throw DatabaseException(__FILE__, __LINE__, "inactive transaction");
     }
-    
+
     long txnId = 0;
-  
+
     try
     {
         _connection->closeAllIterators();
@@ -106,7 +106,7 @@ Freeze::TransactionI::rollbackInternal(bool warning)
         try
         {
             _connection->closeAllIterators();
-            
+
             if(_txTrace >= 1 || (warning && _warnRollback))
             {
                 txnId = (_txn->id() & 0x7FFFFFFF) + 0x80000000L;
@@ -117,9 +117,9 @@ Freeze::TransactionI::rollbackInternal(bool warning)
                          << " due to destruction.\nApplication code should explicitly call rollback or commit.";
                 }
             }
-            
+
             _txn->abort();
-            
+
             if(_txTrace >= 1)
             {
                 Trace out(_communicator->getLogger(), "Freeze.Transaction");
@@ -133,7 +133,7 @@ Freeze::TransactionI::rollbackInternal(bool warning)
                 Trace out(_communicator->getLogger(), "Freeze.Transaction");
                 out << "failed to rollback transaction " << hex << txnId << dec << ": " << dx.what();
             }
-            
+
             DeadlockException deadlockException(__FILE__, __LINE__, dx.what(), this);
 
             postCompletion(false, true);
@@ -148,7 +148,7 @@ Freeze::TransactionI::rollbackInternal(bool warning)
                 Trace out(_communicator->getLogger(), "Freeze.Transaction");
                 out << "failed to rollback transaction " << hex << txnId << dec << ": " << dx.what();
             }
-            
+
             postCompletion(false, false);
             // After postCompletion is called the transaction may be
             // dead. Beware!
@@ -202,7 +202,7 @@ Freeze::TransactionI::setPostCompletionCallback(const Freeze::PostCompletionCall
 {
     _postCompletionCallback = cb;
 }
-    
+
 //
 // The constructor takes a ConnectionI* instead of a ConnectionIPtr
 // because we have to ensure there is no call to __decRef while the
@@ -243,7 +243,7 @@ Freeze::TransactionI::TransactionI(ConnectionI* connection) :
     }
 }
 
-    
+
 Freeze::TransactionI::~TransactionI()
 {
     assert(_txn == 0);
@@ -269,7 +269,7 @@ Freeze::TransactionI::postCompletion(bool committed, bool deadlock)
     {
         PostCompletionCallbackPtr cb = _postCompletionCallback;
         _postCompletionCallback = 0;
-        
+
         cb->postCompletion(committed, deadlock, _connection->dbEnv());
     }
 

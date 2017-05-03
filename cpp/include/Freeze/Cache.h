@@ -23,7 +23,7 @@ template<typename Key, typename Value>
 class Cache
 {
 public:
-    
+
     //
     // Latch and CacheValue are implementation details;
     // application code should not use them.
@@ -34,7 +34,7 @@ public:
         Latch() :
             IceUtilInternal::CountDownLatch(1),
             useCount(0)
-        { 
+        {
         }
         int useCount;
     };
@@ -46,7 +46,7 @@ public:
             latch(0)
         {
         }
-        
+
         IceUtil::Handle<Value> obj;
         Latch* latch;
     };
@@ -56,12 +56,12 @@ public:
     IceUtil::Handle<Value> getIfPinned(const Key&, bool = false) const;
 
     void unpin(Position);
-  
+
     void clear();
     size_t size() const;
 
     bool pin(const Key&, const IceUtil::Handle<Value>&);
-    
+
     IceUtil::Handle<Value> pin(const Key&);
     IceUtil::Handle<Value> putIfAbsent(const Key&, const IceUtil::Handle<Value>&);
 
@@ -72,7 +72,7 @@ protected:
     virtual void pinned(const IceUtil::Handle<Value>&, Position)
     {
     }
-    
+
     virtual ~Cache()
     {
     }
@@ -82,13 +82,13 @@ private:
     IceUtil::Handle<Value> pinImpl(const Key&, const IceUtil::Handle<Value>&);
 
     typedef std::map<Key, CacheValue> CacheMap;
-    
+
     IceUtil::Mutex _mutex;
     CacheMap  _map;
 };
 
 
-template<typename Key, typename Value> IceUtil::Handle<Value> 
+template<typename Key, typename Value> IceUtil::Handle<Value>
 Cache<Key, Value>::getIfPinned(const Key& key, bool wait) const
 {
     IceUtil::Mutex::Lock sync(_mutex);
@@ -103,7 +103,7 @@ Cache<Key, Value>::getIfPinned(const Key& key, bool wait) const
             {
                 return result;
             }
-            
+
             //
             // The object is being loaded: we wait
             //
@@ -112,7 +112,7 @@ Cache<Key, Value>::getIfPinned(const Key& key, bool wait) const
             {
                 const_cast<CacheValue&>(p->second).latch = new Latch;
             }
-            
+
             Latch* latch = p->second.latch;
             ++latch->useCount;
             sync.release();
@@ -144,7 +144,7 @@ Cache<Key, Value>::unpin(typename Cache::Position p)
     _map.erase(p);
 }
 
-template<typename Key, typename Value> void 
+template<typename Key, typename Value> void
 Cache<Key, Value>::clear()
 {
     //
@@ -154,14 +154,14 @@ Cache<Key, Value>::clear()
     _map.clear();
 }
 
-template<typename Key, typename Value> size_t 
+template<typename Key, typename Value> size_t
 Cache<Key, Value>::size() const
 {
     IceUtil::Mutex::Lock sync(_mutex);
     return _map.size();
 }
-    
-template<typename Key, typename Value> bool 
+
+template<typename Key, typename Value> bool
 Cache<Key, Value>::pin(const Key& key, const IceUtil::Handle<Value>& obj)
 {
     IceUtil::Mutex::Lock sync(_mutex);
@@ -170,7 +170,7 @@ Cache<Key, Value>::pin(const Key& key, const IceUtil::Handle<Value>& obj)
        _map.insert(CacheMap::value_type(key, CacheValue(obj)));
 #else
        _map.insert(typename CacheMap::value_type(key, CacheValue(obj)));
-#endif       
+#endif
 
     if(ir.second)
     {
@@ -179,19 +179,19 @@ Cache<Key, Value>::pin(const Key& key, const IceUtil::Handle<Value>& obj)
     return ir.second;
 }
 
-template<typename Key, typename Value> IceUtil::Handle<Value> 
+template<typename Key, typename Value> IceUtil::Handle<Value>
 Cache<Key, Value>::pin(const Key& key)
 {
     return pinImpl(key, 0);
 }
 
-template<typename Key, typename Value> IceUtil::Handle<Value> 
+template<typename Key, typename Value> IceUtil::Handle<Value>
 Cache<Key, Value>::putIfAbsent(const Key& key, const IceUtil::Handle<Value>& obj)
 {
     return pinImpl(key, obj);
 }
 
-template<typename Key, typename Value> IceUtil::Handle<Value> 
+template<typename Key, typename Value> IceUtil::Handle<Value>
 Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
 {
     Latch* latch = 0;
@@ -201,7 +201,7 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
     {
         {
             IceUtil::Mutex::Lock sync(_mutex);
-        
+
             //
             // Clean up latch from previous loop
             //
@@ -213,13 +213,13 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
                 }
                 latch = 0;
             }
-    
+
             std::pair<typename CacheMap::iterator, bool> ir =
 #if defined(_MSC_VER)
                 _map.insert(CacheMap::value_type(key, CacheValue(0)));
 #else
                 _map.insert(typename CacheMap::value_type(key, CacheValue(0)));
-#endif    
+#endif
 
             if(ir.second == false)
             {
@@ -234,37 +234,37 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
                 //
                 if(val.latch == 0)
                 {
-                    // 
-                    // The first queued thread creates the latch 
-                    // 
-                    val.latch = new Latch; 
+                    //
+                    // The first queued thread creates the latch
+                    //
+                    val.latch = new Latch;
                 }
                 latch = val.latch;
                 latch->useCount++;
             }
-           
-            p = ir.first;          
+
+            p = ir.first;
         }
-        
-        if(latch != 0) 
+
+        if(latch != 0)
         {
             //
             // Note: only the threads owning a "useCount" wait; upon wake-up,
             // they loop back, release this useCount and possibly delete the latch
             //
-            
+
             latch->await();
 
-            // 
-            // p could be stale now, e.g. some other thread pinned and unpinned the 
-            // object while we were waiting. 
-            // So start over. 
+            //
+            // p could be stale now, e.g. some other thread pinned and unpinned the
+            // object while we were waiting.
+            // So start over.
         }
     } while(latch != 0);
 
-    
+
     //
-    // Load 
+    // Load
     //
     IceUtil::Handle<Value> obj;
     try
@@ -277,7 +277,7 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
         latch = p->second.latch;
         p->second.latch = 0;
         _map.erase(p);
-        if(latch != 0)  
+        if(latch != 0)
         {
             //
             // It is necessary to call countDown() within the sync
@@ -292,31 +292,31 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
     }
 
     IceUtil::Mutex::Lock sync(_mutex);
-    
+
     //
     // p is still valid here -- nobody knows about it. See also unpin().
     //
     latch = p->second.latch;
     p->second.latch = 0;
-    
+
     try
     {
-        if(obj != 0) 
-        {  
+        if(obj != 0)
+        {
             p->second.obj = obj;
             pinned(obj, p);
-        } 
-        else 
-        { 
+        }
+        else
+        {
             if(newObj == 0)
             {
                 //
                 // pin() did not find the object
                 //
-                
-                // 
-                // The waiting threads will have to call load() to see by themselves. 
-                // 
+
+                //
+                // The waiting threads will have to call load() to see by themselves.
+                //
                 _map.erase(p);
             }
             else
@@ -331,8 +331,8 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
     }
     catch(...)
     {
-        if(latch != 0)  
-        {  
+        if(latch != 0)
+        {
             //
             // Must be called within sync; see ->countDown() note above.
             //
@@ -341,8 +341,8 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
         }
         throw;
     }
-  
-    if(latch != 0)  
+
+    if(latch != 0)
     {
         //
         // Must be called within sync; see ->countDown() note above.

@@ -18,7 +18,7 @@ public:
     SimpleEvictor(CurrentDatabase&, int);
 
 protected:
-    
+
     virtual Ice::ObjectPtr add(const Ice::Current&, Ice::LocalObjectPtr&);
     virtual void evict(const Ice::ObjectPtr&, const Ice::LocalObjectPtr&);
 

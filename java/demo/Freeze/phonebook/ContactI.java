@@ -87,5 +87,5 @@ class ContactI extends Contact
     }
 
     private ContactFactory _factory;
- 
+
 }

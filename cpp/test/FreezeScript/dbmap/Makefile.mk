@@ -11,7 +11,7 @@ $(test)_makedb_sources := TestOld.ice \
 
 $(test)_makedb_slice2freeze   := IntSMap
 
-$(test)_makedb_IntSMap        := --dict IntSMap,int,::Test::S 
+$(test)_makedb_IntSMap        := --dict IntSMap,int,::Test::S
 $(test)_makedb_IntSMap_slice  := $(test)/TestOld.ice
 
 tests += $(test)

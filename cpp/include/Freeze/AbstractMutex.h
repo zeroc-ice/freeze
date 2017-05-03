@@ -19,7 +19,7 @@ namespace IceUtil
 class FREEZE_API AbstractMutex
 {
 public:
-    
+
     typedef LockT<AbstractMutex> Lock;
     typedef TryLockT<AbstractMutex> TryLock;
 

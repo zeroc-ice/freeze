@@ -13,7 +13,7 @@ module Casino
     // or wins more
     //
     interface Player
-    { 
+    {
         //
         // The number of chips held by this player
         //
@@ -78,13 +78,13 @@ module Casino
         ["cpp:const"] int getEarnings();
 
         //
-        // Verify that the total number of chips held by all known players and bets; 
+        // Verify that the total number of chips held by all known players and bets;
         // match getOutstandingChips();
         //
         ["cpp:const", "freeze:read:required"] bool checkAllChips();
 
         //
-        // Create a new bet with the given amount to join; this bet ends in 
+        // Create a new bet with the given amount to join; this bet ends in
         // 'lifetime' milliseconds
         //
         ["freeze:write"] Bet* createBet(int amount, int lifetime);

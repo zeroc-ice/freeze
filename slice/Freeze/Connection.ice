@@ -28,9 +28,9 @@ local exception TransactionAlreadyInProgressException
 
 
 /**
- * 
+ *
  * A connection to a database (database environment with Berkeley
- * DB). If you want to use a connection concurrently 
+ * DB). If you want to use a connection concurrently
  * in multiple threads, you need to serialize access to this
  * connection.
  *
@@ -40,20 +40,20 @@ local interface Connection
     /**
      *
      * Create a new transaction. Only one transaction at a time can
-     * be associated with a connection. 
+     * be associated with a connection.
      *
      * @return The new transaction.
      *
-     * @throws TransactionAlreadyInProgressException Raised if a 
+     * @throws TransactionAlreadyInProgressException Raised if a
      * transaction is already associated with this connection.
      *
      **/
     Transaction beginTransaction();
-    
-    
+
+
     /**
      *
-     * Returns the transaction associated with this connection. 
+     * Returns the transaction associated with this connection.
      *
      * @return The current transaction if there is one, null otherwise.
      *
@@ -70,7 +70,7 @@ local interface Connection
      **/
     void removeMapIndex(string mapName, string indexName);
 
-     
+
     /**
      *
      * Closes this connection. If there is an associated transaction,
@@ -79,7 +79,7 @@ local interface Connection
      **/
     void close();
 
-    
+
     /**
      *
      * Returns the communicator associated with this connection.
@@ -102,7 +102,7 @@ local interface Connection
      **/
     ["cpp:const"] string getName();
 
-}; 
+};
 
 };
 

@@ -15,8 +15,8 @@ local interface Connection;
 
 
 /**
- * 
- * A transaction. If you want to use a transaction concurrently 
+ *
+ * A transaction. If you want to use a transaction concurrently
  * in multiple threads, you need to serialize access to this
  * transaction.
  *
@@ -25,7 +25,7 @@ local interface Transaction
 {
     /**
      *
-     * Commit this transaction. 
+     * Commit this transaction.
      *
      * @throws DatabaseException Raised if a database failure occurred.
      *
@@ -34,7 +34,7 @@ local interface Transaction
 
     /**
      *
-     * Roll back this transaction. 
+     * Roll back this transaction.
      *
      * @throws DatabaseException Raised if a database failure occurred.
      *
@@ -47,7 +47,7 @@ local interface Transaction
      *
      **/
     ["cpp:const"] Connection getConnection();
-}; 
+};
 
 
 };

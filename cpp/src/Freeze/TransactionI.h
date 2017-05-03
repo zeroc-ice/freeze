@@ -41,7 +41,7 @@ public:
 
 
     virtual ConnectionPtr getConnection() const;
-    
+
     //
     // Custom refcounting implementation
     //
@@ -54,7 +54,7 @@ public:
 
     TransactionI(ConnectionI*);
     ~TransactionI();
-    
+
     DbTxn*
     dbTxn() const
     {
@@ -64,9 +64,9 @@ public:
 private:
 
     friend class ConnectionI;
-    
+
     int getRefNoSync() const;
-  
+
     void postCompletion(bool, bool);
 
     const Ice::CommunicatorPtr _communicator;

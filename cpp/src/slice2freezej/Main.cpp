@@ -1782,7 +1782,7 @@ compile(int argc, char* argv[])
     string dependFile = opts.optArg("depend-file");
 
     bool debug = opts.isSet("debug");
-    
+
     bool ice = opts.isSet("ice");
     bool underscore = opts.isSet("underscore");
 

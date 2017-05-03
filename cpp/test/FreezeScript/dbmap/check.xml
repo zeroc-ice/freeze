@@ -3,10 +3,10 @@
 	<record>
         </record>
     </database>
-    
+
     <!-- enum ::E -->
     <transform type="::Test::E"/>
-    
+
     <!-- struct ::S -->
     <transform type="::Test::S">
 

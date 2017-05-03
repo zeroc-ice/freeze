@@ -29,7 +29,7 @@ Freeze::EvictorIteratorI::EvictorIteratorI(ObjectStoreBase* store, const Transac
 bool
 Freeze::EvictorIteratorI::hasNext()
 {
-    if(_batchIterator != _batch.end()) 
+    if(_batchIterator != _batch.end())
     {
         return true;
     }
@@ -64,14 +64,14 @@ Freeze::EvictorIteratorI::nextBatch()
         return _batch.end();
     }
 
-    DeactivateController::Guard 
+    DeactivateController::Guard
         deactivateGuard(_store->evictor()->deactivateController());
-     
+
     Key firstKey = _key;
 
     const CommunicatorPtr& communicator = _store->communicator();
     const EncodingVersion& encoding = _store->encoding();
-   
+
     DbTxn* txn = _tx == 0 ? 0: _tx->dbTxn();
 
     try
@@ -79,19 +79,19 @@ Freeze::EvictorIteratorI::nextBatch()
         for(;;)
         {
             _batch.clear();
-            
+
             Dbt dbKey;
             initializeOutDbt(_key, dbKey);
 
             Dbt dbValue;
             dbValue.set_flags(DB_DBT_USERMEM | DB_DBT_PARTIAL);
-           
+
             Dbc* dbc = 0;
             try
             {
                 //
                 // Move to the first record
-                // 
+                //
                 u_int32_t flags = DB_NEXT;
 
                 if(_initialized)
@@ -107,7 +107,7 @@ Freeze::EvictorIteratorI::nextBatch()
                     //
                     dbKey.set_size(static_cast<u_int32_t>(firstKey.size()));
                 }
-                
+
                 _store->db()->cursor(txn, &dbc, 0);
 
                 bool done = false;
@@ -130,7 +130,7 @@ Freeze::EvictorIteratorI::nextBatch()
                                 _initialized = true;
 
                                 flags = DB_NEXT;
-                    
+
                                 Ice::Identity ident;
                                 ObjectStoreBase::unmarshal(ident, _key, communicator, encoding);
                                 if(_batch.size() < _batchSize)
@@ -181,7 +181,7 @@ Freeze::EvictorIteratorI::nextBatch()
                         // Else, ignored
                     }
                 }
-                
+
                 if(_tx == 0)
                 {
                     _key = firstKey;
@@ -223,7 +223,7 @@ Freeze::EvictorIteratorI::nextBatch()
     {
         handleDbException(dx, __FILE__, __LINE__);
     }
-    
+
     if(_batch.size() == 0)
     {
         return _batch.end();

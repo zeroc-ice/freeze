@@ -21,13 +21,13 @@
     <ItemGroup>
         <Headers Include="$(Ice_SrcRootDir)include\**\*.h"
                  Exclude="$(Ice_SrcRootDir)include\generated\**\*.h"/>
-                          
+
         <Headers Include="$(Ice_SrcRootDir)include\generated\$(Platform)\$(Configuration)\**\*.h" />
     </ItemGroup>
 
     <!-- Copy required files to the package specific directories -->
     <Target Name="NugetPack">
-        <Copy Condition="'$(Platform)|$(Configuration)' == 'Win32|Release'" 
+        <Copy Condition="'$(Platform)|$(Configuration)' == 'Win32|Release'"
               SourceFiles="@(Headers)" DestinationFolder="$(PackageDirectory)\build\native\include\%(Headers.RecursiveDir)" />
         <Copy Condition="'$(Platform)|$(Configuration)' == 'Win32|Release'"
               SourceFiles="@(Slices)" DestinationFolder="$(PackageDirectory)\slice\%(Slices.RecursiveDir)" />

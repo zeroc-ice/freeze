@@ -22,25 +22,25 @@ class MapDb;
 class MapIndexI
 {
 public:
-    
+
     MapIndexI(const ConnectionIPtr&, MapDb&, DbTxn*, bool, const MapIndexBasePtr&);
 
     ~MapIndexI();
-   
+
     IteratorHelper* begin(bool, const MapHelperI&) const;
     IteratorHelper* untypedFind(const Key&, bool, const MapHelperI&, bool) const;
     IteratorHelper* untypedLowerBound(const Key&, bool, const MapHelperI&) const;
     IteratorHelper* untypedUpperBound(const Key&, bool, const MapHelperI&) const;
 
     int untypedCount(const Key&, const ConnectionIPtr&) const;
-    
+
     int secondaryKeyCreate(Db*, const Dbt*, const Dbt*, Dbt*);
 
     const std::string& name() const
     {
         return _index->name();
     }
-    
+
     Db* db() const
     {
         return _db.get();
@@ -67,17 +67,17 @@ private:
 class MapDb : public ::Db
 {
 public:
-    
+
     MapDb(const ConnectionIPtr&, const std::string&, const std::string&, const std::string&,
           const KeyCompareBasePtr&, const std::vector<MapIndexBasePtr>&, bool);
-    
+
 
     //
     // The constructor for catalogs
     //
-    MapDb(const Ice::CommunicatorPtr&, const Ice::EncodingVersion&, const std::string&, const std::string&, 
+    MapDb(const Ice::CommunicatorPtr&, const Ice::EncodingVersion&, const std::string&, const std::string&,
           const std::string&, DbEnv*);
-    
+
     ~MapDb();
 
     void connectIndices(const std::vector<MapIndexBasePtr>&) const;
@@ -104,7 +104,7 @@ private:
     IndexMap _indices;
 };
 
-inline const std::string& 
+inline const std::string&
 MapDb::dbName() const
 {
     return _dbName;

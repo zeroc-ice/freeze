@@ -88,7 +88,7 @@ EvictorCache::load(const Ice::Identity& itemId)
 // cannot acquire the Evictor mutex here, since we also call
 // IceUtil::Cache with the Evictor mutex locked.
 //
-void 
+void
 EvictorCache::pinned(const EvictorEntryPtr& entry, EvictorCache::Position cp)
 {
     entry->stale = false;
@@ -115,13 +115,13 @@ Evictor::Evictor(CurrentDatabase& currentDb, int size) :
 {
 }
 
-Ice::ObjectPtr 
+Ice::ObjectPtr
 Evictor::locate(const Ice::Current& current, Ice::LocalObjectPtr& cookie)
 {
     cookie = 0;
 
     //
-    // Lookup the cookie (EvictorEntry) in the cache; this will call load() 
+    // Lookup the cookie (EvictorEntry) in the cache; this will call load()
     // if the entry is not yet in there.
     //
     // If we get an entry that was just evicted (stale == true), we try again.
@@ -178,8 +178,8 @@ Evictor::locate(const Ice::Current& current, Ice::LocalObjectPtr& cookie)
     }
 }
 
-void 
-Evictor::finished(const Ice::Current& /*current*/, const Ice::ObjectPtr& /*servant*/, 
+void
+Evictor::finished(const Ice::Current& /*current*/, const Ice::ObjectPtr& /*servant*/,
                   const Ice::LocalObjectPtr& cookie)
 {
     if(cookie != 0)
@@ -193,10 +193,10 @@ Evictor::finished(const Ice::Current& /*current*/, const Ice::ObjectPtr& /*serva
         assert(entry->useCount >= 0);
 
         evict();
-    }       
+    }
 }
 
-void 
+void
 Evictor::deactivate(const string& /*category*/)
 {
     Mutex::Lock lock(_mutex);

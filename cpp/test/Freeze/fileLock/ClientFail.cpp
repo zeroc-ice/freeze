@@ -17,7 +17,7 @@ main(int argc, char* argv[])
 {
     int status = EXIT_SUCCESS;
     Ice::CommunicatorPtr communicator;
- 
+
     string envName = "db";
 
     communicator = Ice::initialize(argc, argv);
@@ -26,7 +26,7 @@ main(int argc, char* argv[])
         envName = argv[1];
         envName += "/db";
     }
-    
+
     {
         Freeze::ConnectionPtr connection;
         try
@@ -49,7 +49,7 @@ main(int argc, char* argv[])
             test(false);
         }
     }
-    
+
     try
     {
         communicator->destroy();

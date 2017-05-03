@@ -42,8 +42,8 @@ SimpleEvictor::SimpleEvictor(CurrentDatabase& currentDb, int size) :
     _currentDb(currentDb)
 {
 }
-    
-Ice::ObjectPtr 
+
+Ice::ObjectPtr
 SimpleEvictor::add(const Ice::Current& current, Ice::LocalObjectPtr& cookie)
 {
     cookie = 0;
@@ -56,7 +56,7 @@ SimpleEvictor::add(const Ice::Current& current, Ice::LocalObjectPtr& cookie)
             cout << cacheMisses << " cache misses" << endl;
         }
     }
-    
+
     //
     // You can simulate more expensive cache-misses by adding a sleep here:
     //
@@ -77,7 +77,7 @@ SimpleEvictor::add(const Ice::Current& current, Ice::LocalObjectPtr& cookie)
     }
 }
 
-void 
+void
 SimpleEvictor::evict(const Ice::ObjectPtr&, const Ice::LocalObjectPtr&)
 {
     //

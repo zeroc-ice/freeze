@@ -13,8 +13,8 @@ TBD
 
 Freeze relies on [Oracle Berkeley DB][2] as its datastore.
 
-The Freeze build system for Windows automatically downloads and installs 
-[Nuget][3] and Nuget packages for Berkeley DB when you build Freeze for C++. 
+The Freeze build system for Windows automatically downloads and installs
+[Nuget][3] and Nuget packages for Berkeley DB when you build Freeze for C++.
 These packages are installed in `freeze\cpp\msbuild\packages`.
 
 ## Building Freeze for C++
@@ -51,7 +51,7 @@ mode.
     msbuild msbuild\freeze.proj /p:BuildAllConfigurations=yes
 
 This builds all platforms (x64, Win32) and configurations (Debug, Release)
-of several Ice C++ components in `freeze\ice\cpp`, the Freeze library, the 
+of several Ice C++ components in `freeze\ice\cpp`, the Freeze library, the
 FreezeScript utilities and all the Freeze tests.
 
 ## Running the Test Suite

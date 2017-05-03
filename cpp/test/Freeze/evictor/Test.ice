@@ -41,7 +41,7 @@ exception InsufficientFundsException
     ["freeze:write", "amd"] void transfer2(int amount, Account* toAccount) throws InsufficientFundsException;
     ["freeze:write", "amd"] void transfer3(int amount, Account* toAccount) throws InsufficientFundsException;
 
-    
+
 
     //
     // "Internal" operation
@@ -94,7 +94,7 @@ interface RemoteEvictor
 {
     idempotent void setSize(int size);
 
-    Servant* createServant(string id, int value) 
+    Servant* createServant(string id, int value)
         throws AlreadyRegisteredException, EvictorDeactivatedException;
 
     idempotent Servant* getServant(string id);

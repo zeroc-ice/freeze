@@ -11,7 +11,7 @@ class Grammar
         _parser = p;
         _scanner = new Scanner(_parser);
     }
-    
+
     void
     parse()
     {

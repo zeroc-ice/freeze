@@ -55,7 +55,7 @@ public class Client extends test.Util.Application
         System.out.println("File lock released.");
         return 0;
     }
-    
+
     public static void main(String[] args)
     {
         Client c = new Client();

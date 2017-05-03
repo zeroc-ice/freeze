@@ -37,7 +37,7 @@ typedef IceUtil::Handle<TransactionalEvictorContext> TransactionalEvictorContext
 class SharedDbEnv
 {
 public:
-    
+
     static SharedDbEnvPtr get(const Ice::CommunicatorPtr&, const std::string&, DbEnv* = 0);
 
     ~SharedDbEnv();
@@ -53,10 +53,10 @@ public:
     //
     void removeSharedMapDb(const std::string&);
 
-    
+
     void __incRef();
     void __decRef();
-   
+
     //
     // EvictorContext factory/manager
     //
@@ -73,7 +73,7 @@ public:
 
 private:
     SharedDbEnv(const std::string&, const Ice::CommunicatorPtr&, DbEnv* env);
-    
+
     void cleanup();
 
     DbEnv* _env;
@@ -102,22 +102,22 @@ private:
 inline DbEnv*
 SharedDbEnv::getEnv() const
 {
-    return _env;  
+    return _env;
 }
 
-inline const std::string& 
+inline const std::string&
 SharedDbEnv::getEnvName() const
 {
     return _envName;
 }
 
-inline const Ice::CommunicatorPtr& 
+inline const Ice::CommunicatorPtr&
 SharedDbEnv::getCommunicator() const
 {
     return _communicator;
 }
 
-inline const Ice::EncodingVersion& 
+inline const Ice::EncodingVersion&
 SharedDbEnv::getEncoding() const
 {
     return _encoding;

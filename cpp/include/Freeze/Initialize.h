@@ -35,9 +35,9 @@ namespace Freeze
 
 typedef std::map<std::string, std::string> FacetTypeMap;
 
-FREEZE_API Freeze::BackgroundSaveEvictorPtr 
+FREEZE_API Freeze::BackgroundSaveEvictorPtr
 createBackgroundSaveEvictor(const Ice::ObjectAdapterPtr& adapter,
-                            const std::string& envName, 
+                            const std::string& envName,
                             const std::string& filename,
                             const ServantInitializerPtr& initializer = 0,
                             const std::vector<IndexPtr>& indices = std::vector<IndexPtr>(),
@@ -46,25 +46,25 @@ createBackgroundSaveEvictor(const Ice::ObjectAdapterPtr& adapter,
 FREEZE_API BackgroundSaveEvictorPtr
 createBackgroundSaveEvictor(const Ice::ObjectAdapterPtr& adapter,
                             const std::string& envName,
-                            DbEnv& dbEnv, 
+                            DbEnv& dbEnv,
                             const std::string& filename,
                             const ServantInitializerPtr& initializer = 0,
                             const std::vector<IndexPtr>& indices = std::vector<IndexPtr>(),
                             bool createDb = true);
 
-FREEZE_API TransactionalEvictorPtr 
+FREEZE_API TransactionalEvictorPtr
 createTransactionalEvictor(const Ice::ObjectAdapterPtr& adapter,
-                           const std::string& envName, 
+                           const std::string& envName,
                            const std::string& filename,
                            const FacetTypeMap& facetTypes = FacetTypeMap(),
                            const ServantInitializerPtr& initializer = 0,
                            const std::vector<IndexPtr>& indices = std::vector<IndexPtr>(),
                            bool createDb = true);
 
-FREEZE_API TransactionalEvictorPtr 
+FREEZE_API TransactionalEvictorPtr
 createTransactionalEvictor(const Ice::ObjectAdapterPtr& adapter,
                            const std::string& envName,
-                           DbEnv& dbEnv, 
+                           DbEnv& dbEnv,
                            const std::string& filename,
                            const FacetTypeMap& facetTypes = FacetTypeMap(),
                            const ServantInitializerPtr& initializer = 0,
@@ -78,7 +78,7 @@ createTransactionalEvictor(const Ice::ObjectAdapterPtr& adapter,
 class FREEZE_API TransactionalEvictorDeadlockException : public Ice::SystemException
 {
 public:
-  
+
     TransactionalEvictorDeadlockException(const char*, int, const TransactionPtr& = 0);
 
     virtual ~TransactionalEvictorDeadlockException() throw();
@@ -95,7 +95,7 @@ FREEZE_API ConnectionPtr createConnection(const Ice::CommunicatorPtr& communicat
                                           const std::string& envName);
 
 FREEZE_API ConnectionPtr createConnection(const Ice::CommunicatorPtr& communicator,
-                                          const std::string& envName, 
+                                          const std::string& envName,
                                           DbEnv& dbEnv);
 
 FREEZE_API const std::string& catalogName();

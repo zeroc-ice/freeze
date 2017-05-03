@@ -420,7 +420,7 @@ public class Client extends test.Util.Application
         test(base != null);
         //
         // Use an invocation tiemout to avoid createEvictor call to hang in case the server
-        // fails to load DB classes. The timeout shouldn't be too low since the operation 
+        // fails to load DB classes. The timeout shouldn't be too low since the operation
         // can take some time to complete on slow machines
         //
         RemoteEvictorFactoryPrx factory = RemoteEvictorFactoryPrxHelper.checkedCast(base.ice_invocationTimeout(60000));
@@ -589,7 +589,7 @@ public class Client extends test.Util.Application
 
         //
         // Call an operation that does not exist on the servant
-        //    
+        //
         try
         {
             AccountPrxHelper.uncheckedCast(servants[0]).getBalance();

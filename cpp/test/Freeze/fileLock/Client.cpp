@@ -17,7 +17,7 @@ main(int argc, char* argv[])
 {
     int status = EXIT_SUCCESS;
     Ice::CommunicatorPtr communicator;
- 
+
     string envName = "db";
 
     communicator = Ice::initialize(argc, argv);
@@ -26,7 +26,7 @@ main(int argc, char* argv[])
         envName = argv[1];
         envName += "/db";
     }
-    
+
     {
         Freeze::ConnectionPtr connection;
         try
@@ -43,8 +43,8 @@ main(int argc, char* argv[])
         {
             test(false);
         }
-        
-        cout << "File lock acquired.\n" 
+
+        cout << "File lock acquired.\n"
             << "Enter some input and press enter, to release the lock and terminate the program." << endl;
         //
         // Block the test waiting for IO, so the file lock is preserved.
@@ -61,7 +61,7 @@ main(int argc, char* argv[])
         }
     }
     cout << "File lock released." << endl;
-    
+
     try
     {
         communicator->destroy();

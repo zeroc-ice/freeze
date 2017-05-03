@@ -34,19 +34,19 @@ Freeze::Index::facet() const
 {
     return _facet;
 }
-  
+
 vector<Identity>
 Freeze::Index::untypedFindFirst(const Key& bytes, Int firstN) const
 {
     return _impl->untypedFindFirst(bytes, firstN);
-}   
+}
 
 vector<Identity>
 Freeze::Index::untypedFind(const Key& bytes) const
 {
     return _impl->untypedFind(bytes);
 }
-    
+
 Int
 Freeze::Index::untypedCount(const Key& bytes) const
 {

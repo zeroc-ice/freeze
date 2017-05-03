@@ -13,7 +13,7 @@ using namespace std;
 
 bool
 FreezeScript::invokeGlobalFunction(const Ice::CommunicatorPtr& communicator, const string& name, const DataList& args,
-                                   DataPtr& result, const DataFactoryPtr& factory, 
+                                   DataPtr& result, const DataFactoryPtr& factory,
                                    const ErrorReporterPtr& errorReporter)
 {
     //

@@ -19,15 +19,15 @@ class ObjectStoreBase;
 class IndexI
 {
 public:
-    
+
     IndexI(Index&);
 
     std::vector<Ice::Identity> untypedFindFirst(const Key&, Ice::Int) const;
-    
+
     std::vector<Ice::Identity> untypedFind(const Key&) const;
-    
+
     Ice::Int untypedCount(const Key&) const;
-    
+
     void
     associate(ObjectStoreBase*, DbTxn*, bool, bool);
 
@@ -36,7 +36,7 @@ public:
 
     void
     close();
-    
+
 private:
 
     Index& _index;

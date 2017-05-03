@@ -38,8 +38,8 @@ public:
         return _stale;
     }
 
-private:   
-    
+private:
+
     friend class TransactionalEvictorI;
 
     const Ice::ObjectPtr _servant;
@@ -67,9 +67,9 @@ class TransactionalEvictorI : public TransactionalEvictor, public EvictorI<Trans
 {
 public:
 
-    TransactionalEvictorI(const Ice::ObjectAdapterPtr&, const std::string&, DbEnv*, const std::string&, 
+    TransactionalEvictorI(const Ice::ObjectAdapterPtr&, const std::string&, DbEnv*, const std::string&,
                           const FacetTypeMap&, const ServantInitializerPtr&, const std::vector<IndexPtr>&, bool);
- 
+
     virtual ~TransactionalEvictorI();
 
     virtual TransactionPtr getCurrentTransaction() const;
@@ -81,7 +81,7 @@ public:
     virtual bool hasFacet(const Ice::Identity&, const std::string&);
 
     virtual void finished(const Ice::Current&, const Ice::ObjectPtr&, const Ice::LocalObjectPtr&);
-    virtual void deactivate(const std::string&);  
+    virtual void deactivate(const std::string&);
 
     virtual TransactionIPtr beforeQuery();
 
@@ -90,11 +90,11 @@ public:
     Ice::ObjectPtr evict(const Ice::Identity&, ObjectStore<TransactionalEvictorElement>*);
 
 protected:
-   
+
     virtual bool hasAnotherFacet(const Ice::Identity&, const std::string&);
-    
+
     virtual Ice::ObjectPtr locateImpl(const Ice::Current&, Ice::LocalObjectPtr&);
-   
+
     virtual void evict();
 
 private:

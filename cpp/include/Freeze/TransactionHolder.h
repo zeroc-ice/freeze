@@ -16,9 +16,9 @@ namespace Freeze
 class FREEZE_API TransactionHolder
 {
 public:
-    
+
     TransactionHolder(const ConnectionPtr&);
-    
+
     ~TransactionHolder();
 
     void
@@ -28,13 +28,13 @@ public:
     rollback();
 
 private:
-    
+
     //
     // Not implemented
     //
     TransactionHolder(const TransactionHolder&);
 
-    TransactionHolder& 
+    TransactionHolder&
     operator=(const TransactionHolder&);
 
     TransactionPtr _transaction;
