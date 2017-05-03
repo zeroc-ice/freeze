@@ -4,8 +4,8 @@
 //
 // **********************************************************************
 
-sourceCompatibility = iceSourceCompatibility
-targetCompatibility = iceTargetCompatibility
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 ext.displayName = "Freeze"
 ext.description = "Persistent storage for Ice objects"
