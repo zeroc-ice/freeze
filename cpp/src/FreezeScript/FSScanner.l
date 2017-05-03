@@ -71,11 +71,11 @@ StringTokPtr parseString(char);
 %option prefix="freeze_script_"
 %option outfile="lex.yy.c"
 
-identifier		[[:alpha:]_][[:alnum:]_]*
-integer_constant	(\+|-)?((0[0-7]+)|(0x[[:xdigit:]]+)|([[:digit:]]+))
-fractional_constant	(\+|-)?(([[:digit:]]*\.[[:digit:]]+)|([[:digit:]]+\.))
-exponent_part		(e|E)(\+|-)?[[:digit:]]+
-floating_literal	(({fractional_constant}{exponent_part}?)|((\+|-)?[[:digit:]]+{exponent_part}))[fF]?
+identifier              [[:alpha:]_][[:alnum:]_]*
+integer_constant        (\+|-)?((0[0-7]+)|(0x[[:xdigit:]]+)|([[:digit:]]+))
+fractional_constant     (\+|-)?(([[:digit:]]*\.[[:digit:]]+)|([[:digit:]]+\.))
+exponent_part           (e|E)(\+|-)?[[:digit:]]+
+floating_literal        (({fractional_constant}{exponent_part}?)|((\+|-)?[[:digit:]]+{exponent_part}))[fF]?
 
 %%
 
@@ -146,7 +146,7 @@ floating_literal	(({fractional_constant}{exponent_part}?)|((\+|-)?[[:digit:]]+{e
     *yylvalp = itp;
     if(!IceUtilInternal::stringToInt64(string(yytext), itp->v))
     {
-	assert(itp->v != 0);
+        assert(itp->v != 0);
         string msg = "integer constant `";
         msg += yytext;
         msg += "' out of range";
