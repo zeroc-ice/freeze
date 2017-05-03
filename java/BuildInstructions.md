@@ -82,12 +82,12 @@ The build system also requires the Slice translators from Ice for C++. You must
 set the `ICE_HOME` environment variable with the path name of your Ice installation.
 For example, on Unix:
 
-    $ export ICE_HOME=/opt/Ice-3.7b0 (For local build)
+    $ export ICE_HOME=/opt/Ice-3.7.0 (For local build)
     $ export ICE_HOME=/usr (For RPM installation)
 
 On Windows:
 
-    > set ICE_HOME=C:\Program Files (x86)\ZeroC\Ice-3.7b0
+    > set ICE_HOME=C:\Program Files (x86)\ZeroC\Ice-3.7.0
 
 Before building Freeze for Java, review the settings in the file
 `gradle.properties` and edit as necessary.
@@ -115,7 +115,7 @@ To install Ice for Java in the directory specified by the `prefix` variable in
 
 The installation installs the following JAR file to `<prefix>/lib`.
 
-    freeze-3.7b0.jar
+    freeze-3.7.0.jar
 
 The POM file are also installed for ease of deployment to a maven-based
 distribution system.
