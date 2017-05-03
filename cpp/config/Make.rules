@@ -8,12 +8,12 @@
 # Don't change anything below this line!
 # ----------------------------------------------------------------------
 
--include	$(lang_srcdir)/config/Make.rules.$(os)
+-include        $(lang_srcdir)/config/Make.rules.$(os)
 
 #
 # Supported configurations
 #
-supported-configs	= shared static
+supported-configs       = shared static
 
 slice2cpp_targetext     = cpp
 slice2cpp_path          = $(ice_bindir)/slice2cpp
@@ -38,7 +38,7 @@ $2_sources += $$(addprefix $$($1_generated_srcdir)/,$$(addsuffix .cpp,$$($2_slic
 $2_generated_includedir := $$(or $$($2_generated_includedir),$$($1_generated_includedir))
 
 $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$(eval $$(call make-slice2freeze,$$d,$$($2_$$d),\
-	$$($2_$$d_slice),$$($2_generated_includedir),$$($1_generated_srcdir),$$($2_$$d_flags) $$($2_sliceflags)))))
+        $$($2_$$d_slice),$$($2_generated_includedir),$$($1_generated_srcdir),$$($2_$$d_flags) $$($2_sliceflags)))))
 
 $2_generated_headers += $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
 $1_generated += $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
@@ -56,7 +56,7 @@ define make-freeze-project
 ifneq ($$($1_slice2freeze),)
 
 $$(foreach d,$$($1_slice2freeze),$$(eval $$(call make-slice2freeze,$$d,$$($1_$$d),\
-	$$($1_$$d_slice),$$($1_generated_includedir),$$($1_generated_srcdir),$$($1_$$d_flags) $$($1_sliceflags))))
+        $$($1_$$d_slice),$$($1_generated_includedir),$$($1_generated_srcdir),$$($1_$$d_flags) $$($1_sliceflags))))
 
 $1_generated += $$(foreach d,$$($1_slice2freeze),$$($1_generated_includedir)/$$d.h)
 
@@ -77,15 +77,15 @@ ifeq ($(USE_BIN_DIST),yes)
 else
 ifneq ($(filter ../ice/%,$1),)
 # Building ice submodule project
-$1_cppflags 		+= -I../ice/cpp/include -I../ice/cpp/include/generated -I../ice/cpp/src
+$1_cppflags             += -I../ice/cpp/include -I../ice/cpp/include/generated -I../ice/cpp/src
 else
 # Building freeze project
-$1_slicecompiler 	:= slice2cpp
-$1_sliceflags		+= -I$(ice_slicedir) -I$(slicedir)
-$1_cppflags 		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -I../ice/cpp/src -Isrc
-$1_cppflags		+= -I$(ice_includedir)/generated -I$(includedir)/generated
-$1_extensions		:= make-freeze-project
-$1_component_extensions	:= make-freeze-components
+$1_slicecompiler        := slice2cpp
+$1_sliceflags           += -I$(ice_slicedir) -I$(slicedir)
+$1_cppflags             += -I$(ice_includedir) -I$(includedir) -I$1/generated -I../ice/cpp/src -Isrc
+$1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
+$1_extensions           := make-freeze-project
+$1_component_extensions := make-freeze-components
 endif
 $(make-project)
 srcs:: $1
@@ -96,14 +96,14 @@ endef
 # $(call make-cpp-test-project,$1=project)
 #
 define make-cpp-test-project
-$1_slicecompiler 	:= slice2cpp
-$1_sliceflags		+= -I$(ice_slicedir) -I$(slicedir) -I$1
-$1_cppflags		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -Itest/include -I$1
+$1_slicecompiler        := slice2cpp
+$1_sliceflags           += -I$(ice_slicedir) -I$(slicedir) -I$1
+$1_cppflags             += -I$(ice_includedir) -I$(includedir) -I$1/generated -Itest/include -I$1
 ifneq ($(USE_BIN_DIST),yes)
 $1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
 endif
-$1_extensions		:= make-freeze-project
-$1_component_extensions	:= make-freeze-components
+$1_extensions           := make-freeze-project
+$1_component_extensions := make-freeze-components
 $(make-project)
 tests:: $1
 endef
@@ -112,8 +112,8 @@ endef
 # $(create-cpp-test-project $1=test)
 #
 define create-cpp-test-project
-$1_srcext		:= cpp
-$1_dependencies 	:= $$(or $$($1_dependencies),Freeze Ice)
+$1_srcext               := cpp
+$1_dependencies         := $$(or $$($1_dependencies),Freeze Ice)
 $(create-test-project)
 endef
 
@@ -121,14 +121,14 @@ endef
 # $(call make-cpp-demo-project,$1=project)
 #
 define make-cpp-demo-project
-$1_slicecompiler 	:= slice2cpp
-$1_sliceflags		+= -I$(ice_slicedir) -I$(slicedir) -I$1
-$1_cppflags		+= -I$(ice_includedir) -I$(includedir) -I$1/generated -I$1
+$1_slicecompiler        := slice2cpp
+$1_sliceflags           += -I$(ice_slicedir) -I$(slicedir) -I$1
+$1_cppflags             += -I$(ice_includedir) -I$(includedir) -I$1/generated -I$1
 ifneq ($(USE_BIN_DIST),yes)
 $1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
 endif
-$1_extensions		:= make-freeze-project
-$1_component_extensions	:= make-freeze-components
+$1_extensions           := make-freeze-project
+$1_component_extensions := make-freeze-components
 $(make-project)
 demos:: $1
 endef
@@ -137,8 +137,8 @@ endef
 # $(create-cpp-demo-project $1=demo)
 #
 define create-cpp-demo-project
-$1_srcext		:= cpp
-$1_dependencies 	:= $$(or $$($1_dependencies),Freeze Ice)
+$1_srcext               := cpp
+$1_dependencies         := $$(or $$($1_dependencies),Freeze Ice)
 $(create-test-project)
 endef
 

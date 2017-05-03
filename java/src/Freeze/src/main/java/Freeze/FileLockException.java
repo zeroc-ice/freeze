@@ -31,16 +31,16 @@ public class FileLockException extends RuntimeException implements Cloneable
     @Override
     public FileLockException clone()
     {
-	FileLockException c = null;
-	try
-	{
-	    c = (FileLockException)super.clone();
-	}
-	catch(CloneNotSupportedException ex)
-	{
-	    assert false;
-	}
-	return c;
+        FileLockException c = null;
+        try
+        {
+            c = (FileLockException)super.clone();
+        }
+        catch(CloneNotSupportedException ex)
+        {
+            assert false;
+        }
+        return c;
     }
 
     public String

@@ -4,8 +4,8 @@
 #
 # **********************************************************************
 
-top_srcdir 	:= ..
-lang_srcdir	:= $(top_srcdir)/cpp
+top_srcdir      := ..
+lang_srcdir     := $(top_srcdir)/cpp
 
 include $(top_srcdir)/config/Make.rules
 include $(lang_srcdir)/config/Make.rules

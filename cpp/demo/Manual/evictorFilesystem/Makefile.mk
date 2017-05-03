@@ -4,15 +4,15 @@
 #
 # **********************************************************************
 
-$(test)_client_sources 		= Filesystem.ice \
+$(test)_client_sources          = Filesystem.ice \
                                   Client.cpp \
-		                  Grammar.y \
-		                  Parser.cpp \
-		                  Scanner.l
+                                  Grammar.y \
+                                  Parser.cpp \
+                                  Scanner.l
 
 $(test)_server_sources          = Filesystem.ice \
                                   PersistentFilesystem.ice \
                                   PersistentFilesystemI.cpp \
-		                  Server.cpp
+                                  Server.cpp
 
 demos += $(test)

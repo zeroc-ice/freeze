@@ -34,13 +34,13 @@ extern "C"
     static int customCompare(DB* db, const DBT* dbt1, const DBT* dbt2, size_t*)
 #endif
     {
-	MapDb* me = static_cast<MapDb*>(db->app_private);
-	Ice::Byte* first = static_cast<Ice::Byte*>(dbt1->data);
-	Key k1(first, first + dbt1->size);
-	first = static_cast<Ice::Byte*>(dbt2->data);
-	Key k2(first, first + dbt2->size);
+        MapDb* me = static_cast<MapDb*>(db->app_private);
+        Ice::Byte* first = static_cast<Ice::Byte*>(dbt1->data);
+        Key k1(first, first + dbt1->size);
+        first = static_cast<Ice::Byte*>(dbt2->data);
+        Key k2(first, first + dbt2->size);
 
-	return me->getKeyCompare()->compare(k1, k2);
+        return me->getKeyCompare()->compare(k1, k2);
     }
 }
 

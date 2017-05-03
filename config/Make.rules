@@ -8,7 +8,7 @@
 # Select an installation base directory. The directory will be created
 # if it does not exist.
 #
-prefix			?= /opt/Ice-$(version)
+prefix                  ?= /opt/Ice-$(version)
 
 #
 # The "root directory" for runpath embedded in executables. Can be set
@@ -23,13 +23,13 @@ prefix			?= /opt/Ice-$(version)
 # Define embedded_runpath as no if you don't want any runpath added to
 # the executables. If not set, defaults to to "yes"
 #
-embedded_runpath 	?= yes
+embedded_runpath        ?= yes
 
 #
 # Define OPTIMIZE as yes if you want to build with optimization.
 # Otherwise Ice is build with debug information.
 #
-#OPTIMIZE		= yes
+#OPTIMIZE               = yes
 
 #
 # Define PLATFORMS to the list of platforms to build. This defaults
@@ -38,7 +38,7 @@ embedded_runpath 	?= yes
 # Run `make print V=supported-platforms' to see the list of supported
 # platforms on this system.
 #
-PLATFORMS              	?= $(firstword $(supported-platforms))
+PLATFORMS               ?= $(firstword $(supported-platforms))
 
 #
 # Configurations to build. This defaults to the first supported
@@ -47,7 +47,7 @@ PLATFORMS              	?= $(firstword $(supported-platforms))
 # Run `make print V=supported-configs` to see the list of supported
 # configurations.
 #
-CONFIGS			?= $(firstword $(supported-configs))
+CONFIGS                 ?= $(firstword $(supported-configs))
 
 #
 # Third-party libraries
@@ -56,43 +56,43 @@ CONFIGS			?= $(firstword $(supported-configs))
 # where the compiler can find it, set the corresponding variable
 # below to the installation directory of the library.
 #
-#DB_HOME 		?= /opt/db
-#EXPAT_HOME 		?= /opt/expat
-#BZ2_HOME 		?= /opt/bz2
-#MCPP_HOME 		?= /opt/mcpp
+#DB_HOME                ?= /opt/db
+#EXPAT_HOME             ?= /opt/expat
+#BZ2_HOME               ?= /opt/bz2
+#MCPP_HOME              ?= /opt/mcpp
 
 # ----------------------------------------------------------------------
 # Don't change anything below this line!
 # ----------------------------------------------------------------------
 
-os			?= $(shell uname)
+os                      ?= $(shell uname)
 
-include	$(top_srcdir)/ice/config/Make.rules.$(os)
-include	$(top_srcdir)/ice/config/Make.project.rules
-include	$(top_srcdir)/ice/config/Make.tests.rules
+include $(top_srcdir)/ice/config/Make.rules.$(os)
+include $(top_srcdir)/ice/config/Make.project.rules
+include $(top_srcdir)/ice/config/Make.tests.rules
 
 -include $(top_srcdir)/config/Make.rules.$(os)
 
 ifeq ($(USE_BIN_DIST),yes)
-prefix 			:= $(or $(ICE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
-bindir			?= $(install_bindir)
-libdir			?= $(install_libdir)
-slicedir 		?= $(install_slicedir)
-includedir		?= $(install_includedir)
+prefix                  := $(or $(ICE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
+bindir                  ?= $(install_bindir)
+libdir                  ?= $(install_libdir)
+slicedir                ?= $(install_slicedir)
+includedir              ?= $(install_includedir)
 else
-bindir			?= $(call mappingdir,$(or $1,$(currentdir)),bin)
-libdir			?= $(call mappingdir,$(or $1,$(currentdir)),lib)
-slicedir		?= $(top_srcdir)/slice
-includedir		?= $(call mappingdir,$(or $1,$(currentdir)),include)
+bindir                  ?= $(call mappingdir,$(or $1,$(currentdir)),bin)
+libdir                  ?= $(call mappingdir,$(or $1,$(currentdir)),lib)
+slicedir                ?= $(top_srcdir)/slice
+includedir              ?= $(call mappingdir,$(or $1,$(currentdir)),include)
 
-ice_bindir		?= $(top_srcdir)/ice/cpp/bin
-ice_libdir		?= $(top_srcdir)/ice/cpp/lib
-ice_slicedir 		?= $(top_srcdir)/ice/slice
-ice_includedir		?= $(top_srcdir)/ice/cpp/include
+ice_bindir              ?= $(top_srcdir)/ice/cpp/bin
+ice_libdir              ?= $(top_srcdir)/ice/cpp/lib
+ice_slicedir            ?= $(top_srcdir)/ice/slice
+ice_includedir          ?= $(top_srcdir)/ice/cpp/include
 endif
 
-version			= 3.7.0
-soversion		= 37
+version                 = 3.7.0
+soversion               = 37
 
 #
 # The compatversion is the lowest patch release with the same API.
@@ -102,31 +102,31 @@ soversion		= 37
 #
 compatversion           = $(version)
 
-ice_src_dist 		:= $(wildcard $(ice_home)/config/Make.rules)
+ice_src_dist            := $(wildcard $(ice_home)/config/Make.rules)
 
-usr_dir_install		:= $(filter /usr%,$(prefix))
-install_bindir	  	?= $(prefix)/bin
-install_libdir	  	?= $(prefix)/lib
-install_slicedir 	?= $(prefix)$(if $(usr_dir_install),/share/Ice-$(version))/slice
-install_includedir	?= $(prefix)/include
-install_docdir 		?= $(prefix)$(if $(usr_dir_install),/share/Ice-$(version))
-install_mandir		?= $(prefix)$(if $(usr_dir_install),/share)/man
+usr_dir_install         := $(filter /usr%,$(prefix))
+install_bindir          ?= $(prefix)/bin
+install_libdir          ?= $(prefix)/lib
+install_slicedir        ?= $(prefix)$(if $(usr_dir_install),/share/Ice-$(version))/slice
+install_includedir      ?= $(prefix)/include
+install_docdir          ?= $(prefix)$(if $(usr_dir_install),/share/Ice-$(version))
+install_mandir          ?= $(prefix)$(if $(usr_dir_install),/share)/man
 
 #
 # Languages, platforms and configurations to build
 #
-supported-languages	= cpp java
-supported-configs	= shared
+supported-languages     = cpp java
+supported-configs       = shared
 
 #
 # Support for 3rd party libraries
 #
-thirdparties		:= bz2 db expat mcpp
-bz2_home 		:= $(BZ2_HOME)
-db_home 		:= $(or $(DB_HOME),$(if $(filter Darwin,$(os)),/usr/local/opt/berkeley-db53,))
-db_ldflags		:= -ldb_cxx
-expat_home 		:= $(EXPAT_HOME)
-mcpp_home		:= $(MCPP_HOME)
+thirdparties            := bz2 db expat mcpp
+bz2_home                := $(BZ2_HOME)
+db_home                 := $(or $(DB_HOME),$(if $(filter Darwin,$(os)),/usr/local/opt/berkeley-db53,))
+db_ldflags              := -ldb_cxx
+expat_home              := $(EXPAT_HOME)
+mcpp_home               := $(MCPP_HOME)
 
 $(foreach l,$(thirdparties),$(eval $(call make-lib,$l)))
 
@@ -136,12 +136,12 @@ db_libdir               ?= $(wildcard /usr/lib64/db53)
 #
 # Support for Ice libraries
 #
-static_projects		= %
-shared_excludes		= IceUtil Slice
+static_projects         = %
+shared_excludes         = IceUtil Slice
 
 $(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice Ice IceXML)))
 
 # Create component dependency variables
-ice_targetdir 			:= $(top_srcdir)/ice/cpp/lib
+ice_targetdir                   := $(top_srcdir)/ice/cpp/lib
 $(foreach d,$(dependencies),$(eval $(call create-component-targets,ice,$d,library)))
 

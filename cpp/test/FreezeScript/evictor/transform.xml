@@ -1,7 +1,7 @@
 <transformdb>
 
     <database key="::Ice::Identity" value="Object">
-	<record/>
+        <record/>
     </database>
 
 <!--
@@ -16,7 +16,7 @@
 
     <!-- class ::Test::MainObject -->
     <transform type="::Test::MainObject">
-	<!-- NOTICE: renamed has been removed -->
+        <!-- NOTICE: renamed has been removed -->
         <!-- NOTICE: newname has been added -->
         <set target="new.newname" value="old.renamed"/>
     </transform>

@@ -4,9 +4,9 @@
 #
 # **********************************************************************
 
-$(test)_client_sources 			:= Client.cpp
+$(test)_client_sources                  := Client.cpp
 
 $(test)_client_slice2freeze             := IntLongMap
-$(test)_client_IntLongMap		:= --dict IntLongMap,int,long
+$(test)_client_IntLongMap               := --dict IntLongMap,int,long
 
 demos += $(test)

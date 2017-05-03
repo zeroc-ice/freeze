@@ -1,6 +1,6 @@
 <transformdb>
     <database key="int" value="::Test::S">
-	<record>
+        <record>
         </record>
     </database>
 

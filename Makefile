@@ -33,7 +33,7 @@ $(eval $(call make-global-rule,install,$(languages)))
 install:: install-doc install-slice
 
 $(eval $(call install-data-files,$(wildcard $(slicedir)/*/*.ice),$(slicedir),$(install_slicedir),\
-	install-slice,"Installing slice files"))
+        install-slice,"Installing slice files"))
 
 $(eval $(call install-data-files,$(wildcard $(top_srcdir)/*LICENSE),$(top_srcdir),$(install_docdir),\
-	install-doc,"Installing documentation files"))
+        install-doc,"Installing documentation files"))

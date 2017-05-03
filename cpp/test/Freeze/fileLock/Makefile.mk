@@ -6,7 +6,7 @@
 
 $(test)_programs := client clientFail
 
-$(test)_client_sources       	:= Client.cpp
+$(test)_client_sources          := Client.cpp
 $(test)_clientFail_sources      := ClientFail.cpp
 
 tests += $(test)
