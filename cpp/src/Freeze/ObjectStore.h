@@ -200,4 +200,3 @@ ObjectStoreBase::sampleServant() const
 }
 
 #endif
-

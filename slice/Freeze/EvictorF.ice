@@ -16,4 +16,3 @@ local interface BackgroundSaveEvictor;
 local interface TransactionalEvictor;
 
 };
-

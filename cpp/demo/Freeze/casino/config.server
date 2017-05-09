@@ -50,4 +50,3 @@ Freeze.Evictor.db.player.RollbackOnUserException=1
 # 1 = Trace transaction IDs and commit and rollback activity.
 #
 #Freeze.Trace.Transaction=1
-

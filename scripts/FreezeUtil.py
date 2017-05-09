@@ -56,4 +56,3 @@ class FreezeJavaMapping(JavaCompatMapping):
 
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))
-

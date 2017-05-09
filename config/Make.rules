@@ -144,4 +144,3 @@ $(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil S
 # Create component dependency variables
 ice_targetdir                   := $(top_srcdir)/ice/cpp/lib
 $(foreach d,$(dependencies),$(eval $(call create-component-targets,ice,$d,library)))
-

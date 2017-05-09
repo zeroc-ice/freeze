@@ -14,5 +14,3 @@ set_verbose DB_VERB_RECOVERY
 # Please keep the default for real applications
 #
 set_lg_max 2000000
-
-

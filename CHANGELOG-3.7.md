@@ -30,5 +30,3 @@ These are the changes since Freeze 3.6.1:
 
 - The following classes are now provided by Freeze for Java: `Freeze.Cache`, `Freeze.Store`, `Freeze.FileLockException`
   There classes were previously in package `IceUtil` and incorporated in `ice.jar`.
-
-

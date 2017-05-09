@@ -359,4 +359,3 @@ Freeze::EvictorIBase::allDbs() const
 
     return result;
 }
-

@@ -164,4 +164,3 @@ PhoneBookI::shutdown(const Ice::Current& c)
 {
     c.adapter->getCommunicator()->shutdown();
 }
-

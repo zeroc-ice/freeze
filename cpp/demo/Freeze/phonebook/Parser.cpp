@@ -483,4 +483,3 @@ Parser::parse(bool debug)
     parser = 0;
     return status;
 }
-

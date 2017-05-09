@@ -87,4 +87,3 @@ module CasinoStore
         int outstandingChips;
     };
 };
-

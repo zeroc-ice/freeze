@@ -333,4 +333,3 @@ local interface Evictor extends Ice::ServantLocator
 };
 
 };
-

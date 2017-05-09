@@ -36,4 +36,3 @@ echo ====== Run db_hotbackup -c -u (log archival) ======
 db_hotbackup -c -u -b hotbackup -v -D -h db
 if errorlevel 1 exit /b %errorlevel%
 exit /b 0
-

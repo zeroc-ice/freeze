@@ -17,6 +17,3 @@ Freeze.DbEnv.backup.DbPrivate=0
 # "Fatal" recovery
 #
 #Freeze.DbEnv.backup.DbRecoverFatal=1
-
-
-

@@ -55,4 +55,3 @@ typedef IceUtil::Handle<Index> IndexPtr;
 }
 
 #endif
-

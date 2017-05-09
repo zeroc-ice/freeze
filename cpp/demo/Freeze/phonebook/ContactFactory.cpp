@@ -36,4 +36,3 @@ ContactFactory::getEvictor() const
 {
     return _evictor;
 }
-
