@@ -15,7 +15,7 @@ particular aspect of Freeze.
 
 # Changes in Freeze 3.7.0
 
-These are the changes since Freeze 3.6.1:
+These are the changes since Freeze (Ice) 3.6:
 
 ## General Changes
 
