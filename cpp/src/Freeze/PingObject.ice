@@ -13,6 +13,6 @@ module Freeze
 
 class PingObject
 {
-};
+}
 
-};
+}

@@ -3,9 +3,9 @@
 module Test
 {
 
-class C1 {};
-class C2 extends C1 {};
-class C3 {};
+class C1 {}
+class C2 extends C1 {}
+class C3 {}
 
 struct S
 {
@@ -13,6 +13,6 @@ struct S
     C1 m2;
     C2 m3;
     C3 m4;
-};
+}
 
-};
+}

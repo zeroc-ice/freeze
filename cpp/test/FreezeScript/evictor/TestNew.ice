@@ -1,7 +1,7 @@
 module Test
 {
 
-enum E { E1, E2, E3};
+enum E { E1, E2, E3}
 
 class MainObject
 {
@@ -14,7 +14,7 @@ class MainObject
     float doubleToFloat;
     E stringToEnum;
     E newname;
-};
+}
 
 /*
  * DerivedMainObject has been removed.
@@ -22,7 +22,7 @@ class MainObject
 class DerivedMainObject extends MainObject
 {
     string name;
-};
+}
  */
 
 /*
@@ -31,7 +31,7 @@ class DerivedMainObject extends MainObject
 class RenamedFacetObject
 {
     string doubleToString;
-};
+}
 
 /*
  * DerivedFacetObject has been removed.
@@ -39,7 +39,7 @@ class RenamedFacetObject
 class DerivedFacetObject extends FacetObject
 {
     long count;
-};
+}
  */
 
-};
+}

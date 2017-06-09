@@ -3,11 +3,11 @@
 module Test
 {
 
-class C {};
+class C {}
 
 struct S
 {
     C m1;
-};
+}
 
-};
+}

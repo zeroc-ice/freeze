@@ -3,11 +3,11 @@
 module Test
 {
 
-interface C {};
+interface C {}
 
 struct S
 {
     C m1; // FAIL
-};
+}
 
-};
+}

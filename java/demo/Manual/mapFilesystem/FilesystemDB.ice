@@ -16,7 +16,7 @@ module FilesystemDB
         string name;
         Ice::Identity parent;
         Filesystem::Lines text;
-    };
+    }
 
     dictionary<string, Filesystem::NodeDesc> StringNodeDescDict;
     struct DirectoryEntry
@@ -24,5 +24,5 @@ module FilesystemDB
         string name;
         Ice::Identity parent;
         StringNodeDescDict nodes;
-    };
-};
+    }
+}

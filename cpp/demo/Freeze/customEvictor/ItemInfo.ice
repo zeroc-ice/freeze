@@ -18,6 +18,6 @@ struct ItemInfo
     float unitPrice;
     int quantityInStock;
     string filler;
-};
+}
 
-};
+}

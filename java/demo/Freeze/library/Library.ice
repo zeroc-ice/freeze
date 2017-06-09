@@ -19,7 +19,7 @@ module Demo
 exception DatabaseException
 {
     string message;
-};
+}
 
 /**
  *
@@ -28,7 +28,7 @@ exception DatabaseException
  **/
 exception BookExistsException
 {
-};
+}
 
 /**
  *
@@ -37,7 +37,7 @@ exception BookExistsException
  **/
 exception BookRentedException
 {
-};
+}
 
 /**
  *
@@ -46,7 +46,7 @@ exception BookRentedException
  **/
 exception BookNotRentedException
 {
-};
+}
 
 /**
  *
@@ -63,7 +63,7 @@ struct BookDescription
 
     /** The authors of the book. */
     string authors;
-};
+}
 
 /**
  *
@@ -144,7 +144,7 @@ class Book
      *
      **/
     string rentalCustomerName;
-};
+}
 
 /**
  *
@@ -226,6 +226,6 @@ interface Library
      *
      **/
     void shutdown();
-};
+}
 
-};
+}

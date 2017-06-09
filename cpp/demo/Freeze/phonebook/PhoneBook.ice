@@ -16,7 +16,7 @@ module Demo
 exception DatabaseException
 {
     string message;
-};
+}
 
 class Contact
 {
@@ -34,7 +34,7 @@ class Contact
     string name;
     string address;
     string phone;
-};
+}
 
 sequence<Contact*> Contacts;
 
@@ -44,6 +44,6 @@ interface PhoneBook
     ["cpp:const"] idempotent Contacts findContacts(string name) throws DatabaseException;
     void setEvictorSize(int size) throws DatabaseException;
     void shutdown();
-};
+}
 
-};
+}

@@ -11,10 +11,10 @@ module Filesystem
     exception GenericError
     {
         string reason;
-    };
-    exception PermissionDenied extends GenericError {};
-    exception NameInUse extends GenericError {};
-    exception NoSuchName extends GenericError {};
+    }
+    exception PermissionDenied extends GenericError {}
+    exception NameInUse extends GenericError {}
+    exception NoSuchName extends GenericError {}
 
     interface Node
     {
@@ -22,7 +22,7 @@ module Filesystem
 
         ["freeze:write"]
         void destroy() throws PermissionDenied;
-    };
+    }
 
     sequence<string> Lines;
 
@@ -32,16 +32,16 @@ module Filesystem
 
         ["freeze:write"]
         idempotent void write(Lines text) throws GenericError;
-    };
+    }
 
-    enum NodeType { DirType, FileType };
+    enum NodeType { DirType, FileType }
 
     struct NodeDesc
     {
         string name;
         NodeType type;
         Node* proxy;
-    };
+    }
 
     sequence<NodeDesc> NodeDescSeq;
 
@@ -56,5 +56,5 @@ module Filesystem
 
         ["freeze:write"]
         Directory* createDirectory(string name) throws NameInUse;
-    };
-};
+    }
+}

@@ -3,7 +3,7 @@
 module Test
 {
 
-enum E { E1, E2, E3 };
+enum E { E1, E2, E3 }
 
 struct S1
 {
@@ -11,12 +11,12 @@ struct S1
     long m2;
     string m3;
     E m4;
-};
+}
 
 sequence<long> Seq1;
 dictionary<int, long> D1;
 
-interface I {};
+interface I {}
 
 class C1 implements I
 {
@@ -36,7 +36,7 @@ class C1 implements I
     long c1m14;
     long c1m15;
     long c1m16;
-};
+}
 
 class C2 extends C1
 {
@@ -56,7 +56,7 @@ class C2 extends C1
     long c2m14;
     long c2m15;
     long c2m16;
-};
+}
 
 struct S2
 {
@@ -76,6 +76,6 @@ struct S2
     long m14;
     long m15;
     long m16;
-};
+}
 
-};
+}

@@ -21,6 +21,6 @@ struct NewContactData
 {
     string phoneNumber;
     string emailAddress;
-};
+}
 
-};
+}

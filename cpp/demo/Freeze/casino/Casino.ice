@@ -23,7 +23,7 @@ module Casino
         // Destroy this player
         //
         ["freeze:write"] void destroy();
-    };
+    }
 
     sequence<Player*> PlayerPrxSeq;
 
@@ -31,7 +31,7 @@ module Casino
     // Thrown when a Player does not have enough chips to place
     // a bet
     //
-    exception OutOfChipsException {};
+    exception OutOfChipsException {}
 
     interface Bet
     {
@@ -47,7 +47,7 @@ module Casino
         //
         //
         ["freeze:write"] void accept(Player* p) throws OutOfChipsException;
-    };
+    }
 
     interface Bank
     {
@@ -88,5 +88,5 @@ module Casino
         // 'lifetime' milliseconds
         //
         ["freeze:write"] Bet* createBet(int amount, int lifetime);
-    };
-};
+    }
+}

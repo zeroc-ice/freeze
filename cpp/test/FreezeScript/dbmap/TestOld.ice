@@ -1,7 +1,7 @@
 module Test
 {
 
-enum E { E1, E2, E3 };
+enum E { E1, E2, E3 }
 
 sequence<bool> BoolStringSeq;
 
@@ -66,38 +66,38 @@ dictionary<int, string> StringEnumDict;
 class C
 {
     BoolStringDict boolToStringDict;
-};
+}
 
 class D extends C
 {
     StringByteSeq stringToByteSeq;
     Object obj;
-};
+}
 
 class F
 {
     StringEnumSeq stringToEnumSeq;
-};
+}
 
 struct Small1
 {
     byte b;
     int intToString;
-};
+}
 sequence<Small1> Small1Seq;
 dictionary<int, Small1> IntSmall1Dict;
 
 class Small2
 {
     Small1Seq seq;
-};
+}
 sequence<Small2> Small2Seq;
 dictionary<int, Small2> IntSmall2Dict;
 
 class Small3(99)
 {
     string name;
-};
+}
 
 struct S
 {
@@ -231,6 +231,6 @@ struct S
     C dAsCObject;
     D dObject;
     Small3 compactObject;
-};
+}
 
-};
+}

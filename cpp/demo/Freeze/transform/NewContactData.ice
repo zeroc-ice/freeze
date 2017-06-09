@@ -17,6 +17,6 @@ struct ContactData
 {
     string phoneNumber;
     string emailAddress;
-};
+}
 
-};
+}

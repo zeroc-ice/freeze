@@ -15,20 +15,20 @@ module Test
 
 exception AlreadyRegisteredException
 {
-};
+}
 
 exception NotRegisteredException
 {
-};
+}
 
 exception EvictorDeactivatedException
 {
-};
+}
 
 
 exception InsufficientFundsException
 {
-};
+}
 
 ["cpp:virtual"]class Account
 {
@@ -49,7 +49,7 @@ exception InsufficientFundsException
     ["freeze:write:mandatory"] void deposit(int amount) throws InsufficientFundsException;
 
     int balance;
-};
+}
 
 sequence<Account*> AccountPrxSeq;
 sequence<Ice::Identity> AccountIdSeq;
@@ -79,7 +79,7 @@ sequence<Ice::Identity> AccountIdSeq;
 
     int value;
     AccountIdSeq accounts;
-};
+}
 
 ["freeze:write", "cpp:virtual"] class Facet extends Servant
 {
@@ -87,7 +87,7 @@ sequence<Ice::Identity> AccountIdSeq;
     idempotent void setData(string data);
 
     string data;
-};
+}
 
 
 interface RemoteEvictor
@@ -103,12 +103,12 @@ interface RemoteEvictor
 
     void deactivate();
     idempotent void destroyAllServants(string facet);
-};
+}
 
 interface RemoteEvictorFactory
 {
     RemoteEvictor* createEvictor(string name, bool transactional);
     void shutdown();
-};
+}
 
-};
+}

@@ -19,7 +19,7 @@ struct Key
 {
     string expression;
     int result;
-};
+}
 
 //
 // A set of classes that represents a numeric parse tree.
@@ -27,25 +27,25 @@ struct Key
 class Node
 {
     int calc();
-};
+}
 
 class NumberNode extends Node
 {
     int number;
-};
+}
 
 class BinaryNode extends Node
 {
     Node left;
     Node right;
-};
+}
 
 class AddNode extends BinaryNode
 {
-};
+}
 
 class MultiplyNode extends BinaryNode
 {
-};
+}
 
-};
+}

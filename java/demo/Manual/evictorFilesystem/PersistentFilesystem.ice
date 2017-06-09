@@ -18,12 +18,12 @@ module Filesystem
     {
         string nodeName;
         PersistentDirectory* parent;
-    };
+    }
 
     class PersistentFile extends PersistentNode implements File
     {
         Lines text;
-    };
+    }
 
     dictionary<string, NodeDesc> NodeDict;
 
@@ -33,5 +33,5 @@ module Filesystem
         void removeNode(string name);
 
         NodeDict nodes;
-    };
-};
+    }
+}

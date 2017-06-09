@@ -15,6 +15,6 @@ module Demo
 struct ContactData
 {
     string phoneNumber;
-};
+}
 
-};
+}

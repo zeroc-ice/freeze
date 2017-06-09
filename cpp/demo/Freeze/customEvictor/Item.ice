@@ -12,7 +12,7 @@
 module Warehouse
 {
 
-exception OutOfStock {};
+exception OutOfStock {}
 
 interface Item
 {
@@ -24,6 +24,6 @@ interface Item
 
     idempotent int quantityInStock();
     void adjustStock(int value) throws OutOfStock;
-};
+}
 
-};
+}

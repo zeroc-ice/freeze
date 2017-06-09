@@ -3,6 +3,6 @@
 module Test
 {
 
-class C {};
+class C {}
 
-};
+}

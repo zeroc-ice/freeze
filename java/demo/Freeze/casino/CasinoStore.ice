@@ -25,7 +25,7 @@ module CasinoStore
         // Win a bet
         //
         ["freeze:write:mandatory"] void win(int count);
-    };
+    }
     ["java:type:java.util.Vector<WinnerPrx>:java.util.Vector<WinnerPrx>"] sequence<Winner*> WinnerPrxSeq;
 
 
@@ -37,7 +37,7 @@ module CasinoStore
         ["freeze:write:mandatory"] void withdraw(int count) throws Casino::OutOfChipsException;
 
         int chips;
-    };
+    }
 
     class PersistentBet implements Casino::Bet
     {
@@ -70,7 +70,7 @@ module CasinoStore
         // The time when the bet completes (ms since the epoch)
         //
         long closeTime;
-    };
+    }
 
     class PersistentBank implements Casino::Bank, Winner
     {
@@ -86,5 +86,5 @@ module CasinoStore
 
         int chipsSold;
         int outstandingChips;
-    };
-};
+    }
+}

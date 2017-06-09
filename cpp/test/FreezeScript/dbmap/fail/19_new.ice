@@ -3,6 +3,6 @@
 module Test
 {
 
-local class C {};
+local class C {}
 
-};
+}
