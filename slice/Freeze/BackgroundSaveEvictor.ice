@@ -100,6 +100,6 @@ local interface BackgroundSaveEvictor extends Evictor
      *
      **/
     void releaseFacet(Ice::Identity id, string facet);
-};
+}
 
-};
+}

@@ -30,7 +30,7 @@ local exception DatabaseException
      *
      **/
     string message;
-};
+}
 
 /**
  *
@@ -41,7 +41,7 @@ local exception DatabaseException
 ["cpp:ice_print"]
 local exception NotFoundException extends DatabaseException
 {
-};
+}
 
 /**
  *
@@ -58,7 +58,7 @@ local exception DeadlockException extends DatabaseException
      *
      **/
     Transaction tx;
-};
+}
 
 /**
  *
@@ -68,7 +68,7 @@ local exception DeadlockException extends DatabaseException
  **/
 local exception InvalidPositionException
 {
-};
+}
 
 /**
  *
@@ -91,6 +91,6 @@ local exception IndexNotFoundException
      *
      **/
     string indexName;
-};
+}
 
-};
+}

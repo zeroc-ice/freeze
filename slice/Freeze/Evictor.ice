@@ -48,7 +48,7 @@ local interface ServantInitializer
      *
      **/
     void initialize(Ice::ObjectAdapter adapter, Ice::Identity identity, string facet, Object servant);
-};
+}
 
 
 /**
@@ -58,7 +58,7 @@ local interface ServantInitializer
  **/
 local exception NoSuchElementException
 {
-};
+}
 
 /**
  *
@@ -98,7 +98,7 @@ local interface EvictorIterator
      * occurs while retrieving a batch of objects.
      **/
     Ice::Identity next();
-};
+}
 
 /**
  *
@@ -107,7 +107,7 @@ local interface EvictorIterator
  **/
 local exception EvictorDeactivatedException
 {
-};
+}
 
 
 /**
@@ -330,6 +330,6 @@ local interface Evictor extends Ice::ServantLocator
      *
      **/
     EvictorIterator getIterator(string facet, int batchSize);
-};
+}
 
-};
+}

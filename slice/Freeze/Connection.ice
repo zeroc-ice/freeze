@@ -24,7 +24,7 @@ module Freeze
  **/
 local exception TransactionAlreadyInProgressException
 {
-};
+}
 
 
 /**
@@ -102,6 +102,6 @@ local interface Connection
      **/
     ["cpp:const"] string getName();
 
-};
+}
 
-};
+}

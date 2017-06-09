@@ -47,7 +47,7 @@ local interface Transaction
      *
      **/
     ["cpp:const"] Connection getConnection();
-};
+}
 
 
-};
+}

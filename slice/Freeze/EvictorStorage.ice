@@ -40,7 +40,7 @@ struct Statistics
      *
      **/
     long avgSaveTime;
-};
+}
 
 /**
  *
@@ -63,6 +63,6 @@ struct ObjectRecord
      *
      **/
     Statistics stats;
-};
+}
 
-};
+}

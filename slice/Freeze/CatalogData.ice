@@ -40,6 +40,6 @@ struct CatalogData
      *
      **/
     string value;
-};
+}
 
-};
+}

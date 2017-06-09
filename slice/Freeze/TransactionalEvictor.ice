@@ -40,6 +40,6 @@ local interface TransactionalEvictor extends Evictor
      *
      **/
     void setCurrentTransaction(Transaction tx);
-};
+}
 
-};
+}

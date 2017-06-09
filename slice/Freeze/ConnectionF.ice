@@ -13,4 +13,4 @@ module Freeze
 
 local interface Connection;
 
-};
+}
