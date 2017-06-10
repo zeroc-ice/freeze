@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <Ice_LanguageMapping>cpp</Ice_LanguageMapping>
-        <Ice_CppMapping>cpp98</Ice_CppMapping>
-        <Ice_BuildingSrc Condition="'$(ICE_BIN_DIST)' == ''">yes</Ice_BuildingSrc>
-        <Ice_BuildingSrc Condition="'$(ICE_BIN_DIST)' != ''">no</Ice_BuildingSrc>
+        <IceLanguageMapping>cpp</IceLanguageMapping>
+        <IceCppMapping>cpp98</IceCppMapping>
+        <IceBuildingSrc Condition="'$(ICE_BIN_DIST)' == ''">yes</IceBuildingSrc>
+        <IceBuildingSrc Condition="'$(ICE_BIN_DIST)' != ''">no</IceBuildingSrc>
     </PropertyGroup>
     <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\cpp\msbuild\ice.cpp.props" />
 
@@ -15,24 +15,24 @@
 
     <!-- Define some common properties -->
     <PropertyGroup>
-        <Freeze_SrcRootDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</Freeze_SrcRootDir>
-        <OutDir>$(Freeze_SrcRootDir)\bin\$(Platform)\$(Configuration)\</OutDir>
+        <FreezeSrcRootDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</FreezeSrcRootDir>
+        <OutDir>$(FreezeSrcRootDir)\bin\$(Platform)\$(Configuration)\</OutDir>
     </PropertyGroup>
 
     <ItemDefinitionGroup Condition="'$(ICE_BIN_DIST)' == ''">
         <ClCompile>
-            <AdditionalIncludeDirectories>$(Freeze_SrcRootDir)\include\generated\$(Platform)\$(Ice_Configuration);
-                                          $(Freeze_SrcRootDir)\include;$(Freeze_SrcRootDir)\src;
+            <AdditionalIncludeDirectories>$(FreezeSrcRootDir)\include\generated\$(Platform)\$(IceConfiguration);
+                                          $(FreezeSrcRootDir)\include;$(FreezeSrcRootDir)\src;
                                           %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
-            <AdditionalLibraryDirectories>$(Freeze_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories>$(FreezeSrcRootDir)\lib\$(Platform)\$(IceConfiguration)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
 
     <ItemDefinitionGroup Condition="'$(ConfigurationType)' == 'DynamicLibrary'">
         <Link>
-            <ImportLibrary>$(Freeze_SrcRootDir)\lib\$(Platform)\$(Ice_Configuration)\$(TargetName).lib</ImportLibrary>
+            <ImportLibrary>$(FreezeSrcRootDir)\lib\$(Platform)\$(IceConfiguration)\$(TargetName).lib</ImportLibrary>
         </Link>
     </ItemDefinitionGroup>
 
