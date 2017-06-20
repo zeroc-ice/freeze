@@ -110,7 +110,6 @@ private:
     bool _keepStats;
 };
 
-
 template<class T>
 class ObjectStore : public ObjectStoreBase, public Cache<Ice::Identity, T>
 {

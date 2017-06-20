@@ -72,7 +72,6 @@ private:
     int _guardCount;
 };
 
-
 class EvictorIBase : public virtual Evictor, public IceUtil::Monitor<IceUtil::Mutex>
 {
 public:
@@ -101,7 +100,6 @@ public:
 
     void initialize(const Ice::Identity&, const std::string&, const Ice::ObjectPtr&);
 
-
     static void updateStats(Statistics&, IceUtil::Int64);
 
     static std::string defaultDb;
@@ -111,7 +109,6 @@ protected:
 
     EvictorIBase(const Ice::ObjectAdapterPtr&, const std::string&, DbEnv*, const std::string&,
              const FacetTypeMap&, const ServantInitializerPtr&, bool);
-
 
     virtual bool hasAnotherFacet(const Ice::Identity&, const std::string&) = 0;
 
@@ -149,7 +146,6 @@ private:
 };
 
 typedef IceUtil::Handle<EvictorIBase> EvictorIBasePtr;
-
 
 template<class T>
 class EvictorI : public EvictorIBase
@@ -288,7 +284,6 @@ protected:
     typedef std::map<std::string, ObjectStore<T>*> StoreMap;
     StoreMap _storeMap;
 };
-
 
 inline DeactivateController&
 EvictorIBase::deactivateController()

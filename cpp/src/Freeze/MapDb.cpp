@@ -177,7 +177,6 @@ Freeze::MapDb::MapDb(const ConnectionIPtr& connection,
                 set_pagesize(pageSize);
             }
 
-
             DbTxn* txn = getTxn(tx);
 
             u_int32_t flags = DB_THREAD;

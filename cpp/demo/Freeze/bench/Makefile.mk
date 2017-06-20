@@ -21,5 +21,4 @@ $(test)_client_BenchTypes       := --dict "Demo::IntIntMap,int,int"             
 
 $(test)_client_BenchTypes_slice := $(test)/Test.ice
 
-
 demos += $(test)

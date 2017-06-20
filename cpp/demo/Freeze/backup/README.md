@@ -14,7 +14,6 @@ the old values are all the same.
 This program runs forever: you need to kill it (e.g., with CTRL-C) to
 terminate it.
 
-
 DB utility names
 ----------------
 
@@ -79,7 +78,6 @@ Freeze.DbEnv.backup.DbPrivate=0
 
 The db/DB_CONFIG file is used to put the data files and log files in
 different subdirectories, which simplifies archiving.
-
 
 Recovery
 --------

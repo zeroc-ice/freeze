@@ -1000,7 +1000,6 @@ public:
     //     MapHelper::recreate(connection, dbName, KeyCodec::typeId(), ValueCodec::typeId(), keyCompare, indices);
     // }
 
-
     bool operator==(const Map& rhs) const
     {
         //

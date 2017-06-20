@@ -64,7 +64,6 @@ LibraryServer::run(int argc, char*[])
     //
     adapter->addServantLocator(evictor, "book");
 
-
     //
     // Create the library, and add it to the object adapter.
     //

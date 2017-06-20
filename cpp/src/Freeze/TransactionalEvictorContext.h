@@ -74,7 +74,6 @@ public:
         bool _ownBody;
     };
 
-
     class ToInvalidate
     {
     public:
@@ -91,7 +90,6 @@ public:
         EvictorIBasePtr _evictor; // for _guard
         DeactivateController::Guard _guard; // ensures store is not dangling
     };
-
 
     TransactionalEvictorContext(const SharedDbEnvPtr&);
     TransactionalEvictorContext(const TransactionIPtr&);
@@ -159,6 +157,5 @@ private:
 typedef IceUtil::Handle<TransactionalEvictorContext> TransactionalEvictorContextPtr;
 
 }
-
 
 #endif

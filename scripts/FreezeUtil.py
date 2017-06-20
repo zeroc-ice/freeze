@@ -53,6 +53,5 @@ class FreezeJavaMapping(JavaCompatMapping):
         else:
             return "/usr/{0}".format(platform.getLibSubDir(self, process, current))
 
-
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))

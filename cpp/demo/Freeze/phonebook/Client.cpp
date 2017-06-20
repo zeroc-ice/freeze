@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 class PhoneBookClient : public Ice::Application
 {
 public:

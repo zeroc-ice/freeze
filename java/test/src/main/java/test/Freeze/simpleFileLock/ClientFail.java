@@ -12,7 +12,6 @@ import java.io.EOFException;
 import java.io.UTFDataFormatException;
 import java.io.IOException;
 
-
 public class ClientFail
 {
     private static void

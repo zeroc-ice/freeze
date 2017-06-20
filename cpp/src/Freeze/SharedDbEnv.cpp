@@ -21,7 +21,6 @@
 
 #include <cstdlib>
 
-
 using namespace std;
 using namespace IceUtil;
 using namespace Ice;
@@ -195,7 +194,6 @@ Freeze::SharedDbEnv::~SharedDbEnv()
 #endif
 }
 
-
 Freeze::MapDb*
 Freeze::SharedDbEnv::getSharedMapDb(const string& dbName,
                                     const string& key,
@@ -230,7 +228,6 @@ Freeze::SharedDbEnv::getSharedMapDb(const string& dbName,
         return db;
     }
 
-
     //
     // key not found, let's create and open a new Db
     //
@@ -255,8 +252,6 @@ Freeze::SharedDbEnv::getSharedMapDb(const string& dbName,
     return result.release();
 }
 
-
-
 void
 Freeze::SharedDbEnv::removeSharedMapDb(const string& dbName)
 {
@@ -270,7 +265,6 @@ Freeze::SharedDbEnv::removeSharedMapDb(const string& dbName)
         delete db;
     }
 }
-
 
 void
 Freeze::SharedDbEnv::__incRef()
@@ -288,7 +282,6 @@ Freeze::SharedDbEnv::__decRef()
         MapKey key;
         key.envName = _envName;
         key.communicator = _communicator;
-
 
         IceUtilInternal::MutexPtrTryLock<IceUtil::Mutex> mapLock(mapMutex);
         if(!mapLock.acquired())
@@ -348,7 +341,6 @@ Freeze::SharedDbEnv::__decRef()
         delete this;
     }
 }
-
 
 Freeze::TransactionalEvictorContextPtr
 Freeze::SharedDbEnv::createCurrent()
@@ -688,7 +680,6 @@ Freeze::SharedDbEnv::cleanup()
         }
     }
 }
-
 
 Freeze::CheckpointThread::CheckpointThread(SharedDbEnv& dbEnv, const Time& checkpointPeriod, Int kbyte, Int trace) :
     Thread("Freeze checkpoint thread"),

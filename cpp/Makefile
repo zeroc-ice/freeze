@@ -10,7 +10,6 @@ lang_srcdir     := $(top_srcdir)/cpp
 include $(top_srcdir)/config/Make.rules
 include $(lang_srcdir)/config/Make.rules
 
-
 #
 # Create projects for all the Slice translators from src/slice2* and load source projects.
 #

@@ -350,7 +350,6 @@ private:
     int _size;
 };
 
-
 class TransferThread : public Thread
 {
 public:
@@ -387,7 +386,6 @@ public:
                 to = _accounts[IceUtilInternal::random(static_cast<int>(_accounts.size()))];
             }
             while(from == to);
-
 
             try
             {
@@ -452,8 +450,6 @@ private:
 
     Test::AccountPrxSeq _accounts;
 };
-
-
 
 int
 run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, bool shutdown)
@@ -721,7 +717,6 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         evictor->setSize(0);
         evictor->setSize(size);
 
-
         //
         // Check the transient value
         //
@@ -759,7 +754,6 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
         {
             test(servants[i]->getTransientValue() == -1);
         }
-
 
         //
         // Release one more time
@@ -971,7 +965,6 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
             threads[i]->getThreadControl().join();
         }
     }
-
 
     //
     // Clean up.

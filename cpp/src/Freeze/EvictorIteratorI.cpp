@@ -13,7 +13,6 @@ using namespace std;
 using namespace Freeze;
 using namespace Ice;
 
-
 Freeze::EvictorIteratorI::EvictorIteratorI(ObjectStoreBase* store, const TransactionIPtr& tx, Int batchSize) :
     _store(store),
     _batchSize(static_cast<size_t>(batchSize)),
@@ -24,7 +23,6 @@ Freeze::EvictorIteratorI::EvictorIteratorI(ObjectStoreBase* store, const Transac
 {
     _batchIterator = _batch.end();
 }
-
 
 bool
 Freeze::EvictorIteratorI::hasNext()
@@ -52,7 +50,6 @@ Freeze::EvictorIteratorI::next()
         throw Freeze::NoSuchElementException(__FILE__, __LINE__);
     }
 }
-
 
 vector<Identity>::const_iterator
 Freeze::EvictorIteratorI::nextBatch()

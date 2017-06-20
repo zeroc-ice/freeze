@@ -28,5 +28,4 @@ $(test)_NewContacts             := --dict "Demo::NewContacts,string,Demo::Contac
                                    --dict-index "Demo::NewContacts,phoneNumber,sort"
 $(test)_NewContacts_slice       := $(test)/NewContactData.ice
 
-
 demos += $(test)

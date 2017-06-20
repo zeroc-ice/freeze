@@ -50,7 +50,6 @@ local interface ServantInitializer
     void initialize(Ice::ObjectAdapter adapter, Ice::Identity identity, string facet, Object servant);
 }
 
-
 /**
  *
  * This exception is raised if there are no further elements in the iteration.
@@ -109,7 +108,6 @@ local exception EvictorDeactivatedException
 {
 }
 
-
 /**
  *
  * An automatic Ice object persistence manager, based on the
@@ -163,7 +161,6 @@ local interface Evictor extends Ice::ServantLocator
      *
      **/
     int getSize();
-
 
     /**
      *

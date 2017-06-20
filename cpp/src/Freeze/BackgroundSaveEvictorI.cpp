@@ -187,7 +187,6 @@ Freeze::BackgroundSaveEvictorI::BackgroundSaveEvictorI(const ObjectAdapterPtr& a
     __setNoDelete(false);
 }
 
-
 Ice::ObjectPrx
 Freeze::BackgroundSaveEvictorI::addFacet(const ObjectPtr& servant, const Identity& ident, const string& facet)
 {
@@ -469,7 +468,6 @@ Freeze::BackgroundSaveEvictorI::keepFacet(const Identity& ident, const string& f
                 continue;
             }
 
-
             {
                 IceUtil::Mutex::Lock lockElement(element->mutex);
                 if(element->status == destroyed || element->status == dead)
@@ -574,7 +572,6 @@ Freeze::BackgroundSaveEvictorI::releaseFacet(const Identity& ident, const string
     throw ex;
 }
 
-
 bool
 Freeze::BackgroundSaveEvictorI::hasFacet(const Identity& ident, const string& facet)
 {
@@ -654,7 +651,6 @@ Freeze::BackgroundSaveEvictorI::hasAnotherFacet(const Identity& ident, const str
     return false;
 }
 
-
 ObjectPtr
 Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPtr& cookie)
 {
@@ -696,7 +692,6 @@ Freeze::BackgroundSaveEvictorI::locateImpl(const Current& current, LocalObjectPt
             //
             continue;
         }
-
 
         IceUtil::Mutex::Lock lockElement(element->mutex);
         if(element->status == destroyed || element->status == dead)
@@ -825,7 +820,6 @@ Freeze::BackgroundSaveEvictorI::~BackgroundSaveEvictorI()
         out << "evictor has not been deactivated";
     }
 }
-
 
 void
 Freeze::BackgroundSaveEvictorI::run()
@@ -1336,7 +1330,6 @@ Freeze::BackgroundSaveEvictorI::evict(const BackgroundSaveEvictorElementPtr& ele
     element->store.unpin(element->cachePosition);
 }
 
-
 void
 Freeze::BackgroundSaveEvictorI::addToModifiedQueue(const BackgroundSaveEvictorElementPtr& element)
 {
@@ -1348,7 +1341,6 @@ Freeze::BackgroundSaveEvictorI::addToModifiedQueue(const BackgroundSaveEvictorEl
         notifyAll();
     }
 }
-
 
 void
 Freeze::BackgroundSaveEvictorI::stream(const BackgroundSaveEvictorElementPtr& element, Long streamStart,

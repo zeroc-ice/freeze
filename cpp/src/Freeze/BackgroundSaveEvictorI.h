@@ -54,7 +54,6 @@ namespace Freeze
 
 #endif
 
-
 class BackgroundSaveEvictorI;
 
 struct BackgroundSaveEvictorElement;
@@ -94,7 +93,6 @@ struct BackgroundSaveEvictorElement : public Ice::LocalObject
     Ice::Byte status;
 };
 
-
 class BackgroundSaveEvictorI : public BackgroundSaveEvictor, public EvictorI<BackgroundSaveEvictorElement>,
                                public IceUtil::Thread
 {
@@ -118,7 +116,6 @@ public:
     virtual void deactivate(const std::string&);
 
     virtual ~BackgroundSaveEvictorI();
-
 
     virtual TransactionIPtr beforeQuery();
 

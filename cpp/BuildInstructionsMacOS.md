@@ -77,7 +77,6 @@ When compiling Freeze programs, you must pass the location of the
 `<prefix>/include` directory to the comer with the `-I` option, and the
 location of the library directory with the `-L` option.
 
-
 [1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
 [2]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm
 [3]: http://brew.sh

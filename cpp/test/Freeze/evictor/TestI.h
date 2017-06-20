@@ -44,7 +44,6 @@ private:
     Freeze::TransactionalEvictorPtr _evictor;
 };
 
-
 class ServantI : public virtual Servant, public IceUtil::AbstractMutexI<IceUtil::Monitor<IceUtil::Mutex> >
 {
 public:
@@ -61,7 +60,6 @@ public:
     //
     virtual ::Ice::Int slowGetValue(const Ice::Current& = Ice::Current()) const;
 
-
     virtual void slowGetValue_async(const AMD_Servant_slowGetValuePtr&,
                                     const Ice::Current& = Ice::Current()) const;
 
@@ -75,7 +73,6 @@ public:
     virtual void addFacet(const std::string&, const std::string&, const Ice::Current& = Ice::Current()) const;
 
     virtual void removeFacet(const std::string&, const Ice::Current& = Ice::Current()) const;
-
 
     virtual Ice::Int getTransientValue(const Ice::Current& = Ice::Current()) const;
     virtual void setTransientValue(Ice::Int, const Ice::Current& = Ice::Current());
@@ -95,7 +92,6 @@ protected:
     AMD_Servant_setValueAsyncPtr _setValueAsyncCB;
     Ice::Int _setValueAsyncValue;
 };
-
 
 class FacetI : public virtual Facet, public ServantI
 {

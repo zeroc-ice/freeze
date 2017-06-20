@@ -21,10 +21,8 @@ using namespace Ice;
 using namespace Freeze;
 using namespace Test;
 
-
 // #define SHOW_EXCEPTIONS 1
 #define CONCURRENT_TIME 3
-
 
 #ifdef __SUNPRO_CC
 extern
@@ -53,7 +51,6 @@ FindFirstOfTest(const pair<const Byte, const Int>& p, Byte q)
 {
     return p.first == q;
 }
-
 
 void
 populateDB(const Freeze::ConnectionPtr& connection, ByteIntMap& m)
@@ -159,7 +156,6 @@ private:
 
 typedef IceUtil::Handle<ReadThread> ReadThreadPtr;
 
-
 class WriteThread : public IceUtil::Thread
 {
 public:
@@ -212,7 +208,6 @@ public:
                 }
             }
             populateDB(_connection, _map);
-
 
             //
             // Now update without a transaction
@@ -300,7 +295,6 @@ private:
 
 typedef IceUtil::Handle<WriteThread> WriteThreadPtr;
 
-
 int
 run(const CommunicatorPtr& communicator, const string& envName)
 {
@@ -338,7 +332,6 @@ run(const CommunicatorPtr& communicator, const string& envName)
         test(m != m1);
         test(m1.size() == 0);
         test(m.communicator() == (m1.communicator() == communicator));
-
 
         vector<Byte>::const_iterator j;
         ByteIntMap::iterator p;
@@ -493,7 +486,6 @@ run(const CommunicatorPtr& communicator, const string& envName)
 
         p = m.find('a');
         test(p != m.end() && p->second == 1);
-
 
         m.put(ByteIntMap::value_type('a', 0));
 
@@ -982,7 +974,6 @@ main(int argc, char* argv[])
         cerr << ex << endl;
         status = EXIT_FAILURE;
     }
-
 
     cout << "testing manual code... " << flush;
 

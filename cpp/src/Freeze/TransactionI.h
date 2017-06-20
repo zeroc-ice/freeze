@@ -39,7 +39,6 @@ public:
 
     virtual void rollback();
 
-
     virtual ConnectionPtr getConnection() const;
 
     //

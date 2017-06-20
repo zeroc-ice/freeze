@@ -64,7 +64,6 @@ local interface BackgroundSaveEvictor extends Evictor
      **/
     void keepFacet(Ice::Identity id, string facet);
 
-
     /**
      *
      * Release a lock acquired by {@link #keep}. Once all the locks on an

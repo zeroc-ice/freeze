@@ -28,7 +28,6 @@ using namespace IceUtil;
 string Freeze::EvictorIBase::defaultDb = "$default";
 string Freeze::EvictorIBase::indexPrefix = "$index:";
 
-
 //
 // DeactivateController
 //
@@ -132,7 +131,6 @@ Freeze::DeactivateController::deactivationComplete()
     notifyAll();
 }
 
-
 //
 // EvictorIBase
 //
@@ -163,7 +161,6 @@ Freeze::EvictorIBase::EvictorIBase(const ObjectAdapterPtr& adapter,
     _txTrace = _communicator->getProperties()->getPropertyAsInt("Freeze.Trace.Transaction");
     _deadlockWarning = (_communicator->getProperties()->getPropertyAsInt("Freeze.Warn.Deadlocks") > 0);
 }
-
 
 void
 Freeze::EvictorIBase::setSize(Int evictorSize)
@@ -197,7 +194,6 @@ Freeze::EvictorIBase::getSize()
     Lock sync(*this);
     return static_cast<Int>(_evictorSize);
 }
-
 
 Ice::ObjectPrx
 Freeze::EvictorIBase::add(const ObjectPtr& servant, const Identity& ident)
@@ -271,7 +267,6 @@ Freeze::EvictorIBase::locate(const Current& current, LocalObjectPtr& cookie)
     return result;
 }
 
-
 void
 Freeze::EvictorIBase::initialize(const Identity& ident, const string& facet, const ObjectPtr& servant)
 {
@@ -296,7 +291,6 @@ Freeze::EvictorIBase::updateStats(Statistics& stats, IceUtil::Int64 time)
         stats.avgSaveTime = static_cast<IceUtil::Int64>(stats.avgSaveTime * 0.95 + diff * 0.05);
     }
 }
-
 
 const string&
 Freeze::EvictorIBase::filename() const

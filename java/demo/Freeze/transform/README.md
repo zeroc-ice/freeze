@@ -58,7 +58,6 @@ This demo provides four programs:
    Recreate the contacts map in the 'dbnew' directory (uses the new
    version of ContactData)
 
-
 Running the demo
 ----------------
 

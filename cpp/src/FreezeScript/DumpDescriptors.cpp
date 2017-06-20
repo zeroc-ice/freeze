@@ -1591,7 +1591,6 @@ FreezeScript::SymbolTableI::getConstantValue(const string& name) const
         }
     }
 
-
     Slice::EnumeratorPtr e = Slice::EnumeratorPtr::dynamicCast(l.front());
     Slice::ConstPtr c = Slice::ConstPtr::dynamicCast(l.front());
     if(!e && !c)

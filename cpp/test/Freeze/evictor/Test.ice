@@ -25,7 +25,6 @@ exception EvictorDeactivatedException
 {
 }
 
-
 exception InsufficientFundsException
 {
 }
@@ -40,8 +39,6 @@ exception InsufficientFundsException
     //
     ["freeze:write", "amd"] void transfer2(int amount, Account* toAccount) throws InsufficientFundsException;
     ["freeze:write", "amd"] void transfer3(int amount, Account* toAccount) throws InsufficientFundsException;
-
-
 
     //
     // "Internal" operation
@@ -88,7 +85,6 @@ sequence<Ice::Identity> AccountIdSeq;
 
     string data;
 }
-
 
 interface RemoteEvictor
 {

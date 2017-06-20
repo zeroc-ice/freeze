@@ -167,7 +167,6 @@ Freeze::TransactionI::__incRef()
     _refCount++;
 }
 
-
 void
 Freeze::TransactionI::__decRef()
 {
@@ -242,7 +241,6 @@ Freeze::TransactionI::TransactionI(ConnectionI* connection) :
         throw ex;
     }
 }
-
 
 Freeze::TransactionI::~TransactionI()
 {

@@ -53,7 +53,6 @@ public:
     //
     void removeSharedMapDb(const std::string&);
 
-
     void __incRef();
     void __decRef();
 

@@ -1180,7 +1180,6 @@ FreezeScript::AnalyzeInitVisitor::visitEnum(const EnumPtr& v)
     _out << ee;
 }
 
-
 void
 FreezeScript::AnalyzeInitVisitor::typeChange(const TypePtr& t, const string& scoped, const string& kind)
 {

@@ -1317,7 +1317,6 @@ gen(const string& name, const UnitPtr& u, const vector<string>& includePaths, co
     printHeader(H);
     printGeneratedHeader(H, string(args[0]) + ".ice");
 
-
     printFreezeTypes(H, dicts, indices);
 
     IceUtilInternal::Output CPP;
@@ -1384,7 +1383,6 @@ gen(const string& name, const UnitPtr& u, const vector<string>& includePaths, co
     {
         H << "\n#include <" << changeInclude(*p, includePaths) << "." + headerExtension + ">";
     }
-
 
     CPP << "\n#include <IceUtil/PushDisableWarnings.h>";
     CPP << "\n#include <IceUtil/StringUtil.h>";

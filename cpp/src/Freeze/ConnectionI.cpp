@@ -68,7 +68,6 @@ Freeze::ConnectionI::removeMapIndex(const string& mapName, const string& indexNa
     }
 }
 
-
 void
 Freeze::ConnectionI::close()
 {
@@ -111,7 +110,6 @@ Freeze::ConnectionI::__incRef()
     _refCount++;
 }
 
-
 void
 Freeze::ConnectionI::__decRef()
 {
@@ -146,7 +144,6 @@ Freeze::ConnectionI::getRefNoSync() const
 {
     return _refCount;
 }
-
 
 Freeze::ConnectionI::~ConnectionI()
 {

@@ -15,7 +15,6 @@ using namespace Freeze;
 using namespace Ice;
 using namespace std;
 
-
 static int
 callback(Db* secondary, const Dbt* key, const Dbt* value, Dbt* result)
 {
@@ -24,7 +23,6 @@ callback(Db* secondary, const Dbt* key, const Dbt* value, Dbt* result)
     assert(index != 0);
     return index->secondaryKeyCreate(secondary, key, value, result);
 }
-
 
 Freeze::IndexI::IndexI(Index& index) :
     _index(index),

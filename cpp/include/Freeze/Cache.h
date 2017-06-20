@@ -87,7 +87,6 @@ private:
     CacheMap  _map;
 };
 
-
 template<typename Key, typename Value> IceUtil::Handle<Value>
 Cache<Key, Value>::getIfPinned(const Key& key, bool wait) const
 {
@@ -261,7 +260,6 @@ Cache<Key, Value>::pinImpl(const Key& key, const IceUtil::Handle<Value>& newObj)
             // So start over.
         }
     } while(latch != 0);
-
 
     //
     // Load

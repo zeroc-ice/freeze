@@ -12,7 +12,6 @@
 #include <Casino.h>
 #include <CasinoStore.h>
 
-
 class BetResolver
 {
 public:

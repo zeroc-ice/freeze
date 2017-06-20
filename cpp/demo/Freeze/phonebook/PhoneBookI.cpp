@@ -124,7 +124,6 @@ PhoneBookI::createContact(const Ice::Current& c)
     //
     _evictor->add(contact, ident);
 
-
     //
     // Turn the identity into a Proxy and return the Proxy to the
     // caller.

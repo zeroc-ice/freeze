@@ -17,7 +17,6 @@ namespace Freeze
 class TransactionI;
 typedef IceUtil::Handle<TransactionI> TransactionIPtr;
 
-
 class ObjectStoreBase;
 
 class EvictorIteratorI : public EvictorIterator

@@ -31,7 +31,6 @@
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)..\..\ice\cpp\msbuild\ice.test.sln"/>
     </Target>
 
-
     <!-- Freeze for C++ builds -->
     <Choose>
         <!--

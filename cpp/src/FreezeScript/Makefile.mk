@@ -38,7 +38,6 @@ slice_sources           := $(filter-out %Util.cpp %Ruby.cpp %Python.cpp %MD5.cpp
                            $(top_srcdir)/cpp/src/Slice/SliceUtil.cpp \
                            $(top_srcdir)/cpp/src/Slice/CPlusPlusUtil.cpp
 
-
 transformdb_sources     := $(addprefix $(project)/,$(transformdb_sources)) \
                            $(slice_sources)
 

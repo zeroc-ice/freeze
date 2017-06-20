@@ -12,7 +12,6 @@
 #include <Freeze/ConnectionI.h>
 #include <Freeze/Map.h>
 
-
 namespace Freeze
 {
 
@@ -58,7 +57,6 @@ private:
     std::string _dbName;
 };
 
-
 //
 // A MapDb represents the Db object underneath Freeze Maps. Several Freeze Maps often
 // share the very same MapDb object; SharedDbEnv manages these shared MapDb objects.
@@ -70,7 +68,6 @@ public:
 
     MapDb(const ConnectionIPtr&, const std::string&, const std::string&, const std::string&,
           const KeyCompareBasePtr&, const std::vector<MapIndexBasePtr>&, bool);
-
 
     //
     // The constructor for catalogs

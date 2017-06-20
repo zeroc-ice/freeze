@@ -31,7 +31,6 @@ const int required = 2;
 const int never = 3;
 }
 
-
 //
 // createEvictor functions
 //
@@ -60,7 +59,6 @@ Freeze::createTransactionalEvictor(const ObjectAdapterPtr& adapter,
 {
     return new TransactionalEvictorI(adapter, envName, &dbEnv, filename, facetTypes, initializer, indices, createDb);
 }
-
 
 //
 // TransactionalEvictorI
@@ -105,7 +103,6 @@ Freeze::TransactionalEvictorI::TransactionalEvictorI(const ObjectAdapterPtr& ada
         getPropertyAsIntWithDefault(propertyPrefix + ".RollbackOnUserException", 0) > 0;
 }
 
-
 TransactionPtr
 Freeze::TransactionalEvictorI::getCurrentTransaction() const
 {
@@ -128,7 +125,6 @@ Freeze::TransactionalEvictorI::setCurrentTransaction(const TransactionPtr& tx)
     DeactivateController::Guard deactivateGuard(_deactivateController);
     _dbEnv->setCurrentTransaction(tx);
 }
-
 
 ObjectPrx
 Freeze::TransactionalEvictorI::addFacet(const ObjectPtr& servant, const Identity& ident, const string& facet)
@@ -320,7 +316,6 @@ Freeze::TransactionalEvictorI::hasAnotherFacet(const Identity& ident, const stri
     return false;
 }
 
-
 ObjectPtr
 Freeze::TransactionalEvictorI::locateImpl(const Current&, LocalObjectPtr&)
 {
@@ -379,7 +374,6 @@ Freeze::TransactionalEvictorI::dispatch(Request& request)
         const SharedDbEnvPtr& _dbEnv;
 #endif
     };
-
 
     DeactivateController::Guard deactivateGuard(_deactivateController);
 
@@ -648,7 +642,6 @@ Freeze::TransactionalEvictorI::dispatch(Request& request)
     throw OperationNotExistException(__FILE__, __LINE__);
 }
 
-
 void
 Freeze::TransactionalEvictorI::deactivate(const string&)
 {
@@ -722,7 +715,6 @@ Freeze::TransactionalEvictorI::evict()
         evict(*_evictorList.rbegin());
     }
 }
-
 
 ObjectPtr
 Freeze::TransactionalEvictorI::loadCachedServant(const Identity& ident, ObjectStore<TransactionalEvictorElement>* store)
@@ -818,7 +810,6 @@ Freeze::TransactionalEvictorI::fixEvictPosition(const TransactionalEvictorElemen
     element->_evictPosition = _evictorList.begin();
 }
 
-
 void
 Freeze::TransactionalEvictorI::servantNotFound(const char* file, int line, const Current& current)
 {
@@ -839,8 +830,6 @@ Freeze::TransactionalEvictorI::servantNotFound(const char* file, int line, const
     }
 }
 
-
-
 Freeze::TransactionalEvictorElement::TransactionalEvictorElement(ObjectRecord& r,
                                                                  ObjectStore<TransactionalEvictorElement>& s) :
     _servant(r.servant),
@@ -849,7 +838,6 @@ Freeze::TransactionalEvictorElement::TransactionalEvictorElement(ObjectRecord& r
     _inEvictor(false)
 {
 }
-
 
 Freeze::TransactionalEvictorElement::~TransactionalEvictorElement()
 {

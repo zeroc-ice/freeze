@@ -254,7 +254,6 @@ Freeze::TransactionalEvictorContext::deadlockException()
     rollback();
 }
 
-
 //
 // ServantHolder
 //
@@ -263,7 +262,6 @@ Freeze::TransactionalEvictorContext::ServantHolder::ServantHolder() :
     _ownBody(true)
 {
 }
-
 
 Freeze::TransactionalEvictorContext::ServantHolder::~ServantHolder() ICE_NOEXCEPT_FALSE
 {
@@ -291,7 +289,6 @@ Freeze::TransactionalEvictorContext::ServantHolder::~ServantHolder() ICE_NOEXCEP
         ctx->_stack.pop_front();
     }
 }
-
 
 void
 Freeze::TransactionalEvictorContext::ServantHolder::init(const TransactionalEvictorContextPtr& ctx,

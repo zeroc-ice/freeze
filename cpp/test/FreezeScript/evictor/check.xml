@@ -16,7 +16,6 @@
         </record>
     </database>
 
-
     <!-- enum ::Test::E -->
     <transform type="::Test::E"/>
 

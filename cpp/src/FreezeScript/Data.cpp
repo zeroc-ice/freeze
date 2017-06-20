@@ -1336,7 +1336,6 @@ FreezeScript::ProxyData::setValue(const Ice::ObjectPrx& v)
     _str.clear();
 }
 
-
 //
 // StructData
 //

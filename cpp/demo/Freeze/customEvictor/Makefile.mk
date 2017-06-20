@@ -19,5 +19,4 @@ $(test)_server_slice2freeze     := Database
 $(test)_server_Database         := --dict Database,string,Warehouse::ItemInfo
 $(test)_server_Database_slice   := $(test)/ItemInfo.ice
 
-
 demos += $(test)

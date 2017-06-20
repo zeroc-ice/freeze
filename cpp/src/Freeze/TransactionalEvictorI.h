@@ -62,7 +62,6 @@ private:
     bool _inEvictor;
 };
 
-
 class TransactionalEvictorI : public TransactionalEvictor, public EvictorI<TransactionalEvictorElement>
 {
 public:

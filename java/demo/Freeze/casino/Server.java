@@ -197,7 +197,6 @@ class Server extends Ice.Application
             String[] players =
                 { "al", "bob", "charlie", "dave", "ed", "fred", "gene", "herb", "irvin", "joe", "ken", "lance" };
 
-
             Freeze.Connection connection = Freeze.Util.createConnection(communicator(), _envName);
             Freeze.Transaction tx = connection.beginTransaction();
 
@@ -215,7 +214,6 @@ class Server extends Ice.Application
             tx.commit();
             assert(_playerEvictor.getCurrentTransaction() == null);
             connection.close();
-
 
             //
             // Everything is ready, activate

@@ -90,7 +90,6 @@ public:
     TransactionPtr tx;
 };
 
-
 FREEZE_API ConnectionPtr createConnection(const Ice::CommunicatorPtr& communicator,
                                           const std::string& envName);
 
@@ -102,7 +101,6 @@ FREEZE_API const std::string& catalogName();
 FREEZE_API const std::string& catalogIndexListName();
 
 FREEZE_API DbTxn* getTxn(const TransactionPtr&);
-
 
 typedef void (*FatalErrorCallback)(const BackgroundSaveEvictorPtr&, const Ice::CommunicatorPtr&);
 FREEZE_API FatalErrorCallback registerFatalErrorCallback(FatalErrorCallback);

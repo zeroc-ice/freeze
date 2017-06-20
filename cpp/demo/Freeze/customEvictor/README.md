@@ -11,7 +11,6 @@ IceUtil::Cache can be used to implement an evictor for objects stored
 in any database, not just Freeze; as a result, you may find this demo
 useful even if you don't plan to use Freeze.
 
-
 Server
 ------
 
@@ -43,7 +42,6 @@ In both configurations, the evictor size (the number of objects cached
 by the evictor) is set to 8,000 to provide a good cache-hit ratio when
 the access pattern is random.
 
-
 Client
 ------
 
@@ -59,7 +57,6 @@ IceUtil::Cache-based evictor. You could also add a sleep in
 EvictorCache::load (Evictor.cpp) and SimpleEvictor::add
 (SimpleEvictor.cpp) to make cache misses even more expensive and
 further increase the advantage of the IceUtil::Cache-based evictor.
-
 
 Berkeley DB cache tuning
 ------------------------

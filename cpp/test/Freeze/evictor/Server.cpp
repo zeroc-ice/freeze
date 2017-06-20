@@ -26,7 +26,6 @@ public:
     }
 };
 
-
 class ServantFactory : public Ice::ValueFactory
 {
 public:
@@ -42,7 +41,6 @@ public:
         return new Test::ServantI;
     }
 };
-
 
 class FacetFactory : public Ice::ValueFactory
 {

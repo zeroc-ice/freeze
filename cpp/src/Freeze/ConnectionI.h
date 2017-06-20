@@ -28,7 +28,6 @@ struct SharedMutex : public IceUtil::Shared
 };
 typedef IceUtil::Handle<SharedMutex> SharedMutexPtr;
 
-
 class ConnectionI : public Connection
 {
 public:

@@ -26,7 +26,6 @@ local exception TransactionAlreadyInProgressException
 {
 }
 
-
 /**
  *
  * A connection to a database (database environment with Berkeley
@@ -50,7 +49,6 @@ local interface Connection
      **/
     Transaction beginTransaction();
 
-
     /**
      *
      * Returns the transaction associated with this connection.
@@ -59,7 +57,6 @@ local interface Connection
      *
      **/
     ["cpp:const"] Transaction currentTransaction();
-
 
     /**
      *
@@ -70,7 +67,6 @@ local interface Connection
      **/
     void removeMapIndex(string mapName, string indexName);
 
-
     /**
      *
      * Closes this connection. If there is an associated transaction,
@@ -78,7 +74,6 @@ local interface Connection
      *
      **/
     void close();
-
 
     /**
      *

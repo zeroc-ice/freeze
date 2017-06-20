@@ -65,7 +65,6 @@ BankI::getLiveBetCount(const Ice::Current&) const
     return _betResolver->getBetCount();
 }
 
-
 bool
 BankI::checkAllChips(const Ice::Current& current) const
 {

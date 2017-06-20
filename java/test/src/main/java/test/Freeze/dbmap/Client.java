@@ -1138,9 +1138,7 @@ public class Client extends test.Util.Application
                     int sz = isub.get(id.category).size();
                     test(sz > 0);
 
-
                     test(sm.fastRemove(sm.firstKey()) == true);
-
 
                     if(sz == 1)
                     {

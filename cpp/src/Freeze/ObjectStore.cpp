@@ -118,7 +118,6 @@ Freeze::ObjectStoreBase::ObjectStoreBase(const string& facet, const string& face
             _db->set_pagesize(pageSize);
         }
 
-
         TransactionPtr tx = catalogConnection->beginTransaction();
         DbTxn* txn = getTxn(tx);
 
@@ -609,7 +608,6 @@ Freeze::ObjectStoreBase::remove(const Identity& ident, const TransactionIPtr& tr
         }
     }
 }
-
 
 const string&
 Freeze::ObjectStoreBase::dbName() const

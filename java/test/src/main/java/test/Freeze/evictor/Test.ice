@@ -26,7 +26,6 @@ exception EvictorDeactivatedException
 {
 }
 
-
 exception InsufficientFundsException
 {
 }
@@ -87,7 +86,6 @@ sequence<Ice::Identity> AccountIdSeq;
 
     string data;
 }
-
 
 interface RemoteEvictor
 {
