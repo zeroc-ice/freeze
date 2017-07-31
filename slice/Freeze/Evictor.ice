@@ -139,7 +139,6 @@ local interface Evictor extends Ice::ServantLocator
      * the operation waits until a sufficient number of servants
      * complete their requests.
      *
-     *
      * @throws EvictorDeactivatedException Raised if a the evictor has
      * been deactivated.
      *
@@ -256,7 +255,7 @@ local interface Evictor extends Ice::ServantLocator
      *
      * @param id The identity of the Ice object.
      *
-     * @param facet The facet. An empty facet means the default
+     * @param facet The facet name. An empty facet means the default
      * facet.
      *
      * @return The removed servant.
@@ -281,6 +280,8 @@ local interface Evictor extends Ice::ServantLocator
      * Returns true if the given identity is managed by the evictor
      * with the default facet.
      *
+     * @param id The identity of the Ice object.
+     *
      * @return true if the identity is managed by the evictor, false
      * otherwise.
      *
@@ -295,7 +296,11 @@ local interface Evictor extends Ice::ServantLocator
     /**
      *
      * Like {@link #hasObject}, but with a facet. Calling <tt>hasObject(id)</tt>
-     * is equivalent to calling {@link #hasFacet} with an empty
+     * is equivalent to calling {@link #hasFacet} with an empty facet.
+     *
+     * @param id The identity of the Ice object.
+     *
+     * @param facet The facet name. An empty facet means the default
      * facet.
      *
      * @return true if the identity is managed by the evictor for the

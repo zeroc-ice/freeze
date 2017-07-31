@@ -22,7 +22,7 @@ public class Util
      * @param initializer An object that is used to initialize a servant after its
      *   state is restored from the database, or <code>null</code> if no initializer
      *   is necessary.
-     * @param indices An array of Freeze indices, or <code>null</code if no indices
+     * @param indices An array of Freeze indices, or <code>null</code> if no indices
      *   are defined.
      * @param createDb True if the Berkeley DB database should be created if it does
      *   not exist, false otherwise.
@@ -51,7 +51,7 @@ public class Util
      * @param initializer An object that is used to initialize a servant after its
      *   state is restored from the database, or <code>null</code> if no initializer
      *   is necessary.
-     * @param indices An array of Freeze indices, or <code>null</code if no indices
+     * @param indices An array of Freeze indices, or <code>null</code> if no indices
      *   are defined.
      * @param createDb True if the Berkeley DB database should be created if it does
      *   not exist, false otherwise.
@@ -76,12 +76,12 @@ public class Util
      * @param envName The name of the Berkeley DB database environment. The
      *   environment must already exist.
      * @param filename The name of the Berkeley DB database file.
-     * @param facetTypes A map of facet name to Slice type id, or <code>null</code if
+     * @param facetTypes A map of facet name to Slice type id, or <code>null</code> if
      *   no map is necessary.
      * @param initializer An object that is used to initialize a servant after its
      *   state is restored from the database, or <code>null</code> if no initializer
      *   is necessary.
-     * @param indices An array of Freeze indices, or <code>null</code if no indices
+     * @param indices An array of Freeze indices, or <code>null</code> if no indices
      *   are defined.
      * @param createDb True if the Berkeley DB database should be created if it does
      *   not exist, false otherwise.
@@ -108,12 +108,12 @@ public class Util
      *   environment must already exist.
      * @param dbEnv The database environment in which to open the database.
      * @param filename The name of the Berkeley DB database file.
-     * @param facetTypes A map of facet name to Slice type id, or <code>null</code if
+     * @param facetTypes A map of facet name to Slice type id, or <code>null</code> if
      *   no map is necessary.
      * @param initializer An object that is used to initialize a servant after its
      *   state is restored from the database, or <code>null</code> if no initializer
      *   is necessary.
-     * @param indices An array of Freeze indices, or <code>null</code if no indices
+     * @param indices An array of Freeze indices, or <code>null</code> if no indices
      *   are defined.
      * @param createDb True if the Berkeley DB database should be created if it does
      *   not exist, false otherwise.
@@ -204,6 +204,8 @@ public class Util
      * Registers a handler for fatal errors encountered by the background save evictor.
      *
      * @param cb The error callback.
+     *
+     * @return The previous callback.
      */
     public static synchronized FatalErrorCallback
     registerFatalErrorCallback(FatalErrorCallback cb)

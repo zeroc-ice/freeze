@@ -42,7 +42,9 @@ local interface Transaction
 
     /**
      *
-     * Get the connection associated with this Transaction
+     * Get the connection associated with this transaction.
+     *
+     * @return The connection.
      *
      **/
     ["cpp:const"] Connection getConnection();

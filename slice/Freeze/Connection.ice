@@ -60,9 +60,14 @@ local interface Connection
 
     /**
      *
-     * Remove an old unused Freeze Map index
+     * Remove an unused Freeze Map index.
+     *
+     * @param mapName The name of the Freeze map.
+     *
+     * @param indexName The name of the index.
+     *
      * @throws IndexNotFoundException Raised if this index
-     * does not exist
+     * does not exist.
      *
      **/
     void removeMapIndex(string mapName, string indexName);
@@ -79,12 +84,16 @@ local interface Connection
      *
      * Returns the communicator associated with this connection.
      *
+     * @return The communicator.
+     *
      **/
     ["cpp:const"] Ice::Communicator getCommunicator();
 
     /**
      *
      * Returns the encoding version used to encode the data.
+     *
+     * @return The encoding version.
      *
      **/
     ["cpp:const"] Ice::EncodingVersion getEncoding();
@@ -94,9 +103,10 @@ local interface Connection
      * The name of the connected system (for example, the Berkeley DB
      * environment).
      *
+     * @return The name of the connected system.
+     *
      **/
     ["cpp:const"] string getName();
-
 }
 
 }
