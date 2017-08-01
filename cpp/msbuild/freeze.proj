@@ -11,10 +11,15 @@
 
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
     <!-- Import common targets from Ice submodule -->
+    <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\config\icebuilder.props" />
     <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\config\Ice.common.targets"/>
     <!-- Require Ice targets -->
     <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v120'">
       <IceTargets>icexml;slice2java</IceTargets>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <SymbolServer Condition="'$(SymbolServer)' == ''">https://symbols.zeroc.com</SymbolServer>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v140'">
@@ -26,9 +31,22 @@
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.sln"/>
     </Target>
 
+    <Target Name="RemovePackages">
+      <Exec Command="rmdir /s /q $(MSBuildThisFileDirectory)packages" Condition="Exists('$(MSBuildThisFileDirectory)packages')" />
+    </Target>
+
     <Target Name="TestNugetRestore" DependsOnTargets="GetNuget" Condition="'$(ICE_BIN_DIST)' != ''">
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.test.sln"/>
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)..\..\ice\cpp\msbuild\ice.test.sln"/>
+    </Target>
+
+    <Target Name="DownloadSymbols" DependsOnTargets="TestNuGetRestore" Condition="'$(ICE_BIN_DIST)' == 'all'">
+        <MakeDir Directories="$(TEMP)\SymbolCache" />
+        <Exec IgnoreExitCode="True"
+              Command="symchk /r $(MSBuildThisFileDirectory)packages\zeroc.freeze.$(DefaultPlatformToolset).$(IceJSONVersion)\build\native\bin\$(Platform)\$(IceConfiguration)\* /s SRV*$(TEMP)\SymbolCache*$(SymbolServer)">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
+        </Exec>
+        <Warning  Text="PDBs download failed, stack traces might be missing or incomplete" Condition="'$(ErrorCode)' != '0'" />
     </Target>
 
     <!-- Freeze for C++ builds -->
