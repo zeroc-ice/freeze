@@ -16,16 +16,23 @@ class TransformDB(SimpleClient):
 
 class FreezeCppMapping(CppMapping):
 
+    def getNugetPackage(self, compiler, version):
+        return "zeroc.freeze.{0}.{1}".format(compiler, version)
+
     def getCommandLine(self, current, process, exe):
         if isinstance(process, TransformDB):
-            return os.path.join(toplevel, "cpp", platform.getBinSubDir(self, process, current), exe)
+            if current.driver.useIceBinDist(self):
+                return os.path.join(platform.getIceInstallDir(self, current),
+                                    platform.getBinSubDir(self, process, current), exe)
+            else:
+                return os.path.join(toplevel, "cpp", platform.getBinSubDir(self, process, current), exe)
         else:
             return CppMapping.getCommandLine(self, current, process, exe)
 
     def getEnv(self, process, current):
         env = CppMapping.getEnv(self, process, current)
         if isinstance(platform, Windows):
-            env["PATH"] += os.pathsep + Mapping.getByName("cpp").getLibDir(process, current)
+            env["PATH"] += "{}{}".format(os.pathsep, Mapping.getByName("cpp").getLibDir(process, current))
         return env
 
 class FreezeJavaMapping(JavaCompatMapping):
