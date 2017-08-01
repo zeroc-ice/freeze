@@ -107,6 +107,7 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="$(IceBuilderCppTargets)" Condition="Exists('$(IceBuilderCppTargets)')" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\..\..\..\ice\cpp\msbuild\ice.sign.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v140.5.3.28.3\build\native\berkeley.db.v140.targets')" />
     <Import Project="..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets" Condition="Exists('..\..\..\..\msbuild\packages\berkeley.db.v120.5.3.28.4\build\native\berkeley.db.v120.targets')" />

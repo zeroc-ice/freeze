@@ -115,6 +115,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)..\..\..\..\ice\cpp\msbuild\ice.sign.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\..\msbuild\packages\mcpp.v120.2.7.2.12\build\native\mcpp.v120.targets" Condition="Exists('..\..\..\msbuild\packages\mcpp.v120.2.7.2.12\build\native\mcpp.v120.targets')" />
     <Import Project="..\..\..\msbuild\packages\mcpp.v140.2.7.2.12\build\native\mcpp.v140.targets" Condition="Exists('..\..\..\msbuild\packages\mcpp.v140.2.7.2.12\build\native\mcpp.v140.targets')" />
