@@ -23,6 +23,7 @@ ext.localDependency = { artifactId ->
     }
 }
 
+/*
 ext.demoJar = { name ->
     def taskName = name + "Jar"
     // Create a jar for the client & server which includes everything in the demo.
@@ -43,3 +44,4 @@ ext.demoJar = { name ->
         archives jarTask
     }
 }
+*/

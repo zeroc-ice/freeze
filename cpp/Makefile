@@ -26,12 +26,3 @@ tests := $(call tests-without-project-makefile,cpp)
 include $(shell find $(lang_srcdir)/test -name Makefile.mk)
 $(foreach t,$(tests),$(eval $(call create-cpp-test-project,$(t))))
 $(call make-projects,$(projects),make-cpp-test-project)
-
-#
-# Create and load demo projects.
-#
-projects :=
-demos :=
-include $(shell find $(lang_srcdir)/demo -name Makefile.mk)
-$(foreach d,$(demos),$(eval $(call create-cpp-demo-project,$(d))))
-$(call make-projects,$(projects),make-cpp-demo-project)

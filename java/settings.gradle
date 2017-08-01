@@ -17,6 +17,7 @@ def demos = [
         'Manual' : ['evictorFilesystem', 'mapFilesystem'],
 ]
 
+/*
 demos.each {
         def dir = it.key
         def subdirs = it.value
@@ -33,3 +34,4 @@ demos.each {
                 project("${projectName}").projectDir = new File("demo/${dir}/${it}")
         }
 }
+*/
