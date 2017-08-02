@@ -30,10 +30,7 @@ $(eval $(call make-global-rule,install,$(languages)))
 #
 # Install documentation and slice files
 #
-install:: install-doc install-slice
-
-$(eval $(call install-data-files,$(wildcard $(slicedir)/*/*.ice),$(slicedir),$(install_slicedir),\
-        install-slice,"Installing slice files"))
+install:: install-doc
 
 $(eval $(call install-data-files,$(wildcard $(top_srcdir)/*LICENSE),$(top_srcdir),$(install_docdir),\
         install-doc,"Installing documentation files"))

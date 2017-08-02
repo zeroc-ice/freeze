@@ -8,7 +8,7 @@
 # Select an installation base directory. The directory will be created
 # if it does not exist.
 #
-prefix                  ?= /opt/Ice-$(version)
+prefix                  ?= /opt/Freeze-$(version)
 
 #
 # The "root directory" for runpath embedded in executables. Can be set
@@ -107,9 +107,8 @@ ice_src_dist            := $(wildcard $(ice_home)/config/Make.rules)
 usr_dir_install         := $(filter /usr%,$(prefix))
 install_bindir          ?= $(prefix)/bin
 install_libdir          ?= $(prefix)/lib
-install_slicedir        ?= $(prefix)$(if $(usr_dir_install),/share/Ice-$(version))/slice
 install_includedir      ?= $(prefix)/include
-install_docdir          ?= $(prefix)$(if $(usr_dir_install),/share/Ice-$(version))
+install_docdir          ?= $(prefix)$(if $(usr_dir_install),/share/doc/freeze)
 install_mandir          ?= $(prefix)$(if $(usr_dir_install),/share)/man
 
 #
