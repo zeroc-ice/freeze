@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <Ice_SrcRootDir>$(MSBuildThisFileDirectory)..\</Ice_SrcRootDir>
+        <DbPackage Condition="'$(DefaultPlatformToolset)' == 'v140'">berkeley.db.v140.5.3.28.3</DbPackage>
+        <DbPackage Condition="'$(DefaultPlatformToolset)' == 'v120'">berkeley.db.v140.5.3.28.4</DbPackage>
     </PropertyGroup>
 
     <!-- Dynamic libraries and import libraries -->
@@ -10,6 +12,8 @@
         <ImportLibraries Include="$(Ice_SrcRootDir)lib\$(Platform)\$(Configuration)\*.lib"/>
         <Executables Include="$(Ice_SrcRootDir)bin\$(Platform)\$(Configuration)\*.exe"
                      Exclude="$(Ice_SrcRootDir)bin\$(Platform)\$(Configuration)\slice2*.exe"/>
+        <Executables Include="$(MSBuildThisFileDirectory)packages\$(DbPackage)\build\native\bin\$(Platform)\$(Configuration)\*.exe"
+                     Condition="'$(Configuration)' == 'Release'"/>
     </ItemGroup>
 
     <!-- x64 Release binaries -->
@@ -27,6 +31,8 @@
 
     <!-- Copy required files to the package specific directories -->
     <Target Name="NugetPack">
+        <Message Text="EXECUTABLES: @(Executables)"/>
+        <Message Text="Path: $(MSBuildThisFileDirectory)\packages\$(DbPackage)\build\native\bin\$(Platform)\$(Configuration)"/>
         <Copy Condition="'$(Platform)|$(Configuration)' == 'Win32|Release'"
               SourceFiles="@(Headers)" DestinationFolder="$(PackageDirectory)\build\native\include\%(Headers.RecursiveDir)" />
         <Copy Condition="'$(Platform)|$(Configuration)' == 'Win32|Release'"

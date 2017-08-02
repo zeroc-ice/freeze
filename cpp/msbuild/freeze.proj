@@ -148,13 +148,13 @@
       <RemoveDir Directories="zeroc.freeze.$(DefaultPlatformToolset)" />
 
       <MSBuild Projects="freeze.nuget.targets"
-               Properties="Configuration=Debug;Platform=Win32;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset)" />
+               Properties="Configuration=Debug;Platform=Win32;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset);DefaultPlatformToolset=$(DefaultPlatformToolset)" />
       <MSBuild Projects="freeze.nuget.targets"
-               Properties="Configuration=Debug;Platform=x64;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset)" />
+               Properties="Configuration=Debug;Platform=x64;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset);DefaultPlatformToolset=$(DefaultPlatformToolset)" />
       <MSBuild Projects="freeze.nuget.targets"
-               Properties="Configuration=Release;Platform=Win32;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset)" />
+               Properties="Configuration=Release;Platform=Win32;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset);DefaultPlatformToolset=$(DefaultPlatformToolset)" />
       <MSBuild Projects="freeze.nuget.targets"
-               Properties="Configuration=Release;Platform=x64;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset)" />
+               Properties="Configuration=Release;Platform=x64;PackageDirectory=zeroc.freeze.$(DefaultPlatformToolset);DefaultPlatformToolset=$(DefaultPlatformToolset)" />
 
       <Copy SourceFiles="zeroc.freeze.$(DefaultPlatformToolset).nuspec"
             DestinationFolder="zeroc.freeze.$(DefaultPlatformToolset)" />
