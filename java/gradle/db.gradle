@@ -43,17 +43,13 @@ if(dbHome) {
 } else {
     def subdirs
     if (isWindows) {
-        if(slice.srcDist){
-            if(!new File(nuget).exists()) {
-                nugetInstall.execute()
-            }
-            if(!new File("${dbPackage}/berkeley.db.java7.nupkg").exists()) {
-                nugetInstallBerkeleyDb.execute()
-            }
-            subdirs = [ "${dbPackage}/build/native/lib/" ]
-        } else {
-            subdirs = [ "${slice.iceHome}/lib/" ]
+        if(!new File(nuget).exists()) {
+            nugetInstall.execute()
         }
+        if(!new File("${dbPackage}/berkeley.db.java7.nupkg").exists()) {
+            nugetInstallBerkeleyDb.execute()
+        }
+        subdirs = [ "${dbPackage}/build/native/lib/" ]
     } else {
         subdirs = [
             "/usr/local/opt/ice/libexec/lib/",

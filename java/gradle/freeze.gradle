@@ -1,7 +1,43 @@
 // Ensure iceHome is set prior to loading ice.gradle
-ext.freezeHome = iceHome ? iceHome : new File([rootProject.projectDir, ".."].join(File.separator)).getCanonicalPath()
-if(!iceHome) {
-    iceHome = new File([rootProject.projectDir, "..", "ice"].join(File.separator)).getCanonicalPath()
+
+def os = System.properties['os.name']
+def isWindows = os.toLowerCase().contains("windows")
+
+if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp")
+{
+    ext.iceHome = iceHome ? iceHome : System.env.ICE_HOME
+    ext.freezeHome = freezeHome ? freezeHome : System.env.FREEZE_HOME
+    if(isWindows)
+    {
+
+        if(!new File("${iceHome}\\tools\\slice2java.exe").exists() &&
+           !new File("${iceHome}\\bin\\slice2java.exe").exists())
+        {
+            throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
+        }
+
+        if(!new File("${freezeHome}\\tools\\slice2freezej.exe").exists())
+        {
+            throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
+        }
+    }
+    else
+    {
+        if(!new File("${iceHome}/bin/slice2java").exists())
+        {
+            throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}/bin/slice2freezej")
+        }
+
+        if(!new File("${freezeHome}/bin/slice2freezej").exists())
+        {
+            throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}/bin/slice2freezej")
+        }
+    }
+}
+else
+{
+    ext.iceHome = new File([rootProject.projectDir, "..", "ice"].join(File.separator)).getCanonicalPath()
+    ext.freezeHome = new File([rootProject.projectDir, ".."].join(File.separator)).getCanonicalPath()
 }
 
 apply from: "$rootProject.projectDir/../ice/java/gradle/ice.gradle"
