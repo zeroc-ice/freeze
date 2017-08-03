@@ -10,12 +10,14 @@ if(isWindows)
     ext.freezeHome = freezeHome ? freezeHome : "${rootProject.projectDir}/packages/zeroc.freeze.v140.${iceVersion}"
 
     if(!new File("${iceHome}\\tools\\slice2java.exe").exists() &&
-        !new File("${iceHome}\\bin\\slice2java.exe").exists())
+       !new File("${iceHome}\\bin\\slice2java.exe").exists() &&
+       !new File("${iceHome}\\cpp\\bin\\${cppPlatform}\\${cppConfiguration}\\slice2java.exe").exists())
     {
         throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
     }
 
-    if(!new File("${freezeHome}\\tools\\slice2freezej.exe").exists())
+    if(!new File("${freezeHome}\\tools\\slice2freezej.exe").exists() &&
+       !new File("${freezeHome}\\cpp\\bin\\${cppPlatform}\\${cppConfiguration}\\slice2freezej.exe").exists())
     {
         throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
     }
