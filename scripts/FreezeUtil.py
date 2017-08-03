@@ -55,7 +55,7 @@ class FreezeJavaMapping(JavaCompatMapping):
             else:
                 return "/usr/local/opt/berkeley-db53/lib"
         elif isinstance(platform, Windows):
-            return os.path.join(toplevel, "cpp", "msbuild", "packages", "berkeley.db.java7", "build", "native", "bin",
+            return os.path.join(toplevel, "java", "packages", "berkeley.db.java7.5.3.28.1", "build", "native", "bin",
                                 current.config.buildPlatform)
         else:
             return "/usr/{0}".format(platform.getLibSubDir(self, process, current))
