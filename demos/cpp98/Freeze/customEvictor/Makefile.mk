@@ -4,9 +4,9 @@
 #
 # **********************************************************************
 
-$(test)_client_sources          = Item.ice Client.cpp
+$(demo)_client_sources          = Item.ice Client.cpp
 
-$(test)_server_sources          = Item.ice \
+$(demo)_server_sources          = Item.ice \
                                   ItemInfo.ice \
                                   ItemI.cpp \
                                   CurrentDatabase.cpp \
@@ -15,8 +15,8 @@ $(test)_server_sources          = Item.ice \
                                   Server.cpp \
                                   SimpleEvictor.cpp
 
-$(test)_server_slice2freeze     := Database
-$(test)_server_Database         := --dict Database,string,Warehouse::ItemInfo
-$(test)_server_Database_slice   := $(test)/ItemInfo.ice
+$(demo)_server_slice2freeze     := Database
+$(demo)_server_Database         := --dict Database,string,Warehouse::ItemInfo
+$(demo)_server_Database_slice   := $(demo)/ItemInfo.ice
 
-demos += $(test)
+demos += $(demo)

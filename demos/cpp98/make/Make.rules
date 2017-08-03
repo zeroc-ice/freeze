@@ -1,0 +1,232 @@
+# **********************************************************************
+#
+# Copyright (c) 2003-2017 ZeroC, Inc. All rights reserved.
+#
+# **********************************************************************
+
+#
+# Define ICE_HOME if Ice is not installed in /usr (Linux) or
+# /usr/local (macOS)
+#
+#ICE_HOME               ?= /opt/Ice-3.7.0
+
+#
+# Define FREEZE_HOME if Freeze is not installed in /usr (Linux) or
+# /usr/local (macOS)
+#
+#FREEZE_HOME            ?= /opt/Freeze-3.7.0
+
+#
+# Define OPTIMIZE as yes if you want to build with optimization.
+# Otherwise Ice is build with debug information.
+#
+#OPTIMIZE               = yes
+
+#
+# Define PLATFORMS to the list of platforms to build. This defaults
+# to the first supported platform for this system.
+#
+# Run `make print V=supported-platforms' to see the list of supported
+# platforms on this system.
+#
+PLATFORMS               ?= $(firstword $(supported-platforms))
+
+#
+# Configurations to build. This defaults to the first supported
+# configuration.
+#
+# Run `make print V=supported-configs` to see the list of supported
+# configurations.
+#
+CONFIGS                 ?= $(firstword $(supported-configs))
+
+# ----------------------------------------------------------------------
+# Don't change anything below this line!
+# ----------------------------------------------------------------------
+
+os                      ?= $(shell uname)
+embedded_runpath        := yes
+
+include $(top_srcdir)/ice/config/Make.rules.$(os)
+include $(top_srcdir)/ice/config/Make.project.rules
+
+#
+# Ice/Freeze installation
+#
+ice_home                := $(or $(ICE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
+ice_src_dist            := $(wildcard $(ice_home)/config/Make.rules)
+ice_usr_dir_install     := $(filter /usr%,$(ice_home))
+ice_bindir              ?= $(if $(ice_src_dist),$(ice_home)/cpp/bin,$(ice_home)/bin)
+ice_slicedir            ?= $(ice_home)$(if $(ice_usr_dir_install),/share/ice)/slice
+
+freeze_home             := $(or $(FREEZE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
+freeze_src_dist         := $(wildcard $(freeze_home)/config/Make.rules)
+freeze_usr_dir_install  := $(filter /usr%,$(freeze_home))
+freeze_bindir           ?= $(if $(freeze_src_dist),$(freeze_home)/cpp/bin,$(freeze_home)/bin)
+
+static_projects         = %
+
+#
+# Support for 3rd party libraries (required for static linking)
+#
+thirdparties            := db bz2
+bz2_home                := $(BZ2_HOME)
+db_home                 := $(or $(DB_HOME),$(if $(filter Darwin,$(os)),/usr/local/opt/berkeley-db53,))
+db_ldflags              := -ldb_cxx
+$(foreach l,$(thirdparties),$(eval $(call make-lib,$l)))
+
+#
+# Supported configurations
+#
+supported-configs       = shared static
+
+#
+# Support for Ice library/ Freeze libraries
+#
+Ice_libs                := bz2
+Ice_targetdir		:= $(ice_home)$(if $(ice_src_dist),/cpp)/lib
+
+ice_includedir          ?= $(ice_home)$(if $(ice_src_dist),/cpp)/include
+$(eval $(call create-component-targets,ice,Ice,library))
+
+slice2cpp_targetext     = cpp
+slice2cpp_path          = $(ice_bindir)/slice2cpp
+
+Freeze_libs             := db
+Freeze_targetdir	:= $(freeze_home)$(if $(freeze_src_dist),/cpp)/lib
+
+freeze_includedir       ?= $(freeze_home)$(if $(freeze_src_dist),/cpp)/include
+$(eval $(call create-component-targets,freeze,Freeze,library))
+
+slice2freeze_path       = $(freeze_bindir)/slice2freeze
+
+
+#
+# $(call demo,[$1])
+#
+# Returns the demo project name (./demo/Ice/hello -> demo/Ice/hello)
+#
+demo = $(patsubst $(lang_srcdir)/%,%,$(if $1,$1,$(currentdir)))
+
+#
+# $(call demo-sources,$1=sources,$2=dir,$3=main-src extra-srcs)
+#
+# Returns sources if set, otherwise if main-src exists return main-src + extra-srcs, if it
+# doesn't exist, returns an empty value.
+#
+demo-sources = $(call unique,$(if $1,$(foreach f,$1,$(notdir $(wildcard $2/$f))),\
+                 $(if $(wildcard $2/$(firstword $3)),$(foreach f,$3,$(notdir $(wildcard $2/$f))))))
+
+#
+# $(call create-demo-project,demo)
+#
+# Defines a project for the given demo.
+#
+# The following variables can be defined to customize the build of the demo:
+#
+# <name>_cleandirs
+# <name>_clean
+# <name>_bindir
+# <name>_libdir
+# <name>_sliceflags
+# <name>_cppflags
+# <name>_dependencies
+# <name>_programs
+# <name>_libraries
+#
+# The following variables allows to specify per-target (program or library) configuration
+#
+# <name>_<target>_sources
+# <name>_<target>_sources
+#
+define create-demo-project
+
+$1_srcdir               := $1
+$1_targetdir            := $1
+
+$1_slicecompiler        := slice2cpp
+$1_sliceflags           := -I$(ice_slicedir) -I$1 $$($1_sliceflags)
+$1_cppflags             := $(if $(ice_usr_dir_install),,-I$(ice_includedir)) \
+                           $(if $(ice_src_dist),-I$(ice_includedir)/generated) \
+                           $(if $(freeze_usr_dir_install),,-I$(freeze_includedir)) \
+                           $(if $(freeze_src_dist),-I$(freeze_includedir)/generated) \
+                           -I$1 -I$1/generated $$($1_cppflags)
+$1_caninstall		:= no
+$1_extensions           := make-freeze-project
+$1_component_extensions := make-freeze-components
+$1_dependencies         := $$(or $$($1_dependencies),Ice Freeze)
+
+$1_programs             := $$(or $$($1_programs),client server)
+$1_client_sources       := $$(call demo-sources,$$($1_client_sources),$$($1_srcdir),Client.cpp *.ice)
+$1_server_sources       := $$(call demo-sources,$$($1_server_sources),$$($1_srcdir),Server.cpp *.ice *I.cpp)
+
+$1_programs             := $$(foreach p,$$($1_programs),$$(if $$($1_$$(p)_sources),$1_$$(p)))
+$1_libraries            := $$(foreach p,$$($1_libraries),$1_$$(p))
+
+$$(foreach m,$$($1_programs) $$($1_libraries),$$(eval $$m_sources := $$(addprefix $$($1_srcdir)/,$$($$m_sources))))
+
+projects += $(project)
+
+endef
+
+#
+# The demos variable is used to load demos in Makefile.mk fragments
+#
+demos :=
+
+#
+# $(call make-freeze-components,$1=project,$2=component,$3=target)
+#
+# This is called by the component extension mechanism to allow adding generated sources
+# and headers to the build of the component.
+#
+define make-freeze-components
+ifneq ($$($2_slice2freeze),)
+
+$2_sources += $$(addprefix $$($1_generated_srcdir)/,$$(addsuffix .cpp,$$($2_slice2freeze)))
+
+$2_generated_includedir := $$(or $$($2_generated_includedir),$$($1_generated_includedir))
+
+$$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$(eval $$(call make-slice2freeze,$$d,$$($2_$$d),\
+        $$($2_$$d_slice),$$($2_generated_includedir),$$($1_generated_srcdir),$$($2_$$d_flags) $$($2_sliceflags)))))
+
+$2_generated_headers += $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
+$1_generated += $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
+
+ifeq ($(wildcard $$(1_generated_srcdir)/*),)
+# Make sure the slice2freeze generated files are built first
+$(wildcard $1/*.cpp): $$(foreach d,$$($2_slice2freeze),$$(if $$($2_$$d),$$($2_generated_includedir)/$$d.h))
+endif
+endif
+
+endef
+
+define make-freeze-project
+
+ifneq ($$($1_slice2freeze),)
+
+$$(foreach d,$$($1_slice2freeze),$$(eval $$(call make-slice2freeze,$$d,$$($1_$$d),\
+        $$($1_$$d_slice),$$($1_generated_includedir),$$($1_generated_srcdir),$$($1_$$d_flags) $$($1_sliceflags))))
+
+$1_generated += $$(foreach d,$$($1_slice2freeze),$$($1_generated_includedir)/$$d.h)
+
+ifeq ($(wildcard $$(1_generated_srcdir)/*),)
+# Make sure the slice2freeze generated files are built first
+$(wildcard $1/*.cpp): $$(foreach d,$$($1_slice2freeze),$$($1_generated_includedir)/$$d.h)
+endif
+endif
+
+endef
+
+#
+# $(call make-slice2freeze,$1=name,$2=command,$3=slice,$4=hdir,$5=sdir,$6=sliceflags)
+#
+define make-slice2freeze
+$4/$1.h: $5/$1.cpp
+$5/$1.cpp: $3 $$(slice2freeze_path) | $5 $4
+	$(E) "Generating $$@ with slice2freeze"
+	$(Q)$(RM) $4/$1.h $5/$1.cpp
+	$(Q)$$(slice2freeze_path) $(strip $6) $2 --output-dir $5 $1 $3
+	$(if $(filter-out $4,$5),$(Q)$(MV) $5/$1.h $4/$1.h)
+endef
+

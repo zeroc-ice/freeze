@@ -30,6 +30,9 @@ The comments in the file provide more information.
 
 ### Step 2: build Freeze
 
+Edit `freeze/config/Make.rules` to establish your build configuration.
+The comments in the file provide more information.
+
     cd freeze/cpp
     make -j8
 
@@ -38,15 +41,15 @@ tests and demos.
 
 ## Installing a C++ Source Build
 
-Simply run `make install`. This will install Freeze in the directory specified by
-the `prefix` variable in `freeze/ice/config/Make.rules`.
+Simply run `make install`. This will install Freeze in the directory specified
+by the `prefix` variable in `freeze/config/Make.rules`.
 
 After installation, make sure that the `prefix/bin` directory is in your `PATH`.
 
 If you choose to not embed a `runpath` into executables at build time (see your
-build settings in `freeze/ice/config/Make.rules`) or did not create a symbolic link from
-the `runpath` directory to the installation directory, you also need to add the
-library directory to your `LD_LIBRARY_PATH`.
+build settings in `freeze/config/Make.rules`) or did not create a symbolic link
+from the `runpath` directory to the installation directory, you also need to add
+the library directory to your `LD_LIBRARY_PATH`.
 
 On an x86 system, the library directory is:
 
@@ -58,9 +61,9 @@ On an x86_64 system:
     prefix/lib64                 (RHEL, SLES, Amazon)
     prefix/lib/x86_64-linux-gnu  (Debian, Ubuntu)
 
-When compiling Freeze programs, you must pass the location of the `prefix/include`
-directory to the compiler with the `-I` option, and the location of the library
-directory with the `-L` option.
+When compiling Freeze programs, you must pass the location of the
+`prefix/include` directory to the compiler with the `-I` option, and the
+location of the library directory with the `-L` option.
 
 ## Running the Test Suite
 

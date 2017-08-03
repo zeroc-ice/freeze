@@ -4,28 +4,28 @@
 #
 # **********************************************************************
 
-$(test)_programs := create read recreate readnew
+$(demo)_programs := create read recreate readnew
 
-$(test)_create_sources          := ContactData.ice create.cpp
-$(test)_create_slice2freeze     := Contacts
+$(demo)_create_sources          := ContactData.ice create.cpp
+$(demo)_create_slice2freeze     := Contacts
 
-$(test)_read_sources            := ContactData.ice read.cpp
-$(test)_read_slice2freeze       := Contacts
+$(demo)_read_sources            := ContactData.ice read.cpp
+$(demo)_read_slice2freeze       := Contacts
 
-$(test)_recreate_sources        := NewContactData.ice recreate.cpp
-$(test)_recreate_slice2freeze   := NewContacts
+$(demo)_recreate_sources        := NewContactData.ice recreate.cpp
+$(demo)_recreate_slice2freeze   := NewContacts
 
-$(test)_readnew_sources         := NewContactData.ice readnew.cpp
-$(test)_readnew_slice2freeze    := NewContacts
+$(demo)_readnew_sources         := NewContactData.ice readnew.cpp
+$(demo)_readnew_slice2freeze    := NewContacts
 
-$(test)_slice2freeze            := Contacts NewContacts
+$(demo)_slice2freeze            := Contacts NewContacts
 
-$(test)_Contacts                := --dict "Demo::Contacts,string,Demo::ContactData,sort" \
+$(demo)_Contacts                := --dict "Demo::Contacts,string,Demo::ContactData,sort" \
                                    --dict-index "Demo::Contacts,phoneNumber,sort"
-$(test)_Contacts_slice          := $(test)/ContactData.ice
+$(demo)_Contacts_slice          := $(demo)/ContactData.ice
 
-$(test)_NewContacts             := --dict "Demo::NewContacts,string,Demo::ContactData,sort" \
+$(demo)_NewContacts             := --dict "Demo::NewContacts,string,Demo::ContactData,sort" \
                                    --dict-index "Demo::NewContacts,phoneNumber,sort"
-$(test)_NewContacts_slice       := $(test)/NewContactData.ice
+$(demo)_NewContacts_slice       := $(demo)/NewContactData.ice
 
-demos += $(test)
+demos += $(demo)

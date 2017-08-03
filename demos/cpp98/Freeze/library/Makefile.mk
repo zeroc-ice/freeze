@@ -4,21 +4,20 @@
 #
 # **********************************************************************
 
-$(test)_client_sources          := Library.ice \
+$(demo)_client_sources          := Library.ice \
                                    Client.cpp \
                                    Grammar.y \
                                    Parser.cpp \
                                    RunParser.cpp \
                                    Scanner.l
 
-$(test)_server_sources          := Library.ice \
+$(demo)_server_sources          := Library.ice \
                                    BookFactory.cpp \
                                    LibraryI.cpp \
                                    Server.cpp
+$(demo)_server_slice2freeze     := LibraryTypes
 
-$(test)_server_slice2freeze     := LibraryTypes
-
-$(test)_collocated_sources      := Library.ice \
+$(demo)_collocated_sources      := Library.ice \
                                    Collocated.cpp \
                                    Grammar.y \
                                    Parser.cpp \
@@ -26,11 +25,12 @@ $(test)_collocated_sources      := Library.ice \
                                    Scanner.l \
                                    BookFactory.cpp \
                                    LibraryI.cpp
+$(demo)_collocated_slice2freeze := LibraryTypes
 
-$(test)_collocated_slice2freeze := LibraryTypes
+$(demo)_server_LibraryTypes            	:= --dict StringIsbnSeqDict,string,Ice::StringSeq
+$(demo)_server_LibraryTypes_slice      	:= $(ice_slicedir)/Ice/BuiltinSequences.ice $(demo)/Library.ice
 
-$(test)_slice2freeze            := LibraryTypes
-$(test)_LibraryTypes            := --dict StringIsbnSeqDict,string,Ice::StringSeq
-$(test)_LibraryTypes_slice      := $(ice_slicedir)/Ice/BuiltinSequences.ice $(test)/Library.ice
+$(demo)_collocated_LibraryTypes         := --dict StringIsbnSeqDict,string,Ice::StringSeq
+$(demo)_collocated_LibraryTypes_slice   := $(ice_slicedir)/Ice/BuiltinSequences.ice $(demo)/Library.ice
 
-demos += $(test)
+demos += $(demo)
