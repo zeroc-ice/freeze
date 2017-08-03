@@ -4,19 +4,63 @@
 //
 // **********************************************************************
 
+ext.os = System.properties['os.name']
+ext.isWindows = os.toLowerCase().contains("windows")
+ext.isMacOS = os.toLowerCase().contains("darwin")
+
+buildscript {
+    repositories {
+        maven {
+        url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.ullink.gradle:gradle-nuget-plugin:2.15"
+    }
+}
+
+if(isWindows) {
+    apply plugin: "com.ullink.nuget"
+
+    task nugetConfig() {
+        def config = new File("${rootProject.projectDir}/packages.config")
+        def writer = new StringWriter()
+        def xml = new groovy.xml.MarkupBuilder(writer)
+        def packages = [["id": "berkeley.db.java7", "version": "5.3.28.1"]]
+
+        if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp") {
+            packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
+            packages.add(["id": "zeroc.freeze.v140", "version": "${iceVersion}"])
+        }
+
+        xml.packages {
+            packages.each {
+                xml.package("id": it.id, "version": it.version)
+            }
+        }
+        config.write(writer.toString())
+    }
+
+    nugetRestore {
+        solutionDirectory = "${rootProject.projectDir}"
+        packagesDirectory = "${rootProject.projectDir}/packages"
+    }
+}
+
 subprojects {
     project.version = iceVersion
     project.group = "com.zeroc"
 
     apply plugin: 'java'
     apply plugin: 'idea'
-    apply from: "$rootProject.projectDir/gradle/freeze.gradle"
+    apply from: "${rootProject.projectDir}/gradle/freeze.gradle"
 
     repositories {
         flatDir {
             name "local"
-            dirs "$rootProject.projectDir/lib", localIceLibPath
+            dirs "${rootProject.projectDir}/lib"
         }
+
         if (slice.jarDir) {
             flatDir {
                 name "local"

@@ -1,7 +1,5 @@
 // Ensure iceHome is set prior to loading ice.gradle
-
-def os = System.properties['os.name']
-def isWindows = os.toLowerCase().contains("windows")
+apply from: "$rootProject.projectDir/gradle/db.gradle"
 
 if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp")
 {
@@ -9,6 +7,9 @@ if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp")
     ext.freezeHome = freezeHome ? freezeHome : System.env.FREEZE_HOME
     if(isWindows)
     {
+
+        ext.iceHome = iceHome ? iceHome : "${rootProject.projectDir}/packages/zeroc.ice.v140.${iceVersion}"
+        ext.freezeHome = freezeHome ? freezeHome : "${rootProject.projectDir}/packages/zeroc.freeze.v140.${iceVersion}"
 
         if(!new File("${iceHome}\\tools\\slice2java.exe").exists() &&
            !new File("${iceHome}\\bin\\slice2java.exe").exists())
@@ -23,14 +24,17 @@ if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp")
     }
     else
     {
+        ext.iceHome = iceHome ? iceHome : isMacOS ? "/usr/local" : "/usr"
+        ext.freezeHome = freezeHome ? freezeHome : isMacOS ? "/usr/local" : "/usr"
+
         if(!new File("${iceHome}/bin/slice2java").exists())
         {
-            throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}/bin/slice2freezej")
+            throw new GradleException("Unable to locate slice2freezej compiler in ${iceHome}")
         }
 
         if(!new File("${freezeHome}/bin/slice2freezej").exists())
         {
-            throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}/bin/slice2freezej")
+            throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
         }
     }
 }
@@ -41,9 +45,6 @@ else
 }
 
 apply from: "$rootProject.projectDir/../ice/java/gradle/ice.gradle"
-apply from: "$rootProject.projectDir/gradle/db.gradle"
-
-ext.localIceLibPath = new File([iceHome, "java-compat", "lib"].join(File.separator)).getCanonicalPath()
 
 slice {
     freezeHome = this.freezeHome
@@ -58,26 +59,3 @@ ext.localDependency = { artifactId ->
         return "com.zeroc:${artifactId}:${project.version}"
     }
 }
-
-/*
-ext.demoJar = { name ->
-    def taskName = name + "Jar"
-    // Create a jar for the client & server which includes everything in the demo.
-    def jarTask = tasks.create(name: taskName, type: Jar) {
-        version = ""
-        baseName = name
-        from(sourceSets.main.output) {
-            include "**"
-        }
-    }
-
-    jarTask.manifest {
-        attributes("Main-Class": name.capitalize())
-        attributes("Class-Path": configurations.runtime.resolve().collect { it.toURI() }.join(' '))
-    }
-
-    artifacts {
-        archives jarTask
-    }
-}
-*/

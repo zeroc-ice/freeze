@@ -2,3 +2,5 @@ build
 .gradle
 *.iml
 .idea
+packages/*
+packages.config
