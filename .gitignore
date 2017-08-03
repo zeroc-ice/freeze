@@ -316,3 +316,7 @@ _Pvt_Extensions
 
 # IceBuilder dependency files
 IceBuilder.d
+
+# Java demos excluded files
+.gradle
+demos/java-compat/packages.config

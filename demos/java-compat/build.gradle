@@ -1,0 +1,103 @@
+// **********************************************************************
+//
+// Copyright (c) 2003-2017 ZeroC, Inc. All rights reserved.
+//
+// **********************************************************************
+
+ext.os = System.properties['os.name']
+ext.isWindows = os.toLowerCase().contains("windows")
+ext.isMacOS = os.toLowerCase().contains("darwin")
+
+buildscript {
+    repositories {
+        maven {
+        url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.ullink.gradle:gradle-nuget-plugin:2.15"
+    }
+}
+
+if(isWindows) {
+    apply plugin: "com.ullink.nuget"
+
+    task nugetConfig() {
+        def config = new File("${rootProject.projectDir}/packages.config")
+        def writer = new StringWriter()
+        def xml = new groovy.xml.MarkupBuilder(writer)
+        def packages = [["id": "berkeley.db.java7", "version": "5.3.28.1"]]
+
+        if(!System.env.ICE_HOME) {
+            packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
+            packages.add(["id": "zeroc.freeze.v140", "version": "${iceVersion}"])
+        }
+
+        xml.packages {
+            packages.each {
+                xml.package("id": it.id, "version": it.version)
+            }
+        }
+        config.write(writer.toString())
+    }
+
+    nugetRestore {
+        solutionDirectory = "${rootProject.projectDir}"
+        packagesDirectory = "${rootProject.projectDir}/packages"
+    }
+}
+
+subprojects {
+    project.version = iceVersion
+    project.group = "com.zeroc"
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply from: "${rootProject.projectDir}/gradle/freeze.gradle"
+
+    repositories {
+        flatDir {
+            name "local"
+            dirs "${rootProject.projectDir}/../../java/lib"
+        }
+
+        if (slice.jarDir) {
+            flatDir {
+                name "local"
+                dirs slice.jarDir
+            }
+        }
+
+        mavenCentral()
+
+        maven {
+            url 'https://repo.zeroc.com/nexus/content/repositories/thirdparty'
+        }
+        maven {
+            url 'https://repo.zeroc.com/nexus/content/repositories/releases'
+        }
+    }
+
+    jar {
+        manifest {
+            attributes("Built-By": "ZeroC, Inc.")
+        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Xlint:-options"
+    }
+
+    idea.module {
+        excludeDirs -= file(buildDir)
+        buildDir.listFiles({d, f ->f != 'generated-src'} as FilenameFilter).each { excludeDirs += it }
+    }
+}
+
+//
+// Used to build the gradle wrapper to automatically download and install
+// the version of gradle needed to build Ice.
+//
+task wrapper(type: Wrapper) {
+    gradleVersion = "4.0.1"
+}

@@ -65,12 +65,10 @@ sourceSets {
 }
 
 dependencies {
-    compile localDependency("ice-compat")
-    compile localDependency("freeze")
+    compile "com.zeroc:ice-compat:${iceVersion}"
+    compile "com.zeroc:freeze:${iceVersion}"
     compile files(dbJar)
-    if (!useLocalOnly) {
-        runtime "org.apache.tools:bzip2:1.0"
-    }
+    runtime "org.apache.commons:commons-compress:1.14"
 }
 
 clean {

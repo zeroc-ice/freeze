@@ -1,0 +1,22 @@
+// Map of dir->subdir for each of the demos.
+def demos = [
+        'Freeze' : ['bench', 'casino', 'library', 'phonebook', 'transform'],
+        'Manual' : ['evictorFilesystem', 'mapFilesystem'],
+]
+
+demos.each {
+    def dir = it.key
+    def subdirs = it.value
+
+    subdirs.each {
+        // abc_def -> AbcDef
+        def name = it.split('_').collect { it.capitalize() }.join()
+
+        // A project in directory xyz is demoXyzAbcDef
+        def projectName = ":demo${dir.capitalize()}${name}"
+        include projectName
+
+        // The directory is <dir>/<name>.
+        project("${projectName}").projectDir = new File("${dir}/${it}")
+    }
+}
