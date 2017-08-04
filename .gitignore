@@ -320,3 +320,4 @@ IceBuilder.d
 # Java demos excluded files
 .gradle
 demos/java-compat/packages.config
+demos/java-compat/**/build
