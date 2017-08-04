@@ -3,7 +3,7 @@
     <PropertyGroup>
         <Ice_SrcRootDir>$(MSBuildThisFileDirectory)..\</Ice_SrcRootDir>
         <DbPackage Condition="'$(DefaultPlatformToolset)' == 'v140'">berkeley.db.v140.5.3.28.3</DbPackage>
-        <DbPackage Condition="'$(DefaultPlatformToolset)' == 'v120'">berkeley.db.v140.5.3.28.4</DbPackage>
+        <DbPackage Condition="'$(DefaultPlatformToolset)' == 'v120'">berkeley.db.v120.5.3.28.4</DbPackage>
     </PropertyGroup>
 
     <!-- Dynamic libraries and import libraries -->
