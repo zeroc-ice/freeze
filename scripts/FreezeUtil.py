@@ -58,7 +58,7 @@ class FreezeJavaMapping(JavaCompatMapping):
             return os.path.join(toplevel, "java", "packages", "berkeley.db.java7.5.3.28.1", "build", "native", "bin",
                                 current.config.buildPlatform)
         else:
-            return "/usr/{0}".format(platform.getLibSubDir(self, process, current))
+            return "/usr/{0}".format("lib/x86_64-linux-gnu" if self.platform.linuxId in ["ubuntu", "debian"] else "lib64")
 
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))
