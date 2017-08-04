@@ -3,12 +3,12 @@
     <PropertyGroup>
         <IceLanguageMapping>cpp</IceLanguageMapping>
         <IceCppMapping>cpp98</IceCppMapping>
-        <IceBuildingSrc Condition="'$(ICE_BIN_DIST)' == ''">yes</IceBuildingSrc>
-        <IceBuildingSrc Condition="'$(ICE_BIN_DIST)' != ''">no</IceBuildingSrc>
+        <IceBuildingSrc Condition="'$(FREEZE_BIN_DIST)' == ''">yes</IceBuildingSrc>
+        <IceBuildingSrc Condition="'$(FREEZE_BIN_DIST)' != ''">no</IceBuildingSrc>
     </PropertyGroup>
     <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\cpp\msbuild\ice.cpp.props" />
 
-    <PropertyGroup Condition="'$(ICE_BIN_DIST)' == ''">
+    <PropertyGroup Condition="'$(FREEZE_BIN_DIST)' == ''">
         <FreezeHome>$(MSBuildThisFileDirectory)..\..</FreezeHome>
         <FreezeToolsPath>$(FreezeHome)\cpp\bin\$(Platform)\$(Configuration)</FreezeToolsPath>
     </PropertyGroup>
@@ -19,7 +19,7 @@
         <OutDir>$(FreezeSrcRootDir)\bin\$(Platform)\$(Configuration)\</OutDir>
     </PropertyGroup>
 
-    <ItemDefinitionGroup Condition="'$(ICE_BIN_DIST)' == ''">
+    <ItemDefinitionGroup Condition="'$(FREEZE_BIN_DIST)' == ''">
         <ClCompile>
             <AdditionalIncludeDirectories>$(FreezeSrcRootDir)\include\generated\$(Platform)\$(Configuration);
                                           $(FreezeSrcRootDir)\include;$(FreezeSrcRootDir)\src;

@@ -74,7 +74,7 @@ msbuild msbuild\freeze.proj /t:BuildDist /p:Platform=x64
 To build the test suite using the NuGet binary distribution use:
 
 ```
-msbuild msbuild\freeze.proj /p:ICE_BIN_DIST=all
+msbuild msbuild\freeze.proj /p:FREEZE_BIN_DIST=all
 ```
 
 You can also sign the Freeze binaries with Authenticode, by setting the following

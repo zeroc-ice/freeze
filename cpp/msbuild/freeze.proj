@@ -27,7 +27,7 @@
     </PropertyGroup>
 
     <!-- Restore Nuget packages -->
-    <Target Name="NugetRestore" DependsOnTargets="GetNuget"  Condition="'$(ICE_BIN_DIST)' == ''">
+    <Target Name="NugetRestore" DependsOnTargets="GetNuget"  Condition="'$(FREEZE_BIN_DIST)' == ''">
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.sln"/>
     </Target>
 
@@ -35,12 +35,12 @@
       <Exec Command="rmdir /s /q $(MSBuildThisFileDirectory)packages" Condition="Exists('$(MSBuildThisFileDirectory)packages')" />
     </Target>
 
-    <Target Name="TestNugetRestore" DependsOnTargets="GetNuget" Condition="'$(ICE_BIN_DIST)' != ''">
+    <Target Name="TestNugetRestore" DependsOnTargets="GetNuget" Condition="'$(FREEZE_BIN_DIST)' != ''">
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)freeze.test.sln"/>
         <Exec Command="$(NugetExe) restore $(MSBuildThisFileDirectory)..\..\ice\cpp\msbuild\ice.test.sln"/>
     </Target>
 
-    <Target Name="DownloadSymbols" DependsOnTargets="TestNuGetRestore" Condition="'$(ICE_BIN_DIST)' == 'all'">
+    <Target Name="DownloadSymbols" DependsOnTargets="TestNuGetRestore" Condition="'$(FREEZE_BIN_DIST)' == 'all'">
         <MakeDir Directories="$(TEMP)\SymbolCache" />
         <Exec IgnoreExitCode="True"
               Command="symchk /r $(MSBuildThisFileDirectory)packages\zeroc.freeze.$(DefaultPlatformToolset).$(IceJSONVersion)\build\native\bin\$(Platform)\$(IceConfiguration)\* /s SRV*$(TEMP)\SymbolCache*$(SymbolServer)">
@@ -99,7 +99,7 @@
         </Otherwise>
     </Choose>
 
-    <Target Name="BuildIce" Condition="'$(ICE_BIN_DIST)' == ''">
+    <Target Name="BuildIce" Condition="'$(FREEZE_BIN_DIST)' == ''">
         <MSBuild Projects="..\..\ice\cpp\msbuild\ice.proj"
                  Targets="NugetRestore"
                  BuildInParallel="true"/>
@@ -116,13 +116,13 @@
                  Properties="%(TestSolution.Properties)"/>
     </Target>
 
-    <Target Name="BuildDist" DependsOnTargets="BuildIce;NugetRestore" Condition="'$(ICE_BIN_DIST)' == ''">
+    <Target Name="BuildDist" DependsOnTargets="BuildIce;NugetRestore" Condition="'$(FREEZE_BIN_DIST)' == ''">
         <MSBuild Projects="@(DistSolution)"
                  BuildInParallel="true"
                  Properties="%(Properties)"/>
     </Target>
 
-    <Target Name="CleanDist" Condition="'$(ICE_BIN_DIST)' == ''">
+    <Target Name="CleanDist" Condition="'$(FREEZE_BIN_DIST)' == ''">
         <MSBuild Projects="@(DistSolution)"
                  BuildInParallel="true"
                  Properties="%(Properties)"
