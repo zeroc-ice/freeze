@@ -145,10 +145,10 @@ shared_excludes         = IceUtil Slice
 
 $(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice)))
 
-ifeq ($(filter all cpp,$(ICE_BIN_DIST)),)
+ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
 $(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,Ice)))
 else
 Ice_libs                := bz2
 Ice_targetdir           := $(ice_libdir)
-$(eval $(call create-component-targets,ice,Ice,library,yes))
+$(eval $(call create-component-targets,ice,Ice,library,nobuild))
 endif

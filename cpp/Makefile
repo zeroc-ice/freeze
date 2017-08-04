@@ -16,7 +16,7 @@ include $(lang_srcdir)/config/Make.rules
 projects :=
 include $(shell find $(lang_srcdir)/src -name Makefile.mk)
 $(foreach t,$(wildcard $(lang_srcdir)/src/slice2*),$(eval $(call create-translator-project,$(call project,$t))))
-$(call make-projects,$(projects),make-cpp-src-project)
+$(call make-projects,$(projects),make-cpp-src-project,,$(filter all cpp,$(FREEZE_BIN_DIST)))
 
 #
 # Create and load test projects.

@@ -366,7 +366,7 @@ $5_system_libs  := $$(call var-compound,system_libs,$1,$2,$3,$4)
 #
 # The targets to build.
 #
-ifneq ($6,yes)
+ifeq ($6,)
 $5_targets := $$(call get-$$($5_targetrule)-targets,$$($5_targetname),$$($5_targetdir),$$($5_version),$$($5_soversion),yes)
 $5_install_targets := $$(call get-$$($5_targetrule)-targets,$$($5_targetname),$(DESTDIR)$$($5_installdir),$$($5_version),$$($5_soversion),$$($2_devinstall))
 endif
@@ -412,7 +412,7 @@ $$(foreach p,$$($2_platforms),\
 endef
 
 #
-# $(call create-project-targets,$1=project)
+# $(call create-project-targets,$1=project,$2=nobuild)
 #
 # Creates all the target variables which are necessary to depend on the components
 # from the given project. This is used by various language mappings to depend on C++
@@ -424,8 +424,8 @@ $1_targetdir    := $$(call var-with-default,$1_targetdir,$1/build)
 $1_version      := $$(call var-with-default,$1_version,$(version))
 $1_soversion    := $$(call var-with-default,$1_soversion,$(soversion))
 $1_caninstall   := $$(call var-with-default,$1_caninstall,yes)
-$$(foreach p,$$($1_programs),$$(if $$(filter $(SKIP),$$p),,$$(eval $$(call create-component-targets,$1,$$p,program))))
-$$(foreach l,$$($1_libraries),$$(if $$(filter $(SKIP),$$l),,$$(eval $$(call create-component-targets,$1,$$l,library))))
+$$(foreach p,$$($1_programs),$$(if $$(filter $(SKIP),$$p),,$$(eval $$(call create-component-targets,$1,$$p,program,$2))))
+$$(foreach l,$$($1_libraries),$$(if $$(filter $(SKIP),$$l),,$$(eval $$(call create-component-targets,$1,$$l,library,$2))))
 endif
 endef
 
@@ -861,8 +861,8 @@ endef
 #
 # Create the targets for the given projects and then make the project rules.
 #
-make-projects = $(foreach p,$1,$(eval $(call $(or $(if $($p_type),create-$($p_type)-project-targets),$3,create-project-targets),$p)))\
-                $(foreach p,$1,$(eval $(call $(or $(if $($p_type),make-$($p_type)-project),$2,make-project),$p)))
+make-projects = $(foreach p,$1,$(eval $(call $(or $(if $($p_type),create-$($p_type)-project-targets),$3,create-project-targets),$p,$4)))\
+                $(if $4,,$(foreach p,$1,$(eval $(call $(or $(if $($p_type),make-$($p_type)-project),$2,make-project),$p))))
 
 #
 # $(call depend_cppflags,$1=dependencyfile,$2=targetfile)
@@ -934,7 +934,7 @@ var-rcompound   = $(call $(or $6,var-valu2),$1,$3,$4,$5,$3[$4-$5],$(strip $(fore
 #
 # $(call make-xxx,$1=varname,$2=component,$3=platform,$4=config,$5=$2[$3-$4],$6=value)
 #
-make-dirwsuffix = $(patsubst %/,%,$6$(platform-var)/$(subst $(space),-,$(config-var)))
+make-dirwsuffix = $(if $6,$(patsubst %/,%,$6$(platform-var)/$(subst $(space),-,$(config-var))))
 make-targetrule = $(patsubst -%,%,$(subst $(space),-,$(call platform-and-config-var,targetrule,$2,$3,$4,$5,$6))-$6)
 make-targetname = $6$(subst $(space),,$(platform-and-config-var))
 make-unique     = $(call unique,$6)

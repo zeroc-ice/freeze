@@ -8,13 +8,6 @@
 # Don't change anything below this line!
 # ----------------------------------------------------------------------
 
-#
-# Supported configurations
-#
-supported-configs       = shared static
-
-static_projects         = src/Freeze test/%
-
 slice2cpp_targetext     = cpp
 slice2cpp_path          = $(ice_bindir)/slice2cpp
 
@@ -29,13 +22,11 @@ slice2freezej_cppflags  = -I../ice/cpp/src -I../ice/cpp/include
 # $(call make-cpp-src-project,$1=project)
 #
 define make-cpp-src-project
-ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
 $1_slicecompiler        := slice2cpp
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
 $(make-project)
 srcs:: $1
-endif
 endef
 
 #
