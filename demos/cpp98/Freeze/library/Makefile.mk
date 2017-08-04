@@ -27,10 +27,8 @@ $(demo)_collocated_sources      := Library.ice \
                                    LibraryI.cpp
 $(demo)_collocated_slice2freeze := LibraryTypes
 
-$(demo)_server_LibraryTypes            	:= --dict StringIsbnSeqDict,string,Ice::StringSeq
-$(demo)_server_LibraryTypes_slice      	:= $(ice_slicedir)/Ice/BuiltinSequences.ice $(demo)/Library.ice
-
-$(demo)_collocated_LibraryTypes         := --dict StringIsbnSeqDict,string,Ice::StringSeq
-$(demo)_collocated_LibraryTypes_slice   := $(ice_slicedir)/Ice/BuiltinSequences.ice $(demo)/Library.ice
+$(demo)_slice2freeze            := LibraryTypes
+$(demo)_LibraryTypes            := --dict StringIsbnSeqDict,string,Ice::StringSeq
+$(demo)_LibraryTypes_slice      := $(ice_slicedir)/Ice/BuiltinSequences.ice $(demo)/Library.ice
 
 demos += $(demo)

@@ -156,9 +156,10 @@ $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
 $1_dependencies         := $$(or $$($1_dependencies),Ice Freeze)
 
-$1_programs             := $$(or $$($1_programs),client server)
+$1_programs             := $$(or $$($1_programs),client server collocated)
 $1_client_sources       := $$(call demo-sources,$$($1_client_sources),$$($1_srcdir),Client.cpp *.ice)
 $1_server_sources       := $$(call demo-sources,$$($1_server_sources),$$($1_srcdir),Server.cpp *.ice *I.cpp)
+$1_collocated_sources   := $$(call demo-sources,$$($1_collocated_sources),$$($1_srcdir),Collocated.cpp *.ice)
 
 $1_programs             := $$(foreach p,$$($1_programs),$$(if $$($1_$$(p)_sources),$1_$$(p)))
 $1_libraries            := $$(foreach p,$$($1_libraries),$1_$$(p))
