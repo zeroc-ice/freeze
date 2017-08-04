@@ -21,18 +21,18 @@
 
     <ItemDefinitionGroup Condition="'$(ICE_BIN_DIST)' == ''">
         <ClCompile>
-            <AdditionalIncludeDirectories>$(FreezeSrcRootDir)\include\generated\$(Platform)\$(IceConfiguration);
+            <AdditionalIncludeDirectories>$(FreezeSrcRootDir)\include\generated\$(Platform)\$(Configuration);
                                           $(FreezeSrcRootDir)\include;$(FreezeSrcRootDir)\src;
                                           %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
         </ClCompile>
         <Link>
-            <AdditionalLibraryDirectories>$(FreezeSrcRootDir)\lib\$(Platform)\$(IceConfiguration)</AdditionalLibraryDirectories>
+            <AdditionalLibraryDirectories>$(FreezeSrcRootDir)\lib\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
         </Link>
     </ItemDefinitionGroup>
 
     <ItemDefinitionGroup Condition="'$(ConfigurationType)' == 'DynamicLibrary'">
         <Link>
-            <ImportLibrary>$(FreezeSrcRootDir)\lib\$(Platform)\$(IceConfiguration)\$(TargetName).lib</ImportLibrary>
+            <ImportLibrary>$(FreezeSrcRootDir)\lib\$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
         </Link>
     </ItemDefinitionGroup>
 

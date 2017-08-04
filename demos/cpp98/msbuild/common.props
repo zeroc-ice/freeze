@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="$(FREEZE_HOME)\cpp\msbuild\freeze.cpp.props"
+          Condition="Exists('$(FREEZE_HOME)\cpp\msbuild\freeze.cpp.props')" />
   <ItemDefinitionGroup>
     <ClCompile>
       <ProgramDataBaseFileName>$(IntDir)$(TargetName)-objs.pdb</ProgramDataBaseFileName>

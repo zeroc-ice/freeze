@@ -43,7 +43,7 @@ The comments in the file provide more information.
     make -j8
 
 This builds the Freeze library, the FreezeScript utilities, and all Freeze
-tests and demos.
+tests.
 
 ## Running the Test Suite
 
@@ -55,13 +55,6 @@ After a successful source build, you can run the tests as follows:
 
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
-
-## Running the Demos
-
-Before running a demo, make sure you've configured your environment to use Ice
-as described in the [release notes][4].
-
-Refer to the README file in each demo directory for usage instructions.
 
 ## Installing a C++ Source Build
 
@@ -83,4 +76,3 @@ location of the library directory with the `-L` option.
 [1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
 [2]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm
 [3]: http://brew.sh
-[4]: https://doc.zeroc.com/display/Freeze37/Release+Notes

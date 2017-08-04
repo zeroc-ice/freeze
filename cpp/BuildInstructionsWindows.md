@@ -107,23 +107,7 @@ python allTests.py
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
-## Building the Demos
-
-Open the solution file `demo\Freeze C++ demos.sln` to build the sample programs.
-
-Select your target configuration: Debug or Release, Win32 or x64. Right click on
-the desired demo in the Solution Explorer window and select "Build".
-
-## Running the Demos
-
-Before running a demo, make sure you've configured your environment to use Ice
-as described in the [release notes][4].
-
-Refer to the README file in each demo directory for usage instructions.
-
 [1]: https://zeroc.com/distributions/freeze
 [2]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
 [3]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm
 [4]: https://www.nuget.org
-[5]: https://doc.zeroc.com/display/Freeze37/Release+Notes
-[6]: https://github.com/zeroc-ice/ice-builder-visualstudio

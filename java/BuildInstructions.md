@@ -135,14 +135,6 @@ running this command:
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
-## Running the Java Demos
-
-Before running a demo, make sure you've configured your environment to use Ice
-as described in the [release notes][4].
-
-Refer to the README file in each demo directory for usage instructions.
-
 [1]: https://zeroc.com/download.html
 [2]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
 [3]: http://gradle.org
-[4]: https://doc.zeroc.com/display/Freeze37/Release+Notes

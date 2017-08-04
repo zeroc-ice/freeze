@@ -28,8 +28,8 @@ the `ICE_HOME` or `FREEZE_HOME` environment variable with the path name of the
 installation directory:
 
 ```
-export ICE_HOME=~/testing/ice 
-export FREEZE_HOME=~/testing/freeze 
+export ICE_HOME=~/testing/ice
+export FREEZE_HOME=~/testing/freeze
 ```
 
 ### Building the Demos
@@ -89,18 +89,17 @@ select `Build`.
   * Open a Visual Studio command prompt
   ```
   cd ice-demos\cpp98
-  MSBuild /p:ICE_SRC_DIST=all /p:IceHome=<Ice dist path> /p:Configuration=<Release or Debug> "Freeze C++ demos.sln"
+  MSBuild /p:ICE_HOME=<Ice dist path> /p:FREEZE_HOME=<Freeze dist path> /p:Configuration=<Release or Debug> "Freeze C++ demos.sln"
   ```
 
 - Build from Visual Studio
   * Open a Visual Studio command prompt
   ```
-  set ICE_SRC_DIST=all
+  set ICE_HOME=<Ice dist path>
+  set FREEZE_HOME=<Freeze dist path>
   devenv
   ```
 
-  * When Visual Studio starts set `Ice home directory` in
-    `Tools > Options > Projects and Solutions > Ice Builder`
   * Disable automatic restoring of NuGet packages in Visual Studio
     `Tools > Options > NuGet Package Manager`
   * Select your target configuration (Debug or Release) and platform (Win32 or
@@ -113,8 +112,8 @@ You need to add the Ice and Freeze `bin` directory to your PATH before running
 the demos, with a command similar to:
 
 ```
-set PATH=%USERPROFILE%\freeze\demos\cpp\packages\zeroc.ice.v140.3.7.0\build\native\bin\x64\Debug;%PATH%
-set PATH=%USERPROFILE%\freeze\demos\cpp\packages\zeroc.freeze.v140.3.7.0\build\native\bin\x64\Debug;%PATH%
+set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.ice.v140.3.7.0\build\native\bin\x64\Release;%PATH%
+set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.freeze.v140.3.7.0\build\native\bin\x64\Release;%PATH%
 ```
 
 Then refer to the README.md file in each demo directory for usage instructions.
