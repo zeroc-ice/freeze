@@ -26,12 +26,14 @@ else
     ext.iceHome = iceHome ? iceHome : isMacOS ? "/usr/local" : "/usr"
     ext.freezeHome = freezeHome ? freezeHome : isMacOS ? "/usr/local" : "/usr"
 
-    if(!new File("${iceHome}/bin/slice2java").exists())
+    if(!new File("${iceHome}/bin/slice2java").exists() &&
+       !new File("${iceHome}/cpp/bin/slice2java").exists())
     {
         throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
     }
 
-    if(!new File("${freezeHome}/bin/slice2freezej").exists())
+    if(!new File("${freezeHome}/bin/slice2freezej").exists() &&
+       !new File("${freezeHome}/cpp/bin/slice2freezej").exists())
     {
         throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
     }

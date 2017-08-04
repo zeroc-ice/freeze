@@ -23,7 +23,7 @@ sourceSets {
 
 dependencies {
     compile localDependency('ice-compat')
-    compile localDependency('freeze')
+    compile localDependency('freeze-compat')
     compile files(dbJar)
     runtime "org.apache.tools:bzip2:1.0"
 }

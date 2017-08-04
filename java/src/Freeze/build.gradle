@@ -7,7 +7,7 @@
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-ext.displayName = "Freeze"
+ext.displayName = "Freeze Compat"
 ext.description = "Persistent storage for Ice objects"
 ext.connection = 'scm:git:git@github.com/zeroc-ice/freeze.git'
 ext.developerConnection = 'scm:git:git@github.com/zeroc-ice/freeze.git'

@@ -63,7 +63,7 @@ slice {
 }
 
 ext.localDependency = { artifactId ->
-    if(artifactId == "freeze") {
+    if(artifactId == "freeze-compat") {
         return project(":${artifactId}")
     } else {
         return "com.zeroc:${artifactId}:${project.version}"

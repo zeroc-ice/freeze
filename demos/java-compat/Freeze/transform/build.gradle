@@ -40,7 +40,7 @@ sourceSets {
 
 dependencies {
     compile "com.zeroc:ice-compat:${iceVersion}"
-    compile "com.zeroc:freeze:${iceVersion}"
+    compile "com.zeroc:freeze-compat:${iceVersion}"
     compile files(dbJar)
     runtime "org.apache.commons:commons-compress:1.14"
 }

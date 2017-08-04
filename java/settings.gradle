@@ -5,8 +5,8 @@
 // **********************************************************************
 
 // Main source
-include ':freeze'
-project(':freeze').projectDir = new File('src/Freeze')
+include ':freeze-compat'
+project(':freeze-compat').projectDir = new File('src/Freeze')
 
 // Tests
 include ':test'
