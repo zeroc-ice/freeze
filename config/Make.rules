@@ -73,27 +73,11 @@ include $(top_srcdir)/ice/config/Make.tests.rules
 
 -include $(top_srcdir)/config/Make.rules.$(os)
 
-ifneq ($(ICE_BIN_DIST),)
-freeze_home             := $(or $(FREEZE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
-bindir                  ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/bin
-libdir                  ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/lib
-includedir              ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/include
-
-ice_home                := $(or $(ICE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
-ice_bindir              ?= $(ice_home)/bin
-ice_libdir              ?= $(ice_home)/lib
-ice_slicedir            ?= $(ice_home)$(if $(filter /usr%,$(ice_home)),/share/ice)/slice
-ice_includedir          ?= $(ice_home)/include
-else
+ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
 bindir                  ?= $(call mappingdir,$(or $1,$(currentdir)),bin)
 libdir                  ?= $(call mappingdir,$(or $1,$(currentdir)),lib)
 slicedir                ?= $(top_srcdir)/slice
 includedir              ?= $(call mappingdir,$(or $1,$(currentdir)),include)
-
-ice_bindir              ?= $(top_srcdir)/ice/cpp/bin
-ice_libdir              ?= $(top_srcdir)/ice/cpp/lib
-ice_slicedir            ?= $(top_srcdir)/ice/slice
-ice_includedir          ?= $(top_srcdir)/ice/cpp/include
 
 usr_dir_install         := $(filter /usr%,$(prefix))
 install_bindir          ?= $(prefix)/bin
@@ -101,6 +85,24 @@ install_libdir          ?= $(prefix)/lib
 install_includedir      ?= $(prefix)/include
 install_docdir          ?= $(prefix)$(if $(usr_dir_install),/share/doc/freeze)
 install_mandir          ?= $(prefix)$(if $(usr_dir_install),/share)/man
+else
+freeze_home             := $(or $(FREEZE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
+bindir                  ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/bin
+libdir                  ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/lib
+includedir              ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/include
+endif
+
+ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
+ice_bindir              ?= $(top_srcdir)/ice/cpp/bin
+ice_libdir              ?= $(top_srcdir)/ice/cpp/lib
+ice_slicedir            ?= $(top_srcdir)/ice/slice
+ice_includedir          ?= $(top_srcdir)/ice/cpp/include
+else
+ice_home                := $(or $(ICE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
+ice_bindir              ?= $(ice_home)/bin
+ice_libdir              ?= $(ice_home)/lib
+ice_slicedir            ?= $(ice_home)$(if $(filter /usr%,$(ice_home)),/share/ice)/slice
+ice_includedir          ?= $(ice_home)/include
 endif
 
 version                 = 3.7.0
@@ -141,8 +143,12 @@ db_libdir               ?= $(wildcard /usr/lib64/db53)
 static_projects         = %
 shared_excludes         = IceUtil Slice
 
-$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice Ice IceXML)))
+$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice)))
 
-# Create component dependency variables
-ice_targetdir                   := $(top_srcdir)/ice/cpp/lib
-$(foreach d,$(dependencies),$(eval $(call create-component-targets,ice,$d,library)))
+ifeq ($(filter all cpp,$(ICE_BIN_DIST)),)
+$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,Ice)))
+else
+Ice_libs                := bz2
+Ice_targetdir		:= $(ice_libdir)
+$(eval $(call create-component-targets,ice,Ice,library))
+endif

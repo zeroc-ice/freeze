@@ -21,14 +21,18 @@ slice2cpp_targetext     = cpp
 slice2cpp_path          = $(ice_bindir)/slice2cpp
 
 #
+# Translator projects are created by freeze/cpp/Makefile (with create-translator-project),
+# we just set additional flags here to make sure the sources find the private headers.
+#
+slice2freeze_cppflags   = -I../ice/cpp/src
+slice2freezej_cppflags  = -I../ice/cpp/src
+
+#
 # $(call make-cpp-src-project,$1=project)
 #
 define make-cpp-src-project
-ifeq ($(filter all cpp,$(ICE_BIN_DIST)),)
+ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
 $1_slicecompiler        := slice2cpp
-$1_sliceflags           += -I$(ice_slicedir) -I$(slicedir)
-$1_cppflags             += -I$(ice_includedir) -I$(includedir) -I$1/generated -I../ice/cpp/src -Isrc
-$1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
 $(make-project)
@@ -43,8 +47,11 @@ define make-cpp-test-project
 $1_slicecompiler        := slice2cpp
 $1_sliceflags           += -I$(ice_slicedir) -I$1
 $1_cppflags             += -I$(ice_includedir) -I$(includedir) -I$1/generated -Itest/include -I$1
-ifeq ($(filter all cpp,$(ICE_BIN_DIST)),)
-$1_cppflags             += -I$(ice_includedir)/generated -I$(includedir)/generated
+ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
+$1_cppflags             += -I$(ice_includedir)/generated
+endif
+ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
+$1_cppflags             += -I$(includedir)/generated
 endif
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
