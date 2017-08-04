@@ -321,3 +321,8 @@ IceBuilder.d
 .gradle
 demos/java-compat/packages.config
 demos/java-compat/**/build
+
+# Makefile Build System
+build
+generated
+.depend

@@ -8,13 +8,13 @@ $(project)_libraries = Freeze
 $(project)_generated_includedir := $(project)/generated/Freeze
 
 Freeze_targetdir                := $(libdir)
-Freeze_cppflags                 := -DFREEZE_API_EXPORTS
 Freeze_sliceflags               := -I$(ice_slicedir) -I$(slicedir) --include-dir Freeze
-Freeze_cppflags                 := -I$(includedir) -I$(includedir)/generated -I$(project)/generated -Isrc
+Freeze_cppflags                 := -DFREEZE_API_EXPORTS -I$(includedir) -I$(includedir)/generated -I$(project)/generated -Isrc
+ifneq ($(ice_includedir),)
 ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
-Freeze_cppflags                 += -I$(ice_includedir)/generated -I$(ice_includedir)
-else
-Freeze_cppflags                 += $(if $(filter-out /usr%,$(ice_includedir)),-I$(ice_includedir))
+Freeze_cppflags                 += -I$(ice_includedir)/generated
+endif
+Freeze_cppflags                 += -I$(ice_includedir)
 endif
 
 Freeze_dependencies             := Ice

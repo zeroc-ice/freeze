@@ -67,11 +67,11 @@ CONFIGS                 ?= $(firstword $(supported-configs))
 
 os                      ?= $(shell uname)
 
-include $(top_srcdir)/ice/config/Make.rules.$(os)
-include $(top_srcdir)/ice/config/Make.project.rules
-include $(top_srcdir)/ice/config/Make.tests.rules
+include $(top_srcdir)/config/Make.rules.$(os)
+include $(top_srcdir)/config/Make.project.rules
+include $(top_srcdir)/config/Make.tests.rules
 
--include $(top_srcdir)/config/Make.rules.$(os)
+appendnousr = $(if $(filter-out /usr%,$1),$1/$2)
 
 ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
 bindir                  ?= $(call mappingdir,$(or $1,$(currentdir)),bin)
@@ -88,8 +88,8 @@ install_mandir          ?= $(prefix)$(if $(usr_dir_install),/share)/man
 else
 freeze_home             := $(or $(FREEZE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
 bindir                  ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/bin
-libdir                  ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/lib
-includedir              ?= $(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home))/include
+libdir                  ?= $(call appendnousr,$(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home)),lib)
+includedir              ?= $(call appendnousr,$(if $(filter ../ice/%,$(currentdir)),$(ice_home),$(freeze_home)),include)
 endif
 
 ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
@@ -100,9 +100,9 @@ ice_includedir          ?= $(top_srcdir)/ice/cpp/include
 else
 ice_home                := $(or $(ICE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
 ice_bindir              ?= $(ice_home)/bin
-ice_libdir              ?= $(ice_home)/lib
 ice_slicedir            ?= $(ice_home)$(if $(filter /usr%,$(ice_home)),/share/ice)/slice
-ice_includedir          ?= $(ice_home)/include
+ice_libdir              ?= $(call appendnousr,$(ice_home),lib)
+ice_includedir          ?= $(call appendnousr,$(ice_home),include)
 endif
 
 version                 = 3.7.0
@@ -150,5 +150,5 @@ $(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,Ice)))
 else
 Ice_libs                := bz2
 Ice_targetdir           := $(ice_libdir)
-$(eval $(call create-component-targets,ice,Ice,library))
+$(eval $(call create-component-targets,ice,Ice,library,yes))
 endif

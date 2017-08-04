@@ -47,8 +47,8 @@ CONFIGS                 ?= $(firstword $(supported-configs))
 os                      ?= $(shell uname)
 embedded_runpath        := yes
 
-include $(top_srcdir)/ice/config/Make.rules.$(os)
-include $(top_srcdir)/ice/config/Make.project.rules
+include $(top_srcdir)/config/Make.rules.$(os)
+include $(top_srcdir)/config/Make.project.rules
 
 #
 # Ice/Freeze installation
@@ -58,11 +58,15 @@ ice_src_dist            := $(wildcard $(ice_home)/config/Make.rules)
 ice_usr_dir_install     := $(filter /usr%,$(ice_home))
 ice_bindir              ?= $(if $(ice_src_dist),$(ice_home)/cpp/bin,$(ice_home)/bin)
 ice_slicedir            ?= $(ice_home)$(if $(ice_usr_dir_install),/share/ice)/slice
+ice_includedir          ?= $(ice_home)$(if $(ice_src_dist),/cpp)/include
+ice_libdir              ?= $(ice_home)$(if $(ice_src_dist),/cpp)/lib
 
 freeze_home             := $(or $(FREEZE_HOME),$(if $(filter Darwin,$(os)),/usr/local,/usr))
 freeze_src_dist         := $(wildcard $(freeze_home)/config/Make.rules)
 freeze_usr_dir_install  := $(filter /usr%,$(freeze_home))
 freeze_bindir           ?= $(if $(freeze_src_dist),$(freeze_home)/cpp/bin,$(freeze_home)/bin)
+freeze_includedir       ?= $(freeze_home)$(if $(freeze_src_dist),/cpp)/include
+freeze_libdir           ?= $(freeze_home)$(if $(freeze_src_dist),/cpp)/lib
 
 static_projects         = %
 
@@ -84,19 +88,17 @@ supported-configs       = shared static
 # Support for Ice library/ Freeze libraries
 #
 Ice_libs                := bz2
-Ice_targetdir           := $(ice_home)$(if $(ice_src_dist),/cpp)/lib
+Ice_targetdir           := $(ice_libdir)
 
-ice_includedir          ?= $(ice_home)$(if $(ice_src_dist),/cpp)/include
-$(eval $(call create-component-targets,ice,Ice,library))
+$(eval $(call create-component-targets,ice,Ice,library,yes))
 
 slice2cpp_targetext     = cpp
 slice2cpp_path          = $(ice_bindir)/slice2cpp
 
 Freeze_libs             := db
-Freeze_targetdir        := $(freeze_home)$(if $(freeze_src_dist),/cpp)/lib
+Freeze_targetdir        := $(freeze_libdir)
 
-freeze_includedir       ?= $(freeze_home)$(if $(freeze_src_dist),/cpp)/include
-$(eval $(call create-component-targets,freeze,Freeze,library))
+$(eval $(call create-component-targets,freeze,Freeze,library,yes))
 
 slice2freeze_path       = $(freeze_bindir)/slice2freeze
 
