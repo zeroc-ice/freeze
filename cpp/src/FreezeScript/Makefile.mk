@@ -10,7 +10,7 @@ $(project)_dependencies = Freeze Ice
 $(project)_libs         = db mcpp
 $(project)_targetdir    := $(bindir)
 $(project)_bisonflags   := --name-prefix "freeze_script_"
-$(project)_cppflags	:= -I$(includedir) -I$(includedir)/generated -Isrc -I../ice/cpp/src
+$(project)_cppflags     := -I$(includedir) -I$(includedir)/generated -Isrc -I../ice/cpp/src
 ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
 $(project)_cppflags     += -I$(ice_includedir)/generated -I$(ice_includedir)
 else
@@ -19,7 +19,7 @@ endif
 
 # Don't use the regular dependencies for IceXML because there's no libIceXML.so symlink
 # with the Ice binary distributions.
-$(project)_ldflags	:= $(if $(filter Darwin,$(os)),-lIceXML.37,-l:libIceXML.so.37)
+$(project)_ldflags      := $(if $(filter Darwin,$(os)),-lIceXML.37,-l:libIceXML.so.37)
 
 common_sources          = AssignVisitor.cpp \
                           Data.cpp \

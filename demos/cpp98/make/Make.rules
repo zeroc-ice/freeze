@@ -84,7 +84,7 @@ supported-configs       = shared static
 # Support for Ice library/ Freeze libraries
 #
 Ice_libs                := bz2
-Ice_targetdir		:= $(ice_home)$(if $(ice_src_dist),/cpp)/lib
+Ice_targetdir           := $(ice_home)$(if $(ice_src_dist),/cpp)/lib
 
 ice_includedir          ?= $(ice_home)$(if $(ice_src_dist),/cpp)/include
 $(eval $(call create-component-targets,ice,Ice,library))
@@ -93,13 +93,12 @@ slice2cpp_targetext     = cpp
 slice2cpp_path          = $(ice_bindir)/slice2cpp
 
 Freeze_libs             := db
-Freeze_targetdir	:= $(freeze_home)$(if $(freeze_src_dist),/cpp)/lib
+Freeze_targetdir        := $(freeze_home)$(if $(freeze_src_dist),/cpp)/lib
 
 freeze_includedir       ?= $(freeze_home)$(if $(freeze_src_dist),/cpp)/include
 $(eval $(call create-component-targets,freeze,Freeze,library))
 
 slice2freeze_path       = $(freeze_bindir)/slice2freeze
-
 
 #
 # $(call demo,[$1])
@@ -151,7 +150,7 @@ $1_cppflags             := $(if $(ice_usr_dir_install),,-I$(ice_includedir)) \
                            $(if $(freeze_usr_dir_install),,-I$(freeze_includedir)) \
                            $(if $(freeze_src_dist),-I$(freeze_includedir)/generated) \
                            -I$1 -I$1/generated $$($1_cppflags)
-$1_caninstall		:= no
+$1_caninstall           := no
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
 $1_dependencies         := $$(or $$($1_dependencies),Ice Freeze)
@@ -230,4 +229,3 @@ $5/$1.cpp: $3 $$(slice2freeze_path) | $5 $4
 	$(Q)$$(slice2freeze_path) $(strip $6) $2 --output-dir $5 $1 $3
 	$(if $(filter-out $4,$5),$(Q)$(MV) $5/$1.h $4/$1.h)
 endef
-

@@ -15,7 +15,7 @@
 #
 supported-configs       = shared static
 
-static_projects		= src/Freeze test/%
+static_projects         = src/Freeze test/%
 
 slice2cpp_targetext     = cpp
 slice2cpp_path          = $(ice_bindir)/slice2cpp
