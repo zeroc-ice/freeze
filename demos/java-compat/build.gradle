@@ -6,7 +6,7 @@
 
 ext.os = System.properties['os.name']
 ext.isWindows = os.toLowerCase().contains("windows")
-ext.isMacOS = os.toLowerCase().contains("darwin")
+ext.isMacOS = os.toLowerCase().contains("mac os x")
 
 buildscript {
     repositories {

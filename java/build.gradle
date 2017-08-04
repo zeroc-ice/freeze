@@ -6,7 +6,7 @@
 
 ext.os = System.properties['os.name']
 ext.isWindows = os.toLowerCase().contains("windows")
-ext.isMacOS = os.toLowerCase().contains("darwin")
+ext.isMacOS = os.toLowerCase().contains("mac os x")
 
 buildscript {
     repositories {
@@ -28,9 +28,12 @@ if(isWindows) {
         def xml = new groovy.xml.MarkupBuilder(writer)
         def packages = [["id": "berkeley.db.java7", "version": "5.3.28.1"]]
 
-        if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp") {
+        if(System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp") {
             packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
             packages.add(["id": "zeroc.freeze.v140", "version": "${iceVersion}"])
+        }
+        else if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp") {
+            packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
         }
 
         xml.packages {

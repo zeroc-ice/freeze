@@ -11,6 +11,10 @@ Freeze_targetdir                := $(libdir)
 Freeze_cppflags                 := -DFREEZE_API_EXPORTS
 Freeze_sliceflags               := -I$(ice_slicedir) -I$(slicedir) --include-dir Freeze
 Freeze_cppflags			:= -I$(ice_includedir) -I$(includedir) -I$(includedir)/generated -I$(project)/generated -Isrc
+ifeq ($(filter all cpp,$(ICE_BIN_DIST)),)
+Freeze_cppflags                 += -I$(ice_includedir)/generated
+endif
+
 Freeze_dependencies             := Ice
 Freeze_libs                     := db
 

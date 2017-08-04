@@ -1,22 +1,12 @@
 // Ensure iceHome is set prior to loading ice.gradle
 apply from: "$rootProject.projectDir/gradle/db.gradle"
 
-if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp")
+if(System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp")
 {
-    ext.iceHome = iceHome ? iceHome : System.env.ICE_HOME
     ext.freezeHome = freezeHome ? freezeHome : System.env.FREEZE_HOME
     if(isWindows)
     {
-
-        ext.iceHome = iceHome ? iceHome : "${rootProject.projectDir}/packages/zeroc.ice.v140.${iceVersion}"
         ext.freezeHome = freezeHome ? freezeHome : "${rootProject.projectDir}/packages/zeroc.freeze.v140.${iceVersion}"
-
-        if(!new File("${iceHome}\\tools\\slice2java.exe").exists() &&
-           !new File("${iceHome}\\bin\\slice2java.exe").exists())
-        {
-            throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
-        }
-
         if(!new File("${freezeHome}\\tools\\slice2freezej.exe").exists())
         {
             throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
@@ -24,17 +14,37 @@ if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp")
     }
     else
     {
-        ext.iceHome = iceHome ? iceHome : isMacOS ? "/usr/local" : "/usr"
         ext.freezeHome = freezeHome ? freezeHome : isMacOS ? "/usr/local" : "/usr"
-
-        if(!new File("${iceHome}/bin/slice2java").exists())
-        {
-            throw new GradleException("Unable to locate slice2freezej compiler in ${iceHome}")
-        }
-
         if(!new File("${freezeHome}/bin/slice2freezej").exists())
         {
             throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
+        }
+    }
+}
+else
+{
+    ext.freezeHome = new File([rootProject.projectDir, ".."].join(File.separator)).getCanonicalPath()
+}
+
+if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp" ||
+   System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp")
+{
+    ext.iceHome = iceHome ? iceHome : System.env.ICE_HOME
+    if(isWindows)
+    {
+        ext.iceHome = iceHome ? iceHome : "${rootProject.projectDir}/packages/zeroc.ice.v140.${iceVersion}"
+        if(!new File("${iceHome}\\tools\\slice2java.exe").exists() &&
+           !new File("${iceHome}\\bin\\slice2java.exe").exists())
+        {
+            throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
+        }
+    }
+    else
+    {
+        ext.iceHome = iceHome ? iceHome : isMacOS ? "/usr/local" : "/usr"
+        if(!new File("${iceHome}/bin/slice2java").exists())
+        {
+            throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
         }
     }
 }

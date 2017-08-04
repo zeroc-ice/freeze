@@ -24,8 +24,8 @@ slice2cpp_path          = $(ice_bindir)/slice2cpp
 # Translator projects are created by freeze/cpp/Makefile (with create-translator-project),
 # we just set additional flags here to make sure the sources find the private headers.
 #
-slice2freeze_cppflags   = -I../ice/cpp/src
-slice2freezej_cppflags  = -I../ice/cpp/src
+slice2freeze_cppflags   = -I../ice/cpp/src -I../ice/cpp/include
+slice2freezej_cppflags  = -I../ice/cpp/src -I../ice/cpp/include
 
 #
 # $(call make-cpp-src-project,$1=project)
