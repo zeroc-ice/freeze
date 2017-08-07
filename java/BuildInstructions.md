@@ -6,7 +6,7 @@ This page describes how to build and install Freeze for Java from source code.
 
 ### Operating Systems
 
-Freeze for Java is expected to build and run properly on Windows, OS X, and any
+Freeze for Java is expected to build and run properly on Windows, macOS, and any
 recent Linux distribution for x86 and x86_64, and was extensively tested using
 the operating systems and compiler versions listed for our [supported
 platforms][1]. Due to the portability of Java, it is very likely that it will
@@ -21,7 +21,7 @@ Ice for C++ (which contains the Slice to Java translator), or you will have to
 translate your Slice files to Java on a supported platform and then copy the
 generated Java files to your target platform.
 
-### Java Version# Building Freeze for Java
+### Java Version
 
 Freeze for Java requires J2SE 1.7.0 or later.
 
@@ -50,17 +50,17 @@ installed in a different directory:
 
 ### Gradle
 
-Freeze for Java uses the [Gradle][2] build system, and includes the Gradle wrapper
-version 4.0.1 in the distribution. You cannot build the Freeze for Java source
-distribution without an Internet connection. Except for Berkeley DB, Gradle will
-download all required packages automatically. These packages are listed below.
-Gradle will automatically download any necessary build artifacts.
+Freeze for Java uses the [Gradle][2] build system, and includes the Gradle
+wrapper version 4.0.1 in the distribution. You cannot build the Freeze for Java
+source distribution without an Internet connection. Except for Berkeley DB,
+Gradle will download all required packages automatically. These packages are
+listed below. Gradle will automatically download any necessary build artifacts.
 
 ## Compiling Freeze for Java
 
 ### Preparing to Build
 
-This source distribution cannot be compiled successfully withoutthe Berkeley DB
+This source distribution cannot be compiled successfully without the Berkeley DB
 run time for Java (`db.jar`). The build system searches in standard locations
 for the following two JAR files:
 
@@ -120,9 +120,9 @@ On Windows:
 set FREEZE_BIN_DIST=all
 ```
 
-This will download the binary NuGet packages for Freeze that include the Slice to
-Freeze Java compiler, if you want to use an existing Freeze installation you must
-also set `FREEZE_HOME`
+This will download the binary NuGet packages for Freeze that include the Slice
+to Freeze Java compiler, if you want to use an existing Freeze installation you
+must also set `FREEZE_HOME`
 
 ```
 set FREEZE_HOME=zeroc.freeze.v140.3.7.0.0
@@ -139,7 +139,8 @@ To build Ice, all services, and tests, run
 gradlew build
 ```
 
-Upon completion, the Freeze JAR and POM files are placed in the `lib` subdirectory.
+Upon completion, the Freeze JAR and POM files are placed in the `lib`
+subdirectory.
 
 If at any time you wish to discard the current build and start a new one, use
 these commands:

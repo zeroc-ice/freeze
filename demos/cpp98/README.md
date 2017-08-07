@@ -12,7 +12,7 @@ following subdirectories:
 - [Freeze](./Freeze) contains Freeze examples for using the Freeze library.
 
 - [Manual](./Manual) contains complete examples for some of the code snippets
-in the [Ice manual][1].
+in the [Freeze manual][1].
 
 ## Building and Running the Demos on Linux and macOS
 
@@ -118,5 +118,5 @@ set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.freeze.v140.3.7.0\build
 
 Then refer to the README.md file in each demo directory for usage instructions.
 
-[1]: https://doc.zeroc.com/display/Ice37/Ice+Manual
+[1]: https://doc.zeroc.com/display/Freeze37/Freeze+Manual
 [2]: https://github.com/zeroc-ice/ice-builder-visualstudio
