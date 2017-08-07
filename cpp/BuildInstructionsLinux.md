@@ -8,7 +8,9 @@ and testing the distribution.
 
 ### Operating Systems and Compilers
 
-TBD
+Freeze is expected to build and run properly on any recent Linux distribution
+for x86 and x86_64, and was extensively tested using the operating systems and
+compiler versions listed for our [supported platforms][1].
 
 ### Third-Party Libraries
 
@@ -26,7 +28,7 @@ Edit `freeze/ice/config/Make.rules` to establish your build configuration.
 The comments in the file provide more information.
 
     cd freeze/ice/cpp
-    make -j8 src/IceXML test/Common
+    make -j8 src/IceXML
 
 ### Step 2: build Freeze
 
