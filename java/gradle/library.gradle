@@ -1,0 +1,147 @@
+// **********************************************************************
+//
+// Copyright (c) 2003-2017 ZeroC, Inc. All rights reserved.
+//
+// This copy of Ice is licensed to you under the terms described in the
+// ICE_LICENSE file included in this distribution.
+//
+// **********************************************************************
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def pomName = "${libDir}/${project.name}-${project.version}.pom"
+
+def scmData = [
+    connection : 'scm:git:git@github.com/zeroc-ice/freeze.git',
+    developerConnection : 'scm:git:git@github.com/zeroc-ice/freeze.git',
+    url : 'git://github.com/zeroc-ice/freeze.git'
+].collectEntries { key, value -> [key, project.hasProperty(key) ? project.property(key) : value] }
+
+ext.projectPom = {
+    pom {
+        project {
+            name project.ext.displayName
+            description project.ext.description
+            url 'https://zeroc.com'
+            packaging 'jar'
+            scm {
+                connection scmData.connection
+                developerConnection scmData.developerConnection
+                url scmData.url
+            }
+            licenses {
+                license {
+                    name 'GNU General Public License, version 2'
+                    url 'https://www.gnu.org/licenses/gpl-2.0.html'
+                    distribution 'repo'
+                }
+            }
+            developers {
+                developer {
+                    name 'ZeroC Developers'
+                    email 'info@zeroc.com'
+                    organization = 'ZeroC, Inc.'
+                    organizationUrl 'https://zeroc.com'
+                }
+            }
+        }
+    }
+}
+
+task writeNewPom {
+    outputs.file file(pomName)
+
+    doLast {
+        projectPom().writeTo(pomName)
+    }
+}
+
+jar.dependsOn(writeNewPom)
+
+jar {
+    destinationDir = new File("${libDir}")
+}
+
+task jarSources(type:Jar, dependsOn: jar){
+    from sourceSets.main.allSource
+    classifier = 'sources'
+    destinationDir = new File("${libDir}")
+}
+
+assemble.dependsOn(jarSources)
+
+javadoc {
+    failOnError = false
+    options.header = project.displayName
+    classpath =project.sourceSets.main.compileClasspath
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc
+    destinationDir = new File("${libDir}")
+}
+
+artifacts {
+    archives jar, jarSources, javadocJar
+}
+
+signing {
+    required {
+        gradle.taskGraph.hasTask("signArchives") || gradle.taskGraph.hasTask("uploadArchives") ||
+        ( project.hasProperty('signing.keyId') &&
+          project.hasProperty('signing.password') &&
+          project.hasProperty('signing.secretKeyRingFile') )
+    }
+    sign configurations.archives
+}
+
+ext.mavenRepo = rootProject.hasProperty('mavenRepo')?project.mavenRepo:System.getenv('MAVEN_REPO')?:''
+ext.mavenSnapshotRepo = rootProject.hasProperty('mavenSnapshotRepo')?project.mavenSnapshotRepo:System.getenv('MAVEN_SNAPSHOT_REPO')?:''
+ext.mavenUser = rootProject.hasProperty('mavenUser')?project.mavenUser:System.getenv('MAVEN_USER')?:''
+ext.mavenPassword = rootProject.hasProperty('mavenPassword')?project.mavenPassword:System.getenv('MAVEN_PASSWORD')?:''
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            // url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            repository(url: mavenRepo) {
+                authentication(userName: mavenUser, password: mavenPassword)
+            }
+
+            // url: "https://oss.sonatype.org/content/repositories/snapshots/"
+            snapshotRepository(url: mavenSnapshotRepo) {
+                authentication(userName: mavenUser, password: mavenPassword)
+            }
+
+            pom = projectPom()
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes("Class-Path": configurations.runtime.resolve().collect{ "${it.name}" }.join(' '))
+    }
+}
+
+clean {
+    delete("${libDir}/${jar.archiveName}")
+    delete("${libDir}/${project.name}-${project.version}-javadoc.jar")
+    delete("${libDir}/${project.name}-${project.version}-sources.jar")
+    delete(pomName)
+}
+
+//
+// Check if we need to update the JARs class-path
+//
+
+task install(type: Copy, dependsOn: jarSources, overwrite: true) {
+    from "${pomName}"
+    from "${libDir}/${jar.archiveName}"
+    from "${libDir}/${project.name}-${project.version}-sources.jar"
+    into "${DESTDIR}${jarDir}"
+}

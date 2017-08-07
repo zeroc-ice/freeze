@@ -28,6 +28,6 @@ ext.dbJar = candidates.find {
     new File(it).exists()
 }
 
-if(!ext.dbJar || !new File(ext.dbJar).exists()) {
+if (!ext.dbJar || !new File(ext.dbJar).exists()) {
     throw new GradleException("Unable to locate the required third party BerkeleyDB jar file `db.jar'.")
 }

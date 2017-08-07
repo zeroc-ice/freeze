@@ -11,7 +11,7 @@ ext.isMacOS = os.toLowerCase().contains("mac os x")
 buildscript {
     repositories {
         maven {
-        url "https://plugins.gradle.org/m2/"
+            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
@@ -31,8 +31,7 @@ if(isWindows) {
         if(System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp") {
             packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
             packages.add(["id": "zeroc.freeze.v140", "version": "${iceVersion}"])
-        }
-        else if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp") {
+        } else if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp") {
             packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
         }
 

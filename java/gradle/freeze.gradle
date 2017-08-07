@@ -1,60 +1,109 @@
 // Ensure iceHome is set prior to loading ice.gradle
 apply from: "$rootProject.projectDir/gradle/db.gradle"
 
-if(System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp")
-{
+if(System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp") {
     ext.freezeHome = freezeHome ? freezeHome : System.env.FREEZE_HOME
-    if(isWindows)
-    {
+    if (isWindows) {
         ext.freezeHome = freezeHome ? freezeHome : "${rootProject.projectDir}/packages/zeroc.freeze.v140.${iceVersion}"
-        if(!new File("${freezeHome}\\tools\\slice2freezej.exe").exists())
-        {
+        if (!new File("${freezeHome}\\tools\\slice2freezej.exe").exists()) {
             throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
         }
-    }
-    else
-    {
+    } else {
         ext.freezeHome = freezeHome ? freezeHome : isMacOS ? "/usr/local" : "/usr"
-        if(!new File("${freezeHome}/bin/slice2freezej").exists())
-        {
+        if (!new File("${freezeHome}/bin/slice2freezej").exists()) {
             throw new GradleException("Unable to locate slice2freezej compiler in ${freezeHome}")
         }
     }
-}
-else
-{
+} else {
     ext.freezeHome = new File([rootProject.projectDir, ".."].join(File.separator)).getCanonicalPath()
 }
 
 if(System.env.ICE_BIN_DIST == "all" || System.env.ICE_BIN_DIST == "cpp" ||
-   System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp")
-{
+   System.env.FREEZE_BIN_DIST == "all" || System.env.FREEZE_BIN_DIST == "cpp") {
     ext.iceHome = iceHome ? iceHome : System.env.ICE_HOME
-    if(isWindows)
-    {
+    if (isWindows) {
         ext.iceHome = iceHome ? iceHome : "${rootProject.projectDir}/packages/zeroc.ice.v140.${iceVersion}"
         if(!new File("${iceHome}\\tools\\slice2java.exe").exists() &&
-           !new File("${iceHome}\\bin\\slice2java.exe").exists())
-        {
+           !new File("${iceHome}\\bin\\slice2java.exe").exists()) {
             throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
         }
-    }
-    else
-    {
+    } else {
         ext.iceHome = iceHome ? iceHome : isMacOS ? "/usr/local" : "/usr"
-        if(!new File("${iceHome}/bin/slice2java").exists())
-        {
+        if(!new File("${iceHome}/bin/slice2java").exists()) {
             throw new GradleException("Unable to locate slice2java compiler in ${iceHome}")
         }
     }
-}
-else
-{
+} else {
     ext.iceHome = new File([rootProject.projectDir, "..", "ice"].join(File.separator)).getCanonicalPath()
     ext.freezeHome = new File([rootProject.projectDir, ".."].join(File.separator)).getCanonicalPath()
 }
 
-apply from: "$rootProject.projectDir/../ice/java/gradle/ice.gradle"
+buildscript {
+    //
+    // If iceBuilderHome is set add its lib directory it to the local maven repositories
+    // so we can build using a local plugin version
+    //
+    if (iceBuilderHome) {
+        def builder  = new File([iceBuilderHome, "build", "libs"].join(File.separator))
+        if (builder.exists()) {
+            repositories {
+                flatDir dirs: "file://${builder.getCanonicalPath()}"
+            }
+        }
+    }
+
+    if (new File("/usr/share/maven-repo").exists()) {
+        repositories {
+            maven {
+                url "file:///usr/share/maven-repo"
+            }
+        }
+    }
+
+    repositories {
+        mavenCentral()
+
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath group: "${iceBuilderClassPath}", name: 'slice', version: "${iceBuilderVersion}"
+    }
+}
+
+//
+// We do not use the new gradle Plugin DSL because on debian we want to use the plug-in
+// from gradle-ice-builder-plugin package and this is not possible when using gradle 3.2
+// included in stretch and the Plugin DSL.
+//
+if(!project.plugins.findPlugin(com.zeroc.gradle.icebuilder.slice.SlicePlugin)) {
+    project.apply(plugin: com.zeroc.gradle.icebuilder.slice.SlicePlugin)
+}
+
+if(!prefix) {
+    prefix = isWindows ? "C:\\Freeze-${iceVersion}" : "/opt/Freeze-${iceVersion}"
+}
+
+// Installation location for jar/pom & executables.
+//
+// Note that we exclude /usr/src/packages because it's the RPM build directory on SLES.
+//
+if ((prefix.startsWith("/usr") || prefix.startsWith("/usr/local")) && !prefix.startsWith("/usr/src/packages")) {
+    ext.jarDir = prefix + "/share/java"
+    ext.binDir = prefix + "/bin"
+} else {
+    ext.jarDir = prefix + "/lib"
+    ext.binDir = prefix + "/bin"
+}
+
+// Check is DESTDIR is set (non-Windows)
+if (isWindows) {
+    ext.DESTDIR = ""
+}
+
+ext.versionSuffix = "-${project.version}"
+ext.libDir = "${rootProject.projectDir}/lib"
 
 slice {
     freezeHome = this.freezeHome
@@ -63,9 +112,5 @@ slice {
 }
 
 ext.localDependency = { artifactId ->
-    if(artifactId == "freeze-compat") {
-        return project(":${artifactId}")
-    } else {
-        return "com.zeroc:${artifactId}:${project.version}"
-    }
+    return artifactId == "freeze-compat" ? project(":${artifactId}") :"com.zeroc:${artifactId}:${project.version}"
 }

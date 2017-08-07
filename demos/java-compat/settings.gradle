@@ -1,7 +1,7 @@
 // Map of dir->subdir for each of the demos.
 def demos = [
-        'Freeze' : ['bench', 'casino', 'library', 'phonebook', 'transform'],
-        'Manual' : ['evictorFilesystem', 'mapFilesystem'],
+    'Freeze' : ['bench', 'casino', 'library', 'phonebook', 'transform'],
+    'Manual' : ['evictorFilesystem', 'mapFilesystem'],
 ]
 
 demos.each {
