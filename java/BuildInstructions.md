@@ -100,11 +100,7 @@ set FREEZE_BIN_DIST=all
 ```
 
 This will download a binary NuGet package for Freeze that includes the Slice
-to Freeze Java compiler. If you want to use an existing Freeze installation, 
-you need to set `FREEZE_HOME`:
-```
-set FREEZE_HOME=zeroc.freeze.v140.3.7.0.0
-```
+to Freeze Java compiler.
 
 Before building Freeze for Java, review the settings in the file
 `gradle.properties` and edit as necessary.
