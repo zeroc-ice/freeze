@@ -140,13 +140,10 @@ db_libdir               ?= $(wildcard /usr/lib64/db53)
 #
 # Support for Ice libraries
 #
+ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
 static_projects         = %
 shared_excludes         = IceUtil Slice
-
-$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice)))
-
-ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
-$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,Ice)))
+$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice Ice)))
 else
 Ice_libs                := bz2
 Ice_targetdir           := $(ice_libdir)

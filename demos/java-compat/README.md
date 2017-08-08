@@ -17,17 +17,17 @@ in the [Freeze manual][1].
 #### Slice translators
 
 The build system requires the Slice-to-Java and Slice-to-Freeze-Java compilers.
-If you've installed Ice or Freeze in a non-standard location, you'll need to set
-the `ICE_HOME` or `FREEZE_HOME` environment variable with the path name of the
-installation directory. For example, on Linux or macOS:
+
+On Linux and macOS, if you have installed Ice or Freeze in a non-standard
+location, you'll need to set the `ICE_HOME` or `FREEZE_HOME` environment
+variable with the path name of the installation directory. For example:
 
     $ export ICE_HOME=~/testing/Ice
     $ export FREEZE_HOME=~/testing/Freeze
 
-On Windows:
-
-    > set ICE_HOME=C:\Ice
-    > set FREEZE_HOME=C:\Freeze
+On Windows, the build system automatically pulls the Ice and Freeze nuget
+packages. Unless you want to use nuget packages from a specific location, you
+don't need to set the ICE_HOME or FREEZE_HOME environment variables.
 
 #### Freeze JAR files
 
