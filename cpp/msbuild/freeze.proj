@@ -19,7 +19,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <SymbolServer Condition="'$(SymbolServer)' == ''">https://symbols.zeroc.com</SymbolServer>
+      <SymbolServer Condition="'$(SymbolServer)' == ''">$(TEMP)\SymbolCache*https://symbols.zeroc.com</SymbolServer>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v140'">
@@ -41,9 +41,8 @@
     </Target>
 
     <Target Name="DownloadSymbols" DependsOnTargets="TestNuGetRestore" Condition="'$(FREEZE_BIN_DIST)' == 'all'">
-        <MakeDir Directories="$(TEMP)\SymbolCache" />
         <Exec IgnoreExitCode="True"
-              Command="symchk /r $(MSBuildThisFileDirectory)packages\zeroc.freeze.$(DefaultPlatformToolset).$(IceJSONVersion)\build\native\bin\$(Platform)\$(IceConfiguration)\* /s SRV*$(TEMP)\SymbolCache*$(SymbolServer)">
+              Command="symchk /r $(MSBuildThisFileDirectory)packages\zeroc.freeze.$(DefaultPlatformToolset).$(IceJSONVersion)\build\native\bin\$(Platform)\$(IceConfiguration)\* /s $(SymbolServer)">
             <Output TaskParameter="ExitCode" PropertyName="ErrorCode"/>
         </Exec>
         <Warning  Text="PDBs download failed, stack traces might be missing or incomplete" Condition="'$(ErrorCode)' != '0'" />
