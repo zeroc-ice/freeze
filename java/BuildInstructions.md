@@ -13,13 +13,10 @@ platforms][1]. Due to the portability of Java, it is very likely that it will
 also work on other platforms for which a suitable Java implementation is
 available.
 
-### Slice to Java Translator
+### Slice to Java and Slice to Freeze Java Compilers
 
-You will need the Slice to Java translator. ZeroC provides translator binaries
-for our supported platforms. For other platforms, you will have to either port
-Ice for C++ (which contains the Slice to Java translator), or you will have to
-translate your Slice files to Java on a supported platform and then copy the
-generated Java files to your target platform.
+You will need the slice2java and slice2freezej compilers, which are implemented
+in C++. These compilers are included in the Ice and Freeze binary distributions.
 
 ### Java Version
 
@@ -36,18 +33,6 @@ In order to run an application that uses Freeze, you must add `db.jar` to your
 CLASSPATH and verify that the Berkeley DB shared libraries are in your
 `java.library.path`.
 
-Assuming you are using ZeroC's distribution of Berkeley DB, the bash command is
-shown below for Linux:
-
-    $ export LD_LIBRARY_PATH=/usr/lib:$LD_LIBRARY_PATH                 (RHEL, SLES, Amazon)
-    $ export LD_LIBRARY_PATH=/usr/lib/i386-linux-gnu:$LD_LIBRARY_PATH  (Ubuntu)
-
-On an x86_64 system with a 64-bit JVM, the 64-bit Berkeley DB libraries are
-installed in a different directory:
-
-    $ export LD_LIBRARY_PATH=/usr/lib64:$LD_LIBRARY_PATH                 (RHEL, SLES, Amazon)
-    $ export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH  (Ubuntu)
-
 ### Gradle
 
 Freeze for Java uses the [Gradle][2] build system, and includes the Gradle
@@ -63,67 +48,60 @@ listed below. Gradle will automatically download any necessary build artifacts.
 This source distribution cannot be compiled successfully without the Berkeley DB
 run time for Java (`db.jar`). The build system searches in standard locations
 for the following two JAR files:
-
-    db-5.3.28.jar
-    db-5.3.21.jar
-    db.jar
+```
+ db-5.3.28.jar
+ db-5.3.21.jar
+ db.jar
+ ```
 
 The build system requires the Slice to Java compiler. You can build the ice
 submodule or use a binary package.
 
-For example, on Unix:
-
+For example, on Linux or macOS:
 ```
 export ICE_BIN_DIST=all
 ```
 
 If Ice was installed in a non standard location you also need to set
 `ICE_HOME`:
-
 ```
 export ICE_HOME=/opt/Ice-3.7.0
 ```
 
 On Windows:
-
 ```
 set ICE_BIN_DIST=all
 ```
 
-This will download the binary NuGet packages for Ice that include the Slice to
-Java compiler, if you want to use an existing Ice installation you must also
-set `ICE_HOME`
-
+This will download a binary NuGet package for Ice that includes the Slice to
+Java compiler. If you want to use an existing Ice installation, you must
+set `ICE_HOME` as well, for example:
 ```
 set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.0
 ```
 
-Finally you also need the Slice to Freeze Java compiler, you can build it from
+You also need the Slice to Freeze Java compiler. You can build it from
 the `cpp` directory or use a binary package:
 
-For example on Unix:
-
+For example on Linux or macOS:
 ```
 export FREEZE_BIN_DIST=all
 ```
 
-If Freeze was installed in a non standard location you also need to set
-`FREEZE_HOME`:
-
+If Freeze was installed in a non standard location, you need to set
+`FREEZE_HOME` as well:
 ```
 export ICE_HOME=/opt/Ice-3.7.0
 ```
 
 On Windows:
-
 ```
 set FREEZE_BIN_DIST=all
 ```
 
-This will download the binary NuGet packages for Freeze that include the Slice
-to Freeze Java compiler, if you want to use an existing Freeze installation you
-must also set `FREEZE_HOME`
-
+This will download a binary NuGet package for Freeze that includes the Slice
+to Freeze Java compiler. If you want to use an existing Freeze installation, 
+you need to set `FREEZE_HOME`:
 ```
 set FREEZE_HOME=zeroc.freeze.v140.3.7.0.0
 ```
@@ -134,7 +112,6 @@ Before building Freeze for Java, review the settings in the file
 ### Building Freeze for Java
 
 To build Ice, all services, and tests, run
-
 ```
 gradlew build
 ```
@@ -144,7 +121,6 @@ subdirectory.
 
 If at any time you wish to discard the current build and start a new one, use
 these commands:
-
 ```
 gradlew clean
 gradlew build
@@ -154,7 +130,6 @@ gradlew build
 
 Python is required to run the test suite. To run the tests, open a command
 window and change to the top-level directory. At the command prompt, execute:
-
 ```
 python allTests.py
 ```
