@@ -793,4 +793,15 @@ move $(Platform)\$(Configuration)\CatalogIndexList.h $(FreezeSrcRootDir)\include
     </PropertyGroup>
     <Error Condition="!Exists('$(IceBuilderCppProps)')" Text="$(ErrorText)" />
   </Target>
+  <PropertyGroup>
+    <DBPackage Condition="'$(DefaultPlatformToolset)' == 'v120'">berkeley.db.v120.5.3.28.4</DBPackage>
+    <DBPackage Condition="'$(DefaultPlatformToolset)' == 'v140'">berkeley.db.v140.5.3.28.3</DBPackage>
+    <DBPackageDirectory>$(MSBuildThisFileDirectory)..\..\..\..\msbuild\packages\$(DBPackage)</DBPackageDirectory>
+  </PropertyGroup>
+  <!-- Copy Berkeley the PDBs to the output directory so they get upload to the symbol server -->
+  <Target Name="BerkeleyDB_CopyPDBs" AfterTargets="Build">
+    <Copy SourceFiles="$(DBPackageDirectory)\build\native\bin\$(Platform)\$(Configuration)\libdb53$(_BerkeleyDBLibSuffix).pdb"
+          DestinationFolder="$(OutDir)"
+          SkipUnchangedFiles="true"/>
+  </Target>
 </Project>
