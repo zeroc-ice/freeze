@@ -29,8 +29,11 @@ Make sure that the `javac` and `java` commands are present in your PATH.
 Freeze uses Berkeley DB as its underlying database and currently requires
 Berkeley DB version 5.3 (the recommended version is 5.3.28).
 
+Berkeley DB for Java is not a pure Java implementation: the `db.jar`
+implementation calls a Berkeley DB C library through JNI.
+
 In order to run an application that uses Freeze, you must add `db.jar` to your
-CLASSPATH and verify that the Berkeley DB shared libraries are in your
+CLASSPATH and verify that the Berkeley DB shared library is in your
 `java.library.path`.
 
 ### Gradle
@@ -38,8 +41,8 @@ CLASSPATH and verify that the Berkeley DB shared libraries are in your
 Freeze for Java uses the [Gradle][2] build system, and includes the Gradle
 wrapper version 4.0.1 in the distribution. You cannot build the Freeze for Java
 source distribution without an Internet connection. Except for Berkeley DB,
-Gradle will download all required packages automatically. These packages are
-listed below. Gradle will automatically download any necessary build artifacts.
+Gradle will download all required packages automatically (on Windows, it also
+downloads the `berkeley.db.java7` NuGet automatically).
 
 ## Compiling Freeze for Java
 
@@ -49,10 +52,12 @@ This source distribution cannot be compiled successfully without the Berkeley DB
 run time for Java (`db.jar`). The build system searches in standard locations
 for the following two JAR files:
 ```
- db-5.3.28.jar
- db-5.3.21.jar
- db.jar
- ```
+db-5.3.28.jar
+db-5.3.21.jar
+db.jar
+```
+
+On Windows, the build system downloads automatically a NuGet that provides `db.jar`.
 
 The build system requires the Slice to Java compiler. You can build the ice
 submodule or use a binary package.
