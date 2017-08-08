@@ -29,7 +29,7 @@ if(isWindows) {
         def packages = [["id": "berkeley.db.java7", "version": "5.3.28.1"]]
 
         if(!System.env.ICE_HOME || !System.env.FREEZE_HOME) {
-            packages.add(["id": "zeroc.freeze.v140", "version": "${iceVersion}"])
+            packages.add(["id": "zeroc.ice.v140", "version": "${iceVersion}"])
         }
 
         if(!System.env.FREEZE_HOME) {
