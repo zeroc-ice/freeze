@@ -19,7 +19,7 @@ listed on [supported platforms][2].
 Freeze relies on [Oracle Berkeley DB][3] as its datastore.
 
 The Freeze build system for Windows automatically downloads and installs
-[Nuget][3] and Nuget packages for Berkeley DB when you build Freeze for C++.
+[NuGet][3] and NuGet packages for Berkeley DB when you build Freeze for C++.
 These packages are installed in `freeze\cpp\msbuild\packages`.
 
 ## Building Freeze for C++
@@ -34,15 +34,13 @@ Using the first Command Prompt produces `Win32` binaries by default, while
 the second Command Promt produces `x64` binaries by default.
 
 In the Command Prompt, change to the `freeze\cpp` subdirectory:
-
 ```
 cd freeze\cpp
 ```
 
 Now you're ready to build Freeze:
-
 ```
-msbuild msbuild\freeze.proj
+msbuild /m msbuild\freeze.proj
 ```
 
 This builds several Ice C++ components in `freeze\ice\cpp`, the Freeze
@@ -51,7 +49,6 @@ mode.
 
 Set the MSBuild `Configuration` property to `Debug` to build debug binaries
 instead:
-
 ```
 msbuild msbuild\freeze.proj /p:Configuration=Debug
 ```
@@ -60,33 +57,28 @@ The `Configuration` property may be set to `Debug` or `Release`.
 
 Set the MSBuild `Platform` property to `Win32` or `x64` to build binaries
 for a specific platform, for example:
-
 ```
 msbuild msbuild\freeze.proj /p:Configuration=Debug /p:Platform=x64
 ```
 
 You can also skip the build of the test suite with the `BuildDist` target:
-
 ```
 msbuild msbuild\freeze.proj /t:BuildDist /p:Platform=x64
 ```
 
 To build the test suite using the NuGet binary distribution use:
-
 ```
 msbuild msbuild\freeze.proj /p:FREEZE_BIN_DIST=all
 ```
 
 You can also sign the Freeze binaries with Authenticode, by setting the following
 environment variables:
-
  - SIGN_CERTIFICATE to your Authenticode certificate
  - SIGN_PASSWORD to the certificate password
 
 ## NuGet packages
 
 You can create a NuGet package with the following command:
-
 ```
 msbuild msbuild\ice.proj /t:NuGetPack /p:BuildAllConfigurations=yes
 ```
@@ -99,7 +91,6 @@ using.
 
 Python is required to run the test suite. After a successful source build, you
 can run the tests as follows:
-
 ```
 python allTests.py
 ```
