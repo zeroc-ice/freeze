@@ -22,8 +22,10 @@ On Linux and macOS, if you have installed Ice or Freeze in a non-standard
 location, you'll need to set the `ICE_HOME` or `FREEZE_HOME` environment
 variable with the path name of the installation directory. For example:
 
-    $ export ICE_HOME=~/testing/Ice
-    $ export FREEZE_HOME=~/testing/Freeze
+```
+export ICE_HOME=~/testing/ice
+export FREEZE_HOME=~/testing/freeze
+```
 
 On Windows, the build system automatically pulls the Ice and Freeze nuget
 packages. Unless you want to use nuget packages from a specific location, you
