@@ -9,7 +9,7 @@ and testing the distribution.
 ### Operating Systems and Compilers
 
 Freeze is expected to build and run properly on any recent Linux distribution
-and was extensively tested using the operating systems and compiler versions 
+and was extensively tested using the operating systems and compiler versions
 listed for our [supported platforms][1].
 
 ### Third-Party Libraries
