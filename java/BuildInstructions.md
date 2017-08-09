@@ -110,7 +110,7 @@ gradlew build
 The test suite requires Python and files in the the ice submodule;
 if `freeze/ice` is an empty directory, fetch this `ice` submodule with:
 ```
-git submodule update --unit
+git submodule update --init
 ```
 
 To run the tests, open a command window and change to the top-level 
