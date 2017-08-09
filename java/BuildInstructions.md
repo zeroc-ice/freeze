@@ -44,81 +44,59 @@ source distribution without an Internet connection. Except for Berkeley DB,
 Gradle will download all required packages automatically (on Windows, it also
 downloads the `berkeley.db.java7` NuGet automatically).
 
-## Compiling Freeze for Java
+## Compiling Freeze for Java on Linux or macOS
 
-### Preparing to Build
-
-This source distribution cannot be compiled successfully without the Berkeley DB
-run time for Java (`db.jar`). The build system searches in standard locations
-for the following two JAR files:
+You need to install Berkeley DB Java before building Freeze for Java. The build 
+system searches in standard locations for the following JAR files:
 ```
 db-5.3.28.jar
 db-5.3.21.jar
 db.jar
 ```
 
-On Windows, the build system downloads automatically a NuGet that provides `db.jar`.
-
-The build system requires the Slice to Java compiler. You can build the ice
-submodule or use a binary package.
-
-For example, on Linux or macOS:
+You can build Freeze for Java using the Slice to Java and the Slice to
+Freeze Java compilers installed in `/usr/bin` (Linux) or `/usr/local/bin` 
+(macOS) with the following commands:
 ```
 export ICE_BIN_DIST=all
+export FREEZE_BIN_DIST=all
+./gradlew build
 ```
 
-If Ice was installed in a non standard location you also need to set
-`ICE_HOME`:
+If you installed Slice to Java (Ice) or Slice to Freeze Java (Freeze C++)
+in another directory, you need to first set `ICE_HOME` or `FREEZE_HOME`, for
+example:
 ```
-export ICE_HOME=/opt/Ice-3.7.0
+export ICE_HOME=/opt/ice-3.7.0
+export FREEZE_HOME=/opt/freeze-3.7.0
 ```
 
-On Windows:
+If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
+`slice2java` in the `freeze/ice` submodule resp. `slice2freezej` in the 
+`freeze/cpp` directory.
+
+## Compiling Freeze for Java on Windows
+
+You can build Freeze for Java using NuGet packages that the build system
+downloads automatically from nuget.org:
 ```
 set ICE_BIN_DIST=all
+set FREEZE_BIN_DIST=all
+gradlew build
 ```
 
-This will download a binary NuGet package for Ice that includes the Slice to
-Java compiler. If you want to use an existing Ice installation, you must
-set `ICE_HOME` as well, for example:
+This will download and use a binary NuGet package for Ice that includes the 
+Slice to Java compiler. If you want to use another Ice installation, set 
+`ICE_HOME`, for example:
 ```
 set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.0
 ```
 
-You also need the Slice to Freeze Java compiler. You can build it from
-the `cpp` directory or use a binary package:
+If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
+`slice2java` in the `freeze/ice` submodule resp. `slice2freezej` in the 
+`freeze/cpp` directory.
 
-For example on Linux or macOS:
-```
-export FREEZE_BIN_DIST=all
-```
-
-If Freeze was installed in a non standard location, you need to set
-`FREEZE_HOME` as well:
-```
-export ICE_HOME=/opt/Ice-3.7.0
-```
-
-On Windows:
-```
-set FREEZE_BIN_DIST=all
-```
-
-This will download a binary NuGet package for Freeze that includes the Slice
-to Freeze Java compiler.
-
-Before building Freeze for Java, review the settings in the file
-`gradle.properties` and edit as necessary.
-
-### Building Freeze for Java
-
-To build Ice, all services, and tests, run
-```
-gradlew build
-```
-
-Upon completion, the Freeze JAR and POM files are placed in the `lib`
-subdirectory.
+## Cleaning and Rebuilding Freeze for Java
 
 If at any time you wish to discard the current build and start a new one, use
 these commands:
@@ -129,8 +107,14 @@ gradlew build
 
 ## Running the Java Tests
 
-Python is required to run the test suite. To run the tests, open a command
-window and change to the top-level directory. At the command prompt, execute:
+The test suite requires Python and files in the the ice submodule;
+if `freeze/ice` is an empty directory, fetch this `ice` submodule with:
+```
+git submodule update --unit
+```
+
+To run the tests, open a command window and change to the top-level 
+directory. At the command prompt, execute:
 ```
 python allTests.py
 ```
