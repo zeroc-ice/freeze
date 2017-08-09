@@ -12,7 +12,7 @@ $(project)_targetdir    := $(bindir)
 $(project)_bisonflags   := --name-prefix "freeze_script_"
 $(project)_cppflags     := -I$(includedir) -I$(includedir)/generated -Isrc -I../ice/cpp/src
 ifneq ($(ice_includedir),)
-ifeq ($(or $(filter all cpp,$(ICE_BIN_DIST)),$(filter all cpp,$(FREEZE_BIN_DIST))),)
+ifeq ($(filter all cpp,$(ICE_BIN_DIST) $(FREEZE_BIN_DIST)),)
 $(project)_cppflags     += -I$(ice_includedir)/generated
 endif
 $(project)_cppflags     += -I$(ice_includedir)

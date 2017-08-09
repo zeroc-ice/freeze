@@ -14,9 +14,11 @@ include $(lang_srcdir)/config/Make.rules
 # Create projects for all the Slice translators from src/slice2* and load source projects.
 #
 projects :=
+ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
 include $(shell find $(lang_srcdir)/src -name Makefile.mk)
 $(foreach t,$(wildcard $(lang_srcdir)/src/slice2*),$(eval $(call create-translator-project,$(call project,$t))))
 $(call make-projects,$(projects),make-cpp-src-project,,$(filter all cpp,$(FREEZE_BIN_DIST)))
+endif
 
 #
 # Create and load test projects.
