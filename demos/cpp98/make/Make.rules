@@ -114,9 +114,7 @@ $1_targetdir            := $1
 
 $1_slicecompiler        := slice2cpp
 $1_sliceflags           := -I$(ice_slicedir) -I$1 $$($1_sliceflags)
-$1_cppflags             := $(if $(ice_includedir),-I$(ice_includedir) $(if $(ice_src_dist),-I$(ice_includedir)/generated)) \
-                           $(if $(freeze_includedir),-I$(freeze_includedir) $(if $(freeze_src_dist),-I$(freeze_includedir)/generated)) \
-                           -I$1 -I$1/generated $$($1_cppflags)
+$1_cppflags             := -I$1 -I$1/generated $(ice_cppflags) $(freeze_cppflags) $$($1_cppflags)
 $1_caninstall           := no
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components

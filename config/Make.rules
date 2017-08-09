@@ -104,6 +104,10 @@ install_mandir          ?= $(prefix)$(if $(usr_dir_install),/share)/man
 else
 $(eval $(call create-project-dependencies,freeze,$(FREEZE_HOME),cpp,Freeze))
 slice2freeze_path       = $(freeze_bindir)/slice2freeze
+bindir                  ?= $(freeze_bindir)
+libdir                  ?= $(freeze_libdir)
+slicedir                ?= $(freeze_slicedir)
+includedir              ?= $(freeze_includedir)
 endif
 
 #
@@ -133,4 +137,10 @@ ifeq ($(filter all cpp,$(ICE_BIN_DIST) $(FREEZE_BIN_DIST)),)
 $(eval $(call create-project-dependencies,ice,$(top_srcdir)/ice,cpp,Ice))
 else
 $(eval $(call create-project-dependencies,ice,$(ICE_HOME),cpp,Ice))
+endif
+
+ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
+freeze_cpp_cppflags := -I$(top_srcdir)/cpp/include -I$(top_srcdir)/cpp/include/generated
+else
+freeze_cpp_cppflags := $(if $(freeze_includedir),-I$(freeze_includedir) $(if $(freeze_src_dist),-I$(freeze_includedir)/generated))
 endif

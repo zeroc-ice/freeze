@@ -9,14 +9,8 @@ $(project)_generated_includedir := $(project)/generated/Freeze
 
 Freeze_targetdir                := $(libdir)
 Freeze_sliceflags               := -I$(ice_slicedir) -I$(slicedir) --include-dir Freeze
-Freeze_cppflags                 := -DFREEZE_API_EXPORTS -I$(includedir) -I$(includedir)/generated -I$(project)/generated -Isrc
-ifneq ($(ice_includedir),)
-ifeq ($(filter all cpp,$(ICE_BIN_DIST) $(FREEZE_BIN_DIST)),)
-Freeze_cppflags                 += -I$(ice_includedir)/generated
-endif
-Freeze_cppflags                 += -I$(ice_includedir)
-endif
-
+Freeze_cppflags                 := -DFREEZE_API_EXPORTS -I$(includedir) -I$(includedir)/generated \
+                                   -I$(project)/generated -Isrc $(ice_cppflags)
 Freeze_dependencies             := Ice
 Freeze_libs                     := db
 

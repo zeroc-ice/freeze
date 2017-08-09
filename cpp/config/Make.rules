@@ -38,22 +38,7 @@ endef
 define make-cpp-test-project
 $1_slicecompiler        := slice2cpp
 $1_sliceflags           += -I$(ice_slicedir) -I$1
-$1_cppflags             += -I$1/generated -Itest/include -I$1
-
-ifneq ($(ice_includedir),)
-ifeq ($(filter all cpp,$(ICE_BIN_DIST) $(FREEZE_BIN_DIST)),)
-$1_cppflags             += -I$(ice_includedir)/generated
-endif
-$1_cppflags             += -I$(ice_includedir)
-endif
-
-ifneq ($(includedir),)
-ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
-$1_cppflags             += -I$(includedir)/generated
-endif
-$1_cppflags             += -I$(includedir)
-endif
-
+$1_cppflags             += -I$1/generated -Itest/include -I$1 $(ice_cppflags) $(freeze_cpp_cppflags)
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
 $(make-project)

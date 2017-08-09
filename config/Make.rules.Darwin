@@ -61,9 +61,9 @@ system-install-dir = /usr/local
 #
 # $(call mkxxx,$1=libname,$2=version,$3=soversion)
 #
-mksoname          = $(if $(filter %.dylib,$1),$1,lib$1$(if $3,.$3).dylib)
-mkshlibfilename   = $(if $(filter %.dylib,$1),$1,lib$1$(if $2,.$2).dylib)
-mkshlibname       = $(if $(filter %.dylib,$1),$1,lib$1.dylib)
+mksoname          = lib$1$(if $3,.$3).dylib
+mkshlibfilename   = lib$1$(if $2,.$2).dylib
+mkshlibname       = lib$1.dylib
 mkshlibnametarget = $(mkshlibfilename)
 
 mkpymodulename  = $1.so

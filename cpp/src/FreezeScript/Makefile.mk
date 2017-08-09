@@ -10,13 +10,7 @@ $(project)_dependencies = Freeze Ice
 $(project)_libs         = db mcpp
 $(project)_targetdir    := $(bindir)
 $(project)_bisonflags   := --name-prefix "freeze_script_"
-$(project)_cppflags     := -I$(includedir) -I$(includedir)/generated -Isrc -I../ice/cpp/src
-ifneq ($(ice_includedir),)
-ifeq ($(filter all cpp,$(ICE_BIN_DIST) $(FREEZE_BIN_DIST)),)
-$(project)_cppflags     += -I$(ice_includedir)/generated
-endif
-$(project)_cppflags     += -I$(ice_includedir)
-endif
+$(project)_cppflags     := -I$(includedir) -I$(includedir)/generated -Isrc -I../ice/cpp/src $(ice_cppflags)
 
 # Don't use the regular dependencies for IceXML because there's no libIceXML.so symlink
 # with the Ice binary distributions.
