@@ -9,6 +9,8 @@ from Util import *
 
 toplevel = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
+cppMapping = None
+
 class TransformDB(SimpleClient):
 
     def __init__(self):
@@ -32,7 +34,7 @@ class FreezeCppMapping(CppMapping):
     def getEnv(self, process, current):
         env = CppMapping.getEnv(self, process, current)
         if isinstance(platform, Windows):
-            env["PATH"] += "{}{}".format(os.pathsep, Mapping.getByName("cpp").getLibDir(process, current))
+            env["PATH"] += "{}{}".format(os.pathsep, cppMapping.getLibDir(process, current))
         return env
 
 class FreezeJavaMapping(JavaCompatMapping):
@@ -60,6 +62,12 @@ class FreezeJavaMapping(JavaCompatMapping):
         else:
             return "/usr/{0}".format("lib/x86_64-linux-gnu" if platform.linuxId in ["ubuntu", "debian"] else "lib64")
 
+#
+# Keep a reference to the Ice for C++ mapping (used by FreezeCppMapping.getEnv impl.) and
+# clear all the mappings setup by Util.py (it clutters the ./allTests.py -h usage otherwise).
+#
+cppMapping = Mapping.getByName("cpp")
 Mapping.mappings.clear()
+
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))
