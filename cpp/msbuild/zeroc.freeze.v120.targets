@@ -6,7 +6,12 @@
         <LocalDebuggerEnvironment Condition="$(LocalDebuggerEnvironment.Contains('PATH='))">$(LocalDebuggerEnvironment.Replace('PATH=', 'PATH=$(MSBuildThisFileDirectory)bin\$(Platform)\$(IceConfiguration);$(FreezeToolsPath);'))</LocalDebuggerEnvironment>
         <LocalDebuggerEnvironment Condition="!$(LocalDebuggerEnvironment.Contains('PATH='))">
     PATH=$(MSBuildThisFileDirectory)bin\$(Platform)\$(IceConfiguration);$(FreezeToolsPath);$(LocalDebuggerEnvironment)
-    $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+        $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
+        <!--
+            We need to set PATH here in case Ice NuGet package target file is included after this package so that the debug PATH is
+            still set correctly
+        -->
+        <Path>$(MSBuildThisFileDirectory)bin\$(Platform)\$(IceConfiguration);$(FreezeToolsPath);$(LocalDebuggerEnvironment)$(Path)</Path>
     </PropertyGroup>
     <ItemDefinitionGroup Condition="'$(PlatformToolset)' == 'v120'">
         <ClCompile>
