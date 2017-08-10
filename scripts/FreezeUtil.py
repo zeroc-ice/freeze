@@ -9,8 +9,6 @@ from Util import *
 
 toplevel = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-cppMapping = None
-
 class TransformDB(SimpleClient):
 
     def __init__(self):
@@ -23,18 +21,16 @@ class FreezeCppMapping(CppMapping):
 
     def getCommandLine(self, current, process, exe):
         if isinstance(process, TransformDB):
-            if current.driver.useIceBinDist(self):
-                return os.path.join(platform.getIceInstallDir(self, current),
-                                    platform.getBinSubDir(self, process, current), exe)
-            else:
-                return os.path.join(toplevel, "cpp", platform.getBinSubDir(self, process, current), exe)
+            return os.path.join(current.driver.getInstallDir(self, current, "FREEZE_HOME", "FREEZE_BIN_DIST"),
+                                platform.getBinSubDir(self, process, current),
+                                exe)
         else:
             return CppMapping.getCommandLine(self, current, process, exe)
 
     def getEnv(self, process, current):
         env = CppMapping.getEnv(self, process, current)
         if isinstance(platform, Windows):
-            env["PATH"] += "{}{}".format(os.pathsep, cppMapping.getLibDir(process, current))
+            env["PATH"] += "{}{}".format(os.pathsep, Mapping.getByName("ice/cpp").getLibDir(process, current))
         return env
 
 class FreezeJavaMapping(JavaCompatMapping):
@@ -62,12 +58,8 @@ class FreezeJavaMapping(JavaCompatMapping):
         else:
             return "/usr/{0}".format("lib/x86_64-linux-gnu" if platform.linuxId in ["ubuntu", "debian"] else "lib64")
 
-#
-# Keep a reference to the Ice for C++ mapping (used by FreezeCppMapping.getEnv impl.) and
-# clear all the mappings setup by Util.py (it clutters the ./allTests.py -h usage otherwise).
-#
-cppMapping = Mapping.getByName("cpp")
 Mapping.mappings.clear()
-
+Mapping.add("ice/cpp", CppMapping(path = os.path.join(toplevel, "ice", "cpp")))
+Mapping.add("ice/java", JavaMapping(path = os.path.join(toplevel, "ice", "java")))
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))
