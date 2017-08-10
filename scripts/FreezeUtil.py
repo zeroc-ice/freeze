@@ -60,5 +60,6 @@ class FreezeJavaMapping(JavaCompatMapping):
         else:
             return "/usr/{0}".format("lib/x86_64-linux-gnu" if platform.linuxId in ["ubuntu", "debian"] else "lib64")
 
+Mapping.mappings.clear()
 Mapping.add("freeze/cpp", FreezeCppMapping(path = os.path.join(toplevel, "cpp")))
 Mapping.add("freeze/java", FreezeJavaMapping(path = os.path.join(toplevel, "java")))
