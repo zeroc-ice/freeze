@@ -1,11 +1,11 @@
 This demo presents an alternate implementation of the filesystem
-application using a Freeze map, as discussed in the Freeze chapter of
-the Ice manual.
+application using a Freeze map, as discussed in the Freeze Manual.
 
 To run it, start the server in a window:
-
-$ server
-
+```
+server
+```
 Then run the client in a separate window:
-
-$ client
+```
+client
+```

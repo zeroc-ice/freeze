@@ -27,8 +27,8 @@ this program.
 
 ## Backup
 
-While the program is running, you can perform a hot backup with the backup shell
-script (on OS X or Linux) or batch file (on Windows).
+While the client program is running, you can perform a hot backup with the backup
+shell script (on macOS or Linux) or batch file (on Windows).
 
 These two scripts illustrate how to use the Berkeley DB db_hotbackup utility.
 For a full description of db_hotbackup, please refer to:

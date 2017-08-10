@@ -8,7 +8,7 @@ following subdirectories:
 - [Freeze](./Freeze) contains Freeze examples for using the Freeze library.
 
 - [Manual](./Manual) contains complete examples for some of the code snippets
-in the [Freeze manual][1].
+in the [Freeze Manual][1].
 
 ## Build Instructions
 
