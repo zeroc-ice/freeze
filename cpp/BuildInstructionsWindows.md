@@ -19,7 +19,7 @@ listed on [supported platforms][2].
 Freeze relies on [Oracle Berkeley DB][3] as its datastore.
 
 The Freeze build system for Windows automatically downloads and installs
-[NuGet][3] and NuGet packages for Berkeley DB when you build Freeze for C++.
+[NuGet][4] and NuGet packages for Berkeley DB when you build Freeze for C++.
 These packages are installed in `freeze\cpp\msbuild\packages`.
 
 ## Building Freeze for C++
