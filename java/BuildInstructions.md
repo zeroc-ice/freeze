@@ -46,7 +46,7 @@ downloads the `berkeley.db.java7` NuGet automatically).
 
 ## Compiling Freeze for Java on Linux or macOS
 
-You need to install Berkeley DB Java before building Freeze for Java. The build 
+You need to install Berkeley DB Java before building Freeze for Java. The build
 system searches in standard locations for the following JAR files:
 ```
 db-5.3.28.jar
@@ -55,7 +55,7 @@ db.jar
 ```
 
 You can build Freeze for Java using the Slice to Java and the Slice to
-Freeze Java compilers installed in `/usr/bin` (Linux) or `/usr/local/bin` 
+Freeze Java compilers installed in `/usr/bin` (Linux) or `/usr/local/bin`
 (macOS) with the following commands:
 ```
 export ICE_BIN_DIST=all
@@ -72,7 +72,7 @@ export FREEZE_HOME=/opt/freeze-3.7.0
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
-`slice2java` in the `freeze/ice` submodule resp. `slice2freezej` in the 
+`slice2java` in the `freeze/ice` submodule resp. `slice2freezej` in the
 `freeze/cpp` directory.
 
 ## Compiling Freeze for Java on Windows
@@ -85,15 +85,15 @@ set FREEZE_BIN_DIST=all
 gradlew build
 ```
 
-This will download and use a binary NuGet package for Ice that includes the 
-Slice to Java compiler. If you want to use another Ice installation, set 
+This will download and use a binary NuGet package for Ice that includes the
+Slice to Java compiler. If you want to use another Ice installation, set
 `ICE_HOME`, for example:
 ```
 set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.0
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
-`slice2java` in the `freeze/ice` submodule resp. `slice2freezej` in the 
+`slice2java` in the `freeze/ice` submodule resp. `slice2freezej` in the
 `freeze/cpp` directory.
 
 ## Cleaning and Rebuilding Freeze for Java
@@ -113,7 +113,7 @@ if `freeze/ice` is an empty directory, fetch this `ice` submodule with:
 git submodule update --init
 ```
 
-To run the tests, open a command window and change to the top-level 
+To run the tests, open a command window and change to the top-level
 directory. At the command prompt, execute:
 ```
 python allTests.py
