@@ -300,7 +300,7 @@ class Windows(Platform):
 
     def getNugetPackageVersion(self):
         if not self.nugetPackageVersion:
-            with open(os.path.join(toplevel, "config", "icebuilder.props"), "r") as configFile:
+            with open(os.path.join(toplevel, "ice", "config", "icebuilder.props"), "r") as configFile:
                 self.nugetPackageVersion = re.search("<IceJSONVersion>(.*)</IceJSONVersion>", configFile.read()).group(1)
         return self.nugetPackageVersion
 
@@ -335,8 +335,9 @@ class Windows(Platform):
                 #
                 # With Windows binary distribution some binaries are only included for Release configuration.
                 #
-                binaries = [Glacier2Router, IcePatch2Calc, IcePatch2Client, IcePatch2Server, IceBoxAdmin, IceBridge,
-                            IceStormAdmin, IceGridAdmin]
+                # binaries = [Glacier2Router, IcePatch2Calc, IcePatch2Client, IcePatch2Server, IceBoxAdmin, IceBridge,
+                #             IceStormAdmin, IceGridAdmin]
+                binaries = []
                 config = next(("Release" for p in binaries if isinstance(process, p)), config)
 
                 return os.path.join("build", "native", "bin", platform, config)
