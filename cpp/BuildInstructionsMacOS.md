@@ -27,7 +27,13 @@ option.
 
 ## Building Freeze
 
-### Step 1: build IceXML and testcommon in the ice submodule
+### Step 1: build IceXML in the ice submodule
+
+If `freeze/ice` is an empty directory, fetch the `ice` submodule with:
+```
+cd freeze
+git submodule update --init
+```
 
 Edit `freeze/ice/config/Make.rules` to establish your build configuration.
 The comments in the file provide more information.

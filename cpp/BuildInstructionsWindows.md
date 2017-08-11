@@ -33,7 +33,14 @@ can open one of:
 Using the first Command Prompt produces `Win32` binaries by default, while
 the second Command Promt produces `x64` binaries by default.
 
-In the Command Prompt, change to the `freeze\cpp` subdirectory:
+If `freeze\ice` is an empty directory, change to the `freeze` directory and
+fetch the `ice` submodule:
+```
+cd freeze
+git submodule update --init
+```
+
+Change to the `freeze\cpp` subdirectory:
 ```
 cd freeze\cpp
 ```

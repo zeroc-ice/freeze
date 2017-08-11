@@ -22,19 +22,25 @@ distributions that do not include them.
 
 ## Building Freeze
 
-### Step 1: build IceXML and testcommon in the ice submodule
+### Step 1: build IceXML in the ice submodule
 
-Edit `freeze/ice/config/Make.rules` to establish your build configuration.
-The comments in the file provide more information.
+If `freeze/ice` is an empty directory, fetch the `ice` submodule with:
+```
+cd freeze
+git submodule update --init
+```
+
+Edit `freeze/ice/config/Make.rules` to establish your build configuration. The
+comments in the file provide more information.
 ```
  cd freeze/ice/cpp
  make -j8 src/IceXML
- ```
+```
 
 ### Step 2: build Freeze
 
-Edit `freeze/config/Make.rules` to establish your build configuration.
-The comments in the file provide more information.
+Edit `freeze/config/Make.rules` to establish your build configuration. The
+comments in the file provide more information.
 ```
 cd freeze/cpp
 make -j8
@@ -42,6 +48,18 @@ make -j8
 
 This builds the Freeze library, the FreezeScript utilities, and all Freeze
 tests.
+
+## Running the Test Suite
+
+Python is required to run the test suite.
+
+After a successful source build, you can run the tests as follows:
+```
+python allTests.py
+```
+
+If everything worked out, you should see lots of `ok` messages. In case of a
+failure, the tests abort with `failed`.
 
 ## Installing a C++ Source Build
 
@@ -53,23 +71,6 @@ After installation, make sure that the `prefix/bin` directory is in your `PATH`.
 When compiling Freeze programs, you must pass the location of the
 `prefix/include` directory to the compiler with the `-I` option, and the
 location of the library directory with the `-L` option.
-
-## Running the Test Suite
-
-Python is required to run the test suite.
-
-After a successful source build, you can run the tests as follows:
-```
-make test
-```
-
-This command is equivalent to:
-```
-python allTests.py
-```
-
-If everything worked out, you should see lots of `ok` messages. In case of a
-failure, the tests abort with `failed`.
 
 [1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
 [2]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm

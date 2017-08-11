@@ -67,8 +67,8 @@ If you installed Slice to Java (Ice) or Slice to Freeze Java (Freeze C++)
 in another directory, you need to first set `ICE_HOME` or `FREEZE_HOME`, for
 example:
 ```
-export ICE_HOME=/opt/ice-3.7.0
-export FREEZE_HOME=/opt/freeze-3.7.0
+export ICE_HOME=/opt/Ice-3.7.0
+export FREEZE_HOME=/opt/Freeze-3.7.0
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
@@ -106,12 +106,6 @@ gradlew build
 ```
 
 ## Running the Java Tests
-
-The test suite requires Python and files in the the ice submodule;
-if `freeze/ice` is an empty directory, fetch this `ice` submodule with:
-```
-git submodule update --init
-```
 
 To run the tests, open a command window and change to the top-level
 directory. At the command prompt, execute:
