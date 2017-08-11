@@ -38,6 +38,7 @@ the server even more.
   interesting life-cycle situation. What happens if this player wins a bet and
   is destroyed at the same time? Will chips get lost? In fact, there is no issue
   thanks to Berkeley DB locking: when a bet picks a winner, it invokes an
-  operation on this object (through a proxy) within a transaction. At this point,
-  if the object is still alive, it's locked by the transaction, which prevents another
-  transaction from acquiring a write lock (for example, to destroy it).
+  operation on this object (through a proxy) within a transaction. At this
+  point, if the object is still alive, it's locked by the transaction, which
+  prevents another transaction from acquiring a write lock (for example, to
+  destroy it).

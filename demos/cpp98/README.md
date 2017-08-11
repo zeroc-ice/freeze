@@ -28,8 +28,8 @@ the `ICE_HOME` or `FREEZE_HOME` environment variable with the path name of the
 installation directory:
 
 ```
-export ICE_HOME=~/testing/ice
-export FREEZE_HOME=~/testing/freeze
+export ICE_HOME=/opt/Ice-3.7.0
+export FREEZE_HOME=/opt/Freeze-3.7.0
 ```
 
 ### Building the Demos
@@ -72,8 +72,9 @@ Add this extension to Visual Studio before opening the solution.
 
 Open the solution file `Freeze C++ demos.sln` to build the sample programs.
 
-The demos are configured to use Ice and Freeze C++ binary distribution, packaged
-with NuGet. The build downloads automatically the Ice NuGet package.
+The demos are configured to use Ice and Freeze C++ binary distributions,
+packaged with NuGet. The build automatically downloads the Ice and Freeze NuGet
+packages.
 
 If you have disabled the automatic download of NuGet packages by Visual Studio,
 you need to restore the packages before you build using `Tools > NuGet Package
@@ -88,7 +89,7 @@ select `Build`.
 - Build from command line:
   * Open a Visual Studio command prompt
   ```
-  cd ice-demos\cpp98
+  cd freeze\cpp\cpp98
   MSBuild /p:ICE_HOME=<Ice dist path> /p:FREEZE_HOME=<Freeze dist path> /p:Configuration=<Release or Debug> "Freeze C++ demos.sln"
   ```
 

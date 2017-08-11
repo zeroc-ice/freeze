@@ -74,9 +74,9 @@ memory, and evictor cache misses become fairly cheap.
 Use `db/DB_CONFIG` to set the Berkeley DB environment cache size.
 
 The default cache size is 256KB; with a cache size of 128KB, the performance
-difference between Evictor and EvictorBase increases, since the larger number
-of cache misses requires more data to be read from disk. With a cache size of
-100MB, the performance difference between the two evictor implementations becomes
-very small.
+difference between Evictor and EvictorBase increases, since the larger number of
+cache misses requires more data to be read from disk. With a cache size of
+100MB, the performance difference between the two evictor implementations
+becomes very small.
 
 [1]: https://doc.zeroc.com/pages/viewpage.action?pageId=18256198#ImplementingaServantEvictorinC++-TheEvictorBaseClassinC++

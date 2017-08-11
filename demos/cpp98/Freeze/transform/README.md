@@ -78,8 +78,7 @@ This demo provides four programs:
 
  - transform the contacts database to the new format:
    ```
-   transformdb --old ContactData.ice --new NewContactData.ice \
-       -f transform.xml db dbnew
+   transformdb --old ContactData.ice --new NewContactData.ice -f transform.xml db dbnew
    ```
 
  - read the transformed contacts map:
@@ -105,13 +104,13 @@ This demo provides four programs:
 
    recreate reads and rewrites the contacts map with the proper sort order; it
    also removes and recreates the phoneNumber index. You can run
-   `recreate --Freeze.Trace.Map=2` to get more information on the actions performed
-   by recreate.
+   `recreate --Freeze.Trace.Map=2` to get more information on the actions
+   performed by recreate.
 
  - read again the new contacts map:
    ```
    readnew
    ```
 
-   This time, the sort order should be alphabetical again, and readnew is expected to
-   complete successfully.
+   This time, the sort order should be alphabetical again, and readnew is
+   expected to complete successfully.
