@@ -111,7 +111,6 @@ select `Build`.
 
 You need to add the Ice and Freeze `bin` directory to your PATH before running
 the demos, with a command similar to:
-
 ```
 set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.ice.v140.3.7.0\build\native\bin\x64\Release;%PATH%
 set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.freeze.v140.3.7.0\build\native\bin\x64\Release;%PATH%

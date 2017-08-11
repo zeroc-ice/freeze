@@ -2,38 +2,16 @@ This example demonstrates the use of the Freeze Transactional Evictor to
 implement a reliable gambling operation.
 
 To run the demo, change to the demo directory:
-
 ```
 cd Freeze\casino
 ```
 
-On Windows and macOS you need to set your `PATH` and `DYLD_LIBRARY_PATH`
-respectively in order for the demos to load the required Berkeley DB C
-library. On Linux Berkeley DB C library is typically install in a system
-wide directory and you don't need any extra configuration.
-
-On Windows using a 64 bit JVM:
-
-```
-set PATH=..\..\packages\berkeley.db.java7.5.3.28.1\build\native\bin\x64;%PATH%
-```
-
-If you are using a 32 bit JVM replace `x64` by `Win32` in the command above.
-
-On macOS:
-
-```
-set DYLD_LIBRARY_PATH=/usr/local/opt/berkeley-db53/lib;$DYLD_LIBRARY_PATH
-```
-
 First start the server:
-
 ```
 java -jar build/libs/server.jar
 ```
 
 In another window, start the client:
-
 ```
 java -jar build/libs/client.jar
 ```

@@ -55,4 +55,23 @@ gradlew build
 
 Refer to the README file in each demo directory for usage instructions.
 
+You also need to make sure your Java library path contains the
+Berkeley DB C library used by `db.jar`.
+
+On Windows, the build system automatically installs the `berkeley.db.java7`
+NuGet package from nuget.org, and you want to add the correct `bin`
+directory to your PATH, for example:
+```
+set PATH=%USERPROFILE%\freeze\demos\java-compat\packages\berkeley.db.java7.5.3.28.1\build\native\bin\x64;%PATH%
+```
+
+Replace `x64` by `Win32` if you are using a 32-bit JVM.
+
+On macOS, if you use the `berkeley-db53` formula (as we recommend), you
+should set `java.library.path` explicitely each time you start a Freeze-based
+application, for example:
+```
+java -Djava.library.path=/usr/local/opt/berkeley-db53/lib -jar build/libs/server.jar
+```
+
 [1]: https://doc.zeroc.com/display/Freeze37/Freeze+Manual

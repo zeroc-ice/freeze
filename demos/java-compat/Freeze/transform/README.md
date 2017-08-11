@@ -1,13 +1,12 @@
 This demo shows how to transform a Freeze map when its definition changes.
 
 In this demo, we start with a simple "contacts" map:
-
 ```
 key = string
 value = struct ContactData
     {
         string phoneNumber;
-    };
+    }
 ```
 
 Later on, we want to add a new data member to ContactData:
@@ -25,7 +24,6 @@ struct NewContactData
 
 If the contacts map was not sorted on its key, the transformation
 would be a straightforward 'FreezeScript' transformation:
-
 ```
 transformdb --old ContactData.ice --new NewContactData.ice -f transform.xml db dbnew
 ```
@@ -64,41 +62,16 @@ This demo provides four programs:
 ## Running the demo
 
 * First change to the demo directory:
-
   ```
   cd Freeze\transform
   ```
 
-* Set the environment to load Berkeley DB C library
-
-  On Windows and macOS you need to set your `PATH` and `DYLD_LIBRARY_PATH`
-  respectively in order for the demos to load the required Berkeley DB C
-  library. On Linux Berkeley DB C library is typically install in a system
-  wide directory and you don't need any extra configuration.
-
-  On Windows using a 64 bit JVM:
-
-  ```
-  set PATH=..\..\packages\berkeley.db.java7.5.3.28.1\build\native\bin\x64;%PATH%
-  ```
-
-  If you are using a 32 bit JVM replace `x64` by `Win32` in the command above.
-
-  On macOS:
-
-  ```
-  set DYLD_LIBRARY_PATH=/usr/local/opt/berkeley-db53/lib;$DYLD_LIBRARY_PATH
-
-  ```
-
  * Create the original map, by running Create:
-
    ```
    java -jar build/libs/create.jar
    ```
 
  * Display the entries created by create:
-
    ```
    java -jar build/libs/read.jar
 
@@ -112,27 +85,23 @@ This demo provides four programs:
    `PATH`
 
    on Linux and macOS:
-
    ```
    export PATH=<ICE_HOME>/bin;$PATH
    export PATH=<FREEZE_HOME>/bin;$PATH
    ```
 
    on Windows:
-
    ```
    set PATH=..\..\packages\zeroc.ice.v140.3.7.0\build\native\bin\x64\Release;%PATH%
    set PATH=..\..\packages\zeroc.freeze.v140.3.7.0\build\native\bin\x64\Release;%PATH%
    ```
 
    And then run the transformdb command as:
-
    ```
    transformdb --old ContactData.ice --new NewContactData.ice -f transform.xml db dbnew
    ```
 
  * read the transformed contacts map:
-
    ```
    java -jar build/libs/readnew.jar
    ```
@@ -143,7 +112,6 @@ This demo provides four programs:
    corruption.
 
    If you prefer, you can update ReadNew with
-
    ```
    boolean createDb = false
    ```
@@ -152,7 +120,6 @@ This demo provides four programs:
    the contacts map when the associated phoneNumber index does not exist.
 
  * recreate the new contacts map with:
-
    ```
    java -jar build/libs/recreate.jar
 
@@ -164,7 +131,6 @@ This demo provides four programs:
    Recreate.
 
  * read again the new contacts map:
-
    ```
    java -jar build/libs/readnew.jar
    ```

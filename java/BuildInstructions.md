@@ -47,13 +47,21 @@ downloads the `berkeley.db.java7` NuGet automatically).
 
 ## Compiling Freeze for Java on Linux or macOS
 
-You need to install Berkeley DB Java before building Freeze for Java. The build
-system searches in standard locations for the following JAR files:
+You need to install Berkeley DB Java before building Freeze for Java.
+
+On Linux, the build system searches in standard locations for the following
+JAR files:
 ```
 db-5.3.28.jar
 db-5.3.21.jar
 db.jar
 ```
+
+On macOS, we recommend you install the keg-only `berkeley-db53` formula
+available in ZeroC's tap (`zeroc-ice/tap`). It provides `db.jar`, the
+associated Berkeley DB C shared library and more. The `freeze` formula
+(for Freeze C++) depends on this formula, so if you install `freeze`,
+you will get `berkeley-db53` automatically.
 
 You can build Freeze for Java using the Slice to Java and the Slice to
 Freeze Java compilers installed in `/usr/bin` (Linux) or `/usr/local/bin`
