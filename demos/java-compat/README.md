@@ -59,8 +59,8 @@ You also need to make sure your Java library path contains the
 Berkeley DB C library used by `db.jar`.
 
 On Windows, the build system automatically installs the `berkeley.db.java7`
-NuGet package from nuget.org, and you want to add the correct `bin`
-directory to your PATH, for example:
+NuGet package from nuget.org, and you want to add its `bin` directory to 
+your PATH, for example:
 ```
 set PATH=%USERPROFILE%\freeze\demos\java-compat\packages\berkeley.db.java7.5.3.28.1\build\native\bin\x64;%PATH%
 ```
