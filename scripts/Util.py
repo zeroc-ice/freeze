@@ -299,10 +299,12 @@ class Windows(Platform):
         return self.compiler
 
     def getNugetPackageVersion(self):
-        if not self.nugetPackageVersion:
-            with open(os.path.join(toplevel, "ice", "config", "icebuilder.props"), "r") as configFile:
-                self.nugetPackageVersion = re.search("<IceJSONVersion>(.*)</IceJSONVersion>", configFile.read()).group(1)
-        return self.nugetPackageVersion
+        # We don't want to depend on the ice submodule for allTests.py to work
+        # if not self.nugetPackageVersion:
+        #     with open(os.path.join(toplevel, "config", "icebuilder.props"), "r") as configFile:
+        #         self.nugetPackageVersion = re.search("<IceJSONVersion>(.*)</IceJSONVersion>", configFile.read()).group(1)
+        # return self.nugetPackageVersion
+        return "3.7.0"
 
     def getPlatformToolset(self):
         return self.getCompiler().replace("VC", "v")
