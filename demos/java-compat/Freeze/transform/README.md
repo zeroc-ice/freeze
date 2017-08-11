@@ -27,10 +27,8 @@ If the contacts map was not sorted on its key, the transformation
 would be a straightforward 'FreezeScript' transformation:
 
 ```
-transformdb --old ContactData.ice --new NewContactData.ice db dbnew
+transformdb --old ContactData.ice --new NewContactData.ice -f transform.xml db dbnew
 ```
-
-(with -f <xml-file> if you want a customized transformation)
 
 With a sorted map, the situation is more complicated. transformdb is unaware of
 the sort order, and as a result transforms the map into an unsorted map -- or
@@ -110,7 +108,8 @@ This demo provides four programs:
 
  * transform the contacts database to the new format:
 
-   Ensure that transformdb executable and its dependencies are included in your `PATH`
+   Ensure that transformdb executable and its dependencies are included in your
+   `PATH`
 
    on Linux and macOS:
 

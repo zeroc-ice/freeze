@@ -10,4 +10,6 @@
         </record>
     </database>
 
+    <transform type="::Demo::NewContactData" rename="::Demo::ContactData"/>
+
 </transformdb>
