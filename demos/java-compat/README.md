@@ -23,8 +23,8 @@ location, you'll need to set the `ICE_HOME` or `FREEZE_HOME` environment
 variable with the path name of the installation directory. For example:
 
 ```
-export ICE_HOME=~/testing/ice
-export FREEZE_HOME=~/testing/freeze
+export ICE_HOME=/opt/Ice-3.7.0
+export FREEZE_HOME=/opt/Freeze-3.7.0
 ```
 
 On Windows, the build system automatically pulls the Ice and Freeze NuGet
@@ -59,7 +59,7 @@ You also need to make sure your Java library path contains the
 Berkeley DB C library used by `db.jar`.
 
 On Windows, the build system automatically installs the `berkeley.db.java7`
-NuGet package from nuget.org, and you want to add its `bin` directory to 
+NuGet package from nuget.org, and you want to add its `bin` directory to
 your PATH, for example:
 ```
 set PATH=%USERPROFILE%\freeze\demos\java-compat\packages\berkeley.db.java7.5.3.28.1\build\native\bin\x64;%PATH%
