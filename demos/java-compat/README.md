@@ -14,7 +14,7 @@ in the [Freeze Manual][1].
 
 ### Prerequisites
 
-#### Slice translators
+#### Slice Compilers
 
 The build system requires the Slice-to-Java and Slice-to-Freeze-Java compilers.
 
@@ -27,8 +27,8 @@ export ICE_HOME=~/testing/ice
 export FREEZE_HOME=~/testing/freeze
 ```
 
-On Windows, the build system automatically pulls the Ice and Freeze nuget
-packages. Unless you want to use nuget packages from a specific location, you
+On Windows, the build system automatically pulls the Ice and Freeze NuGet
+packages. Unless you want to use NuGet packages from a specific location, you
 don't need to set the ICE_HOME or FREEZE_HOME environment variables.
 
 #### Freeze JAR files

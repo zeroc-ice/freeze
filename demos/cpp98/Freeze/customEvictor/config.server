@@ -5,4 +5,3 @@
 Warehouse.Endpoints=tcp -h localhost -p 10000
 
 Ice.ThreadPool.Server.Size=10
-

@@ -15,8 +15,9 @@ available.
 
 ### Slice to Java and Slice to Freeze Java Compilers
 
-You will need the slice2java and slice2freezej compilers, which are implemented
-in C++. These compilers are included in the Ice and Freeze binary distributions.
+You will need the Slice-to-Java and Slice-to-Freeze-Java compilers, which are
+implemented in C++. These compilers are included in the Ice and Freeze binary
+distributions.
 
 ### Java Version
 
