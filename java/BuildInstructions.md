@@ -57,11 +57,11 @@ db-5.3.21.jar
 db.jar
 ```
 
-On macOS, we recommend you install the keg-only `berkeley-db53` formula
+On macOS, we recommend you install the keg-only `berkeley-db@5.3` formula
 available in ZeroC's tap (`zeroc-ice/tap`). It provides `db.jar`, the
 associated Berkeley DB C shared library and more. The `freeze` formula
 (for Freeze C++) depends on this formula, so if you install `freeze`,
-you will get `berkeley-db53` automatically.
+you will get `berkeley-db@5.3` automatically.
 
 You can build Freeze for Java using the Slice to Java and the Slice to
 Freeze Java compilers installed in `/usr/bin` (Linux) or `/usr/local/bin`

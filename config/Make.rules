@@ -115,7 +115,7 @@ endif
 #
 thirdparties            := bz2 db expat mcpp
 bz2_home                := $(BZ2_HOME)
-db_home                 := $(or $(DB_HOME),$(if $(filter Darwin,$(os)),/usr/local/opt/berkeley-db53,))
+db_home                 := $(or $(DB_HOME),$(if $(filter Darwin,$(os)),/usr/local/opt/berkeley-db@5.3,))
 db_ldflags              := -ldb_cxx
 expat_home              := $(EXPAT_HOME)
 mcpp_home               := $(MCPP_HOME)

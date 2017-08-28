@@ -67,11 +67,11 @@ set PATH=%USERPROFILE%\freeze\demos\java-compat\packages\berkeley.db.java7.5.3.2
 
 Replace `x64` by `Win32` if you are using a 32-bit JVM.
 
-On macOS, if you use the `berkeley-db53` formula (as we recommend), you
+On macOS, if you use the `berkeley-db@5.3` formula (as we recommend), you
 should set `java.library.path` explicitely each time you start a Freeze-based
 application, for example:
 ```
-java -Djava.library.path=/usr/local/opt/berkeley-db53/lib -jar build/libs/server.jar
+java -Djava.library.path=/usr/local/opt/berkeley-db@5.3/lib -jar build/libs/server.jar
 ```
 
 [1]: https://doc.zeroc.com/display/Freeze37/Freeze+Manual

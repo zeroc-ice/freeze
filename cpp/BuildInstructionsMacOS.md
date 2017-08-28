@@ -18,12 +18,8 @@ Berkeley DB version 5.3 (the recommended version is 5.3.28).
 
 You can install Berkeley DB with [Homebrew][3] as follows:
 ```
-brew install zeroc-ice/tap/berkeley-db53
+brew install zeroc-ice/tap/berkeley-db@5.3
 ```
-
-The `berkeley-db53` package is a pre-compiled bottle that includes Java
-support by default; you can exclude Java support using the `--without-java`
-option.
 
 ## Building Freeze
 
