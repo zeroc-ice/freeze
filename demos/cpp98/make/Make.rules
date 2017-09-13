@@ -59,8 +59,8 @@ supported-configs       = shared
 #
 # Ice/Freeze dependencies
 #
-$(eval $(call create-project-dependencies,ice,$(ICE_HOME),cpp,Ice))
-$(eval $(call create-project-dependencies,freeze,$(FREEZE_HOME),cpp,Freeze))
+$(eval $(call create-project-dependencies,ice,$(ICE_HOME),cpp,cpp,Ice))
+$(eval $(call create-project-dependencies,freeze,$(FREEZE_HOME),cpp,cpp,Freeze))
 
 #
 # Support for Slice compilers
