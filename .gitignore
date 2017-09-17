@@ -63,6 +63,9 @@ cpp/demo/Debug
 /cpp/test/*/*/build.txt
 /csharp/test/*/*/build.txt
 
+# Eclipse
+.externalToolBuilders
+
 # OS X Keychain
 *.keychain
 .fl????????
