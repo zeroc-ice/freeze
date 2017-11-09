@@ -333,8 +333,11 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
            const StringList& keyMetaData, const TypePtr& valueType, const StringList& valueMetaData, Output& H,
            const string& dllExport)
 {
-    const string keyTypeS = typeToString(keyType, keyMetaData);
-    const string valueTypeS = typeToString(valueType, valueMetaData);
+
+    // ContainedPtr cont = ContainedPtr::dynamicCast(dict.container());
+    // string scope = fixKwd(cont->scope());
+    const string keyTypeS = typeToString(keyType, "", keyMetaData);
+    const string valueTypeS = typeToString(valueType, "", valueMetaData);
     const string compare = getCompare(dict, keyTypeS);
     const string keyCodec = string("::Freeze::MapKeyCodec< ") + keyTypeS + ">";
     const string valueCodec =
@@ -391,9 +394,9 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
     {
         string className = capitalizedMembers[i] + "Index";
 
-        string indexCompare = getCompare(dict.indices[i], typeToString(indexTypes[i].type, indexTypes[i].metaData));
+        string indexCompare = getCompare(dict.indices[i], typeToString(indexTypes[i].type, "", indexTypes[i].metaData));
 
-        string indexCompareParams = string("< ") + typeToString(indexTypes[i].type, indexTypes[i].metaData) + ", "
+        string indexCompareParams = string("< ") + typeToString(indexTypes[i].type, "", indexTypes[i].metaData) + ", "
             + className + ", " + indexCompare + " >";
 
         H << sp << nl << "class " << dllExport << className
@@ -412,11 +415,11 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
         //
         // Codec
         //
-        H << nl << "static void write(" << inputTypeToString(indexTypes[i].type, 0, indexTypes[i].metaData)
+        H << nl << "static void write(" << inputTypeToString(indexTypes[i].type, 0, "", indexTypes[i].metaData)
           << ", Freeze::Key&, const Ice::CommunicatorPtr&, const Ice::EncodingVersion&);";
 
         H << nl << "static void read("
-          << typeToString(indexTypes[i].type, indexTypes[i].metaData)
+          << typeToString(indexTypes[i].type, "", indexTypes[i].metaData)
           << "&, const Freeze::Key&, const ::Ice::CommunicatorPtr&, const Ice::EncodingVersion&);";
 
         H.dec();
@@ -495,9 +498,9 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
     {
         H << sp;
         H << nl << "iterator findBy" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ", bool = true);";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ", bool = true);";
         H << nl << "const_iterator findBy" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ", bool = true) const;";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ", bool = true) const;";
 
         H << nl << "iterator beginFor" << capitalizedMembers[i] << "();";
         H << nl << "const_iterator beginFor" << capitalizedMembers[i] << "() const;";
@@ -506,28 +509,28 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
         H << nl << "const_iterator endFor" << capitalizedMembers[i] << "() const;";
 
         H << nl << "iterator lowerBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ");";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ");";
         H << nl << "const_iterator lowerBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ") const;";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ") const;";
 
         H << nl << "iterator upperBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ");";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ");";
         H << nl << "const_iterator upperBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ") const;";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ") const;";
 
         H << nl << "std::pair<iterator, iterator> equalRangeFor"
-          << capitalizedMembers[i] << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData)
+          << capitalizedMembers[i] << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData)
           << ");";
 
         H << nl << "std::pair<const_iterator, const_iterator> equalRangeFor"
-          << capitalizedMembers[i] << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData)
+          << capitalizedMembers[i] << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData)
           << ") const;";
 
         string countFunction = dict.indices[i].member.empty() ? string("valueCount")
             : dict.indices[i].member + "Count";
 
         H << nl << "int " << countFunction
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << ") const;";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << ") const;";
 
     }
 
@@ -539,8 +542,8 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
            const TypePtr& keyType, const StringList& keyMetaData, const TypePtr& valueType,
            const StringList& valueMetaData, Output& C)
 {
-    const string keyTypeS = typeToString(keyType, keyMetaData);
-    const string valueTypeS = typeToString(valueType, valueMetaData);
+    const string keyTypeS = typeToString(keyType, "", keyMetaData);
+    const string valueTypeS = typeToString(valueType, "", valueMetaData);
     const string compare = getCompare(dict, keyTypeS);
     const string keyCodec = string("::Freeze::MapKeyCodec< ") + keyTypeS + ">";
     const string valueCodec =
@@ -576,9 +579,9 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
     {
         string className = capitalizedMembers[i] + "Index";
 
-        string indexCompare = getCompare(dict.indices[i], typeToString(indexTypes[i].type, indexTypes[i].metaData));
+        string indexCompare = getCompare(dict.indices[i], typeToString(indexTypes[i].type, "", indexTypes[i].metaData));
 
-        string indexCompareParams = string("< ") + typeToString(indexTypes[i].type, indexTypes[i].metaData) + ", "
+        string indexCompareParams = string("< ") + typeToString(indexTypes[i].type, "", indexTypes[i].metaData) + ", "
             + className + ", " + indexCompare + " >";
 
         C << sp << nl << absolute << "::" << className << "::" << className
@@ -629,7 +632,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << "void"
           << nl << absolute << "::" << className << "::"
-          << "write(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData)
+          << "write(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData)
           << " index, Freeze::Key& bytes, const Ice::CommunicatorPtr& communicator, "
           << "const Ice::EncodingVersion& encoding)";
         C << sb;
@@ -651,7 +654,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
             }
             else
             {
-                C << nl << typeToString(indexTypes[i].type, indexTypes[i].metaData)
+                C << nl << typeToString(indexTypes[i].type, "", indexTypes[i].metaData)
                   << " lowerCaseIndex = IceUtilInternal::toLower(index);";
                 valueS = "lowerCaseIndex";
             }
@@ -664,7 +667,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << "void"
           << nl << absolute << "::" << className << "::"
-          << "read(" << typeToString(indexTypes[i].type, indexTypes[i].metaData)
+          << "read(" << typeToString(indexTypes[i].type, "", indexTypes[i].metaData)
           << "& index, const Freeze::Key& bytes, const Ice::CommunicatorPtr& communicator, "
           << "const Ice::EncodingVersion& encoding)";
         C << sb;
@@ -776,7 +779,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << absolute << "::iterator"
           << nl << absolute << "::" << "findBy" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData)
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData)
           << " index, bool onlyDups)";
         C << sb;
         C << nl << "Freeze::Key bytes;";
@@ -787,7 +790,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << absolute << "::const_iterator"
           << nl << absolute << "::" << "findBy" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData)
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData)
           << " index, bool onlyDups) const";
         C << sb;
         C << nl << "Freeze::Key bytes;";
@@ -822,7 +825,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << absolute << "::iterator"
           << nl << absolute << "::" << "lowerBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index)";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index)";
         C << sb;
         C << nl << "Freeze::Key bytes;";
         C << nl << indexClassName << "::" << "write(index, bytes, _communicator, _encoding);";
@@ -832,7 +835,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << absolute << "::const_iterator"
           << nl << absolute << "::" << "lowerBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index) const";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index) const";
         C << sb;
         C << nl << "Freeze::Key bytes;";
         C << nl << indexClassName << "::" << "write(index, bytes, _communicator, _encoding);";
@@ -842,7 +845,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << absolute << "::iterator"
           << nl << absolute << "::" << "upperBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index)";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index)";
         C << sb;
         C << nl << "Freeze::Key bytes;";
         C << nl << indexClassName << "::" << "write(index, bytes, _communicator, _encoding);";
@@ -852,7 +855,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << absolute << "::const_iterator"
           << nl << absolute << "::" << "upperBoundFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index) const";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index) const";
         C << sb;
         C << nl << "Freeze::Key bytes;";
         C << nl << indexClassName << "::" << "write(index, bytes, _communicator, _encoding);";
@@ -863,7 +866,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
         C << sp << nl << "std::pair<" << absolute << "::iterator, "
           << absolute << "::iterator>"
           << nl << absolute << "::" << "equalRangeFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index)";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index)";
         C << sb;
         C << nl << "return std::make_pair(lowerBoundFor" << capitalizedMembers[i]
           << "(index), upperBoundFor" << capitalizedMembers[i] << "(index));";
@@ -872,7 +875,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
         C << sp << nl << "std::pair<" << absolute << "::const_iterator, "
           << absolute << "::const_iterator>"
           << nl << absolute << "::" << "equalRangeFor" << capitalizedMembers[i]
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index) const";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index) const";
         C << sb;
         C << nl << "return std::make_pair(lowerBoundFor" << capitalizedMembers[i]
           << "(index), upperBoundFor" << capitalizedMembers[i] << "(index));";
@@ -883,7 +886,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
 
         C << sp << nl << "int"
           << nl << absolute << "::" << countFunction
-          << "(" << inputTypeToString(indexTypes[i].type, false, indexTypes[i].metaData) << " index) const";
+          << "(" << inputTypeToString(indexTypes[i].type, false, "", indexTypes[i].metaData) << " index) const";
         C << sb;
         C << nl << "Freeze::Key bytes;";
         C << nl << indexClassName << "::" << "write(index, bytes, _communicator, _encoding);";
