@@ -333,9 +333,6 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
            const StringList& keyMetaData, const TypePtr& valueType, const StringList& valueMetaData, Output& H,
            const string& dllExport)
 {
-
-    // ContainedPtr cont = ContainedPtr::dynamicCast(dict.container());
-    // string scope = fixKwd(cont->scope());
     const string keyTypeS = typeToString(keyType, "", keyMetaData);
     const string valueTypeS = typeToString(valueType, "", valueMetaData);
     const string compare = getCompare(dict, keyTypeS);
