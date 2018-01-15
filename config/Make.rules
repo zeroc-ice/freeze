@@ -95,7 +95,7 @@ libdir                  ?= $(call mappingdir,$(or $1,$(currentdir)),lib)
 slicedir                ?= $(top_srcdir)/slice
 includedir              ?= $(call mappingdir,$(or $1,$(currentdir)),include)
 
-usr_dir_install         := $(call is-system-install,$(prefix))
+usr_dir_install         := $(filter /usr%,$(prefix))
 install_bindir          ?= $(prefix)/bin
 install_libdir          ?= $(prefix)/lib
 install_includedir      ?= $(prefix)/include
