@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>zeroc.freeze.v140</id>
-    <title>ZeroC Freeze C++ for Visual Studio 2013</title>
+    <title>ZeroC Freeze C++ for Visual Studio 2015</title>
     <version>3.7.1</version>
     <authors>ZeroC</authors>
     <licenseUrl>https://raw.githubusercontent.com/zeroc-ice/freeze/3.7/LICENSE</licenseUrl>
