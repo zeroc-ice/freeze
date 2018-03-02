@@ -12,7 +12,7 @@ unnecessary.
   * [macOS](#macos)
   * [Windows](#windows)
 * [Building Freeze for Linux or macOS](#building-freeze-for-linux-or-macos)
-* [Building Freeze for Windows](#building-ice-for-windows)
+* [Building Freeze for Windows](#building-freeze-for-windows)
 * [Installing a C++ Source Build on Linux or macOS](#installing-a-c-source-build-on-linux-or-macos)
 * [Creating a NuGet Package on Windows](#creating-a-nuget-package-on-windows)
 * [Running the Test Suite](#running-the-test-suite)
