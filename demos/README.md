@@ -15,8 +15,3 @@ written in C++ that demonstrate the use of Freeze with the Ice C++98 mapping.
 
 The README.md file in each language subdirectory provides instructions for
 building and running the sample programs.
-
-## License
-
-The sample programs are licensed under the GNU General Public License version 2
-([GPLv2](../LICENSE)).
