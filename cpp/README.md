@@ -8,11 +8,9 @@ including Windows and Visual Studio, so building Freeze from source is usually
 unnecessary.
 
 * [C++ Build Requirements](#c-build-requirements)
-  * [Operating Systems and Compilers](#operating-systems-and-compilers)
-  * [Third-Party Libraries](#third-party-libraries)
-    * [Linux](#linux)
-    * [macOS](#macos)
-    * [Windows](#windows)
+  * [Linux](#linux)
+  * [macOS](#macos)
+  * [Windows](#windows)
 * [Building Freeze for Linux or macOS](#building-freeze-for-linux-or-macos)
 * [Building Freeze for Windows](#building-ice-for-windows)
 * [Installing a C++ Source Build on Linux or macOS](#installing-a-c-source-build-on-linux-or-macos)
@@ -24,24 +22,22 @@ unnecessary.
 Freeze was extensively tested using the operating systems and compiler versions
 listed on [supported platforms][2].
 
-### Third-Party Libraries
-
 Freeze uses [Berkeley DB][3] as its underlying database and currently requires
 Berkeley DB version 5.3 (the recommended version is 5.3.28).
 
-#### Linux
+### Linux
 
 ZeroC supplies binary packages for Berkeley DB on supported Linux
 distributions that do not include them.
 
-#### macOS
+### macOS
 
 You can install Berkeley DB with Homebrew as follows:
 ```
 brew install zeroc-ice/tap/berkeley-db@5.3
 ```
 
-#### Windows
+### Windows
 
 The Freeze build system for Windows automatically downloads and installs
 NuGet and NuGet packages for Berkeley DB when you build Freeze for C++.
