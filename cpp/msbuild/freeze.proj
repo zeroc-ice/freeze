@@ -157,6 +157,8 @@
 
       <Copy SourceFiles="zeroc.freeze.$(DefaultPlatformToolset).nuspec"
             DestinationFolder="zeroc.freeze.$(DefaultPlatformToolset)" />
+      <Copy SourceFiles="$(MSBuildThisFileDirectory)..\..\LICENSE"
+            DestinationFiles="zeroc.freeze.$(DefaultPlatformToolset)\LICENSE.txt" />
       <Copy SourceFiles="zeroc.freeze.$(DefaultPlatformToolset).props"
             DestinationFiles="zeroc.freeze.$(DefaultPlatformToolset)\build\native\zeroc.freeze.$(DefaultPlatformToolset).props" />
       <Copy SourceFiles="zeroc.freeze.$(DefaultPlatformToolset).targets"
