@@ -11,10 +11,6 @@ The sample programs are grouped by programming language:
 For example, the [cpp98](./cpp98) folder contains all the sample programs
 written in C++ that demonstrate the use of Freeze with the Ice C++98 mapping.
 
-## Platform Support
-
-The sample programs are supported on all the platforms supported by Freeze.
-
 ## Building and Running the Sample Programs
 
 The README.md file in each language subdirectory provides instructions for
