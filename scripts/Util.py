@@ -304,7 +304,7 @@ class Windows(Platform):
         #     with open(os.path.join(toplevel, "config", "icebuilder.props"), "r") as configFile:
         #         self.nugetPackageVersion = re.search("<IceJSONVersion>(.*)</IceJSONVersion>", configFile.read()).group(1)
         # return self.nugetPackageVersion
-        return "3.7.0"
+        return "3.7.1"
 
     def getPlatformToolset(self):
         return self.getCompiler().replace("VC", "v")
