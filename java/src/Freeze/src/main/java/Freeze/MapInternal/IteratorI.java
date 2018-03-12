@@ -233,6 +233,7 @@ class IteratorI<K, V> implements Freeze.Map.EntryIterator<java.util.Map.Entry<K,
         close();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void
     finalize()

@@ -6,9 +6,9 @@
 
 class Server extends Ice.Application
 {
-    static class ValueFactory implements Ice.ValueFactory
+    static class ValueFactory<T extends Ice.Object> implements Ice.ValueFactory
     {
-        ValueFactory(Class<?> factoryClass)
+        ValueFactory(Class<T> factoryClass)
         {
             _factoryClass = factoryClass;
         }
@@ -19,19 +19,15 @@ class Server extends Ice.Application
         {
             try
             {
-                return (Ice.Object)_factoryClass.newInstance();
+                return _factoryClass.getDeclaredConstructor().newInstance();
             }
-            catch(InstantiationException ex)
-            {
-                throw new Ice.InitializationException(ex.toString());
-            }
-            catch(IllegalAccessException ex)
+            catch(ReflectiveOperationException ex)
             {
                 throw new Ice.InitializationException(ex.toString());
             }
         }
 
-        private Class<?> _factoryClass;
+        private Class<T> _factoryClass;
     }
 
     private java.util.Map<String, String>
@@ -69,11 +65,11 @@ class Server extends Ice.Application
         //
         // Register factories
         //
-        communicator().getValueFactoryManager().add(new ValueFactory(BankI.class),
+        communicator().getValueFactoryManager().add(new ValueFactory<BankI>(BankI.class),
                                                     CasinoStore.PersistentBank.ice_staticId());
-        communicator().getValueFactoryManager().add(new ValueFactory(PlayerI.class),
+        communicator().getValueFactoryManager().add(new ValueFactory<PlayerI>(PlayerI.class),
                                                     CasinoStore.PersistentPlayer.ice_staticId());
-        communicator().getValueFactoryManager().add(new ValueFactory(BetI.class),
+        communicator().getValueFactoryManager().add(new ValueFactory<BetI>(BetI.class),
                                                     CasinoStore.PersistentBet.ice_staticId());
 
         //
