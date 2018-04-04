@@ -70,15 +70,18 @@ subprojects {
             }
         }
 
-        mavenCentral()
-
-        maven {
-            url 'https://builds.testing.zeroc.com/nexus/repository/maven.ice-3.7'
+        if(this.devRepo) {
+            maven {
+                url this.devRepo
+            }
         }
+
+        mavenCentral()
 
         maven {
             url 'https://repo.zeroc.com/nexus/content/repositories/thirdparty'
         }
+
         maven {
             url 'https://repo.zeroc.com/nexus/content/repositories/releases'
         }
