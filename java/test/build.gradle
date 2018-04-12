@@ -25,7 +25,12 @@ dependencies {
     compile localDependency('ice-compat')
     compile localDependency('freeze-compat')
     compile files(dbJar)
-    runtime "org.apache.tools:bzip2:1.0"
+}
+
+if(!gradle.startParameter.isOffline()) {
+    dependencies {
+        runtime "org.apache.commons:commons-compress:1.14"
+    }
 }
 
 jar {
