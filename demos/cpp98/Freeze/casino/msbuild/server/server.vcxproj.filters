@@ -139,11 +139,11 @@
     <None Include="..\..\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <IceBuilder Include="..\..\Casino.ice">
+    <SliceCompile Include="..\..\Casino.ice">
       <Filter>Slice Files</Filter>
-    </IceBuilder>
-    <IceBuilder Include="..\..\CasinoStore.ice">
+    </SliceCompile>
+    <SliceCompile Include="..\..\CasinoStore.ice">
       <Filter>Slice Files</Filter>
-    </IceBuilder>
+    </SliceCompile>
   </ItemGroup>
 </Project>
