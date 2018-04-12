@@ -51,7 +51,7 @@ class FreezeJavaMapping(JavaCompatMapping):
             if os.path.exists("/usr/local/opt/ice/libexec/lib"):
                 return "/usr/local/opt/ice/libexec/lib"
             else:
-                return "/usr/local/opt/berkeley-db53/lib"
+                return "/usr/local/opt/berkeley-db@5.3/lib"
         elif isinstance(platform, Windows):
             return os.path.join(toplevel, "java", "packages", "berkeley.db.java7.5.3.28.1", "build", "native", "bin",
                                 current.config.buildPlatform)

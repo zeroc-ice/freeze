@@ -57,11 +57,11 @@ db-5.3.21.jar
 db.jar
 ```
 
-On macOS, we recommend you install the keg-only `berkeley-db53` formula
+On macOS, we recommend you install the keg-only `berkeley-db@5.3` formula
 available in ZeroC's tap (`zeroc-ice/tap`). It provides `db.jar`, the
 associated Berkeley DB C shared library and more. The `freeze` formula
 (for Freeze C++) depends on this formula, so if you install `freeze`,
-you will get `berkeley-db53` automatically.
+you will get `berkeley-db@5.3` automatically.
 
 You can build Freeze for Java using the Slice to Java and the Slice to
 Freeze Java compilers installed in `/usr/bin` (Linux) or `/usr/local/bin`
@@ -76,8 +76,8 @@ If you installed Slice to Java (Ice) or Slice to Freeze Java (Freeze C++)
 in another directory, you need to first set `ICE_HOME` or `FREEZE_HOME`, for
 example:
 ```
-export ICE_HOME=/opt/Ice-3.7.0
-export FREEZE_HOME=/opt/Freeze-3.7.0
+export ICE_HOME=/opt/Ice-3.7.1
+export FREEZE_HOME=/opt/Freeze-3.7.1
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
@@ -98,7 +98,7 @@ This will download and use a binary NuGet package for Ice that includes the
 Slice to Java compiler. If you want to use another Ice installation, set
 `ICE_HOME`, for example:
 ```
-set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.0
+set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.1
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
@@ -125,5 +125,5 @@ python allTests.py
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
-[1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.0
+[1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.1
 [2]: http://gradle.org

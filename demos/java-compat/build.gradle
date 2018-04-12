@@ -74,6 +74,10 @@ subprojects {
         mavenCentral()
 
         maven {
+            url 'https://builds.testing.zeroc.com/nexus/repository/maven.ice-3.7'
+        }
+
+        maven {
             url 'https://repo.zeroc.com/nexus/content/repositories/thirdparty'
         }
         maven {
@@ -102,5 +106,5 @@ subprojects {
 // the version of gradle needed to build Ice.
 //
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.0.1"
+    gradleVersion = "4.3.1"
 }

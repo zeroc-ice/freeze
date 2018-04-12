@@ -304,7 +304,7 @@ class Windows(Platform):
         #     with open(os.path.join(toplevel, "config", "icebuilder.props"), "r") as configFile:
         #         self.nugetPackageVersion = re.search("<IceJSONVersion>(.*)</IceJSONVersion>", configFile.read()).group(1)
         # return self.nugetPackageVersion
-        return "3.7.0"
+        return "3.7.1"
 
     def getPlatformToolset(self):
         return self.getCompiler().replace("VC", "v")
@@ -3091,7 +3091,7 @@ class CSharpMapping(Mapping):
             assembliesDir = os.path.join(platform.getIceInstallDir(self, current), "lib")
         else:
             bzip2 = os.path.join(toplevel, "cpp", "msbuild", "packages",
-                                 "bzip2.{0}.1.0.6.9".format(platform.getPlatformToolset()),
+                                 "bzip2.{0}.1.0.6.10".format(platform.getPlatformToolset()),
                                  "build", "native", "bin", "x64", "Release")
             assembliesDir = os.path.join(current.driver.getIceDir(self, current), "Assemblies")
         return { "DEVPATH" : assembliesDir, "PATH" : bzip2 }

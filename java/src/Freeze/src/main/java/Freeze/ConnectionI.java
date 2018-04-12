@@ -113,6 +113,7 @@ public class ConnectionI implements Connection
         return _envName;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected void
     finalize()

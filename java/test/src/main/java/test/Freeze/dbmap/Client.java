@@ -31,7 +31,7 @@ public class Client extends test.Util.Application
                             {
                                 java.util.Map.Entry<Byte, Integer> e = p.next();
                                 byte v = e.getKey().byteValue();
-                                test(e.getValue().equals(new Integer(v - (byte)'a')));
+                                test(e.getValue().equals(Integer.valueOf(v - (byte)'a')));
                             }
 
                             break;
@@ -748,11 +748,11 @@ public class Client extends test.Util.Application
                 byte v = e.getKey().byteValue();
                 if(v == (byte)'b' || v == (byte)'n' || v == (byte)'z')
                 {
-                    test(e.getValue().equals(new Integer(v + 100)));
+                    test(e.getValue().equals(Integer.valueOf(v + 100)));
                 }
                 else
                 {
-                    test(e.getValue().equals(new Integer(v - (byte)'a')));
+                    test(e.getValue().equals(Integer.valueOf(v - (byte)'a')));
                 }
             }
 

@@ -159,7 +159,7 @@ class Client extends Ice.Application
         public String
         toString()
         {
-            return new Integer((_max - _min) + 1).toString();
+            return Integer.toString((_max - _min) + 1);
         }
 
         private int _min;
@@ -272,7 +272,7 @@ class Client extends Ice.Application
         for(int i = 0; i < _repetitions; ++i)
         {
             s1.l = i;
-            s2.s = new Integer(i).toString();
+            s2.s = Integer.toString(i);
             s2.s1 = s1;
             m.fastPut(s1, s2);
         }
@@ -291,7 +291,7 @@ class Client extends Ice.Application
         {
             s1.l = i;
             Struct2 ns2 = m.get(s1);
-            test(ns2.s.equals(new Integer(i).toString()));
+            test(ns2.s.equals(Integer.toString(i)));
         }
         total = _watch.stop();
         perRecord = total / _repetitions;
@@ -309,7 +309,7 @@ class Client extends Ice.Application
             _watch.start();
             for(int i = 0; i < _repetitions; ++i)
             {
-                String s = (new Integer(i)).toString();
+                String s = Integer.toString(i);
                 java.util.Iterator<java.util.Map.Entry<Struct1, Struct2>> p = indexedM.findByS(s);
                 test(p.hasNext());
                 java.util.Map.Entry<Struct1, Struct2> e = p.next();
@@ -366,7 +366,7 @@ class Client extends Ice.Application
         for(int i = 0; i < _repetitions; ++i)
         {
             s1.l = i;
-            c1.s = new Integer(i).toString();
+            c1.s = Integer.toString(i);
             m.fastPut(s1, c1);
         }
         tx.commit();
@@ -384,7 +384,7 @@ class Client extends Ice.Application
         {
             s1.l = i;
             Class1 nc1 = m.get(s1);
-            test(nc1.s.equals(new Integer(i).toString()));
+            test(nc1.s.equals(Integer.toString(i)));
         }
         total = _watch.stop();
         perRecord = total / _repetitions;
@@ -402,7 +402,7 @@ class Client extends Ice.Application
             _watch.start();
             for(int i = 0; i < _repetitions; ++i)
             {
-                String s = (new Integer(i)).toString();
+                String s = Integer.toString(i);
                 java.util.Iterator<java.util.Map.Entry<Struct1, Class1>> p = indexedM.findByS(s);
                 test(p.hasNext());
                 java.util.Map.Entry<Struct1, Class1> e = p.next();
@@ -462,7 +462,7 @@ class Client extends Ice.Application
             {
                 o = c1;
             }
-            c1.s = new Integer(i).toString();
+            c1.s = Integer.toString(i);
 
             m.fastPut(s1, o);
         }
@@ -496,7 +496,7 @@ class Client extends Ice.Application
                 nc1 = (Class1)o;
             }
 
-            test(nc1.s.equals(new Integer(i).toString()));
+            test(nc1.s.equals(Integer.toString(i)));
         }
         total = _watch.stop();
         perRecord = total / _repetitions;
