@@ -8,10 +8,20 @@ We recommend that you use the release notes as a guide for migrating your
 applications to this release, and the manual for complete details on a
 particular aspect of Freeze.
 
+- [Changes in Freeze 3.7.1](#changes-in-freeze-371)
+  - [General Changes](#general-changes)
 - [Changes in Freeze 3.7.0](#changes-in-freeze-370)
   - [General Changes](#general-changes)
   - [C++ Changes](#c-changes)
   - [Java Changes](#java-changes)
+
+# Changes in Freeze 3.7.1
+
+These are the changes since Freeze 3.7.0.
+
+## General Changes
+
+- Updated to Ice 3.7.1.
 
 # Changes in Freeze 3.7.0
 
