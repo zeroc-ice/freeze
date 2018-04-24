@@ -148,8 +148,8 @@
     <CustomBuild Include="dummy.freeze" />
   </ItemGroup>
   <ItemGroup>
-    <IceBuilder Include="..\..\PhoneBook.ice">
+    <SliceCompile Include="..\..\PhoneBook.ice">
       <Filter>Slice Files</Filter>
-    </IceBuilder>
+    </SliceCompile>
   </ItemGroup>
 </Project>

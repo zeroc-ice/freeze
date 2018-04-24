@@ -64,25 +64,20 @@ subprojects {
             dirs "${rootProject.projectDir}/../../java/lib"
         }
 
-        if (slice.jarDir) {
+        if(slice.jarDir) {
             flatDir {
                 name "local"
                 dirs slice.jarDir
             }
         }
 
+        if(this.devRepo) {
+            maven {
+                url this.devRepo
+            }
+        }
+
         mavenCentral()
-
-        maven {
-            url 'https://builds.testing.zeroc.com/nexus/repository/maven.ice-3.7'
-        }
-
-        maven {
-            url 'https://repo.zeroc.com/nexus/content/repositories/thirdparty'
-        }
-        maven {
-            url 'https://repo.zeroc.com/nexus/content/repositories/releases'
-        }
     }
 
     jar {
@@ -106,5 +101,5 @@ subprojects {
 // the version of gradle needed to build Ice.
 //
 task wrapper(type: Wrapper) {
-    gradleVersion = "4.3.1"
+    gradleVersion = "4.7"
 }

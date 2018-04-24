@@ -117,8 +117,8 @@
     <CustomBuild Include="dummy.freeze" />
   </ItemGroup>
   <ItemGroup>
-    <IceBuilder Include="..\..\ContactData.ice">
+    <SliceCompile Include="..\..\ContactData.ice">
       <Filter>Slice Files</Filter>
-    </IceBuilder>
+    </SliceCompile>
   </ItemGroup>
 </Project>

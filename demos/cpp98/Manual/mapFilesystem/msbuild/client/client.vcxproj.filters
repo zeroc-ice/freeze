@@ -106,8 +106,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <IceBuilder Include="..\..\Filesystem.ice">
+    <SliceCompile Include="..\..\Filesystem.ice">
       <Filter>Slice Files</Filter>
-    </IceBuilder>
+    </SliceCompile>
   </ItemGroup>
 </Project>

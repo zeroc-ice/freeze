@@ -106,6 +106,8 @@ ext.versionSuffix = "-${project.version}"
 ext.libDir = "${rootProject.projectDir}/lib"
 
 slice {
+    cppPlatform = this.cppPlatform
+    cppConfiguration = this.cppConfiguration
     freezeHome = this.freezeHome
     iceHome = this.iceHome
     compat = true
