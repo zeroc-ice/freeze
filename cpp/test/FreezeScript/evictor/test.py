@@ -5,7 +5,7 @@
 #
 # **********************************************************************
 
-from FreezeUtil import *
+from Util import *
 
 class FreezeScriptEvictorTestCase(ClientTestCase):
 

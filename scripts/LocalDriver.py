@@ -7,8 +7,9 @@
 #
 # **********************************************************************
 
-import sys, os, time
+import sys, os, time, threading
 from Util import *
+from Component import component
 
 isPython2 = sys.version_info[0] == 2
 
@@ -63,6 +64,10 @@ class Executor:
         with self.lock:
             return self.interrupted
 
+    def setInterrupt(self, value):
+        with self.lock:
+            self.interrupted = value
+
     def runTestSuites(self, driver, total, results, mainThread=False):
         while True:
             item = self.get(total, mainThread)
@@ -76,7 +81,8 @@ class Executor:
             try:
                 testsuite.run(current)
             except KeyboardInterrupt:
-                raise
+                if mainThread:
+                    raise
             except:
                 pass
             finally:
@@ -149,6 +155,8 @@ class Executor:
                 self.interrupted = True
             if threads:
                 print("Terminating (waiting for worker threads to terminate)...")
+            else:
+                print("")
             raise
         finally:
             #
@@ -232,6 +240,8 @@ class RemoteTestCaseRunner(TestCaseRunner):
         return mapping.getTestSuites(testSuiteIds)
 
     def filterOptions(self, options):
+        if options is None:
+            return None
         import Ice
         options = options.copy()
         for (key, values) in options.items():
@@ -392,80 +402,78 @@ class LocalDriver(Driver):
         else:
             self.runner = TestCaseRunner()
 
-        while True:
-            for mapping in mappings:
-                testsuites = self.runner.getTestSuites(mapping, testSuiteIds)
+        try:
+            while True:
+                for mapping in mappings:
+                    testsuites = self.runner.getTestSuites(mapping, testSuiteIds)
+
+                    #
+                    # Sort the test suites to run tests in the following order.
+                    #
+                    runOrder = component.getRunOrder()
+                    def testsuiteKey(testsuite):
+                        for k in runOrder:
+                            if testsuite.getId().startswith(k + '/'):
+                                return testsuite.getId().replace(k, str(runOrder.index(k)))
+                        return testsuite.getId()
+                    testsuites = sorted(testsuites, key=testsuiteKey)
+
+                    for testsuite in testsuites:
+                        if mapping.filterTestSuite(testsuite.getId(), self.configs[mapping], self.filters, self.rfilters):
+                            continue
+                        if testsuite.getId() == "Ice/echo":
+                            continue
+                        elif (self.cross or self.allCross) and not component.isCross(testsuite.getId()):
+                            continue
+                        elif isinstance(self.runner, RemoteTestCaseRunner) and not testsuite.isMultiHost():
+                            continue
+                        self.executor.submit(testsuite, Mapping.getAll(self) if self.allCross else [self.cross], self)
 
                 #
-                # Sort the test suites to run tests in the following order.
+                # Run all the tests and wait for the executor to complete.
                 #
-                runOrder = mapping.getRunOrder()
-                def testsuiteKey(testsuite):
-                    for k in runOrder:
-                        if testsuite.getId().startswith(k + '/'):
-                            return testsuite.getId().replace(k, str(runOrder.index(k)))
-                    return testsuite.getId()
-                testsuites = sorted(testsuites, key=testsuiteKey)
+                now = time.time()
 
-                #
-                # Create the executor to run the test suites on multiple workers thread is requested.
-                #
-                for testsuite in testsuites:
-                    if mapping.filterTestSuite(testsuite.getId(), self.configs[mapping], self.filters, self.rfilters):
-                        continue
-                    if testsuite.getId() == "Ice/echo":
-                        continue
-                    elif (self.cross or self.allCross) and not testsuite.isCross():
-                        continue
-                    elif isinstance(self.runner, RemoteTestCaseRunner) and not testsuite.isMultiHost():
-                        continue
-                    self.executor.submit(testsuite, Mapping.getAll() if self.allCross else [self.cross], self)
+                results = self.executor.runUntilCompleted(self, self.start)
 
-            #
-            # Run all the tests and wait for the executor to complete.
-            #
-            now = time.time()
+                failures = [r for r in results if not r.isSuccess()]
+                duration = time.time() - now
 
-            results = self.executor.runUntilCompleted(self, self.start)
+                if self.exportToXml:
+                    XmlExporter(results, duration, failures).save(self.exportToXml, os.getenv("NODE_NAME", ""))
 
-            Expect.cleanup() # Cleanup processes which might still be around
+                m, s = divmod(duration, 60)
+                print("")
+                if m > 0:
+                    print("Ran {0} tests in {1} minutes {2:02.2f} seconds".format(len(results), m, s))
+                else:
+                    print("Ran {0} tests in {1:02.2f} seconds".format(len(results), s))
 
-            failures = [r for r in results if not r.isSuccess()]
-            duration = time.time() - now
+                if self.showDurations:
+                    for r in sorted(results, key = lambda r : r.getDuration()):
+                        print("- {0} took {1:02.2f} seconds".format(r.testsuite, r.getDuration()))
 
-            if self.exportToXml:
-                XmlExporter(results, duration, failures).save(self.exportToXml, os.getenv("NODE_NAME", ""))
+                self.loopCount += 1
 
-            m, s = divmod(duration, 60)
-            print("")
-            if m > 0:
-                print("Ran {0} tests in {1} minutes {2:02.2f} seconds".format(len(results), m, s))
-            else:
-                print("Ran {0} tests in {1:02.2f} seconds".format(len(results), s))
-
-            if self.showDurations:
-                for r in sorted(results, key = lambda r : r.getDuration()):
-                    print("- {0} took {1:02.2f} seconds".format(r.testsuite, r.getDuration()))
-
-            self.loopCount += 1
-
-            if len(failures) > 0:
-                print("{0} succeeded and {1} failed:".format(len(results) - len(failures), len(failures)))
-                for r in failures:
-                    print("- {0}".format(r.testsuite))
-                    for (c, ex) in r.getFailed().items():
-                        lines = r.getOutput(c).strip().split('\n')
-                        for i in range(0, min(4, len(lines))):
-                            print("  " + lines[i])
-                        if len(lines) > 4:
-                            print("  [...]")
-                            for i in range(max(4, len(lines) - 8), len(lines)):
+                if len(failures) > 0:
+                    print("{0} succeeded and {1} failed:".format(len(results) - len(failures), len(failures)))
+                    for r in failures:
+                        print("- {0}".format(r.testsuite))
+                        for (c, ex) in r.getFailed().items():
+                            lines = r.getOutput(c).strip().split('\n')
+                            for i in range(0, min(4, len(lines))):
                                 print("  " + lines[i])
-                return 1
-            else:
-                print("{0} succeeded".format(len(results)))
-                if not self.loop:
-                    return 0
+                            if len(lines) > 4:
+                                print("  [...]")
+                                for i in range(max(4, len(lines) - 8), len(lines)):
+                                    print("  " + lines[i])
+                    return 1
+                else:
+                    print("{0} succeeded".format(len(results)))
+                    if not self.loop:
+                        return 0
+        finally:
+            Expect.cleanup() # Cleanup processes which might still be around
 
     def runTestSuite(self, current):
         if self.loop:
@@ -519,7 +527,7 @@ class LocalDriver(Driver):
             return
 
         client = current.testcase.getClientTestCase()
-        for cross in (Mapping.getAll() if self.allCross else [self.cross]):
+        for cross in (Mapping.getAll(self) if self.allCross else [self.cross]):
 
             # Only run cross tests with allCross
             if self.allCross and cross == current.testcase.getMapping():
@@ -528,11 +536,6 @@ class LocalDriver(Driver):
             # Skip if the mapping doesn't provide the test case
             server = current.testcase.getServerTestCase(cross)
             if not server:
-                continue
-
-            if cross and server.getMapping() != cross:
-                if not self.allCross:
-                    current.result.skipped(current, "no server available for `{0}' mapping".format(cross))
                 continue
 
             current.writeln("[ running {0} test - {1} ]".format(current.testcase, time.strftime("%x %X")))
@@ -547,7 +550,7 @@ class LocalDriver(Driver):
             if cross:
                 current.writeln("- Mappings: {0},{1}".format(client.getMapping(), server.getMapping()))
                 current.desc += (" " if current.desc else "") + "cross={0}".format(server.getMapping())
-            if not current.config.canRun(current) or not current.testcase.canRun(current):
+            if not current.config.canRun(current.testsuite.getId(), current) or not current.testcase.canRun(current):
                 current.result.skipped(current, "not supported with this configuration")
                 return
 
@@ -557,11 +560,24 @@ class LocalDriver(Driver):
                 self.runner.runClientSide(client, current, host)
                 success = True
             finally:
-                self.runner.stopServerSide(server, current, success)
+                #
+                # We start a thread to stop the servers, this ensures that stopServerSide doesn't get
+                # interrupted by potential KeyboardInterrupt exceptions which could leave some servers
+                # behind.
+                #
+                t=threading.Thread(target = lambda: self.runner.stopServerSide(server, current, success))
+                t.start()
+                while True:
+                    try:
+                        t.join()
+                        break
+                    except KeyboardInterrupt:
+                        pass # Ignore keyboard interrupts
 
     def runTestCase(self, current):
         if self.cross or self.allCross:
-            current.result.skipped(current, "only client/server tests are ran with cross tests")
+            #current.result.skipped(current, "only client/server tests are ran with cross tests")
+            return
 
         if not current.testcase.getParent():
             current.writeln("[ running {0} test - {1} ]".format(current.testcase, time.strftime("%x %X")))
@@ -571,7 +587,7 @@ class LocalDriver(Driver):
             if confStr:
                 current.writeln("- Config: {0}".format(confStr))
                 current.desc = confStr
-            if not current.config.canRun(current) or not current.testcase.canRun(current):
+            if not current.config.canRun(current.testsuite.getId(), current) or not current.testcase.canRun(current):
                 current.result.skipped(current, "not supported with this configuration")
                 return
 
@@ -582,6 +598,9 @@ class LocalDriver(Driver):
 
     def isInterrupted(self):
         return self.executor.isInterrupted()
+
+    def setInterrupt(self, value):
+        self.executor.setInterrupt(value)
 
     def getTestPort(self, portnum):
         # Return a port number in the range 14100-14199 for the first thread, 14200-14299 for the
@@ -601,9 +620,9 @@ class LocalDriver(Driver):
         return props
 
     def getMappings(self):
-        return Mapping.getAll() if self.allCross else [self.cross] if self.cross else []
+        return Mapping.getAll(self) if self.allCross else [self.cross] if self.cross else []
 
-    def filterOptions(self, testcase, options):
+    def filterOptions(self, options):
         return self.runner.filterOptions(options)
 
 Driver.add("local", LocalDriver)
