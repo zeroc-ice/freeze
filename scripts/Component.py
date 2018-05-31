@@ -75,6 +75,8 @@ class Freeze(Component):
         return Component._useBinDist(self, mapping, current, "FREEZE_BIN_DIST")
 
     def getInstallDir(self, mapping, current):
+        # No binary distribution on Windows, nuget package only.
+        envHomeName = None if isinstance(platform, Windows) else "FREEZE_HOME"
         return Component._getInstallDir(self, mapping, current, "FREEZE_HOME")
 
     def getNugetPackage(self, mapping, compiler):
