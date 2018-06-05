@@ -6,21 +6,25 @@
 
 #include <IceUtil/IceUtil.h>
 #include <Freeze/Freeze.h>
-#include <TestCommon.h>
+#include <TestHelper.h>
 
 using namespace std;
 using namespace Ice;
 using namespace Freeze;
 
-int
-main(int argc, char* argv[])
+class ClientFail : public Test::TestHelper
 {
-    int status = EXIT_SUCCESS;
-    Ice::CommunicatorPtr communicator;
+public:
 
+    void run(int, char**);
+};
+
+void
+ClientFail::run(int argc, char** argv)
+{
     string envName = "db";
 
-    communicator = Ice::initialize(argc, argv);
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
     if(argc != 1)
     {
         envName = argv[1];
@@ -28,37 +32,16 @@ main(int argc, char* argv[])
     }
 
     {
-        Freeze::ConnectionPtr connection;
         try
         {
-            connection = Freeze::createConnection(communicator, envName);
+            Freeze::createConnection(communicator(), envName);
             test(false);
         }
         catch(const IceUtil::FileLockException&)
         {
             cout << "File lock not acquired." << endl;
-            test(true);
-        }
-        catch(const exception& ex)
-        {
-            cerr << "excetpion:\n" << ex.what() << endl;
-            test(false);
-        }
-        catch(...)
-        {
-            test(false);
         }
     }
-
-    try
-    {
-        communicator->destroy();
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
-
-    return status;
 }
+
+DEFINE_TEST(ClientFail)

@@ -6,7 +6,7 @@
 
 #include <Freeze/Freeze.h>
 #include <ComplexDict.h>
-#include <TestCommon.h>
+#include <TestHelper.h>
 #include <NodeI.h>
 #include <Parser.h>
 
@@ -21,7 +21,7 @@ using namespace Freeze;
 // using namespace Complex;
 //
 
-static int
+static void
 validate(const Complex::ComplexDict& m)
 {
     cout << "testing database expressions... " << flush;
@@ -47,8 +47,6 @@ validate(const Complex::ComplexDict& m)
         test(root->calc() == p->first.result);
     }
     cout << "ok" << endl;
-
-    return EXIT_SUCCESS;
 }
 
 static const char* expressions[] =
@@ -61,7 +59,7 @@ static const char* expressions[] =
 };
 static const size_t nexpressions = sizeof(expressions)/sizeof(expressions[0]);
 
-static int
+static void
 populate(Complex::ComplexDict& m)
 {
     cout << "populating the database... " << flush;
@@ -76,21 +74,10 @@ populate(Complex::ComplexDict& m)
         m.put(pair<const Complex::Key, const Complex::NodePtr>(k, root));
     }
     cout << "ok" << endl;
-
-    return EXIT_SUCCESS;
 }
 
 static void
-usage(const char* name)
-{
-    cerr << "Usage: " << name << " [options] validate|populate\n";
-    cerr <<
-        "Options:\n"
-        "--dbdir           Location of the database directory.\n";
-}
-
-static int
-run(int argc, char* argv[], const Ice::CommunicatorPtr& communicator, Complex::ComplexDict& m)
+allTests(int argc, char* argv[], const Ice::CommunicatorPtr& communicator, Complex::ComplexDict& m)
 {
     //
     // Register a factory for the node types.
@@ -102,81 +89,67 @@ run(int argc, char* argv[], const Ice::CommunicatorPtr& communicator, Complex::C
 
     if(argc > 1 && strcmp(argv[1], "populate") == 0)
     {
-        return populate(m);
+        populate(m);
     }
-    if(argc > 1 && strcmp(argv[1], "validate") == 0)
+    else if(argc > 1 && strcmp(argv[1], "validate") == 0)
     {
-        return validate(m);
+        validate(m);
     }
-    usage(argv[0]);
-
-    return EXIT_FAILURE;
+    else
+    {
+        test(false);
+    }
 }
 
-int
-main(int argc, char* argv[])
+class Client : public Test::TestHelper
 {
-    int status;
-    Ice::CommunicatorPtr communicator;
+public:
 
+    void run(int, char**);
+};
+
+void
+Client::run(int argc, char** argv)
+{
     string envName = "db";
 
-    try
+    //
+    // Scan for --dbdir command line argument.
+    //
+    int i = 1;
+    while(i < argc)
     {
-        //
-        // Scan for --dbdir command line argument.
-        //
-        int i = 1;
-        while(i < argc)
+        if(strcmp(argv[i], "--dbdir") == 0)
         {
-            if(strcmp(argv[i], "--dbdir") == 0)
+            if(i + 1 >= argc)
             {
-                if(i +1 >= argc)
-                {
-                    usage(argv[0]);
-                    return EXIT_FAILURE;
-                }
-
-                envName = argv[i+1];
-                envName += "/";
-                envName += "db";
-
-                //
-                // Consume arguments
-                //
-                while(i < argc - 2)
-                {
-                    argv[i] = argv[i+2];
-                    ++i;
-                }
-                argc -= 2;
+                throw invalid_argument("missing required --dbdir argument");
             }
-            else
+
+            envName = argv[i+1];
+            envName += "/";
+            envName += "db";
+
+            //
+            // Consume arguments
+            //
+            while(i < argc - 2)
             {
+                argv[i] = argv[i+2];
                 ++i;
             }
+            argc -= 2;
         }
-
-        communicator = Ice::initialize(argc, argv);
-        Freeze::ConnectionPtr connection = createConnection(communicator, envName);
-        Complex::ComplexDict m(connection, "test");
-        status = run(argc, argv, communicator, m);
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
+        else
+        {
+            ++i;
+        }
     }
 
-    try
-    {
-        communicator->destroy();
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
-
-    return status;
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
+    Freeze::ConnectionPtr connection = createConnection(communicator(), envName);
+    Complex::ComplexDict m(connection, "test");
+    allTests(argc, argv, communicator(), m);
 }
+
+DEFINE_TEST(Client)

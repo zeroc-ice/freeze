@@ -6,6 +6,7 @@
 
 #include <Freeze/Freeze.h>
 #include <TestOld.h>
+#include <TestHelper.h>
 
 using namespace std;
 using namespace Test;
@@ -58,8 +59,8 @@ public:
     }
 };
 
-int
-run(const Ice::CommunicatorPtr& communicator, const string& envName, const string& dbName)
+void
+allTests(const Ice::CommunicatorPtr& communicator, const string& envName, const string& dbName)
 {
     Ice::ValueFactoryPtr factory = new Factory;
     communicator->getValueFactoryManager()->add(factory, "");
@@ -115,45 +116,29 @@ run(const Ice::CommunicatorPtr& communicator, const string& envName, const strin
     }
 
     evictor->deactivate("");
-
-    return EXIT_SUCCESS;
 }
 
-int
-main(int argc, char* argv[])
+class Client : public Test::TestHelper
 {
-    int status;
-    Ice::CommunicatorPtr communicator;
+public:
 
+    void run(int, char**);
+};
+
+void
+Client::run(int argc, char** argv)
+{
     string envName = "db";
 
-    try
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
+    if(argc != 1)
     {
-        communicator = Ice::initialize(argc, argv);
-        if(argc != 1)
-        {
-            envName = argv[1];
-            envName += "/";
-            envName += "db";
-        }
-
-        status = run(communicator, envName, "evictor.db");
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
+        envName = argv[1];
+        envName += "/";
+        envName += "db";
     }
 
-    try
-    {
-        communicator->destroy();
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
-
-    return status;
+    allTests(communicator(), envName, "evictor.db");
 }
+
+DEFINE_TEST(Client)

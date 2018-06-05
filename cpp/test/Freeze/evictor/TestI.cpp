@@ -7,7 +7,7 @@
 #include <Ice/Ice.h>
 #include <Freeze/Freeze.h>
 #include <TestI.h>
-#include <TestCommon.h>
+#include <TestHelper.h>
 
 using namespace std;
 using namespace Ice;

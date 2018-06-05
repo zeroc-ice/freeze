@@ -7,6 +7,7 @@
 #include <IceUtil/IceUtil.h>
 #include <TestI.h>
 #include <Ice/Ice.h>
+#include <TestHelper.h>
 
 using namespace std;
 
@@ -57,8 +58,9 @@ public:
         return new Test::FacetI;
     }
 };
-int
-run(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName)
+
+void
+allTests(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName)
 {
     communicator->getProperties()->setProperty("Factory.Endpoints", "default -p 12010");
     Ice::ObjectAdapterPtr adapter = communicator->createObjectAdapter("Factory");
@@ -73,40 +75,21 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName
     adapter->activate();
 
     communicator->waitForShutdown();
-
-    return EXIT_SUCCESS;
 }
 
-int
-main(int argc, char* argv[])
+class Server : public Test::TestHelper
 {
-    int status;
-    Ice::CommunicatorPtr communicator;
+public:
+
+    void run(int, char**);
+};
+
+void
+Server::run(int argc, char** argv)
+{
     string envName = "db";
-
-    try
-    {
-        communicator = Ice::initialize(argc, argv);
-        status = run(argc, argv, communicator, envName);
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
-
-    if(communicator)
-    {
-        try
-        {
-            communicator->destroy();
-        }
-        catch(const Ice::Exception& ex)
-        {
-            cerr << ex << endl;
-            status = EXIT_FAILURE;
-        }
-    }
-
-    return status;
+    Ice::CommunicatorHolder ich = Ice::initialize(argc, argv);
+    allTests(argc, argv, communicator(), envName);
 }
+
+DEFINE_TEST(Server)
