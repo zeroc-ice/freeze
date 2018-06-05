@@ -66,7 +66,7 @@ def escapeXml(s, attribute=False):
 Component abstract class. The driver and mapping classes rely on the component
 class to provide component specific information.
 """
-class Component:
+class Component(object):
 
     def __init__(self):
         pass
@@ -161,7 +161,7 @@ class Component:
         else:
             return toplevel
 
-class Platform:
+class Platform(object):
 
     def __init__(self):
         self.parseBuildVariables({
@@ -271,7 +271,7 @@ class Linux(Platform):
     def _getBinDir(self, component, process, mapping, current):
         installDir = component.getInstallDir(mapping, current)
         if isinstance(mapping, CSharpMapping):
-            return Platform._getBinDir(self, installDir, process, mapping, current)
+            return Platform._getBinDir(self, component, process, mapping, current)
 
         buildPlatform = current.driver.configs[mapping].buildPlatform
         if self.linuxId in ["ubuntu", "debian"] and buildPlatform in self.foreignPlatforms:
@@ -281,7 +281,7 @@ class Linux(Platform):
     def _getLibDir(self, component, process, mapping, current):
         installDir = component.getInstallDir(mapping, current)
         if isinstance(mapping, CSharpMapping):
-            return Platform._getLibDir(self, installDir, process, mapping, current)
+            return Platform._getLibDir(self, component, process, mapping, current)
 
         buildPlatform = current.driver.configs[mapping].buildPlatform
 
@@ -468,11 +468,11 @@ Mapping abstract class. The mapping class provides mapping specific information.
 Multiple components can share the same mapping rules as long as the layout is
 similar.
 """
-class Mapping:
+class Mapping(object):
 
     mappings = OrderedDict()
 
-    class Config:
+    class Config(object):
 
         @classmethod
         def getSupportedArgs(self):
@@ -963,7 +963,7 @@ class Mapping:
 # A Runnable can be used as a "client" for in test cases, it provides
 # implements run, setup and teardown methods.
 #
-class Runnable:
+class Runnable(object):
 
     def __init__(self, desc=None):
         self.desc = desc
@@ -1759,7 +1759,7 @@ class Result:
 
         out.write(  '</testsuite>\n')
 
-class TestSuite:
+class TestSuite(object):
 
     def __init__(self, path, testcases=None, options=None, libDirs=None, runOnMainThread=False, chdir=False,
                  multihost=True, mapping=None):
@@ -2956,7 +2956,15 @@ class CppMapping(Mapping):
         }[plugin]
 
     def getEnv(self, process, current):
+        #
+        # On Windows, add the testcommon directories to the PATH
+        #
         libPaths = []
+        if isinstance(platform, Windows):
+            testcommon = os.path.join(self.path, "test", "Common")
+            if os.path.exists(testcommon):
+                libPaths.append(os.path.join(testcommon, self.getBuildDir("testcommon", current)))
+
         #
         # On most platforms, we also need to add the library directory to the library path environment variable.
         #
@@ -2995,9 +3003,9 @@ class JavaMapping(Mapping):
         package = "test." + current.testcase.getPath()[len(self.getTestsPath()) + 1:].replace(os.sep, ".")
         javaArgs = self.getJavaArgs(process, current)
         if javaArgs:
-            return "{0} {1} {2}.{3} {4}".format(java, " ".join(javaArgs), package, exe, args)
+            return "{0} {1} -Dtest.class={2}.{3} test.TestDriver {4}".format(java, " ".join(javaArgs), package, exe, args)
         else:
-            return "{0} {1}.{2} {3}".format(java, package, exe, args)
+            return "{0} -Dtest.class={1}.{2} test.TestDriver {3}".format(java, package, exe, args)
 
     def getJavaArgs(self, process, current):
         return []
@@ -3078,7 +3086,7 @@ class AndroidMappingMixin():
         self.baseclass = baseclass
 
     def getSSLProps(self, process, current):
-        props = super(baseclass, self).getSSLProps(self, process, current)
+        props = super(self.baseclass, self).getSSLProps(process, current)
         props.update({
             "IceSSL.KeystoreType" : "BKS",
             "IceSSL.TruststoreType" : "BKS",
@@ -3245,7 +3253,7 @@ class CppBasedMapping(Mapping):
 
     def getEnv(self, process, current):
         env = Mapping.getEnv(self, process, current)
-        if not isinstance(platform, Darwin) and component.getInstallDir(self, current) != platform.getInstallDir():
+        if component.getInstallDir(self, current) != platform.getInstallDir():
             # If not installed in the default platform installation directory, add
             # the C++ library directory to the library path
             env[platform.getLdPathEnvName()] = component.getLibDir(process, Mapping.getByName("cpp"), current)

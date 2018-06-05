@@ -8,17 +8,8 @@ package test.Freeze.evictor;
 import test.Freeze.evictor.Test.*;
 import java.io.PrintWriter;
 
-public class Client extends test.Util.Application
+public class Client extends test.TestHelper
 {
-    private static void
-    test(boolean b)
-    {
-        if(!b)
-        {
-            throw new RuntimeException();
-        }
-    }
-
     static class ReadThread extends  Thread
     {
         ReadThread(ServantPrx[] servants)
@@ -410,8 +401,8 @@ public class Client extends test.Util.Application
         private final java.util.Random _random;
     }
 
-    private int
-    run(String[] args, PrintWriter out, boolean transactional, boolean shutdown)
+    private void
+    allTests(PrintWriter out, boolean transactional, boolean shutdown)
         throws AlreadyRegisteredException, NotRegisteredException, EvictorDeactivatedException
     {
         Ice.Communicator communicator = communicator();
@@ -1004,57 +995,32 @@ public class Client extends test.Util.Application
         {
             factory.shutdown();
         }
-
-        return 0;
     }
 
-    public int
+    public void
     run(String[] args)
     {
-        PrintWriter out = getWriter();
-        int status = 0;
-        try
+        Ice.StringSeqHolder argsH = new Ice.StringSeqHolder(args);
+        Ice.Properties properties = createTestProperties(argsH);
+        properties.setProperty("Ice.Package.Test", "test.Freeze.evictor");
+
+        try(Ice.Communicator communicator = initialize(properties))
         {
-            status = run(args, out, false, false);
-            if(status == 0)
-            {
-                status = run(args, out, true, true);
-            }
+            PrintWriter out = getWriter();
+            allTests(out, false, false);
+            allTests(out, true, true);
         }
         catch(AlreadyRegisteredException ex)
         {
-            ex.printStackTrace(out);
-            status = 1;
+            throw new RuntimeException(ex);
         }
         catch(NotRegisteredException ex)
         {
-            ex.printStackTrace(out);
-            status = 1;
+            throw new RuntimeException(ex);
         }
         catch(EvictorDeactivatedException ex)
         {
-            ex.printStackTrace(out);
-            status = 1;
+            throw new RuntimeException(ex);
         }
-        return status;
-    }
-
-    protected Ice.InitializationData
-    getInitData(Ice.StringSeqHolder argsH)
-    {
-        Ice.InitializationData initData = createInitializationData() ;
-        initData.properties = Ice.Util.createProperties(argsH);
-        initData.properties.setProperty("Ice.Package.Test", "test.Freeze.evictor");
-        return initData;
-    }
-
-    public static void
-    main(String[] args)
-    {
-        Client c = new Client();
-        int status = c.main("Client", args);
-
-        System.gc();
-        System.exit(status);
     }
 }

@@ -12,19 +12,11 @@ import java.io.EOFException;
 import java.io.UTFDataFormatException;
 import java.io.IOException;
 
-public class ClientFail
+public class ClientFail extends test.TestHelper
 {
-    private static void
-    test(boolean b)
-    {
-        if(!b)
-        {
-            throw new RuntimeException();
-        }
-    }
-
-    public static void
-    main(String[] argvs)
+    @Override
+    public void
+    run(String[] argvs)
     {
 
         try
