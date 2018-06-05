@@ -22,6 +22,9 @@ class FreezeCppMapping(CppMapping):
         env = CppMapping.getEnv(self, process, current)
         if isinstance(platform, Windows):
             env["PATH"] += os.pathsep + ice.getLibDir(process, process.getMapping(current), current)
+            env["PATH"] += os.pathsep + os.path.join(toplevel, "ice", "cpp", "test", "Common", "msbuild",
+                                                     current.config.buildPlatform,
+                                                     current.config.buildConfig)
         return env
 
 class FreezeJavaMapping(JavaCompatMapping):

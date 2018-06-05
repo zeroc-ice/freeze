@@ -2956,15 +2956,7 @@ class CppMapping(Mapping):
         }[plugin]
 
     def getEnv(self, process, current):
-        #
-        # On Windows, add the testcommon directories to the PATH
-        #
         libPaths = []
-        if isinstance(platform, Windows):
-            testcommon = os.path.join(self.path, "test", "Common")
-            if os.path.exists(testcommon):
-                libPaths.append(os.path.join(testcommon, self.getBuildDir("testcommon", current)))
-
         #
         # On most platforms, we also need to add the library directory to the library path environment variable.
         #
