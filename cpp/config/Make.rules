@@ -38,7 +38,7 @@ endef
 define make-cpp-test-project
 $1_slicecompiler        := slice2cpp
 $1_sliceflags           += -I$(ice_slicedir) -I$1
-$1_cppflags             += -I$1/generated -Itest/include -I$1 $(ice_cppflags) $(freeze_cpp_cppflags)
+$1_cppflags             += -I$1/generated -I../ice/cpp/test/include -I$1 $(ice_cppflags) $(freeze_cpp_cppflags)
 $1_extensions           := make-freeze-project
 $1_component_extensions := make-freeze-components
 $(make-project)
@@ -50,6 +50,6 @@ endef
 #
 define create-cpp-test-project
 $1_srcext               := cpp
-$1_dependencies         := $$(or $$($1_dependencies),Freeze Ice)
+$1_dependencies         := $$(or $$($1_dependencies),TestCommon Freeze Ice)
 $(create-test-project)
 endef
