@@ -60,7 +60,7 @@ public:
 };
 
 void
-allTests(int, char**, const Ice::CommunicatorPtr& communicator, const string& envName)
+allTests(const Ice::CommunicatorPtr& communicator, const string& envName)
 {
     communicator->getProperties()->setProperty("Factory.Endpoints", "default -p 12010");
     Ice::ObjectAdapterPtr adapter = communicator->createObjectAdapter("Factory");
@@ -88,8 +88,8 @@ void
 Server::run(int argc, char** argv)
 {
     string envName = "db";
-    Ice::CommunicatorHolder ich = Ice::initialize(argc, argv);
-    allTests(argc, argv, communicator(), envName);
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
+    allTests(communicator(), envName);
 }
 
 DEFINE_TEST(Server)

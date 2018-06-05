@@ -452,7 +452,7 @@ private:
 };
 
 void
-allTests(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, bool shutdown)
+allTests(const Ice::CommunicatorPtr& communicator, bool transactional, bool shutdown)
 {
     string ref = "factory:default -p 12010";
     Ice::ObjectPrx base = communicator->stringToProxy(ref);
@@ -991,9 +991,9 @@ public:
 void
 Client::run(int argc, char** argv)
 {
-    Ice::CommunicatorHolder ich = Ice::initialize(argc, argv);
-    allTests(argc, argv, communicator(), false, false);
-    allTests(argc, argv, communicator(), true, true);
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
+    allTests(communicator(), false, false);
+    allTests(communicator(), true, true);
 }
 
 DEFINE_TEST(Client)
