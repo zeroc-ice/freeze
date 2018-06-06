@@ -15,7 +15,7 @@
     <Import Project="$(MSBuildThisFileDirectory)\..\..\ice\config\Ice.common.targets"/>
     <!-- Require Ice targets -->
     <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v120'">
-      <IceTargets>icexml;slice2java</IceTargets>
+      <IceTargets>icexml;slice2java;icediscovery;icessl;icelocatordiscovery</IceTargets>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -23,7 +23,7 @@
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(DefaultPlatformToolset)' == 'v140'">
-      <IceTargets>c++98\icexml;c++98\slice2java</IceTargets>
+      <IceTargets>c++98\icexml;c++98\slice2java;c++98\icessl;c++98\icediscovery;c++98\icelocatordiscovery</IceTargets>
     </PropertyGroup>
 
     <!-- Restore Nuget packages -->
