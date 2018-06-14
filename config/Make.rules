@@ -131,8 +131,8 @@ db_libdir               ?= $(wildcard /usr/lib64/db53)
 ifeq ($(filter all cpp,$(FREEZE_BIN_DIST)),)
 shared_excludes         = IceUtil Slice
 $(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/src/,IceUtil Slice)))
-$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/test/,Common)))
 endif
+$(eval $(call load-dependencies,$(addprefix $(top_srcdir)/ice/cpp/test/,Common)))
 
 ifeq ($(filter all cpp,$(ICE_BIN_DIST) $(FREEZE_BIN_DIST)),)
 $(eval $(call create-project-dependencies,ice,$(top_srcdir)/ice,cpp,cpp,Ice))
