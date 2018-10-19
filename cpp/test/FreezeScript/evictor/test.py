@@ -17,18 +17,18 @@ class FreezeScriptEvictorTestCase(ClientTestCase):
 
     def runClientSide(self, current):
 
-        dbdir = os.path.join(current.testcase.getPath(), "db")
-        check_dbdir = os.path.join(current.testcase.getPath(), "db_check")
-        tmp_dbdir = os.path.join(current.testcase.getPath(), "db_tmp")
+        dbdir = os.path.join(current.testsuite.getPath(), "db")
+        check_dbdir = os.path.join(current.testsuite.getPath(), "db_check")
+        tmp_dbdir = os.path.join(current.testsuite.getPath(), "db_tmp")
 
         current.write("creating test database... ")
         SimpleClient(exe="makedb").run(current)
         current.writeln("ok")
 
-        testold = os.path.join(current.testcase.getPath(), "TestOld.ice")
-        testnew = os.path.join(current.testcase.getPath(), "TestNew.ice")
-        transformxml = os.path.join(current.testcase.getPath(), "transform.xml")
-        checkxml = os.path.join(current.testcase.getPath(), "check.xml")
+        testold = os.path.join(current.testsuite.getPath(), "TestOld.ice")
+        testnew = os.path.join(current.testsuite.getPath(), "TestNew.ice")
+        transformxml = os.path.join(current.testsuite.getPath(), "transform.xml")
+        checkxml = os.path.join(current.testsuite.getPath(), "check.xml")
 
         transformdb = TransformDB()
 

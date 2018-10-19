@@ -63,11 +63,8 @@ class Ice(Component):
             mapping = Mapping.getByName("ice/cpp") # Use Ice from submodule
         return Component._getInstallDir(self, mapping, current, "ICE_HOME")
 
-    def getNugetPackage(self, mapping, compiler):
-        return "zeroc.ice.{0}".format(compiler)
-
-    def getNugetPackageVersion(self, mapping):
-        return "3.7.1"
+    def getNugetPackageVersionFile(self, mapping):
+        return os.path.join(mapping.getPath(), "test", "Freeze", "complex", "msbuild", "client", "packages.config")
 
 class Freeze(Component):
 
@@ -82,14 +79,8 @@ class Freeze(Component):
         envHomeName = None if isinstance(platform, Windows) else "FREEZE_HOME"
         return Component._getInstallDir(self, mapping, current, "FREEZE_HOME")
 
-    def getNugetPackage(self, mapping, compiler):
-        return "zeroc.freeze.{0}".format(compiler)
-
-    def getNugetPackageVersion(self, mapping):
-        if not self.nugetVersion:
-            with open(os.path.join(toplevel, "cpp", "msbuild", "zeroc.freeze.v140.nuspec"), "r") as configFile:
-                self.nugetVersion = re.search("<version>(.*)</version>", configFile.read()).group(1)
-        return self.nugetVersion
+    def getNugetPackageVersionFile(self, mapping):
+        return os.path.join(mapping.getPath(), "test", "Freeze", "complex", "msbuild", "client", "packages.config")
 
 component = Freeze()
 ice = Ice()
@@ -97,6 +88,6 @@ ice = Ice()
 #
 # Supported mappings
 #
-Mapping.add("ice/cpp", CppMapping(path = os.path.join(toplevel, "ice", "cpp")))
-Mapping.add("cpp", FreezeCppMapping())
-Mapping.add("java", FreezeJavaMapping())
+Mapping.add("ice/cpp", CppMapping(path = os.path.join(toplevel, "ice", "cpp")), component)
+Mapping.add("cpp", FreezeCppMapping(), component)
+Mapping.add("java", FreezeJavaMapping(), component)

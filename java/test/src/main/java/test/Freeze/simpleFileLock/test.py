@@ -20,7 +20,7 @@ class FreezeSimpleFileLockTestCase(ClientTestCase):
         #
         # Ensure that the file lock exists.
         #
-        assert(os.path.exists(os.path.join(current.testcase.getPath(), "file.lock")))
+        assert(os.path.exists(os.path.join(current.testsuite.getPath(), "file.lock")))
 
         clientFail = SimpleClient("ClientFail")
         clientFail.start(current)

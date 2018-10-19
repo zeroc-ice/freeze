@@ -19,14 +19,14 @@ class FreezeScriptDBMapTestCase(ClientTestCase):
 
         transformdb = TransformDB()
 
-        dbdir = os.path.join(current.testcase.getPath(), "db")
-        init_dbdir = os.path.join(current.testcase.getPath(), "db_init")
-        check_dbdir = os.path.join(current.testcase.getPath(), "db_check")
-        tmp_dbdir = os.path.join(current.testcase.getPath(), "db_tmp")
+        dbdir = os.path.join(current.testsuite.getPath(), "db")
+        init_dbdir = os.path.join(current.testsuite.getPath(), "db_init")
+        check_dbdir = os.path.join(current.testsuite.getPath(), "db_check")
+        tmp_dbdir = os.path.join(current.testsuite.getPath(), "db_tmp")
 
         regex1 = re.compile(r"_old\.ice$", re.IGNORECASE)
         files = []
-        for file in os.listdir(os.path.join(current.testcase.getPath(), "fail")):
+        for file in os.listdir(os.path.join(current.testsuite.getPath(), "fail")):
             if(regex1.search(file)):
                 files.append(file)
 
@@ -45,15 +45,15 @@ class FreezeScriptDBMapTestCase(ClientTestCase):
                 value = "int"
 
             # command = '"' + transformdb +
-            #           '" --old "' + os.path.join(current.testcase.getPath(), "fail", oldfile) +
-            #           '" --new "' + os.path.join(current.testcase.getPath(), "fail", newfile) +
+            #           '" --old "' + os.path.join(current.testsuite.getPath(), "fail", oldfile) +
+            #           '" --new "' + os.path.join(current.testsuite.getPath(), "fail", newfile) +
             #           '" -o tmp.xml --key string --value ' + value
 
             transformdb.run(current, args=["--old", "{testdir}/fail/" + oldfile, "--new", "{testdir}/fail/" + newfile,
                            "-o", "tmp.xml", "--key", "string", "--value", value], exitstatus=1)
 
             lines1 = transformdb.getOutput(current).strip().split("\n")
-            lines2 = open(os.path.join(current.testcase.getPath(), "fail", oldfile.replace("_old.ice", ".err")), "r").readlines()
+            lines2 = open(os.path.join(current.testsuite.getPath(), "fail", oldfile.replace("_old.ice", ".err")), "r").readlines()
             if len(lines1) != len(lines2):
                 raise RuntimeError("failed! (1)")
 
@@ -73,10 +73,10 @@ class FreezeScriptDBMapTestCase(ClientTestCase):
         SimpleClient(exe="makedb").run(current)
         current.writeln("ok")
 
-        testold = os.path.join(current.testcase.getPath(), "TestOld.ice")
-        testnew = os.path.join(current.testcase.getPath(), "TestNew.ice")
-        initxml = os.path.join(current.testcase.getPath(), "init.xml")
-        checkxml = os.path.join(current.testcase.getPath(), "check.xml")
+        testold = os.path.join(current.testsuite.getPath(), "TestOld.ice")
+        testnew = os.path.join(current.testsuite.getPath(), "TestNew.ice")
+        initxml = os.path.join(current.testsuite.getPath(), "init.xml")
+        checkxml = os.path.join(current.testsuite.getPath(), "check.xml")
 
         current.write("initializing test database... ")
         transformdb.run(current,

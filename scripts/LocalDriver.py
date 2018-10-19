@@ -410,7 +410,7 @@ class LocalDriver(Driver):
                     #
                     # Sort the test suites to run tests in the following order.
                     #
-                    runOrder = component.getRunOrder()
+                    runOrder = self.component.getRunOrder()
                     def testsuiteKey(testsuite):
                         for k in runOrder:
                             if testsuite.getId().startswith(k + '/'):
@@ -423,7 +423,7 @@ class LocalDriver(Driver):
                             continue
                         if testsuite.getId() == "Ice/echo":
                             continue
-                        elif (self.cross or self.allCross) and not component.isCross(testsuite.getId()):
+                        elif (self.cross or self.allCross) and not self.component.isCross(testsuite.getId()):
                             continue
                         elif isinstance(self.runner, RemoteTestCaseRunner) and not testsuite.isMultiHost():
                             continue
@@ -533,6 +533,10 @@ class LocalDriver(Driver):
             if self.allCross and cross == current.testcase.getMapping():
                 continue
 
+            # Skip if the cross test server mapping is another mapping than the cross mapping
+            if cross and cross != cross.getServerMapping():
+                continue
+
             # Skip if the mapping doesn't provide the test case
             server = current.testcase.getServerTestCase(cross)
             if not server:
@@ -565,11 +569,20 @@ class LocalDriver(Driver):
                 # interrupted by potential KeyboardInterrupt exceptions which could leave some servers
                 # behind.
                 #
-                t=threading.Thread(target = lambda: self.runner.stopServerSide(server, current, success))
+                failure = []
+                def stopServerSide():
+                    try:
+                        self.runner.stopServerSide(server, current, success)
+                    except Exception as ex:
+                        failure.append(ex)
+
+                t=threading.Thread(target = stopServerSide)
                 t.start()
                 while True:
                     try:
                         t.join()
+                        if failure:
+                            raise failure[0]
                         break
                     except KeyboardInterrupt:
                         pass # Ignore keyboard interrupts
