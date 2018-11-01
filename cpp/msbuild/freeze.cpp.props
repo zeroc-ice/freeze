@@ -36,4 +36,11 @@
         </Link>
     </ItemDefinitionGroup>
 
+    <!-- Disable additional warnings with VS2013 -->
+    <ItemDefinitionGroup Condition="'$(DefaultPlatformToolset)'=='v120'">
+      <ClCompile>
+        <DisableSpecificWarnings>%(DisableSpecificWarnings);4510;4610</DisableSpecificWarnings>
+      </ClCompile>
+    </ItemDefinitionGroup>
+
 </Project>
