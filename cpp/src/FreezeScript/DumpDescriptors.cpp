@@ -1563,9 +1563,9 @@ FreezeScript::SymbolTableI::getConstantValue(const string& name) const
                     string enumerator = name.substr(lastSep + 2);
                     Slice::EnumList enums = container->enums();
 
-                    for(Slice::EnumList::iterator p = enums.begin(); p != enums.end(); ++p)
+                    for(Slice::EnumList::iterator q = enums.begin(); q != enums.end(); ++q)
                     {
-                        Slice::ContainedList enumeratorList = (*p)->lookupContained(enumerator, false);
+                        Slice::ContainedList enumeratorList = (*q)->lookupContained(enumerator, false);
                         if(!enumeratorList.empty())
                         {
                             l.push_back(enumeratorList.front());

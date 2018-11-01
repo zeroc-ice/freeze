@@ -364,7 +364,7 @@ writeDictH(const string& name, const Dict& dict, const vector<IndexType> indexTy
         if(!member.empty())
         {
             string capitalizedMember = member;
-            capitalizedMember[0] = toupper(static_cast<unsigned char>(capitalizedMember[0]));
+            capitalizedMember[0] = static_cast<char>(toupper(static_cast<unsigned char>(capitalizedMember[0])));
             capitalizedMembers.push_back(capitalizedMember);
         }
         else
@@ -580,7 +580,7 @@ writeDictC(const string& name, const string& absolute, const Dict& dict, const v
         if(!member.empty())
         {
             string capitalizedMember = member;
-            capitalizedMember[0] = toupper(static_cast<unsigned char>(capitalizedMember[0]));
+            capitalizedMember[0] = static_cast<char>(toupper(static_cast<unsigned char>(capitalizedMember[0])));
             capitalizedMembers.push_back(capitalizedMember);
         }
         else

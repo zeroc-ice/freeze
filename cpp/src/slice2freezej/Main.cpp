@@ -425,7 +425,7 @@ FreezeGenerator::generate(UnitPtr& u, const Dict& dict)
 
             members.push_back(member);
             string capitalizedMember = member;
-            capitalizedMember[0] = toupper(static_cast<unsigned char>(capitalizedMember[0]));
+            capitalizedMember[0] = static_cast<char>(toupper(static_cast<unsigned char>(capitalizedMember[0])));
             capitalizedMembers.push_back(capitalizedMember);
             indexNames.push_back(member);
         }
