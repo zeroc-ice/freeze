@@ -30,9 +30,10 @@ class FreezeCppMapping(CppMapping):
 class FreezeJavaMapping(JavaCompatMapping):
 
     def getJavaArgs(self, process, current):
+        args = JavaCompatMapping.getJavaArgs(self, process, current)
         if process.isFromBinDir():
-            return []
-        return ["-Djava.library.path={0}".format(self.getBerkeleyDB(process, current))]
+            return args
+        return args + ["-Djava.library.path={0}".format(self.getBerkeleyDB(process, current))]
 
     def getEnv(self, process, current):
         env = JavaCompatMapping.getEnv(self, process, current)
