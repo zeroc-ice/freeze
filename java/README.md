@@ -76,8 +76,8 @@ If you installed Slice to Java (Ice) or Slice to Freeze Java (Freeze C++)
 in another directory, you need to first set `ICE_HOME` or `FREEZE_HOME`, for
 example:
 ```
-export ICE_HOME=/opt/Ice-3.7.1
-export FREEZE_HOME=/opt/Freeze-3.7.1
+export ICE_HOME=/opt/Ice-3.7.2
+export FREEZE_HOME=/opt/Freeze-3.7.2
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
@@ -98,7 +98,7 @@ This will download and use a binary NuGet package for Ice that includes the
 Slice to Java compiler. If you want to use another Ice installation, set
 `ICE_HOME`, for example:
 ```
-set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.1
+set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.2
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
