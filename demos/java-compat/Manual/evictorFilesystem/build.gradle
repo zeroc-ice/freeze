@@ -21,10 +21,10 @@ sourceSets {
 }
 
 dependencies {
-    compile "com.zeroc:ice-compat:${iceVersion}"
-    compile "com.zeroc:freeze-compat:${iceVersion}"
-    runtime files(dbJar)
-    runtime "org.apache.commons:commons-compress:1.14"
+    implementation "com.zeroc:ice-compat:${iceVersion}"
+    implementation "com.zeroc:freeze-compat:${iceVersion}"
+    implementation files(dbJar)
+    runtimeOnly "org.apache.commons:commons-compress:1.14"
 }
 
 // Don't create the default jar.

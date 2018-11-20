@@ -114,5 +114,5 @@ slice {
 }
 
 ext.localDependency = { artifactId ->
-    return artifactId == "freeze-compat" ? project(":${artifactId}") :"com.zeroc:${artifactId}:${project.version}"
+    return artifactId == "freeze-compat" ? project(":${artifactId}") : "com.zeroc:${artifactId}:${project.version}"
 }

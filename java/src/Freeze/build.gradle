@@ -39,8 +39,8 @@ slice {
 }
 
 dependencies {
-    compile localDependency("ice-compat")
-    compile files(dbJar)
+    implementation localDependency("ice-compat")
+    implementation files(dbJar)
 }
 
 apply from: "${rootProject.projectDir}/gradle/library.gradle"

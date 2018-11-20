@@ -86,13 +86,11 @@ This demo provides four programs:
 
    on Linux and macOS:
    ```
-   export PATH=<ICE_HOME>/bin;$PATH
-   export PATH=<FREEZE_HOME>/bin;$PATH
+   export PATH=$FREEZE_HOME/bin;$PATH
    ```
 
    on Windows:
    ```
-   set PATH=..\..\packages\zeroc.ice.v140.3.7.1\build\native\bin\x64\Release;%PATH%
    set PATH=..\..\packages\zeroc.freeze.v140.3.7.1\build\native\bin\x64\Release;%PATH%
    ```
 

@@ -11,7 +11,7 @@ ext.isMacOS = os.toLowerCase().contains("mac os x")
 buildscript {
     repositories {
         maven {
-        url "https://plugins.gradle.org/m2/"
+            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
@@ -71,9 +71,9 @@ subprojects {
             }
         }
 
-        if(this.devRepo) {
+        if(project.devRepo) {
             maven {
-                url this.devRepo
+                url project.devRepo
             }
         }
 
@@ -100,6 +100,6 @@ subprojects {
 // Used to build the gradle wrapper to automatically download and install
 // the version of gradle needed to build Ice.
 //
-task wrapper(type: Wrapper) {
-    gradleVersion = "4.7"
+wrapper {
+    gradleVersion = "4.10.2"
 }
