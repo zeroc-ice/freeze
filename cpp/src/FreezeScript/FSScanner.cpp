@@ -515,11 +515,9 @@ char *freeze_script_text;
 #line 1 "Scanner.l"
 #line 2 "Scanner.l"
 
-// **********************************************************************
 //
-// Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <FreezeScript/GrammarUtil.h>        // Before Grammar.h, so that YYSTYPE is defined
 #include <FreezeScript/FSGrammar.h>

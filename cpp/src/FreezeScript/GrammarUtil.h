@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_SCRIPT_GRAMMAR_UTIL_H
 #define FREEZE_SCRIPT_GRAMMAR_UTIL_H

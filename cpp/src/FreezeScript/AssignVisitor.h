@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_SCRIPT_ASSIGN_VISITOR_H
 #define FREEZE_SCRIPT_ASSIGN_VISITOR_H

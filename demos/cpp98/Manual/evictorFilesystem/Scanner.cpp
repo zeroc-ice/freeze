@@ -488,11 +488,9 @@ char *yytext;
 #line 1 "Scanner.l"
 #line 2 "Scanner.l"
 
-// **********************************************************************
 //
-// Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <IceUtil/PushDisableWarnings.h>
 #include <Parser.h>

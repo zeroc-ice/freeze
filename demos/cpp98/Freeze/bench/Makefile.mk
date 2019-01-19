@@ -1,8 +1,6 @@
-# **********************************************************************
 #
-# Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+# Copyright (c) ZeroC, Inc. All rights reserved.
 #
-# **********************************************************************
 
 $(demo)_client_sources          := Test.ice Client.cpp
 $(demo)_client_slice2freeze     := BenchTypes

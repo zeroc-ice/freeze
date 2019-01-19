@@ -79,11 +79,9 @@
 #line 1 "../FreezeScript/Grammar.y"
 
 
-// **********************************************************************
 //
-// Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <FreezeScript/GrammarUtil.h>
 

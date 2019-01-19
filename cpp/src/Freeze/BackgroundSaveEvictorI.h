@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-present ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_BACKGROUND_SAVE_EVICTOR_I_H
 #define FREEZE_BACKGROUND_SAVE_EVICTOR_I_H
