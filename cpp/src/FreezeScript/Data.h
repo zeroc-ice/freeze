@@ -574,7 +574,7 @@ public:
 
 private:
 
-    ObjectRefPtr _ref;
+    ObjectRefPtr _objRef;
 };
 typedef IceUtil::Handle<ReadObjectCallback> ReadObjectCallbackPtr;
 

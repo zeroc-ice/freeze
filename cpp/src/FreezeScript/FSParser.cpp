@@ -59,6 +59,7 @@ FreezeScript::DataFactoryPtr FreezeScript::parseDataFactory;
 FreezeScript::ErrorReporterPtr FreezeScript::parseErrorReporter;
 FreezeScript::NodePtr FreezeScript::parseResult;
 int FreezeScript::parseLine;
+int freeze_script_parse();
 
 namespace
 {

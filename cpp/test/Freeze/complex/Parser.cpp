@@ -11,6 +11,7 @@ using namespace std;
 // The current bison/flex parser
 //
 Parser* parser = 0;
+int yyparse();
 
 Parser::Parser()
 {

@@ -2379,7 +2379,7 @@ FreezeScript::ObjectRef::marshal(Ice::OutputStream* out) const
 }
 
 FreezeScript::ReadObjectCallback::ReadObjectCallback(const ObjectRefPtr& ref) :
-    _ref(ref)
+    _objRef(ref)
 {
 }
 
@@ -2391,7 +2391,7 @@ FreezeScript::ReadObjectCallback::invoke(const Ice::ObjectPtr& p)
         ObjectReaderPtr reader = ObjectReaderPtr::dynamicCast(p);
         assert(reader);
 
-        _ref->setValue(reader->getValue());
+        _objRef->setValue(reader->getValue());
     }
 }
 

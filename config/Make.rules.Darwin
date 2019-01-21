@@ -31,12 +31,21 @@ iphonesimulator_targetdir       = $(if $(filter %/build,$5),/iphonesimulator)
 # If building objects for a shared library, enable fPIC
 shared_cppflags = $(if $(filter-out program,$($1_target)),-fPIC) -fvisibility=hidden
 
-cppflags        = -Wall -Wdeprecated -Werror -pthread $(if $(filter yes,$(OPTIMIZE)),-O2 -DNDEBUG,-g)
+cppflags        = -Wall -Wextra -Wshadow -Wshadow-all -Wredundant-decls \
+                  -Wdeprecated -Wstrict-prototypes -Werror -pthread \
+                  $(if $(filter yes,$(OPTIMIZE)),-O2 -DNDEBUG,-g)
+
 ifeq ($(MAXWARN),yes)
-    cppflags	+= -Wextra -Wshadow -Wredundant-decls -Wweak-vtables
+    cppflags	+=  -Wweak-vtables
+endif
+
+# -Wshadow issues false warnings with clang 3.x (Apple LLVM 9.0)
+ifeq ($(shell clang -v 2>&1 | sed -ne 's/.*version \([0-9]*\)\.\([0-9]*\).*/\1\2/p'),90)
+    cppflags    := $(filter-out -Wshadow -Wshadow-all,$(cppflags))
 endif
 
 nodeprecatedwarnings-cppflags := -Wno-deprecated-declarations
+nounusedparameter-cppflags    := -Wno-unused-parameter
 
 loader_path     = @loader_path
 
