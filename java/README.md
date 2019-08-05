@@ -76,8 +76,8 @@ If you installed Slice to Java (Ice) or Slice to Freeze Java (Freeze C++)
 in another directory, you need to first set `ICE_HOME` or `FREEZE_HOME`, for
 example:
 ```
-export ICE_HOME=/opt/Ice-3.7.2
-export FREEZE_HOME=/opt/Freeze-3.7.2
+export ICE_HOME=/opt/Ice-3.7.3
+export FREEZE_HOME=/opt/Freeze-3.7.3
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
@@ -98,7 +98,7 @@ This will download and use a binary NuGet package for Ice that includes the
 Slice to Java compiler. If you want to use another Ice installation, set
 `ICE_HOME`, for example:
 ```
-set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.2
+set ICE_HOME=C:\Program Files\ZeroC\Ice-3.7.3
 ```
 
 If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
@@ -125,5 +125,5 @@ python allTests.py
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
-[1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.2
+[1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.3
 [2]: http://gradle.org

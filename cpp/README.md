@@ -168,5 +168,5 @@ If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
 [1]: https://zeroc.com/downloads/ice
-[2]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.2
+[2]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.3
 [3]: https://www.oracle.com/database/berkeley-db/index.html
