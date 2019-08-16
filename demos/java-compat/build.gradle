@@ -93,11 +93,3 @@ subprojects {
         buildDir.listFiles({d, f ->f != 'generated-src'} as FilenameFilter).each { excludeDirs += it }
     }
 }
-
-//
-// Used to build the gradle wrapper to automatically download and install
-// the version of gradle needed to build Ice.
-//
-wrapper {
-    gradleVersion = "4.10.2"
-}
