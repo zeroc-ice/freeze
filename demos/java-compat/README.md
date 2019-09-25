@@ -74,4 +74,4 @@ application, for example:
 java -Djava.library.path=/usr/local/opt/berkeley-db@5.3/lib -jar build/libs/server.jar
 ```
 
-[1]: https://doc.zeroc.com/display/Freeze37/Freeze+Manual
+[1]: https://doc.zeroc.com/freeze/3.7/freeze-manual

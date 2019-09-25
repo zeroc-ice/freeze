@@ -118,5 +118,5 @@ set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.freeze.v140.3.7.3\build
 
 Then refer to the README.md file in each demo directory for usage instructions.
 
-[1]: https://doc.zeroc.com/display/Freeze37/Freeze+Manual
+[1]: https://doc.zeroc.com/freeze/3.7/freeze-manual
 [2]: https://github.com/zeroc-ice/ice-builder-visualstudio

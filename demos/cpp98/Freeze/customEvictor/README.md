@@ -79,4 +79,4 @@ cache misses requires more data to be read from disk. With a cache size of
 100MB, the performance difference between the two evictor implementations
 becomes very small.
 
-[1]: https://doc.zeroc.com/pages/viewpage.action?pageId=18256198#ImplementingaServantEvictorinC++-TheEvictorBaseClassinC++
+[1]: https://doc.zeroc.com/ice/3.7/best-practices/servant-evictors/implementing-a-servant-evictor-in-c++#ImplementingaServantEvictorinC++-TheEvictorBaseClassinC++
