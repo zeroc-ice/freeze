@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/zeroc-ice/freeze.svg?branch=master)](https://travis-ci.org/zeroc-ice/freeze)
+[![Build Status](https://travis-ci.org/zeroc-ice/freeze.svg?branch=3.7)](https://travis-ci.org/zeroc-ice/freeze)
 # Freeze
 
 The `Freeze` persistence service allows you to store Ice objects in [Oracle Berkeley DB][1], with all the features you expect from a robust database - transactions, hot backups, indexing, and more.
