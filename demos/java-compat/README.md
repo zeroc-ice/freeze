@@ -41,7 +41,7 @@ instructions to build these JARs files.
 
 ### Building the Demos
 
-The build system for the Java sample programs uses [Gradle](http://gradle.org)
+The build system for the Java sample programs uses [Gradle](https://gradle.org)
 and includes a wrapper script or batch file that automatically downloads Gradle
 and all other required components.
 

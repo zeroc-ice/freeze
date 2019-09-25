@@ -47,7 +47,13 @@ downloads the `berkeley.db.java7` NuGet automatically).
 
 ## Compiling Freeze for Java on Linux or macOS
 
-You need to install Berkeley DB Java before building Freeze for Java.
+If `freeze/ice` is an empty directory, fetch the `ice` submodule with:
+```
+cd freeze
+git submodule update --init
+```
+
+You also need to install Berkeley DB Java before building Freeze for Java.
 
 On Linux, the build system searches in standard locations for the following
 JAR files:
@@ -85,6 +91,12 @@ If you leave `ICE_BIN_DIST` resp. `FREEZE_BIN_DIST` unset, you must build
 `freeze/cpp` directory.
 
 ## Compiling Freeze for Java on Windows
+
+If `freeze/ice` is an empty directory, fetch the `ice` submodule with:
+```
+cd freeze
+git submodule update --init
+```
 
 You can build Freeze for Java using NuGet packages that the build system
 downloads automatically from nuget.org:
@@ -125,5 +137,5 @@ python allTests.py
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
-[1]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.3
-[2]: http://gradle.org
+[1]: https://doc.zeroc.com/rel/freeze-releases/freeze-3-7/freeze-3-7-3-release-notes/supported-platforms-for-freeze-3-7-3
+[2]: https://gradle.org

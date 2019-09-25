@@ -20,12 +20,12 @@ In C++, `Freeze` and `Berkeley DB` consist of a library that you link with your 
 
 Copyright &copy; ZeroC, Inc. All rights reserved.
 
-The default license for Freeze is [GPLv2](http://opensource.org/licenses/GPL-2.0), a popular open-source license with strong [copyleft](http://en.wikipedia.org/wiki/Copyleft) conditions.
+The default license for Freeze is [GPLv2](https://opensource.org/licenses/GPL-2.0), a popular open-source license with strong [copyleft](https://en.wikipedia.org/wiki/Copyleft) conditions.
 
 If you wish to license Freeze under other terms and conditions, you can purchase a [Commercial License](https://zeroc.com/licensing) from ZeroC. A commercial license for Freeze includes a commercial license for the [Oracle Berkeley DB][1] Transactional Datastore.
 
 # Documentation
 
-- [Freeze Manual](https://doc.zeroc.com/display/Freeze37/Freeze+Manual)
+- [Freeze Manual](https://doc.zeroc.com/freeze/3.7/freeze-manual)
 
-[1]: http://www.oracle.com/us/products/database/berkeley-db/overview/index.htm
+[1]: https://www.oracle.com/database/berkeley-db/
