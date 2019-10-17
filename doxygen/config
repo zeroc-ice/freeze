@@ -855,51 +855,7 @@ INPUT_ENCODING         = UTF-8
 # *.m, *.markdown, *.md, *.mm, *.dox, *.py, *.pyw, *.f90, *.f95, *.f03, *.f08,
 # *.f, *.for, *.tcl, *.vhd, *.vhdl, *.ucf, *.qsf and *.ice.
 
-FILE_PATTERNS          = *.c \
-                         *.cc \
-                         *.cxx \
-                         *.cpp \
-                         *.c++ \
-                         *.java \
-                         *.ii \
-                         *.ixx \
-                         *.ipp \
-                         *.i++ \
-                         *.inl \
-                         *.idl \
-                         *.ddl \
-                         *.odl \
-                         *.h \
-                         *.hh \
-                         *.hxx \
-                         *.hpp \
-                         *.h++ \
-                         *.cs \
-                         *.d \
-                         *.php \
-                         *.php4 \
-                         *.php5 \
-                         *.phtml \
-                         *.inc \
-                         *.m \
-                         *.markdown \
-                         *.md \
-                         *.mm \
-                         *.dox \
-                         *.py \
-                         *.pyw \
-                         *.f90 \
-                         *.f95 \
-                         *.f03 \
-                         *.f08 \
-                         *.f \
-                         *.for \
-                         *.tcl \
-                         *.vhd \
-                         *.vhdl \
-                         *.ucf \
-                         *.qsf \
-                         *.ice
+FILE_PATTERNS          = *.ice
 
 # The RECURSIVE tag can be used to specify whether or not subdirectories should
 # be searched for input files as well.
@@ -1152,7 +1108,7 @@ GENERATE_HTML          = YES
 # The default directory is: html.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_OUTPUT            =
+HTML_OUTPUT            = freeze
 
 # The HTML_FILE_EXTENSION tag can be used to specify the file extension for each
 # generated HTML page (for example: .htm, .php, .asp).
