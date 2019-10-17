@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 slice {
     compat = true
@@ -38,10 +36,10 @@ sourceSets {
 }
 
 dependencies {
-    compile "com.zeroc:ice-compat:${iceVersion}"
-    compile "com.zeroc:freeze-compat:${iceVersion}"
-    compile files(dbJar)
-    runtime "org.apache.commons:commons-compress:1.14"
+    implementation "com.zeroc:ice-compat:${iceVersion}"
+    implementation "com.zeroc:freeze-compat:${iceVersion}"
+    implementation files(dbJar)
+    runtimeOnly "org.apache.commons:commons-compress:1.14"
 }
 
 clean {

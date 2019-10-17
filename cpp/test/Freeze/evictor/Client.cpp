@@ -1,13 +1,11 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <Ice/Ice.h>
 #include <IceUtil/IceUtil.h>
 #include <IceUtil/Random.h>
-#include <TestCommon.h>
+#include <TestHelper.h>
 #include <Test.h>
 
 using namespace std;
@@ -451,8 +449,8 @@ private:
     Test::AccountPrxSeq _accounts;
 };
 
-int
-run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, bool shutdown)
+void
+allTests(const Ice::CommunicatorPtr& communicator, bool transactional, bool shutdown)
 {
     string ref = "factory:default -p 12010";
     Ice::ObjectPrx base = communicator->stringToProxy(ref);
@@ -979,43 +977,21 @@ run(int, char**, const Ice::CommunicatorPtr& communicator, bool transactional, b
     {
         factory->shutdown();
     }
-
-    return EXIT_SUCCESS;
 }
 
-int
-main(int argc, char* argv[])
+class Client : public Test::TestHelper
 {
-    int status;
-    Ice::CommunicatorPtr communicator;
+public:
 
-    try
-    {
-        communicator = Ice::initialize(argc, argv);
-        status = run(argc, argv, communicator, false, false);
-        if(status == 0)
-        {
-            status = run(argc, argv, communicator, true, true);
-        }
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
+    void run(int, char**);
+};
 
-    if(communicator)
-    {
-        try
-        {
-            communicator->destroy();
-        }
-        catch(const Ice::Exception& ex)
-        {
-            cerr << ex << endl;
-            status = EXIT_FAILURE;
-        }
-    }
-
-    return status;
+void
+Client::run(int argc, char** argv)
+{
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
+    allTests(communicator(), false, false);
+    allTests(communicator(), true, true);
 }
+
+DEFINE_TEST(Client)

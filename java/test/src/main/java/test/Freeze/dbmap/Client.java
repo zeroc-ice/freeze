@@ -1,14 +1,12 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 package test.Freeze.dbmap;
 
 import Freeze.*;
 
-public class Client extends test.Util.Application
+public class Client extends test.TestHelper
 {
     static class ReadThread extends Thread
     {
@@ -145,15 +143,6 @@ public class Client extends test.Util.Application
     static String alphabet = "abcdefghijklmnopqrstuvwxyz";
 
     private static void
-    test(boolean b)
-    {
-        if(!b)
-        {
-            throw new RuntimeException();
-        }
-    }
-
-    private static void
     populateDB(Freeze.Connection connection, java.util.Map<Byte, Integer> m)
         throws DatabaseException
     {
@@ -191,7 +180,7 @@ public class Client extends test.Util.Application
     }
 
     private static int
-    run(String[] args, Ice.Communicator communicator, String envName, String dbName)
+    allTests(Ice.Communicator communicator, String envName, String dbName)
         throws DatabaseException
     {
         Freeze.Connection connection = Freeze.Util.createConnection(communicator, envName);
@@ -2139,25 +2128,21 @@ public class Client extends test.Util.Application
     }
 
     @Override
-    public int run(String[] args)
+    public void run(String[] args)
     {
-        int status;
-        String envName = "db";
-        if(args.length > 0)
+        Ice.StringSeqHolder argsH = new Ice.StringSeqHolder(args);
+        Ice.Properties properties = createTestProperties(argsH);
+        try(Ice.Communicator communicator = initialize(properties))
         {
-            envName = args[0];
-            envName += "/";
-            envName += "db";
+            String envName = "db";
+            if(argsH.value.length > 0)
+            {
+                envName = argsH.value[0];
+                envName += "/";
+                envName += "db";
+            }
+
+            allTests(communicator, envName, "binary");
         }
-
-        return run(args, communicator(), envName, "binary");
-    }
-
-    public static void main(String[] args)
-    {
-        Client c = new Client();
-        int status = c.main("Client", args);
-        System.gc();
-        System.exit(status);
     }
 }

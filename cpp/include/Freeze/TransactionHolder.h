@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_TRANSACTION_HOLDER_H
 #define FREEZE_TRANSACTION_HOLDER_H

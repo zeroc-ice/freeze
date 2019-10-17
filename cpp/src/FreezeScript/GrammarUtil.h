@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_SCRIPT_GRAMMAR_UTIL_H
 #define FREEZE_SCRIPT_GRAMMAR_UTIL_H
@@ -112,7 +110,6 @@ public:
 #define YYSTYPE FreezeScript::NodePtr
 #define YY_DECL int freeze_script_lex(YYSTYPE* yylvalp)
 YY_DECL;
-int freeze_script_parse();
 
 //
 // I must set the initial stack depth to the maximum stack depth to

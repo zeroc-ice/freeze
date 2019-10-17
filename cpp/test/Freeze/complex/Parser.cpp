@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <IceUtil/DisableWarnings.h>
 #include <Parser.h>
@@ -13,6 +11,7 @@ using namespace std;
 // The current bison/flex parser
 //
 Parser* parser = 0;
+int yyparse();
 
 Parser::Parser()
 {

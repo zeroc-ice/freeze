@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 ext.os = System.properties['os.name']
 ext.isWindows = os.toLowerCase().contains("windows")
@@ -11,7 +9,7 @@ ext.isMacOS = os.toLowerCase().contains("mac os x")
 buildscript {
     repositories {
         maven {
-        url "https://plugins.gradle.org/m2/"
+            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
@@ -71,9 +69,9 @@ subprojects {
             }
         }
 
-        if(this.devRepo) {
+        if(project.devRepo) {
             maven {
-                url this.devRepo
+                url project.devRepo
             }
         }
 
@@ -94,12 +92,4 @@ subprojects {
         excludeDirs -= file(buildDir)
         buildDir.listFiles({d, f ->f != 'generated-src'} as FilenameFilter).each { excludeDirs += it }
     }
-}
-
-//
-// Used to build the gradle wrapper to automatically download and install
-// the version of gradle needed to build Ice.
-//
-task wrapper(type: Wrapper) {
-    gradleVersion = "4.7"
 }

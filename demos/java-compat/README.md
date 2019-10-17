@@ -23,8 +23,8 @@ location, you'll need to set the `ICE_HOME` or `FREEZE_HOME` environment
 variable with the path name of the installation directory. For example:
 
 ```
-export ICE_HOME=/opt/Ice-3.7.1
-export FREEZE_HOME=/opt/Freeze-3.7.1
+export ICE_HOME=/opt/Ice-3.7.3
+export FREEZE_HOME=/opt/Freeze-3.7.3
 ```
 
 On Windows, the build system automatically pulls the Ice and Freeze NuGet
@@ -41,7 +41,7 @@ instructions to build these JARs files.
 
 ### Building the Demos
 
-The build system for the Java sample programs uses [Gradle](http://gradle.org)
+The build system for the Java sample programs uses [Gradle](https://gradle.org)
 and includes a wrapper script or batch file that automatically downloads Gradle
 and all other required components.
 
@@ -74,4 +74,4 @@ application, for example:
 java -Djava.library.path=/usr/local/opt/berkeley-db@5.3/lib -jar build/libs/server.jar
 ```
 
-[1]: https://doc.zeroc.com/display/Freeze37/Freeze+Manual
+[1]: https://doc.zeroc.com/freeze/3.7/freeze-manual

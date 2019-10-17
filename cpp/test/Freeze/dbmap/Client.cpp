@@ -1,12 +1,10 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <IceUtil/IceUtil.h>
 #include <Freeze/Freeze.h>
-#include <TestCommon.h>
+#include <TestHelper.h>
 #include <ByteIntMap.h>
 #include <IntIdentityMap.h>
 #include <IntIdentityMapWithIndex.h>
@@ -295,8 +293,8 @@ private:
 
 typedef IceUtil::Handle<WriteThread> WriteThreadPtr;
 
-int
-run(const CommunicatorPtr& communicator, const string& envName)
+void
+allTests(const CommunicatorPtr& communicator, const string& envName)
 {
     Freeze::ConnectionPtr connection = createConnection(communicator, envName);
     const string dbName = "binary";
@@ -945,35 +943,29 @@ run(const CommunicatorPtr& communicator, const string& envName)
     }
 
     cout << "ok" << endl;
-
-    return EXIT_SUCCESS;
 }
 
-int
-main(int argc, char* argv[])
+class Client : public Test::TestHelper
 {
-    int status;
-    Ice::CommunicatorPtr communicator;
+public:
 
+    void run(int, char**);
+};
+
+void
+Client::run(int argc, char** argv)
+{
     string envName = "db";
 
-    try
+    Ice::CommunicatorHolder ich = initialize(argc, argv);
+    if(argc != 1)
     {
-        communicator = Ice::initialize(argc, argv);
-        if(argc != 1)
-        {
-            envName = argv[1];
-            envName += "/";
-            envName += "db";
-        }
+        envName = argv[1];
+        envName += "/";
+        envName += "db";
+    }
 
-        status = run(communicator, envName);
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
+    allTests(communicator(), envName);
 
     cout << "testing manual code... " << flush;
 
@@ -981,8 +973,7 @@ main(int argc, char* argv[])
     // From manual
     //
 
-    Freeze::ConnectionPtr connection =
-        Freeze::createConnection(communicator, envName);
+    Freeze::ConnectionPtr connection = Freeze::createConnection(communicator(), envName);
 
     // Instantiate the map.
     //
@@ -1021,16 +1012,6 @@ main(int argc, char* argv[])
     connection->close();
 
     cout << "ok" << endl;
-
-    try
-    {
-        communicator->destroy();
-    }
-    catch(const Ice::Exception& ex)
-    {
-        cerr << ex << endl;
-        status = EXIT_FAILURE;
-    }
-
-    return status;
 }
+
+DEFINE_TEST(Client)

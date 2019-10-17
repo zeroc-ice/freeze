@@ -1,11 +1,9 @@
-# **********************************************************************
 #
-# Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+# Copyright (c) ZeroC, Inc. All rights reserved.
 #
 # This copy of Ice is licensed to you under the terms described in the
 # ICE_LICENSE file included in this distribution.
 #
-# **********************************************************************
 
 import os
 
@@ -22,14 +20,18 @@ class FreezeCppMapping(CppMapping):
         env = CppMapping.getEnv(self, process, current)
         if isinstance(platform, Windows):
             env["PATH"] += os.pathsep + ice.getLibDir(process, process.getMapping(current), current)
+            env["PATH"] += os.pathsep + os.path.join(toplevel, "ice", "cpp", "test", "Common", "msbuild",
+                                                     current.config.buildPlatform,
+                                                     current.config.buildConfig)
         return env
 
 class FreezeJavaMapping(JavaCompatMapping):
 
     def getJavaArgs(self, process, current):
+        args = JavaCompatMapping.getJavaArgs(self, process, current)
         if process.isFromBinDir():
-            return []
-        return ["-Djava.library.path={0}".format(self.getBerkeleyDB(process, current))]
+            return args
+        return args + ["-Djava.library.path={0}".format(self.getBerkeleyDB(process, current))]
 
     def getEnv(self, process, current):
         env = JavaCompatMapping.getEnv(self, process, current)
@@ -60,11 +62,8 @@ class Ice(Component):
             mapping = Mapping.getByName("ice/cpp") # Use Ice from submodule
         return Component._getInstallDir(self, mapping, current, "ICE_HOME")
 
-    def getNugetPackage(self, mapping, compiler):
-        return "zeroc.ice.{0}".format(compiler)
-
-    def getNugetPackageVersion(self, mapping):
-        return "3.7.1"
+    def getNugetPackageVersionFile(self, mapping):
+        return os.path.join(mapping.getPath(), "test", "Freeze", "complex", "msbuild", "client", "packages.config")
 
 class Freeze(Component):
 
@@ -75,16 +74,12 @@ class Freeze(Component):
         return Component._useBinDist(self, mapping, current, "FREEZE_BIN_DIST")
 
     def getInstallDir(self, mapping, current):
+        # No binary distribution on Windows, nuget package only.
+        envHomeName = None if isinstance(platform, Windows) else "FREEZE_HOME"
         return Component._getInstallDir(self, mapping, current, "FREEZE_HOME")
 
-    def getNugetPackage(self, mapping, compiler):
-        return "zeroc.freeze.{0}".format(compiler)
-
-    def getNugetPackageVersion(self, mapping):
-        if not self.nugetVersion:
-            with open(os.path.join(toplevel, "cpp", "msbuild", "zeroc.freeze.v140.nuspec"), "r") as configFile:
-                self.nugetVersion = re.search("<version>(.*)</version>", configFile.read()).group(1)
-        return self.nugetVersion
+    def getNugetPackageVersionFile(self, mapping):
+        return os.path.join(mapping.getPath(), "test", "Freeze", "complex", "msbuild", "client", "packages.config")
 
 component = Freeze()
 ice = Ice()
@@ -92,6 +87,6 @@ ice = Ice()
 #
 # Supported mappings
 #
-Mapping.add("ice/cpp", CppMapping(path = os.path.join(toplevel, "ice", "cpp")))
-Mapping.add("cpp", FreezeCppMapping())
-Mapping.add("java", FreezeJavaMapping())
+Mapping.add("ice/cpp", CppMapping(path = os.path.join(toplevel, "ice", "cpp")), component)
+Mapping.add("cpp", FreezeCppMapping(), component)
+Mapping.add("java", FreezeJavaMapping(), component)

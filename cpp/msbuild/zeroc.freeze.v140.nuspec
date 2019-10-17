@@ -3,17 +3,17 @@
   <metadata>
     <id>zeroc.freeze.v140</id>
     <title>ZeroC Freeze C++ for Visual Studio 2015</title>
-    <version>3.7.1</version>
+    <version>3.7.3</version>
     <authors>ZeroC</authors>
-    <licenseUrl>https://raw.githubusercontent.com/zeroc-ice/freeze/3.7/LICENSE</licenseUrl>
+    <license type="expression">GPL-2.0-only</license>
     <projectUrl>https://github.com/zeroc-ice/freeze</projectUrl>
     <iconUrl>https://zeroc.com/images/logos/zeroc/zeroc_logo-64x64.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Freeze C++ SDK for Visual Studio 2015 (v140). Freeze stores Ice objects in Berkeley DB databases.</description>
-    <releaseNotes>https://doc.zeroc.com/display/Rel/Freeze+3.7.0+Release+Notes</releaseNotes>
+    <releaseNotes>https://doc.zeroc.com/display/Rel/Freeze+3.7.3+Release+Notes</releaseNotes>
     <tags>freeze ice native rpc v140 zeroc</tags>
     <dependencies>
-      <dependency id="zeroc.ice.v140" version="[3.7.0,3.8.0)"/>
+      <dependency id="zeroc.ice.v140" version="[3.7.3]"/>
     </dependencies>
   </metadata>
 </package>

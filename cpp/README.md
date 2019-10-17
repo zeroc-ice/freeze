@@ -45,7 +45,7 @@ These packages are installed in `freeze\cpp\msbuild\packages`.
 
 ## Building Freeze for Linux or macOS
 
-### Step 1: build IceXML in the ice submodule
+### Step 1: build IceXML and TestCommon in the ice submodule
 
 If `freeze/ice` is an empty directory, fetch the `ice` submodule with:
 ```
@@ -57,7 +57,7 @@ Edit `freeze/ice/config/Make.rules` to establish your build configuration. The
 comments in the file provide more information.
 ```
  cd freeze/ice/cpp
- make -j8 src/IceXML
+ make -j8 src/IceXML TestCommon
 ```
 
 ### Step 2: build Freeze
@@ -168,5 +168,5 @@ If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
 [1]: https://zeroc.com/downloads/ice
-[2]: https://doc.zeroc.com/display/Freeze37/Supported+Platforms+for+Freeze+3.7.1
+[2]: https://doc.zeroc.com/rel/freeze-releases/freeze-3-7/freeze-3-7-3-release-notes/supported-platforms-for-freeze-3-7-3
 [3]: https://www.oracle.com/database/berkeley-db/index.html

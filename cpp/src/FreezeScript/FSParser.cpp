@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <FreezeScript/Parser.h>
 #include <FreezeScript/GrammarUtil.h>
@@ -61,6 +59,7 @@ FreezeScript::DataFactoryPtr FreezeScript::parseDataFactory;
 FreezeScript::ErrorReporterPtr FreezeScript::parseErrorReporter;
 FreezeScript::NodePtr FreezeScript::parseResult;
 int FreezeScript::parseLine;
+int freeze_script_parse();
 
 namespace
 {

@@ -1,13 +1,11 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 package test.Freeze.evictor;
 import test.Freeze.evictor.Test.*;
 
-public class Server extends test.Util.Application
+public class Server extends test.TestHelper
 {
     static class AccountFactory implements Ice.ValueFactory
     {
@@ -43,44 +41,29 @@ public class Server extends test.Util.Application
         }
     }
 
-    public int
+    @Override
+    public void
     run(String[] args)
     {
-        Ice.Communicator communicator = communicator();
+        Ice.StringSeqHolder argsH = new Ice.StringSeqHolder(args);
+        Ice.Properties properties = createTestProperties(argsH);
+        properties.setProperty("Evictor.Endpoints", "default -p 12010");
+        properties.setProperty("Ice.Package.Test", "test.Freeze.evictor");
 
-        Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Evictor");
+        try(Ice.Communicator communicator = initialize(properties))
+        {
 
-        communicator.getValueFactoryManager().add(new AccountFactory(), "::Test::Account");
-        communicator.getValueFactoryManager().add(new ServantFactory(), "::Test::Servant");
-        communicator.getValueFactoryManager().add(new FacetFactory(), "::Test::Facet");
+            Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Evictor");
 
-        RemoteEvictorFactoryI factory = new RemoteEvictorFactoryI("db");
-        adapter.add(factory, Ice.Util.stringToIdentity("factory"));
+            communicator.getValueFactoryManager().add(new AccountFactory(), "::Test::Account");
+            communicator.getValueFactoryManager().add(new ServantFactory(), "::Test::Servant");
+            communicator.getValueFactoryManager().add(new FacetFactory(), "::Test::Facet");
 
-        adapter.activate();
+            RemoteEvictorFactoryI factory = new RemoteEvictorFactoryI("db");
+            adapter.add(factory, Ice.Util.stringToIdentity("factory"));
 
-        communicator.waitForShutdown();
-
-        return 0;
-    }
-
-    protected Ice.InitializationData
-    getInitData(Ice.StringSeqHolder argsH)
-    {
-        Ice.InitializationData initData = createInitializationData() ;
-        initData.properties = Ice.Util.createProperties(argsH);
-        initData.properties.setProperty("Evictor.Endpoints", "default -p 12010");
-        initData.properties.setProperty("Ice.Package.Test", "test.Freeze.evictor");
-        return initData;
-    }
-
-    public static void
-    main(String[] args)
-    {
-        Server c = new Server();
-        int status = c.main("Server", args);
-
-        System.gc();
-        System.exit(status);
+            adapter.activate();
+            communicator.waitForShutdown();
+        }
     }
 }

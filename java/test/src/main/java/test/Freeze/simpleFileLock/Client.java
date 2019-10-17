@@ -1,32 +1,19 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 package test.Freeze.simpleFileLock;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Client
+public class Client extends test.TestHelper
 {
-    private static void
-    test(boolean b)
+    @Override
+    public void
+    run(String[] argvs)
     {
-        if(!b)
-        {
-            throw new RuntimeException();
-        }
-    }
-
-    public static void
-    main(String[] argvs)
-    {
-        Freeze.FileLock lock = null;
-
-        lock = new Freeze.FileLock("file.lock");
-        test(true);
+        Freeze.FileLock lock = new Freeze.FileLock("file.lock");
 
         //
         // Force GC here to ensure that temp references in FileLock
@@ -51,10 +38,7 @@ public class Client
             test(false);
         }
 
-        if(lock != null)
-        {
-            lock.release();
-        }
+        lock.release();
         System.out.println("File lock released.");
     }
 }

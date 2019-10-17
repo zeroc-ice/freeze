@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_SCRIPT_DUMP_DESCRIPTORS_H
 #define FREEZE_SCRIPT_DUMP_DESCRIPTORS_H

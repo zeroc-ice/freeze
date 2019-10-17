@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 slice {
     compat = true
@@ -39,10 +37,10 @@ sourceSets {
 }
 
 dependencies {
-    compile "com.zeroc:ice-compat:${iceVersion}"
-    compile "com.zeroc:freeze-compat:${iceVersion}"
-    compile files(dbJar)
-    runtime "org.apache.commons:commons-compress:1.14"
+    implementation "com.zeroc:ice-compat:${iceVersion}"
+    implementation "com.zeroc:freeze-compat:${iceVersion}"
+    implementation files(dbJar)
+    runtimeOnly "org.apache.commons:commons-compress:1.14"
 }
 
 // Create a jar for the client & server which includes everything in the demo.
@@ -81,28 +79,28 @@ task readnewJar(type: Jar) {
 createJar {
     manifest {
         attributes("Main-Class": "Create")
-        attributes("Class-Path": configurations.compile.resolve().collect { it.toURI() }.join(' '))
+        attributes("Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' '))
     }
 }
 
 recreateJar {
     manifest {
         attributes("Main-Class": "Recreate")
-        attributes("Class-Path": configurations.compile.resolve().collect { it.toURI() }.join(' '))
+        attributes("Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' '))
     }
 }
 
 readJar {
     manifest {
         attributes("Main-Class": "Read")
-        attributes("Class-Path": configurations.compile.resolve().collect { it.toURI() }.join(' '))
+        attributes("Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' '))
     }
 }
 
 readnewJar {
     manifest {
         attributes("Main-Class": "ReadNew")
-        attributes("Class-Path": configurations.compile.resolve().collect { it.toURI() }.join(' '))
+        attributes("Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' '))
     }
 }
 

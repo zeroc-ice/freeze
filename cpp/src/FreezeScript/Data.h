@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef FREEZE_SCRIPT_DATA_H
 #define FREEZE_SCRIPT_DATA_H
@@ -576,7 +574,7 @@ public:
 
 private:
 
-    ObjectRefPtr _ref;
+    ObjectRefPtr _objRef;
 };
 typedef IceUtil::Handle<ReadObjectCallback> ReadObjectCallbackPtr;
 

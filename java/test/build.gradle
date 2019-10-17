@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 ext.testDir = "${projectDir}/src/main/java/test"
 apply from: "slice.gradle"
@@ -12,7 +10,7 @@ def hasLambda = org.gradle.internal.jvm.Jvm.current().getJavaVersion().toString(
 sourceSets {
     main {
         java {
-            if (!hasLambda) {
+            if(!hasLambda) {
                 exclude '**/lambda'
             }
             exclude 'plugins'
@@ -22,14 +20,14 @@ sourceSets {
 }
 
 dependencies {
-    compile localDependency('ice-compat')
-    compile localDependency('freeze-compat')
-    compile files(dbJar)
+    implementation localDependency('ice-compat')
+    implementation localDependency('freeze-compat')
+    implementation files(dbJar)
 }
 
 if(!gradle.startParameter.isOffline()) {
     dependencies {
-        runtime "org.apache.commons:commons-compress:1.14"
+        runtimeOnly "org.apache.commons:commons-compress:1.14"
     }
 }
 
@@ -37,7 +35,7 @@ jar {
     archiveName = "test.jar"
     destinationDir = new File("$rootProject.projectDir/lib/")
     manifest {
-        attributes("Class-Path": configurations.runtime.resolve().collect { it.toURI() }.join(' '))
+        attributes("Class-Path": configurations.runtimeClasspath.resolve().collect { it.toURI() }.join(' '))
     }
 }
 

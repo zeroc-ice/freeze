@@ -1,8 +1,6 @@
-# **********************************************************************
 #
-# Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+# Copyright (c) ZeroC, Inc. All rights reserved.
 #
-# **********************************************************************
 
 ifneq ($(prefix),)
 INSTALL_FLAGS += -Dorg.gradle.project.prefix=$(prefix)

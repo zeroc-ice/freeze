@@ -1,10 +1,8 @@
 %{
 
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <FreezeScript/GrammarUtil.h>        // Before Grammar.h, so that YYSTYPE is defined
 #include <FreezeScript/FSGrammar.h>
@@ -15,17 +13,17 @@
 
 #include <map>
 
-#if defined(_MSC_VER) && defined(ICE_64)
+#if defined(_MSC_VER)
 //
 // '=' : conversion from 'size_t' to 'int', possible loss of data
 // The result of fread() is a size_t and gets inserted into an int
 //
-#   pragma warning( 4 : 4267 )
+#   pragma warning(disable:4267)
 //
 // 'initializing' : conversion from '__int64' to 'int', possible loss of data
 // Puts a pointer-difference into an int
 //
-#   pragma warning( 4 : 4244 )
+#   pragma warning(disable:4244)
 #endif
 
 #ifdef _MSC_VER

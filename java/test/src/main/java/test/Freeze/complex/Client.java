@@ -1,26 +1,15 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 package test.Freeze.complex;
 import test.Freeze.complex.Complex.*;
 
 import Freeze.*;
 
-public class Client extends test.Util.Application
+public class Client extends test.TestHelper
 {
     final static String progName = "test.Freeze.complex.Client";
-
-    private static void
-    test(boolean b)
-    {
-        if(!b)
-        {
-            throw new RuntimeException();
-        }
-    }
 
     private int
     validate(String dbName)
@@ -113,8 +102,8 @@ public class Client extends test.Util.Application
         System.out.println("--dbdir           Location of the database directory.");
     }
 
-    private int
-    run(String[] args, String dbName)
+    public void
+    allTests(String[] args, String dbName)
         throws DatabaseException
     {
         //
@@ -127,15 +116,16 @@ public class Client extends test.Util.Application
 
         if(args.length != 0 && args[0].equals("populate"))
         {
-            return populate(dbName);
+            populate(dbName);
         }
-        if(args.length != 0 && args[0].equals("validate"))
+        else if(args.length != 0 && args[0].equals("validate"))
         {
-            return validate(dbName);
+            validate(dbName);
         }
-        usage(progName);
-
-        return 0;
+        else
+        {
+            test(false);
+        }
     }
 
     private void
@@ -145,10 +135,8 @@ public class Client extends test.Util.Application
     }
 
     @Override
-    public int run(String[] args)
+    public void run(String[] args)
     {
-        int status;
-        Ice.Communicator communicator = null;
         String envName = "db";
 
         //
@@ -186,26 +174,18 @@ public class Client extends test.Util.Application
             }
         }
 
-        _connection = Freeze.Util.createConnection(communicator(), envName);
-        try
+        Ice.StringSeqHolder argsH = new Ice.StringSeqHolder(args);
+        Ice.Properties properties = createTestProperties(argsH);
+        try(Ice.Communicator communicator = initialize(properties))
         {
-            status = run(args, "test");
+            _connection = Freeze.Util.createConnection(communicator(), envName);
+            allTests(argsH.value, "test");
         }
         finally
         {
             close();
         }
-        return status;
     }
 
-    public static void main(String[] args)
-    {
-        Client c = new Client();
-        int status = c.main("Client", args);
-        System.gc();
-        System.exit(status);
-    }
-
-    private Ice.Communicator _communicator;
     private Freeze.Connection _connection;
 }

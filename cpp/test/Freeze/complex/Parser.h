@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #ifndef PARSER_H
 #define PARSER_H
@@ -26,7 +24,6 @@
 #define YYSTYPE Complex::NodePtr
 #define YY_DECL int yylex(YYSTYPE* yylvalp)
 YY_DECL;
-int yyparse();
 
 //
 // I must set the initial stack depth to the maximum stack depth to

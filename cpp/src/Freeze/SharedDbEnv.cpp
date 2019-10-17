@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <Freeze/SharedDbEnv.h>
 #include <Freeze/Exception.h>
@@ -628,25 +626,7 @@ Freeze::SharedDbEnv::cleanup()
     //
     for(SharedDbMap::iterator p = _sharedDbMap.begin(); p != _sharedDbMap.end(); ++p)
     {
-        try
-        {
-            delete p->second;
-        }
-        catch(const DatabaseException& ex)
-        {
-            Error out(_communicator->getLogger());
-            out << "Freeze map: \"" << p->first << "\" close error: " << ex;
-        }
-        catch(const std::exception& ex)
-        {
-            Error out(_communicator->getLogger());
-            out << "Freeze map: \"" << p->first << "\" close error: " << ex.what();
-        }
-        catch(...)
-        {
-            Error out(_communicator->getLogger());
-            out << "Freeze map: \"" << p->first << "\" close error: unknown exception.";
-        }
+        delete p->second;
     }
 
     //

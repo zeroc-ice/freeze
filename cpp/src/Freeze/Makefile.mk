@@ -1,8 +1,6 @@
-# **********************************************************************
 #
-# Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+# Copyright (c) ZeroC, Inc. All rights reserved.
 #
-# **********************************************************************
 
 $(project)_libraries = Freeze
 $(project)_generated_includedir := $(project)/generated/Freeze

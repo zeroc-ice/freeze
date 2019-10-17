@@ -1,8 +1,6 @@
-// **********************************************************************
 //
-// Copyright (c) 2003-2018 ZeroC, Inc. All rights reserved.
+// Copyright (c) ZeroC, Inc. All rights reserved.
 //
-// **********************************************************************
 
 #include <Freeze/MapDb.h>
 #include <Freeze/Exception.h>
@@ -472,16 +470,9 @@ Freeze::MapDb::connectIndices(const vector<MapIndexBasePtr>& indices) const
 void
 Freeze::MapDb::clearIndices()
 {
-    try
+    for(IndexMap::iterator p = _indices.begin(); p != _indices.end(); ++p)
     {
-        for(IndexMap::iterator p = _indices.begin(); p != _indices.end(); ++p)
-        {
-            delete p->second;
-        }
-    }
-    catch(const ::DbException& dx)
-    {
-        throw DatabaseException(__FILE__, __LINE__, dx.what());
+        delete p->second;
     }
     _indices.clear();
 }
