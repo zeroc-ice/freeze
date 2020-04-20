@@ -91,7 +91,7 @@ This demo provides four programs:
 
    on Windows:
    ```
-   set PATH=..\..\packages\zeroc.freeze.v140.3.7.3\build\native\bin\x64\Release;%PATH%
+   set PATH=..\..\packages\zeroc.freeze.v140.3.7.4\build\native\bin\x64\Release;%PATH%
    ```
 
    And then run the transformdb command as:
