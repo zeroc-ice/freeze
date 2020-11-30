@@ -3,7 +3,7 @@
   <metadata>
     <id>zeroc.freeze.v140</id>
     <title>ZeroC Freeze C++ for Visual Studio 2015</title>
-    <version>3.7.4</version>
+    <version>3.7.5</version>
     <authors>ZeroC</authors>
     <license type="expression">GPL-2.0-only</license>
     <projectUrl>https://github.com/zeroc-ice/freeze</projectUrl>
@@ -13,7 +13,7 @@
     <releaseNotes>https://doc.zeroc.com/rel/freeze-releases/freeze-3-7/freeze-3-7-4-release-notes/supported-platforms-for-freeze-3-7-4</releaseNotes>
     <tags>freeze ice native rpc v140 zeroc</tags>
     <dependencies>
-      <dependency id="zeroc.ice.v140" version="[3.7.4]"/>
+      <dependency id="zeroc.ice.v140" version="[3.7.5]"/>
     </dependencies>
   </metadata>
 </package>
