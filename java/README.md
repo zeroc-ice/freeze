@@ -137,5 +137,5 @@ python allTests.py
 If everything worked out, you should see lots of `ok` messages. In case of a
 failure, the tests abort with `failed`.
 
-[1]: https://doc.zeroc.com/rel/freeze-releases/freeze-3-7/freeze-3-7-4-release-notes/supported-platforms-for-freeze-3-7-4
+[1]: https://doc.zeroc.com/rel/freeze-releases/freeze-3-7/freeze-3-7-5-release-notes/supported-platforms-for-freeze-3-7-5
 [2]: https://gradle.org
