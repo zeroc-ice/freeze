@@ -577,6 +577,7 @@ TestApp::Struct1ObjectMapTest()
             test(nc2);
 
             test(nc2->rec == nc2);
+            nc2->rec = 0; // Break the cycle
             nc1 = Class1Ptr::dynamicCast(nc2->obj);
         }
         else
@@ -609,6 +610,7 @@ TestApp::Struct1ObjectMapTest()
     }
     total = _watch.stop();
     perRecord = total / _repetitions;
+    c2->rec = 0; // break the cycle
 
     cout << "\ttime for " << _repetitions << " removes: " << total * 1000 << "ms" << endl;
     cout << "\ttime per remove: " << perRecord * 1000 << "ms" << endl;
@@ -740,5 +742,5 @@ int
 main(int argc, char* argv[])
 {
     TestApp app("db");
-    return app.main(argc, argv);
+    return app.main(argc, argv, "config.client");
 }

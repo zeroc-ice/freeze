@@ -1,0 +1,2 @@
+# Allow class cycles used by TestApp::Struct1ObjectMapTest
+Ice.AcceptClassCycles=1
