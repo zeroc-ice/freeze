@@ -9,13 +9,14 @@
     <!-- Custom task to download files -->
     <!-- Nuget executable -->
     <PropertyGroup>
-      <NugetExe>$(MSBuildThisFileDirectory)NuGet.exe</NugetExe>
-      <NugetURL>https://dist.nuget.org/win-x86-commandline/v3.4.4/NuGet.exe</NugetURL>
+      <!-- Use NuGet 5.4.0 more recent versions (5.6.0) fails with Visual Studio 2010 -->
+      <NugetExe>$(MSBuildThisFileDirectory)NuGet-5.4.0.exe</NugetExe>
+      <NugetURL>https://dist.nuget.org/win-x86-commandline/v5.4.0/nuget.exe</NugetURL>
     </PropertyGroup>
 
     <!-- Download nuget.exe if not present -->
     <Target Name="GetNuget" Condition="!Exists('$(NugetExe)')">
-      <Exec Command="powershell -ExecutionPolicy ByPass -Command &quot;(New-Object Net.WebClient).DownloadFile('$(NugetURL)', '$(NugetExe)')&quot;"/>
+      <Exec Command="powershell -ExecutionPolicy ByPass -Command &quot;[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;(New-Object Net.WebClient).DownloadFile('$(NugetURL)', '$(NugetExe)')&quot;"/>
     </Target>
 
     <Target Name="RemovePackages">
