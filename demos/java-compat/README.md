@@ -23,8 +23,8 @@ location, you'll need to set the `ICE_HOME` or `FREEZE_HOME` environment
 variable with the path name of the installation directory. For example:
 
 ```
-export ICE_HOME=/opt/Ice-3.7.7
-export FREEZE_HOME=/opt/Freeze-3.7.7
+export ICE_HOME=/opt/Ice-3.7.8
+export FREEZE_HOME=/opt/Freeze-3.7.8
 ```
 
 On Windows, the build system automatically pulls the Ice and Freeze NuGet
