@@ -28,8 +28,8 @@ the `ICE_HOME` or `FREEZE_HOME` environment variable with the path name of the
 installation directory:
 
 ```
-export ICE_HOME=/opt/Ice-3.7.8
-export FREEZE_HOME=/opt/Freeze-3.7.8
+export ICE_HOME=/opt/Ice-3.7.9
+export FREEZE_HOME=/opt/Freeze-3.7.9
 ```
 
 ### Building the Demos
@@ -112,8 +112,8 @@ select `Build`.
 You need to add the Ice and Freeze `bin` directory to your PATH before running
 the demos, with a command similar to:
 ```
-set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.ice.v140.3.7.8\build\native\bin\x64\Release;%PATH%
-set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.freeze.v140.3.7.8\build\native\bin\x64\Release;%PATH%
+set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.ice.v140.3.7.9\build\native\bin\x64\Release;%PATH%
+set PATH=%USERPROFILE%\freeze\demos\cpp98\packages\zeroc.freeze.v140.3.7.9\build\native\bin\x64\Release;%PATH%
 ```
 
 Then refer to the README.md file in each demo directory for usage instructions.

@@ -6,13 +6,13 @@
 # Define ICE_HOME if Ice is not installed in /usr (Linux) or
 # /usr/local (macOS)
 #
-#ICE_HOME               ?= /opt/Ice-3.7.8
+#ICE_HOME               ?= /opt/Ice-3.7.9
 
 #
 # Define FREEZE_HOME if Freeze is not installed in /usr (Linux) or
 # /usr/local (macOS)
 #
-#FREEZE_HOME            ?= /opt/Freeze-3.7.8
+#FREEZE_HOME            ?= /opt/Freeze-3.7.9
 
 #
 # Define OPTIMIZE as yes if you want to build with optimization.

@@ -70,7 +70,7 @@ include $(top_srcdir)/config/Make.project.rules
 include $(top_srcdir)/config/Make.tests.rules
 include $(top_srcdir)/config/Make.freeze.rules
 
-version                 = 3.7.8
+version                 = 3.7.9
 soversion               = 37
 
 #
