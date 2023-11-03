@@ -163,6 +163,8 @@
             DestinationFiles="zeroc.freeze.$(DefaultPlatformToolset)\build\native\zeroc.freeze.$(DefaultPlatformToolset).props" />
       <Copy SourceFiles="zeroc.freeze.$(DefaultPlatformToolset).targets"
             DestinationFolder="zeroc.freeze.$(DefaultPlatformToolset)\build\native" />
+      <Copy SourceFiles="$(MSBuildThisFileDirectory)\..\..\ice\logo.png"
+            DestinationFolder="zeroc.freeze.$(DefaultPlatformToolset)\build\native" />
       <Exec Command="$(NugetExe) pack -NoPackageAnalysis -NonInteractive"
             WorkingDirectory="zeroc.freeze.$(DefaultPlatformToolset)"/>
   </Target>
