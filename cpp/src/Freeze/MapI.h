@@ -48,10 +48,10 @@ public:
     virtual void
     get(const Key*&, const Value*&) const;
 
-    virtual  void
+    virtual void
     set(const Value&);
 
-    virtual  void
+    virtual void
     set(const Dbt&);
 
     virtual void

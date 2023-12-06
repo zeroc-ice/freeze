@@ -144,7 +144,7 @@ BankI::returnAllChips(const CasinoStore::PersistentPlayerPrx& p, const Ice::Curr
             // Impossible
             //
             assert(0);
-            throw  Freeze::DatabaseException(__FILE__, __LINE__, "returnAllChips: out of chips");
+            throw Freeze::DatabaseException(__FILE__, __LINE__, "returnAllChips: out of chips");
         }
         outstandingChips -= count;
         chipsSold -= count;

@@ -536,7 +536,7 @@ Freeze::ObjectStoreBase::insert(const Identity& ident, const ObjectRecord& rec, 
     {
         try
         {
-            return  _db->put(tx, &dbKey, &dbValue, flags) == 0;
+            return _db->put(tx, &dbKey, &dbValue, flags) == 0;
         }
         catch(const DbDeadlockException& dx)
         {

@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 
 public class Client extends test.TestHelper
 {
-    static class ReadThread extends  Thread
+    static class ReadThread extends Thread
     {
         ReadThread(ServantPrx[] servants)
         {

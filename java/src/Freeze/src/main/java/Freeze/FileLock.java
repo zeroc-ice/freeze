@@ -50,7 +50,7 @@ public final class FileLock
         }
 
         //
-        // In Windows we don't write the process pid to the file, as is  not posible
+        // In Windows we don't write the process pid to the file, as it is not posible
         // to read the file from other process while it is locked here.
         //
         if(!System.getProperty("os.name").startsWith("Windows"))

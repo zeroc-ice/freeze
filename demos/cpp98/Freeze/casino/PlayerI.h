@@ -17,7 +17,7 @@ public:
 
     virtual void destroy(const Ice::Current&);
 
-    virtual void  withdraw(int, const Ice::Current&);
+    virtual void withdraw(int, const Ice::Current&);
 
     virtual void win(int count, const Ice::Current&);
 

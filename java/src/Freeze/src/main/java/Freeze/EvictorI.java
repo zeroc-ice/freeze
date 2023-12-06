@@ -587,7 +587,7 @@ abstract class EvictorI implements Evictor
 
     protected final ServantInitializer _initializer;
 
-    protected SharedDbEnv  _dbEnv;
+    protected SharedDbEnv _dbEnv;
 
     protected final String _filename;
     protected final boolean _createDb;

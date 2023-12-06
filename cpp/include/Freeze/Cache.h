@@ -82,7 +82,7 @@ private:
     typedef std::map<Key, CacheValue> CacheMap;
 
     IceUtil::Mutex _mutex;
-    CacheMap  _map;
+    CacheMap _map;
 };
 
 template<typename Key, typename Value> IceUtil::Handle<Value>

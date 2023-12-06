@@ -156,7 +156,7 @@ public abstract class TestHelper
     {
         InitializationData initData = new InitializationData();
         initData.properties = properties;
-        return  initialize(initData, defaultCommunicator);
+        return initialize(initData, defaultCommunicator);
     }
 
     public Communicator initialize(InitializationData initData)
@@ -182,15 +182,15 @@ public abstract class TestHelper
             _communicatorListener.communicatorInitialized(communicator);
         }
 
-        return  communicator;
+        return communicator;
     }
 
-    synchronized public  void setServerReadyListener(ServerReadyListener listener)
+    synchronized public void setServerReadyListener(ServerReadyListener listener)
     {
         _serverListener = listener;
     }
 
-    synchronized public  void setCommunicatorListener(CommunicatorListener listener)
+    synchronized public void setCommunicatorListener(CommunicatorListener listener)
     {
         _communicatorListener = listener;
     }

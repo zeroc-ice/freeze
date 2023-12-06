@@ -290,7 +290,7 @@ class reader(threading.Thread):
 
                     # If no match and we have finished processing output raise a TIMEOUT
                     if self._finish:
-                      raise  TIMEOUT ('timeout exceeded in match\npattern: "%s"\nbuffer: "%s"\n' %
+                      raise TIMEOUT ('timeout exceeded in match\npattern: "%s"\nbuffer: "%s"\n' %
                                            (escape(s), escape(buf, False)))
 
                     if timeout is None:

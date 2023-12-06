@@ -11,7 +11,7 @@ module Freeze
 
 /**
  *
- * The catalog keeps information about  Freeze Maps and Freeze
+ * The catalog keeps information about Freeze Maps and Freeze
  * evictors in a Berkeley Db environment. It is used by FreezeScript.
  *
  **/
